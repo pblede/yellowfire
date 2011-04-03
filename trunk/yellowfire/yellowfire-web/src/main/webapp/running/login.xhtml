@@ -1,0 +1,38 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.prime.com.tr/ui"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:cc="http://java.sun.com/jsf/composite/cc"
+                template="/resources/layout/running-layout.xhtml">
+   
+	<ui:define name="demoSampleParameters">
+		<f:metadata>
+            <f:viewParam name="section" value="#{navigator.section}" />
+			<f:viewParam name="item" value="#{navigator.item}" />
+			<f:viewParam name="skin" value="#{skinBean.skin}"/>
+		</f:metadata>
+	</ui:define>
+    <ui:define name="head">
+	</ui:define>
+	<ui:define name="content">
+        <p:growl showDetail="true" showSummary="true" />
+        <p:panel id="lp1" header="Login From">
+        	<cc:quickLogin 
+        		bean="#{sessionController}" 
+        		actionMethod="#{sessionController.login}" 
+        		registerMethod="#{sessionController.register}" 
+        		id="l1" update="lp1" />
+        </p:panel>
+        
+        <p:panel header="Login From">
+			<form method="post" action="j_security_check" autocomplete="false">
+			Username: <input type="text" name="j_username" />
+			Password: <input type="password" name="j_password" />
+			<br />
+			<input type="submit" value="Login" />
+			<input type="reset" value="Reset" />
+			</form>
+		</p:panel>
+	</ui:define>
+</ui:composition>

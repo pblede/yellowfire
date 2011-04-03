@@ -1,0 +1,36 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.prime.com.tr/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:cc="http://java.sun.com/jsf/composite/cc"
+	template="/resources/layout/training-layout.xhtml">
+
+	<ui:define name="demoSampleParameters">
+		<f:metadata>
+			<f:viewParam name="section" value="#{navigator.section}" />
+			<f:viewParam name="item" value="#{navigator.item}" />
+			<f:viewParam name="skin" value="#{skinBean.skin}" />
+		</f:metadata>
+	</ui:define>
+	<ui:define name="head">
+	</ui:define>
+	<ui:define name="content">
+		<p:growl id="g" showDetail="true" showSummary="true" />
+		<h:form prependId="false" id="registerForm" autocomplete="off">
+            <p:fieldset legend="#{msgs['pnl.profile']}">
+                <cc:profile bean="#{profileController}"/>
+            </p:fieldset>
+            <p:fieldset>
+                <h:panelGrid columns="2">
+                    <p:commandButton
+                        id="b2"
+                        value="#{msgs['link.register']}"
+                        action="#{profileController.register}"
+                        ajax="false"
+                        update="registerForm od3e od3u od3p od3cp od3d od3em od3um od3pm od3cpm od3dm g" />
+                </h:panelGrid>
+            </p:fieldset>
+		</h:form>
+	</ui:define>
+</ui:composition>

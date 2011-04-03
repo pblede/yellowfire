@@ -1,0 +1,23 @@
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:composite="http://java.sun.com/jsf/composite"
+        xmlns:cc="http://java.sun.com/jsf/composite/cc"
+        xmlns:p="http://primefaces.prime.com.tr/ui"
+        xmlns:f="http://java.sun.com/jsf/core">
+
+<!-- INTERFACE -->
+<composite:interface>
+	<composite:attribute name="text" required="true" shortDescription="The text to displayin the information panel"/>
+</composite:interface>
+
+<!-- IMPLEMENATION -->
+<composite:implementation>
+	<p:panel header="#{msgs['dialog.info']}">
+	    <h:panelGrid id="lfp1" columns="2" >
+	    	<p:graphicImage value="#{requestPath}/resources/images/information.png"/>
+	        <h:outputText value="#{cc.attrs.text}" />
+	    </h:panelGrid>
+    </p:panel>
+</composite:implementation>
+</html>

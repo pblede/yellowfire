@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<!--
+		NOTES(TODO: move to some readme in future): id for sample should
+		equals to xhtml page name with the sample the same for demo id - it
+		should be equals to name of the folder where samples placed
+	-->
+<root>
+    <links>
+        <link>
+            <id>project</id>
+            <name>Project Site</name>
+            <href>http://jboss.org/richfaces</href>
+        </link>
+        <link>
+            <id>project wiki</id>
+            <name>Project Wiki</name>
+            <href>http://www.jboss.org/community/wiki/richfaceswikihomepage</href>
+        </link>
+        <link>
+            <id>project community</id>
+            <name>RichFaces Community Space</name>
+            <href>http://community.jboss.org/community/richfaces</href>
+        </link>
+        <link>
+            <id>project download</id>
+            <name>Download</name>
+            <href>http://downloads.jboss.org/richfaces/milestones/4.0.X/4.0.0.ALPHA2/richfaces-4.0.0.ALPHA2.zip</href>
+        </link>
+        <link>
+            <id>project sources</id>
+            <name>Sources</name>
+            <href>http://anonsvn.jboss.org/repos/richfaces/root/examples/richfaces-showcase/</href>
+        </link>
+    </links>
+	<group>
+		<name>Races</name>
+		<sections>
+			<section>
+				<id>races</id>
+				<name>races</name>
+				<items>
+					<item>
+						<id>races</id>
+						<name>Races</name>
+					</item>
+                    <item>
+						<id>results</id>
+						<name>Results</name>
+					</item>
+				</items>
+			</section>
+		</sections>
+	</group>
+</root>

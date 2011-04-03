@@ -1,0 +1,23 @@
+public static class LoginCallback implements CallbackHandler {
+
+
+	private String userName = null;
+	private String password = null;
+
+	public LoginCallback (String userName, String password) {
+		this.userName = userName;
+		this.password = password;
+	}
+
+	public void handle(Callback[] callbacks) {
+		for (Callback callback : callbacks) {
+			if (callback instanceof NameCallback) {
+				NameCallback nc = (NameCallback) callback;
+				nc.setName(this.userName);
+			} else if (callback instanceof PasswordCallback) {
+				PasswordCallback pc = (PasswordCallback) callback;
+				pc.setPassword(this.password.toCharArray());
+			}
+		}
+	}
+}

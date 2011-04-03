@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PROCESS model-entity="JSFProcess">
+ <PROCESS-ITEM NAME="rules:races" PATH="races" SHAPE="32,17,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:races:0" NAME="item" PATH="races" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="race::race" NAME="output" PATH="race"
+    TARGET="rules:race" TITLE="race" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:race" PATH="race" SHAPE="288,32,50,25" model-entity="JSFProcessGroup"/>
+</PROCESS>

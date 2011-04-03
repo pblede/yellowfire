@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.prime.com.tr/ui"
+    xmlns:cc="http://java.sun.com/jsf/composite/cc">
+
+<ui:composition template="/resources/layout/running-layout.xhtml">
+    <f:loadBundle basename="za.co.yellowfire.ui.resources.messages" var="msg"/>
+	<ui:define name="demoSampleParameters">
+		<f:metadata>
+            <f:viewParam name="section" value="#{navigator.section}" />
+			<f:viewParam name="item" value="#{navigator.item}" />
+			<f:viewParam name="skin" value="#{skinBean.skin}"/>
+		</f:metadata>
+	</ui:define>
+    <ui:define name="head">
+		<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+	</ui:define>
+    <ui:define name="links">
+        <h:form id="links" prependId="true">
+        <div class="left"></div>
+        <ul>
+            <li class="selected" style="padding-right: 12px;"><h:commandLink id="l1" actionListener="#{racesController.select}" value="#{msg.link.home}"/></li>
+            <li><p:commandLink id="l2" value="#{msg.link.register}" onclick="d1.show();"/></li>
+            <li><p:commandLink id="l3" value="#{msg.link.login}" onclick="d2.show();"/></li>
+            <li><h:commandLink id="l4" value="#{msg.link.about}" actionListener="#{racesController.select}"/></li>
+        </ul>
+        <div class="right"></div>
+        </h:form>
+    </ui:define>
+	<ui:define name="content">
+        <p:growl showDetail="true" showSummary="true" />
+        <ui:include src="#{navigator.itemURI}" />
+        <p:dialog id="d1" widgetVar="d1" closable="true" modal="true" header="#{msg.dialog.register}" >
+            <cc:register
+                    id="register"
+                    bean="#{userController}"
+                    action="#{userController.register}"
+                    dialog="d1"/>
+        </p:dialog>
+        <p:dialog id="d2" widgetVar="d2" closable="true" modal="true" header="#{msg.dialog.login}" >
+            <cc:register
+                    id="login"
+                    bean="#{userController}"
+                    action="#{userController.login}"
+                    dialog="d2"/>
+        </p:dialog>
+	</ui:define>
+</ui:composition>
+
+</html>

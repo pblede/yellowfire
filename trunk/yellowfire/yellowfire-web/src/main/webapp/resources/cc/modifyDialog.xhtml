@@ -1,0 +1,65 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+   xmlns:ui="http://java.sun.com/jsf/facelets"
+   xmlns:h="http://java.sun.com/jsf/html"
+   xmlns:p="http://primefaces.prime.com.tr/ui"
+   xmlns:comp="http://java.sun.com/jsf/composite">
+
+    <comp:interface>
+        <comp:attribute name="header" required="true" shortDescription="The label for the output"/>
+        <comp:attribute name="widgetVar" required="true" shortDescription="The widget variable"/>
+        <comp:actionSource name="save" targets="b1" />
+        <comp:actionSource name="delete" targets="b4" />
+        <comp:attribute name="deleteRendered" required="false" default="false" shortDescription="Whether the delete button is rendered"/>
+    </comp:interface>
+
+    <comp:implementation>
+        <p:dialog
+                id="dlg"
+                header="#{cc.attrs.header}"
+                widgetVar="#{cc.attrs.widgetVar}"
+                resizable="false"
+                width="500"
+                modal="true"
+                showEffect="explode"
+                hideEffect="explode">
+
+            <comp:insertChildren />
+
+            <p:fieldset legend="#{msgs['pnl.messages']}">
+                <h:panelGrid id="messages" columns="1">
+                    <p:messages id="m1" showDetail="true" showSummary="false" globalOnly="false"  />
+                </h:panelGrid>
+            </p:fieldset>
+            <h:panelGrid id="buttons" columns="3" cellpadding="4">
+                <p:commandButton
+                        id="b1"
+                        value="#{msgs['btn.save']}"
+                        image="ui-icon ui-icon-disk"
+                        ajax="true"
+                        oncomplete="onSaveComplete(xhr, status, args, #{cc.attrs.widgetVar})"
+                        update="dt1 modify_display modify_messages"
+                        />
+
+                <p:commandButton
+                        id="b4"
+                        value="#{msgs['btn.delete']}"
+                        image="ui-icon ui-icon-minus"
+                        ajax="true"
+                        rendered="#{cc.attrs.deleteRendered}"
+                        oncomplete="onDeleteComplete(xhr, status, args, #{cc.attrs.widgetVar})"
+                        update="dt1 modify_display modify_messages"
+                        />
+
+                <p:commandButton
+                        id="b3"
+                        image="ui-icon ui-icon-close"
+                        value="#{msgs['btn.close']}"
+                        onclick="#{cc.attrs.widgetVar}.hide()"
+                        update="dt1 modify_display modify_messages"
+                        />
+            </h:panelGrid>
+        </p:dialog>
+    </comp:implementation>
+</ui:composition>

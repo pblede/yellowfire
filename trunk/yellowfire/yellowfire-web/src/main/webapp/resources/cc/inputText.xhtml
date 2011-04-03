@@ -1,0 +1,29 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+   xmlns:ui="http://java.sun.com/jsf/facelets"
+   xmlns:h="http://java.sun.com/jsf/html"
+   xmlns:c="http://java.sun.com/jsp/jstl/core"
+   xmlns:cc="http://java.sun.com/jsf/composite/cc"
+   xmlns:p="http://primefaces.prime.com.tr/ui"
+   xmlns:comp="http://java.sun.com/jsf/composite">
+
+   <comp:interface>
+      <comp:attribute name="label" required="true" shortDescription="The label for the output"/>
+      <comp:attribute name="value" required="false" shortDescription="The value for the output"/>
+      <comp:attribute name="size" required="false" default="50" shortDescription="The value for the output"/>
+      <comp:attribute name="required" required="false" default="false" shortDescription="The value for the output"/>
+   </comp:interface>
+
+    <comp:implementation>
+        <h:panelGroup style="width:100%">
+            <h:inputText
+                    id="input"
+                    size="#{cc.attrs.size}"
+                    required="#{cc.attrs.required}"
+                    label="#{cc.attrs.label}"
+                    value="#{cc.attrs.value}"/>
+            <p:message id="msg" for="input" showSummary="false" showDetail="false" display="icon" />
+        </h:panelGroup>
+    </comp:implementation>
+</ui:composition>

@@ -1,0 +1,101 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.prime.com.tr/ui"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:cc="http://java.sun.com/jsf/composite/cc"
+                template="/resources/layout/running-layout.xhtml">
+   
+	<ui:define name="demoSampleParameters">
+		<f:metadata>
+            <f:viewParam name="section" value="#{navigator.section}" />
+			<f:viewParam name="item" value="#{navigator.item}" />
+			<f:viewParam name="skin" value="#{skinBean.skin}"/>
+		</f:metadata>
+	</ui:define>
+    <ui:define name="head">
+	</ui:define>
+	<ui:define name="content">
+        <p:growl showDetail="true" showSummary="true" />
+        <h:form prependId="false" id="fc">
+        	<p:panel header="#{msgs['dialog.result.calendar']}">
+        		<p:schedule
+                    aspectRatio="2.35"
+                    value="#{resultsController.resultModel}"
+        			editable="true" id="s1" widgetVar="s1Var" 
+        			eventSelectListener="#{resultsController.onEventSelect}"
+        			dateSelectListener="#{resultsController.onDateSelect}"
+        			eventMoveListener="#{resultsController.onEventMove}"
+        			eventResizeListener="#{resultsController.onEventResize}"
+        			onEventMoveUpdate="d1, d2, growl, f1"
+        			onEventResizeUpdate="d1, d2, growl, f1"
+        			onDateSelectUpdate="d1, d2, growl, f1"
+        			onEventSelectUpdate="d1, growl, f1"
+        			onDateSelectComplete="d2Var.show()"
+        			onEventSelectComplete="d1Var.show()" />
+        	</p:panel>
+            <p:dialog id="d2" widgetVar="d2Var" header="#{msgs['dialog.result.details']}" showEffect="clip" hideEffect="clip">
+                <h:panelGrid id="pg2" columns="2">
+                    <p:commandButton action="#{resultsController.onNewTraining}" value="Training Result" update="f1,growl" ajax="false"/>
+                    <p:commandButton action="#{resultsController.onNewRace}" value="Race Result" update="f1,growl" ajax="false"/>
+                </h:panelGrid>
+            </p:dialog>
+
+        	<p:dialog id="d1" widgetVar="d1Var" header="#{msgs['dialog.result.details']}"
+        		showEffect="clip" hideEffect="clip">
+        	
+        		<h:panelGrid id="pg1" columns="4">
+        			<h:outputLabel id="la03" for="a03" value="#{msgs['fld.name']}:" />
+        			<h:inputText id="a03" value="#{resultsController.selected.result.name}"/>
+        			<o:floatingIconMessage for="a03" showDetail="true"
+						showSummary="false"
+						style="border: 1px solid red; background-color: #e0e0ff;" />
+					<h:message for="a03" showDetail="true"  showSummary="false" />
+					
+					
+        			<h:outputLabel id="la01" for="a01" value="#{msgs['fld.date']}:" />
+        			<p:calendar id="a01" 
+        				value="#{resultsController.selected.result.start}" 
+        				pattern="yyyy-MM-dd"
+						onchange="O$.validate(this);">
+						<f:attribute name="clientValidation" value="onDemand" />
+        			</p:calendar>
+        			<o:floatingIconMessage for="a01" showDetail="true"
+						showSummary="false"
+						style="border: 1px solid red; background-color: #e0e0ff;" />
+					<h:message for="a01" showDetail="true"  showSummary="false" />
+					
+					<h:outputLabel id="la02" for="a02" value="#{msgs['fld.result.type']}:" />
+					<h:selectOneMenu id="a02" value="#{resultsController.selected.result.type}"  valueChangeListener="#{resultsController.onResultTypeChange}" >
+						<f:selectItems value="${resultsController.resultTypes}" />
+					</h:selectOneMenu>
+					<o:floatingIconMessage for="a02" showDetail="true"
+						showSummary="false"
+						style="border: 1px solid red; background-color: #e0e0ff;" />
+					<h:message for="a02" showDetail="true"  showSummary="false" />
+					
+					
+					<h:outputLabel id="la99" for="a99" value="#{msgs['fld.result.type']}:" />
+					<o:dropDownField id="a99" value="#{resultsController.selected.result.type}" >
+						<o:dropDownItems value="${resultsController.resultTypes}" />
+					</o:dropDownField>
+					<o:floatingIconMessage for="a99" showDetail="true"
+						showSummary="false"
+						style="border: 1px solid red; background-color: #e0e0ff;" />
+					<h:message for="a99" showDetail="true"  showSummary="false" />
+					
+					
+					<h:outputLabel id="la04" for="a04" value="#{msgs['fld.race']}:" />
+					<h:selectOneMenu id="a04" value="#{resultsController.selected.result.race}" >
+						<f:selectItems value="${resultsController.racesForDate}" itemDescription="#{race.name}" itemLabel="#{race.name}" var="race" />
+						<f:converter converterId="RaceConverter" />
+					</h:selectOneMenu>
+					<o:floatingIconMessage for="a04" showDetail="true"
+						showSummary="false"
+						style="border: 1px solid red; background-color: #e0e0ff;" />
+					<h:message for="a04" showDetail="true"  showSummary="false" />
+        		</h:panelGrid>
+        	</p:dialog>
+        </h:form>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,213 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:p="http://primefaces.prime.com.tr/ui"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:cc="http://java.sun.com/jsf/composite/cc"
+        template="/resources/layout/training-layout.xhtml">
+
+    <ui:define name="demoSampleParameters">
+        <f:metadata>
+            <f:viewParam name="section" value="#{navigator.section}"/>
+            <f:viewParam name="item" value="#{navigator.item}"/>
+            <f:viewParam name="skin" value="#{skinBean.skin}"/>
+        </f:metadata>
+    </ui:define> 
+    <ui:define name="head">
+        <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+    </ui:define>
+    <ui:define name="content">
+        <style type="text/css">
+            .venue_col1 {width: 40%; vertical-align: top;}
+            .venue_col2 {width: 40%; vertical-align: top;}
+            .venue_col3 {width: 20%; vertical-align: top;}
+            .result_panel {width: 100%; height: 100%}
+            .map_panel {width: 100%; height: 100%}
+        </style>
+        <p:growl id="growl" showDetail="true" showSummary="true"/>
+
+        <h:form id="h1" prependId="false">
+            <h:panelGrid columns="1" style="width: 100%" cellspacing="1px">
+                <p:panel style="width: 100%">
+                    <h:panelGrid columns="5" >
+                        <h:outputLabel value="#{msgs['fld.search']}" for="a01" />
+                        <h:inputText id="a01" value="#{venuesController.searchText}" label="#{msgs['fld.search']}"/>
+                        <p:message for="a01" display="icon" showDetail="false" showSummary="false"/>
+                        <p:commandButton
+                            id="b30"
+                            ajax="true"
+                            value="#{msgs['btn.search']}"
+                            update="dg1 as1 growl"
+                            actionListener="#{venuesController.searchModel.onSearch}"
+                            oncomplete="onSearchComplete(xhr, status, args)"/>
+                        <p:ajaxStatus id="as1" style="height:24px;display:block;" widgetVar="statusVar">
+                            <f:facet name="start"><h:graphicImage value="../resources/images/loading.gif"/></f:facet>
+                            <f:facet name="complete"><h:outputText value=""/></f:facet>
+                        </p:ajaxStatus>
+                    </h:panelGrid>
+                </p:panel>
+                <h:panelGrid columns="3" columnClasses="venue_col1,venue_col2,venue_col3" style="width:100%">
+                    <p:panel header="#{msgs['dlg.results']}" styleClass="result_panel">
+                        <p:dataTable
+                            id="dg1"
+                            widgetVar="dg1Var"
+                            var="row"
+                            value="#{venuesController.searchModel.rows}"
+                            selectionMode="single"
+                            selection="#{venuesController.searchModel.selected}"
+                            onRowSelectUpdate="map01">
+                            <p:column sortBy="#{row.object.formattedAddress}" filterBy="#{row.object.formattedAddress}" filterStyle="width:100%"  style="width:100%" headerText="Address">
+                                <h:outputText value="#{row.object.formattedAddress}"/>
+                            </p:column>
+                        </p:dataTable>
+                    </p:panel>
+                    <p:panel header="#{msgs['dlg.map']}" styleClass="result_panel">
+                        <p:gmap id="map01" center="#{venuesController.searchModel.selected.object.geometry.location.gps}" zoom="15" type="ROADMAP" style="width:600px;height:400px" rendered="#{venuesController.searchModel.selected ne null}" model="#{venuesController.searchMapModel}" />
+                    </p:panel>
+                    <p:panel header="#{msgs['dlg.options']}" styleClass="options_panel">
+                        <h:panelGrid columns="1" style="width:100%">
+                            <p:commandButton
+                                id="b40"
+                                value="#{msgs['btn.create.venue']}"
+                                update="h2"
+                                actionListener="#{venuesController.onCreateVenue}"
+                                oncomplete="onCreateVenue(xhr, status, args)"
+                                />
+                        </h:panelGrid>
+                    </p:panel>
+                </h:panelGrid>
+            </h:panelGrid>
+        </h:form>
+        <h:form id="h2" prependId="false">
+            <p:dialog
+                    id="modifyDialog"
+                    header="#{msgs['dlg.venue']}"
+                    widgetVar="modifyDialogVar"
+                    resizable="false"
+                    width="500"
+                    modal="true"
+                    showEffect="explode"
+                    hideEffect="explode">
+                <p:fieldset legend="#{msgs['pnl.fields']}">
+                    <cc:venueForm bean="#{venuesController.selectedRow.object}" />
+                </p:fieldset>
+                <p:fieldset legend="#{msgs['pnl.messages']}">
+                    <h:panelGrid id="modify_messages" columns="1">
+                        <p:messages id="m1" showDetail="true" showSummary="false" globalOnly="false"  />
+                    </h:panelGrid>
+                </p:fieldset>
+                <h:panelGrid id="modify_buttons" columns="3" cellpadding="4">
+                    <p:commandButton
+                            id="b1"
+                            value="#{msgs['btn.save']}"
+                            image="ui-icon ui-icon-disk"
+                            actionListener="#{venuesController.onSaveRow}"
+                            ajax="true"
+                            oncomplete="onSaveComplete(xhr, status, args)"
+                            update="dt1 modify_display modify_messages"
+                            />
+
+                    <p:commandButton
+                            id="b4"
+                            value="#{msgs['btn.delete']}"
+                            image="ui-icon ui-icon-minus"
+                            actionListener="#{venuesController.onDeleteRow}"
+                            ajax="true"
+                            rendered="#{venuesController.selectedRow.object.id ne null}"
+                            oncomplete="onDeleteComplete(xhr, status, args)"
+                            update="dt1 modify_display modify_messages"
+                            />
+
+                    <p:commandButton
+                            id="b3"
+                            image="ui-icon ui-icon-close"
+                            value="#{msgs['btn.close']}"
+                            onclick="modifyDialogVar.hide()"
+                            update="dt1 modify_display modify_messages"
+                            />
+                </h:panelGrid>
+            </p:dialog>
+        </h:form>
+        <script type="text/javascript">
+            function onSearchComplete(xhr, status, args) {
+                if (args.validationFailed) {
+                    return false;
+                }
+
+                if (args.result != null) {
+                    if (args.result.failed) {
+                        return false;
+                    }
+                }
+                return true;
+            }
+
+            function onCreateVenue(xhr, status, args) {
+                if (args.validationFailed) {
+                    return false;
+                }
+
+                if (args.result != null) {
+                    if (args.result.failed) {
+                        return false;
+                    }
+                }
+                modifyDialogVar.show();
+                return true;
+            }
+
+            function onLookupComplete(xhr, status, args) {
+                if (args.validationFailed) {
+                    return false;
+                }
+                if (args.result != null) {
+                    if (args.result.failed) {
+                        return false;
+                    }
+                }
+                addressDialogVar.show();
+                return true;
+            }
+
+            function onDeleteComplete(xhr, status, args) {
+            if (args.validationFailed) {
+                return false;
+            }
+            if (args.result != null) {
+                if (args.result.failed) {
+                    return false;
+                }
+            }
+            modifyDialogVar.hide();
+            return true;
+        }
+
+            function onSaveComplete(xhr, status, args) {
+            if (args.validationFailed) {
+                return false;
+            }
+            if (args.result != null) {
+                if (args.result.failed) {
+                    return false;
+                }
+            }
+            modifyDialogVar.hide();
+            return true;
+        }
+
+            function onAddComplete(xhr, status, args) {
+            if (args.validationFailed) {
+                return false;
+            }
+            if (args.result != null) {
+                if (args.result.failed) {
+                    return false;
+                }
+            }
+            modifyDialogVar.hide();
+            return true;
+        }
+        </script>
+    </ui:define>
+</ui:composition>

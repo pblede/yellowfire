@@ -1,0 +1,32 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+   xmlns:h="http://java.sun.com/jsf/html"
+   xmlns:f="http://java.sun.com/jsf/core"
+   xmlns:p="http://primefaces.prime.com.tr/ui"
+   xmlns:ui="http://java.sun.com/jsf/facelets"
+   xmlns:cc="http://java.sun.com/jsf/composite">
+
+   <cc:interface>
+      <cc:attribute name="label" required="true" shortDescription="The label for the output"/>
+      <cc:attribute name="value" required="true" shortDescription="The value for the output"/>
+      <cc:attribute name="converter" required="true" shortDescription="The converter for the output select items"/>
+   </cc:interface>
+
+    <cc:implementation>
+        <h:outputText id="label" value="#{cc.attrs.label}" for="select" />
+        <h:panelGroup style="width:100%">
+            <h:panelGrid columns="2" style="width:100%">
+                <h:selectOneMenu
+                        id="select"
+                        label="#{cc.attrs.label}"
+                        converter="ContentTypeConverter"
+                        value="#{cc.attrs.value}" >
+                    <f:selectItem id="blank" itemValue="-1" itemLabel="Select"  itemDescription="Select" noSelectionOption="true" />
+                    <cc:insertChildren />
+                </h:selectOneMenu>
+                <p:message id="msg" for="select" showSummary="false" showDetail="false" display="icon" />
+            </h:panelGrid>
+        </h:panelGroup>
+    </cc:implementation>
+</ui:composition>

@@ -1,0 +1,108 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.prime.com.tr/ui"
+    xmlns:c="http://java.sun.com/jsp/jstl/core"
+    xmlns:o="http://openfaces.org/"
+    xmlns:cc="http://java.sun.com/jsf/composite/cc">
+
+<ui:composition template="/resources/layout/running-layout.xhtml">
+	<ui:define name="demoSampleParameters">
+		<f:metadata>
+            <f:viewParam name="section" value="#{navigator.section}" />
+			<f:viewParam name="item" value="#{navigator.item}" />
+			<f:viewParam name="skin" value="#{skinBean.skin}"/>
+		</f:metadata>
+	</ui:define>
+    <ui:define name="head">
+	</ui:define>
+	<ui:define name="content">
+        <p:growl id="g" showDetail="true" showSummary="true" />
+        <h:form id="f2" rendered="#{sessionController.loggedIn ne true}">
+        	<cc:warningPanel text="#{msgs['prompt.login']}" />
+       	</h:form>
+       	<h:form id="f1" rendered="#{sessionController.loggedIn}">
+        	<p:panel heading="Profile">
+        		<h:panelGrid columns="4">
+        			<h:outputLabel id="l01" value="#{msgs['fld.username']}:" for="a01"/>
+        			<h:inputText id="a01" value="#{sessionController.user.name}" disabled="true" />
+        			<o:floatingIconMessage 
+						for="a01" 
+						showDetail="true"
+						showSummary="false"
+						style="border: 1px solid red; background-color: #e0e0ff;" />
+        			<h:message for="a01" />
+        			
+        			<h:outputLabel id="l02" value="#{msgs['fld.email']}:" for="a02"/>
+        			<h:inputText id="a02" value="#{sessionController.user.email}"/>
+        			<o:floatingIconMessage 
+						for="a02" 
+						showDetail="true"
+						showSummary="false"
+						style="border: 1px solid red; background-color: #e0e0ff;" />
+        			<h:message for="a02" />
+        			
+        			<h:outputLabel id="l03" value="#{msgs['fld.password']}:" for="a03"/>
+        			<h:inputSecret id="a03" value="#{sessionController.user.password}"/>
+        			<o:floatingIconMessage for="a03" showDetail="true"
+						showSummary="false"
+						style="border: 1px solid red; background-color: #e0e0ff;" />
+        			<h:message for="a03" />
+        			
+        			<h:outputLabel id="l04" value="#{msgs['fld.confirm.password']}:" for="a04"/>
+        			<h:inputSecret id="a04" value="#{sessionController.user.passwordConfirmation}"/>
+        			<o:floatingIconMessage
+						for="a04" 
+						showDetail="true"
+						showSummary="false"
+						style="border: 1px solid red; background-color: #e0e0ff;" />
+        			<h:message for="a04" />
+        			
+        			<h:outputLabel value="#{msgs['fld.birthdate']}:" for="a05" />
+					<p:calendar 
+						id="a05" 
+						pattern="yyyy-MM-dd"
+						onchange="O$.validate(this);"
+						value="#{sessionController.user.birthDate}">
+						<f:attribute name="clientValidation" value="onDemand" />
+					</p:calendar>
+					<o:floatingIconMessage for="a05" showDetail="true"
+						showSummary="false"
+						style="border: 1px solid red; background-color: #e0e0ff;" />
+					<h:message for="a05" showDetail="true"  showSummary="false" />
+					
+					<h:outputLabel id="l06" value="#{msgs['fld.club']}:" for="a06"/>
+        			<h:selectOneMenu id="a06" value="#{sessionController.user.club}" >
+        				<f:selectItems itemDescription="#{club.name}" itemLabel="#{club.name}" value="#{sessionController.clubs}" var="club" />
+        				<f:converter converterId="ClubConverter" />
+        			</h:selectOneMenu>
+        			<o:floatingIconMessage 
+						for="a06" 
+						showDetail="true"
+						showSummary="false"
+						style="border: 1px solid red; background-color: #e0e0ff;" />
+        			<h:message for="a06" />
+        		</h:panelGrid>
+        	</p:panel>
+        	<p:panel>
+        		<h:panelGrid columns="5">
+        			<p:commandButton 
+        				id="cb01" 
+        				value="#{msgs['btn.save']}"
+        				actionListener="#{sessionController.persist}" 
+        				ajax="true" 
+        				update="f1 g"/>
+        			<p:commandButton 
+        				id="cb02" 
+        				value="#{msgs['btn.delete']}"
+        				actionListener="#{sessionController.delete}" 
+        				ajax="true" 
+        				update="f1 g"/>
+        		</h:panelGrid>
+        	</p:panel>
+        </h:form>
+	</ui:define>
+</ui:composition>
+
+</html>

@@ -1,0 +1,25 @@
+public class JAASHelper {
+	LoginContext loginContext = null;
+	public JAASHelper() {}
+
+	public boolean authenticate(String userName, String password) {
+		boolean result = false;
+		try {
+			loginContext = new LoginContext("FileLogin", new LoginCallback(userName, password));
+			loginContext.login();
+			result = true;
+		} catch (LoginException e) {
+			result = false;
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	public Subject getSubject() {
+		Subject result = null;
+		if (null != loginContext) {
+			result = loginContext.getSubject();
+		}
+		return result;
+	}
+}

@@ -1,0 +1,37 @@
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:composite="http://java.sun.com/jsf/composite"
+        xmlns:p="http://primefaces.prime.com.tr/ui"
+        xmlns:f="http://java.sun.com/jsf/facelets">
+
+<!-- INTERFACE -->
+<composite:interface>
+    <composite:attribute name="welcomeLabel" default="Welcome" />
+    <composite:attribute name="logoutLabel" default="Logout" />
+    <composite:attribute name="logoutImage" default="#{resource['images:key.png']}" />
+    <composite:actionSource name="logoutActionListener" targets="unsec:lfcb2"/>
+    <!--<composite:attribute name="rendered" default="true" displayName="Rendered" shortDescription="Whether the component is rendered"/>-->
+    <composite:attribute name="userBean" required="true" shortDescription="The bean that quickLogout should use to get the remoteUser"/>
+    <composite:attribute name="actionMethod" method-signature="java.lang.String action()"/>
+    <composite:attribute name="update" default="unsec" required="false" shortDescription="The component ids to update"/>
+</composite:interface>
+
+<!-- IMPLEMENATION -->
+<composite:implementation>
+    <h:form id="unsec" prependId="true">
+        <h:panelGrid columns="3">
+            <h:outputText value="#{cc.attrs.welcomeLabel}:"/>
+            <h:link outcome="profile">
+            	<h:outputText value="#{cc.attrs.userBean.firstName} #{cc.attrs.userBean.lastName}" />
+        	</h:link>
+            <p:commandButton
+                    value="#{cc.attrs.logoutLabel}"
+                    id="lfcb2"
+                    ajax="false"
+                    action="#{cc.attrs.actionMethod}"
+                    />
+        </h:panelGrid>
+    </h:form>
+</composite:implementation>
+</html>

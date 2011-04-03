@@ -1,0 +1,78 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:p="http://primefaces.prime.com.tr/ui"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:cc="http://java.sun.com/jsf/composite/cc"
+        template="/resources/layout/training-layout.xhtml">
+
+    <ui:define name="head">
+    </ui:define>
+    <ui:define name="content">
+        <p:growl id="growl" showDetail="true" showSummary="true" globalOnly="true"/>
+        <h:form id="h2" prependId="false">
+            <p:panel id="commands">
+                <h:panelGrid columns="4">
+                    <p:commandButton
+                            id="b10"
+                            value="#{msgs['btn.add']}"
+                            actionListener="#{outcomesController.dataModel.onAdd}"
+                            ajax="true"
+                            update="modifyDialog:panel modifyDialog:buttons growl"
+                            oncomplete="onNewComplete(xhr, status, args, modifyDialogVar)"/>
+                    <p:commandButton
+                            id="b11"
+                            value="#{msgs['btn.refresh']}"
+                            actionListener="#{outcomesController.dataModel.onLoad}"
+                            ajax="true"
+                            update="dt1 growl"
+                            onerror="onError()"/>
+                    #{" "} #{msgs['prompt.table.actions']}
+                </h:panelGrid>
+            </p:panel>
+        </h:form>
+        <h:form id="h1" prependId="false">
+            <p:dataTable
+                    id="dt1"
+                    widgetVar="dt1Var"
+                    binding="#{outcomesController.dataModel.table}"
+                    var="row"
+                    value="#{outcomesController.dataModel.rows}"
+                    rows="10"
+                    height="500"
+                    paginator="true"
+                    paginatorAlwaysVisible="true"
+                    style="vertical-align:text-top;"
+                    selectionMode="single"
+                    selection="#{outcomesController.dataModel.selected}"
+                    onRowSelectUpdate="modifyDialog:panel modifyDialog:buttons"
+                    onRowSelectComplete="modifyDialogVar.show()">
+	
+                <p:column sortBy="#{row.object.id}" filterBy="#{row.object.id}" filterStyle="width:100%"  style="width:10px" headerText="#">
+                    <h:outputText value="#{row.object.id}"/>
+                </p:column>
+                <p:column sortBy="#{row.object.name}" filterBy="#{row.object.description}" filterStyle="width:100%" style="width:100%" headerText="#{msgs['fld.description']}">
+                    <h:outputText value="#{row.object.description}" />
+                </p:column>
+            </p:dataTable>
+        </h:form>
+        <h:form id="h3" prependId="false">
+            <cc:modifyDialog
+                id="modifyDialog"
+                header="#{msgs[dlg.content.types]}"
+                widgetVar="modifyDialogVar"
+                deleteRendered="#{outcomesController.dataModel.selected.object.id ne null}" >
+                <f:actionListener for="save" binding="#{outcomesController.dataModel.saveActionListener}" />
+                <f:actionListener for="delete" binding="#{outcomesController.dataModel.deleteActionListener}" />
+
+                <p:fieldset legend="#{msgs['pnl.fields']}" id="panel">
+                    <cc:lookupFieldForm
+                            id="fields"
+                            idValue="#{outcomesController.dataModel.selected.object.id}"
+                            descriptionValue="#{outcomesController.dataModel.selected.object.description}"/>
+                </p:fieldset>
+            </cc:modifyDialog>
+        </h:form>
+    </ui:define>
+</ui:composition>

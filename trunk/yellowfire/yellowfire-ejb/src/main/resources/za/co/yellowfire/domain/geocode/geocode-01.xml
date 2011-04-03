@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GeocodeResponse>
+ <status>OK</status>
+ <result>
+  <type>street_address</type>
+  <formatted_address>9 Brendon St, Kempton Park 1618, South Africa</formatted_address>
+  <address_component>
+   <long_name>9</long_name>
+
+   <short_name>9</short_name>
+   <type>street_number</type>
+  </address_component>
+  <address_component>
+   <long_name>Brendon St</long_name>
+   <short_name>Brendon St</short_name>
+   <type>route</type>
+
+  </address_component>
+  <address_component>
+   <long_name>Birchleigh North</long_name>
+   <short_name>Birchleigh North</short_name>
+   <type>sublocality</type>
+   <type>political</type>
+  </address_component>
+
+  <address_component>
+   <long_name>Kempton Park</long_name>
+   <short_name>Kempton Park</short_name>
+   <type>locality</type>
+   <type>political</type>
+  </address_component>
+  <address_component>
+
+   <long_name>East Rand</long_name>
+   <short_name>East Rand</short_name>
+   <type>administrative_area_level_3</type>
+   <type>political</type>
+  </address_component>
+  <address_component>
+   <long_name>East Rand</long_name>
+
+   <short_name>East Rand</short_name>
+   <type>administrative_area_level_2</type>
+   <type>political</type>
+  </address_component>
+  <address_component>
+   <long_name>Gauteng</long_name>
+   <short_name>GP</short_name>
+
+   <type>administrative_area_level_1</type>
+   <type>political</type>
+  </address_component>
+  <address_component>
+   <long_name>South Africa</long_name>
+   <short_name>ZA</short_name>
+   <type>country</type>
+
+   <type>political</type>
+  </address_component>
+  <address_component>
+   <long_name>1618</long_name>
+   <short_name>1618</short_name>
+   <type>postal_code</type>
+  </address_component>
+
+  <geometry>
+   <location>
+    <lat>-26.0412200</lat>
+    <lng>28.2260700</lng>
+   </location>
+   <location_type>ROOFTOP</location_type>
+   <viewport>
+
+    <southwest>
+     <lat>-26.0443676</lat>
+     <lng>28.2229224</lng>
+    </southwest>
+    <northeast>
+     <lat>-26.0380724</lat>
+     <lng>28.2292176</lng>
+
+    </northeast>
+   </viewport>
+  </geometry>
+  <partial_match>true</partial_match>
+ </result>
+</GeocodeResponse>

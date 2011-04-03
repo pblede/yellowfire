@@ -1,0 +1,45 @@
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:composite="http://java.sun.com/jsf/composite"
+        xmlns:p="http://primefaces.prime.com.tr/ui">
+
+<!-- INTERFACE -->
+<composite:interface>
+    <composite:attribute name="userLabel" default="User" />
+    <composite:attribute name="passwordLabel" default="Password" />
+    <composite:attribute name="loginLabel" default="Login" />
+    <composite:attribute name="registerLabel" default="Register" />
+    <composite:attribute name="registerUrl" required="true" />
+    <composite:attribute name="loginImage" default="#{resource['img:key.png']}" />
+    <composite:actionSource name="loginActionListener" targets="sec:lfcb1"/>
+    <!--<composite:attribute name="rendered" default="true" displayName="Rendered" shortDescription="Whether the component is rendered"/>-->
+    <composite:attribute name="credentialBean" required="true" shortDescription="The bean that quickLogin should use to get the userName and password"/>
+    <composite:attribute name="actionMethod" method-signature="java.lang.String action()"/>
+    <composite:attribute name="registerMethod" method-signature="java.lang.String action()"/>
+    <composite:attribute name="update" default="sec" required="false" shortDescription="The component ids to update"/>
+</composite:interface>
+
+<!-- IMPLEMENATION -->
+<composite:implementation>
+    <h:form id="sec" prependId="true">
+        <h:panelGrid columns="6">
+            <h:outputLabel value="#{cc.attrs.userLabel}:" for="userid"/>
+            <h:inputText value="#{cc.attrs.credentialBean.name}" id="userid"/>
+            <h:outputLabel value="#{cc.attrs.passwordLabel}:" for="pwd"/>
+            <p:password value="#{cc.attrs.credentialBean.password}" id="pwd" autocomplete="true" feedback="false"  minLength="5" />
+            <p:commandButton
+                    value="#{cc.attrs.loginLabel}"
+                    id="lfcb1"
+                    ajax="false"
+                    action="#{cc.attrs.actionMethod}"/>
+            <h:outputLink
+                    value="#{cc.attrs.registerUrl}"
+                    id="lfcb2">
+                <h:outputText value="#{cc.attrs.registerLabel}" />
+            </h:outputLink>
+
+        </h:panelGrid>
+    </h:form>
+</composite:implementation>
+</html>
