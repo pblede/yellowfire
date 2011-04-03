@@ -1,0 +1,111 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:comp="http://java.sun.com/jsf/composite"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.prime.com.tr/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xml:lang="en" lang="en">
+<comp:interface>
+    <comp:attribute name="buttonCaption" required="false" default="#{msgs['btn.register']}"/>
+    <comp:attribute name="prompt" required="false" default="#{msgs['prompt.register']}"/>
+    <comp:attribute name="emailLabel" required="false" default="#{msgs['fld.email']}"/>
+    <comp:attribute name="userNameLabel" required="false" default="#{msgs['fld.username']}"/>
+    <comp:attribute name="passwordLabel" required="false" default="#{msgs['fld.password']}"/>
+    <comp:attribute name="passwordConfirmationLabel" required="false" default="#{msgs['fld.confirm.password']}"/>
+    <comp:attribute name="dobLabel" required="false" default="#{msgs['fld.birthdate']}"/>
+    <comp:attribute name="actionListener" method-signature="void register(javax.faces.event.ActionEvent)"
+                    required="true"/>
+    <comp:attribute name="bean" required="true"/>
+    <comp:attribute name="dialog" required="true"/>
+</comp:interface>
+<comp:implementation>
+    <p:focus id="f"/>
+    <h:panelGrid columns="3">
+        <h:outputLabel value="#{cc.attrs.emailLabel}" for="e"/>
+        <h:inputText id="e" value="#{cc.attrs.bean.user.email}" onchange="O$.validate(this);">
+            <f:attribute name="clientValidation" value="onDemand"/>
+            <ui:remove><!--o:validateEmail detail="The email address is not valid"/--></ui:remove>
+        </h:inputText>
+        <h:message id="em" for="e"/>
+
+        <h:outputLabel value="#{cc.attrs.userNameLabel}" for="u"/>
+        <h:inputText id="u" value="#{cc.attrs.bean.user.name}" onchange="O$.validate(this);">
+            <f:attribute name="clientValidation" value="onDemand"/>
+            <ui:remove><!--o:validateCustom
+                    serverFunction="#{userController.userNameAvailable}"
+                    detail="The requested username is not available"
+                    summary="Username not available"
+                    /--></ui:remove>
+        </h:inputText>
+        <h:message id="um" for="u"/>
+
+        <h:outputLabel value="#{cc.attrs.passwordLabel}" for="p"/>
+        <h:inputSecret id="p" value="#{cc.attrs.bean.user.password}" onchange="O$.validate(this);">
+            <f:attribute name="clientValidation" value="onDemand"/>
+        </h:inputSecret>
+        <h:message id="pm" for="p"/>
+
+        <h:outputLabel value="#{cc.attrs.passwordConfirmationLabel}" for="cp"/>
+        <h:inputSecret id="cp" value="#{cc.attrs.bean.passwordConfirmation}" onchange="O$.validate(this);"
+                       required="true">
+
+        </h:inputSecret>
+        <h:message id="cpm" for="cp"/>
+
+        <h:outputLabel value="#{cc.attrs.dobLabel}" for="d"/>
+        <h:inputText id="d" value="#{cc.attrs.bean.user.birthDate}" onchange="O$.validate(this);">
+            <f:attribute name="clientValidation" value="onDemand"/>
+            <f:convertDateTime pattern="yyyy-MM-dd"/>
+        </h:inputText>
+        <h:message id="dm" for="d"/>
+    </h:panelGrid>
+    <h:panelGrid columns="1">
+        <ui:remove>
+        <!--o:commandButton
+                id="b"
+                value="#{cc.attrs.buttonCaption}"
+                action="#{cc.attrs.actionListener}"
+                execute="e u p cp d"
+                render="e u p cp d"
+                onclick="O$.validateForm(document.getElementById('registerform'));"
+                onerror="handleRegisterRequest(xhr, status, args)"/-->
+        </ui:remove>
+        <p:commandButton
+              id="b2"
+              value="#{cc.attrs.buttonCaption}"
+              action="#{cc.attrs.actionListener}"
+              ajax="false"
+              update="d1 f e u p cp d em um pm cpm dm"/>
+    </h:panelGrid>
+    <script type="text/javascript">
+        function handleRegisterRequest(xhr, status, args) {
+            alert(args.validationFailed);
+            if (args.validationFailed || !args.loggedIn) {
+                alert('failed');
+                jQuery('#dialog').parent().effect("shake", { times:5 }, 100);
+            } else {
+                alert('sucess');
+                //d1.hide();
+                jQuery('#loginLink').fadeOut();
+            }
+        }
+
+        function checkPassword(form) {
+            var p1 = jQuery('##{cc.clientId}:p').val();
+            var p2 = jQuery('#' + '#{cc.clientId}' + ':cp').val();
+            var d = jQuery('##{cc.attrs.dialog}');
+
+            alert(d.text);
+
+            d.hide();
+
+            if (p1 != p2) {
+                alert('Passwords do not match');
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+</comp:implementation>
+</html>

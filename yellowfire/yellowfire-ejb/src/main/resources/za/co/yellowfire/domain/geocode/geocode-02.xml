@@ -1,0 +1,878 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GeocodeResponse>
+ <status>OK</status>
+ <result>
+  <type>street_address</type>
+  <formatted_address>9 Brendon Rd, Watchet, Somerset TA23 0, UK</formatted_address>
+  <address_component>
+   <long_name>9</long_name>
+
+   <short_name>9</short_name>
+   <type>street_number</type>
+  </address_component>
+  <address_component>
+   <long_name>Brendon Rd</long_name>
+   <short_name>Brendon Rd</short_name>
+   <type>route</type>
+
+  </address_component>
+  <address_component>
+   <long_name>Watchet</long_name>
+   <short_name>Watchet</short_name>
+   <type>locality</type>
+   <type>political</type>
+  </address_component>
+
+  <address_component>
+   <long_name>West Somerset</long_name>
+   <short_name>West Somerset</short_name>
+   <type>administrative_area_level_3</type>
+   <type>political</type>
+  </address_component>
+  <address_component>
+
+   <long_name>Somerset</long_name>
+   <short_name>Somset</short_name>
+   <type>administrative_area_level_2</type>
+   <type>political</type>
+  </address_component>
+  <address_component>
+   <long_name>England</long_name>
+
+   <short_name>England</short_name>
+   <type>administrative_area_level_1</type>
+   <type>political</type>
+  </address_component>
+  <address_component>
+   <long_name>United Kingdom</long_name>
+   <short_name>GB</short_name>
+
+   <type>country</type>
+   <type>political</type>
+  </address_component>
+  <address_component>
+   <long_name>TA23 0</long_name>
+   <short_name>TA23 0</short_name>
+   <type>postal_code_prefix</type>
+
+   <type>postal_code</type>
+  </address_component>
+  <geometry>
+   <location>
+    <lat>51.1795612</lat>
+    <lng>-3.3310595</lng>
+   </location>
+
+   <location_type>RANGE_INTERPOLATED</location_type>
+   <viewport>
+    <southwest>
+     <lat>51.1764182</lat>
+     <lng>-3.3342163</lng>
+    </southwest>
+    <northeast>
+
+     <lat>51.1827134</lat>
+     <lng>-3.3279210</lng>
+    </northeast>
+   </viewport>
+   <bounds>
+    <southwest>
+     <lat>51.1795612</lat>
+
+     <lng>-3.3310778</lng>
+    </southwest>
+    <northeast>
+     <lat>51.1795704</lat>
+     <lng>-3.3310595</lng>
+    </northeast>
+   </bounds>
+
+  </geometry>
+ </result>
+ <result>
+  <type>street_address</type>
+  <formatted_address>9 Brendon Rd, Nottingham NG8 1, UK</formatted_address>
+  <address_component>
+   <long_name>9</long_name>
+
+   <short_name>9</short_name>
+   <type>street_number</type>
+  </address_component>
+  <address_component>
+   <long_name>Brendon Rd</long_name>
+   <short_name>Brendon Rd</short_name>
+   <type>route</type>
+
+  </address_component>
+  <address_component>
+   <long_name>Nottingham</long_name>
+   <short_name>Nottingham</short_name>
+   <type>locality</type>
+   <type>political</type>
+  </address_component>
+
+  <address_component>
+   <long_name>Nottingham</long_name>
+   <short_name>Nottingham</short_name>
+   <type>administrative_area_level_3</type>
+   <type>political</type>
+  </address_component>
+  <address_component>
+
+   <long_name>Nottingham</long_name>
+   <short_name>Nottingham</short_name>
+   <type>administrative_area_level_2</type>
+   <type>political</type>
+  </address_component>
+  <address_component>
+   <long_name>England</long_name>
+
+   <short_name>England</short_name>
+   <type>administrative_area_level_1</type>
+   <type>political</type>
+  </address_component>
+  <address_component>
+   <long_name>United Kingdom</long_name>
+   <short_name>GB</short_name>
+
+   <type>country</type>
+   <type>political</type>
+  </address_component>
+  <address_component>
+   <long_name>NG8 1</long_name>
+   <short_name>NG8 1</short_name>
+   <type>postal_code_prefix</type>
+
+   <type>postal_code</type>
+  </address_component>
+  <geometry>
+   <location>
+    <lat>52.9553840</lat>
+    <lng>-1.2067366</lng>
+   </location>
+
+   <location_type>RANGE_INTERPOLATED</location_type>
+   <viewport>
+    <southwest>
+     <lat>52.9522381</lat>
+     <lng>-1.2098749</lng>
+    </southwest>
+    <northeast>
+
+     <lat>52.9585334</lat>
+     <lng>-1.2035797</lng>
+    </northeast>
+   </viewport>
+   <bounds>
+    <southwest>
+     <lat>52.9553840</lat>
+
+     <lng>-1.2067366</lng>
+    </southwest>
+    <northeast>
+     <lat>52.9553875</lat>
+     <lng>-1.2067180</lng>
+    </northeast>
+   </bounds>
+
+  </geometry>
+ </result>
+ <result>
+  <type>street_address</type>
+  <formatted_address>9 Brendon Rd, Portishead, North Somerset BS20 6, UK</formatted_address>
+  <address_component>
+   <long_name>9</long_name>
+
+   <short_name>9</short_name>
+   <type>street_number</type>
+  </address_component>
+  <address_component>
+   <long_name>Brendon Rd</long_name>
+   <short_name>Brendon Rd</short_name>
+   <type>route</type>
+
+  </address_component>
+  <address_component>
+   <long_name>Portishead</long_name>
+   <short_name>Portishead</short_name>
+   <type>sublocality</type>
+   <type>political</type>
+  </address_component>
+
+  <address_component>
+   <long_name>North Somerset</long_name>
+   <short_name>North Somerset</short_name>
+   <type>administrative_area_level_3</type>
+   <type>political</type>
+  </address_component>
+  <address_component>
+
+   <long_name>North Somerset</long_name>
+   <short_name>North Somerset</short_name>
+   <type>administrative_area_level_2</type>
+   <type>political</type>
+  </address_component>
+  <address_component>
+   <long_name>England</long_name>
+
+   <short_name>England</short_name>
+   <type>administrative_area_level_1</type>
+   <type>political</type>
+  </address_component>
+  <address_component>
+   <long_name>United Kingdom</long_name>
+   <short_name>GB</short_name>
+
+   <type>country</type>
+   <type>political</type>
+  </address_component>
+  <address_component>
+   <long_name>BS20 6</long_name>
+   <short_name>BS20 6</short_name>
+   <type>postal_code_prefix</type>
+
+   <type>postal_code</type>
+  </address_component>
+  <geometry>
+   <location>
+    <lat>51.4823425</lat>
+    <lng>-2.7870536</lng>
+   </location>
+
+   <location_type>RANGE_INTERPOLATED</location_type>
+   <viewport>
+    <southwest>
+     <lat>51.4792002</lat>
+     <lng>-2.7901966</lng>
+    </southwest>
+    <northeast>
+
+     <lat>51.4854955</lat>
+     <lng>-2.7839014</lng>
+    </northeast>
+   </viewport>
+   <bounds>
+    <southwest>
+     <lat>51.4823425</lat>
+
+     <lng>-2.7870536</lng>
+    </southwest>
+    <northeast>
+     <lat>51.4823532</lat>
+     <lng>-2.7870444</lng>
+    </northeast>
+   </bounds>
+
+  </geometry>
+ </result>
+ <result>
+  <type>street_address</type>
+  <formatted_address>9 Brendon Rd, Port Elizabeth 6070, South Africa</formatted_address>
+  <address_component>
+   <long_name>9</long_name>
+
+   <short_name>9</short_name>
+   <type>street_number</type>
+  </address_component>
+  <address_component>
+   <long_name>Brendon Rd</long_name>
+   <short_name>Brendon Rd</short_name>
+   <type>route</type>
+
+  </address_component>
+  <address_component>
+   <long_name>Broadwood</long_name>
+   <short_name>Broadwood</short_name>
+   <type>sublocality</type>
+   <type>political</type>
+  </address_component>
+
+  <address_component>
+   <long_name>Port Elizabeth</long_name>
+   <short_name>Port Elizabeth</short_name>
+   <type>locality</type>
+   <type>political</type>
+  </address_component>
+  <address_component>
+
+   <long_name>Port Elizabeth</long_name>
+   <short_name>Port Elizabeth</short_name>
+   <type>administrative_area_level_3</type>
+   <type>political</type>
+  </address_component>
+  <address_component>
+   <long_name>Port Elizabeth</long_name>
+
+   <short_name>Port Elizabeth</short_name>
+   <type>administrative_area_level_2</type>
+   <type>political</type>
+  </address_component>
+  <address_component>
+   <long_name>Eastern Cape</long_name>
+   <short_name>EC</short_name>
+
+   <type>administrative_area_level_1</type>
+   <type>political</type>
+  </address_component>
+  <address_component>
+   <long_name>South Africa</long_name>
+   <short_name>ZA</short_name>
+   <type>country</type>
+
+   <type>political</type>
+  </address_component>
+  <address_component>
+   <long_name>6070</long_name>
+   <short_name>6070</short_name>
+   <type>postal_code</type>
+  </address_component>
+
+  <geometry>
+   <location>
+    <lat>-33.9893100</lat>
+    <lng>25.5464200</lng>
+   </location>
+   <location_type>ROOFTOP</location_type>
+   <viewport>
+
+    <southwest>
+     <lat>-33.9924576</lat>
+     <lng>25.5432724</lng>
+    </southwest>
+    <northeast>
+     <lat>-33.9861624</lat>
+     <lng>25.5495676</lng>
+
+    </northeast>
+   </viewport>
+  </geometry>
+ </result>
+ <result>
+  <type>street_address</type>
+  <formatted_address>9 Brendon Rd, Barking, Greater London RM8 1, UK</formatted_address>
+  <address_component>
+
+   <long_name>9</long_name>
+   <short_name>9</short_name>
+   <type>street_number</type>
+  </address_component>
+  <address_component>
+   <long_name>Brendon Rd</long_name>
+   <short_name>Brendon Rd</short_name>
+
+   <type>route</type>
+  </address_component>
+  <address_component>
+   <long_name>Barking</long_name>
+   <short_name>Barking</short_name>
+   <type>locality</type>
+   <type>political</type>
+
+  </address_component>
+  <address_component>
+   <long_name>Barking</long_name>
+   <short_name>Barking</short_name>
+   <type>administrative_area_level_3</type>
+   <type>political</type>
+  </address_component>
+
+  <address_component>
+   <long_name>Greater London</long_name>
+   <short_name>Greater London</short_name>
+   <type>administrative_area_level_2</type>
+   <type>political</type>
+  </address_component>
+  <address_component>
+
+   <long_name>England</long_name>
+   <short_name>England</short_name>
+   <type>administrative_area_level_1</type>
+   <type>political</type>
+  </address_component>
+  <address_component>
+   <long_name>United Kingdom</long_name>
+
+   <short_name>GB</short_name>
+   <type>country</type>
+   <type>political</type>
+  </address_component>
+  <address_component>
+   <long_name>RM8 1</long_name>
+   <short_name>RM8 1</short_name>
+
+   <type>postal_code_prefix</type>
+   <type>postal_code</type>
+  </address_component>
+  <geometry>
+   <location>
+    <lat>51.5643248</lat>
+    <lng>0.1479623</lng>
+
+   </location>
+   <location_type>RANGE_INTERPOLATED</location_type>
+   <viewport>
+    <southwest>
+     <lat>51.5611713</lat>
+     <lng>0.1448169</lng>
+    </southwest>
+
+    <northeast>
+     <lat>51.5674665</lat>
+     <lng>0.1511121</lng>
+    </northeast>
+   </viewport>
+   <bounds>
+    <southwest>
+     <lat>51.5643130</lat>
+
+     <lng>0.1479623</lng>
+    </southwest>
+    <northeast>
+     <lat>51.5643248</lat>
+     <lng>0.1479667</lng>
+    </northeast>
+   </bounds>
+
+  </geometry>
+ </result>
+ <result>
+  <type>street_address</type>
+  <formatted_address>9 Brendon Rd, Bridgwater, Somerset TA6 3, UK</formatted_address>
+  <address_component>
+   <long_name>9</long_name>
+
+   <short_name>9</short_name>
+   <type>street_number</type>
+  </address_component>
+  <address_component>
+   <long_name>Brendon Rd</long_name>
+   <short_name>Brendon Rd</short_name>
+   <type>route</type>
+
+  </address_component>
+  <address_component>
+   <long_name>Bridgwater</long_name>
+   <short_name>Bridgwater</short_name>
+   <type>locality</type>
+   <type>political</type>
+  </address_component>
+
+  <address_component>
+   <long_name>Sedgemoor</long_name>
+   <short_name>Sedgemoor</short_name>
+   <type>administrative_area_level_3</type>
+   <type>political</type>
+  </address_component>
+  <address_component>
+
+   <long_name>Somerset</long_name>
+   <short_name>Somset</short_name>
+   <type>administrative_area_level_2</type>
+   <type>political</type>
+  </address_component>
+  <address_component>
+   <long_name>England</long_name>
+
+   <short_name>England</short_name>
+   <type>administrative_area_level_1</type>
+   <type>political</type>
+  </address_component>
+  <address_component>
+   <long_name>United Kingdom</long_name>
+   <short_name>GB</short_name>
+
+   <type>country</type>
+   <type>political</type>
+  </address_component>
+  <address_component>
+   <long_name>TA6 3</long_name>
+   <short_name>TA6 3</short_name>
+   <type>postal_code_prefix</type>
+
+   <type>postal_code</type>
+  </address_component>
+  <geometry>
+   <location>
+    <lat>51.1343159</lat>
+    <lng>-3.0077345</lng>
+   </location>
+
+   <location_type>RANGE_INTERPOLATED</location_type>
+   <viewport>
+    <southwest>
+     <lat>51.1311715</lat>
+     <lng>-3.0108739</lng>
+    </southwest>
+    <northeast>
+
+     <lat>51.1374667</lat>
+     <lng>-3.0045786</lng>
+    </northeast>
+   </viewport>
+   <bounds>
+    <southwest>
+     <lat>51.1343159</lat>
+
+     <lng>-3.0077345</lng>
+    </southwest>
+    <northeast>
+     <lat>51.1343223</lat>
+     <lng>-3.0077180</lng>
+    </northeast>
+   </bounds>
+
+  </geometry>
+ </result>
+ <result>
+  <type>street_address</type>
+  <formatted_address>9 Brendon Rd, Fareham, Hampshire PO14 1, UK</formatted_address>
+  <address_component>
+   <long_name>9</long_name>
+
+   <short_name>9</short_name>
+   <type>street_number</type>
+  </address_component>
+  <address_component>
+   <long_name>Brendon Rd</long_name>
+   <short_name>Brendon Rd</short_name>
+   <type>route</type>
+
+  </address_component>
+  <address_component>
+   <long_name>Fareham</long_name>
+   <short_name>Fareham</short_name>
+   <type>locality</type>
+   <type>political</type>
+  </address_component>
+
+  <address_component>
+   <long_name>Fareham</long_name>
+   <short_name>Fareham</short_name>
+   <type>administrative_area_level_3</type>
+   <type>political</type>
+  </address_component>
+  <address_component>
+
+   <long_name>Hampshire</long_name>
+   <short_name>Hampshire</short_name>
+   <type>administrative_area_level_2</type>
+   <type>political</type>
+  </address_component>
+  <address_component>
+   <long_name>England</long_name>
+
+   <short_name>England</short_name>
+   <type>administrative_area_level_1</type>
+   <type>political</type>
+  </address_component>
+  <address_component>
+   <long_name>United Kingdom</long_name>
+   <short_name>GB</short_name>
+
+   <type>country</type>
+   <type>political</type>
+  </address_component>
+  <address_component>
+   <long_name>PO14 1</long_name>
+   <short_name>PO14 1</short_name>
+   <type>postal_code_prefix</type>
+
+   <type>postal_code</type>
+  </address_component>
+  <geometry>
+   <location>
+    <lat>50.8466848</lat>
+    <lng>-1.2087977</lng>
+   </location>
+
+   <location_type>RANGE_INTERPOLATED</location_type>
+   <viewport>
+    <southwest>
+     <lat>50.8435310</lat>
+     <lng>-1.2119459</lng>
+    </southwest>
+    <northeast>
+
+     <lat>50.8498263</lat>
+     <lng>-1.2056507</lng>
+    </northeast>
+   </viewport>
+   <bounds>
+    <southwest>
+     <lat>50.8466725</lat>
+
+     <lng>-1.2087989</lng>
+    </southwest>
+    <northeast>
+     <lat>50.8466848</lat>
+     <lng>-1.2087977</lng>
+    </northeast>
+   </bounds>
+
+  </geometry>
+ </result>
+ <result>
+  <type>street_address</type>
+  <formatted_address>9 Brendon Rd, Worthing, West Sussex BN13 2, UK</formatted_address>
+  <address_component>
+   <long_name>9</long_name>
+
+   <short_name>9</short_name>
+   <type>street_number</type>
+  </address_component>
+  <address_component>
+   <long_name>Brendon Rd</long_name>
+   <short_name>Brendon Rd</short_name>
+   <type>route</type>
+
+  </address_component>
+  <address_component>
+   <long_name>Worthing</long_name>
+   <short_name>Worthing</short_name>
+   <type>locality</type>
+   <type>political</type>
+  </address_component>
+
+  <address_component>
+   <long_name>Worthing</long_name>
+   <short_name>Worthing</short_name>
+   <type>administrative_area_level_3</type>
+   <type>political</type>
+  </address_component>
+  <address_component>
+
+   <long_name>West Sussex</long_name>
+   <short_name>West Susx</short_name>
+   <type>administrative_area_level_2</type>
+   <type>political</type>
+  </address_component>
+  <address_component>
+   <long_name>England</long_name>
+
+   <short_name>England</short_name>
+   <type>administrative_area_level_1</type>
+   <type>political</type>
+  </address_component>
+  <address_component>
+   <long_name>United Kingdom</long_name>
+   <short_name>GB</short_name>
+
+   <type>country</type>
+   <type>political</type>
+  </address_component>
+  <address_component>
+   <long_name>BN13 2</long_name>
+   <short_name>BN13 2</short_name>
+   <type>postal_code_prefix</type>
+
+   <type>postal_code</type>
+  </address_component>
+  <geometry>
+   <location>
+    <lat>50.8386735</lat>
+    <lng>-0.4071653</lng>
+   </location>
+
+   <location_type>RANGE_INTERPOLATED</location_type>
+   <viewport>
+    <southwest>
+     <lat>50.8355320</lat>
+     <lng>-0.4103134</lng>
+    </southwest>
+    <northeast>
+
+     <lat>50.8418273</lat>
+     <lng>-0.4040182</lng>
+    </northeast>
+   </viewport>
+   <bounds>
+    <southwest>
+     <lat>50.8386735</lat>
+
+     <lng>-0.4071663</lng>
+    </southwest>
+    <northeast>
+     <lat>50.8386858</lat>
+     <lng>-0.4071653</lng>
+    </northeast>
+   </bounds>
+
+  </geometry>
+ </result>
+ <result>
+  <type>street_address</type>
+  <formatted_address>9 Brendon Rd, Wellington, Somerset TA21 8, UK</formatted_address>
+  <address_component>
+   <long_name>9</long_name>
+
+   <short_name>9</short_name>
+   <type>street_number</type>
+  </address_component>
+  <address_component>
+   <long_name>Brendon Rd</long_name>
+   <short_name>Brendon Rd</short_name>
+   <type>route</type>
+
+  </address_component>
+  <address_component>
+   <long_name>Wellington</long_name>
+   <short_name>Wellington</short_name>
+   <type>locality</type>
+   <type>political</type>
+  </address_component>
+
+  <address_component>
+   <long_name>Taunton Deane</long_name>
+   <short_name>Taunton Deane</short_name>
+   <type>administrative_area_level_3</type>
+   <type>political</type>
+  </address_component>
+  <address_component>
+
+   <long_name>Somerset</long_name>
+   <short_name>Somset</short_name>
+   <type>administrative_area_level_2</type>
+   <type>political</type>
+  </address_component>
+  <address_component>
+   <long_name>England</long_name>
+
+   <short_name>England</short_name>
+   <type>administrative_area_level_1</type>
+   <type>political</type>
+  </address_component>
+  <address_component>
+   <long_name>United Kingdom</long_name>
+   <short_name>GB</short_name>
+
+   <type>country</type>
+   <type>political</type>
+  </address_component>
+  <address_component>
+   <long_name>TA21 8</long_name>
+   <short_name>TA21 8</short_name>
+   <type>postal_code_prefix</type>
+
+   <type>postal_code</type>
+  </address_component>
+  <geometry>
+   <location>
+    <lat>50.9825631</lat>
+    <lng>-3.2319944</lng>
+   </location>
+
+   <location_type>RANGE_INTERPOLATED</location_type>
+   <viewport>
+    <southwest>
+     <lat>50.9794216</lat>
+     <lng>-3.2351419</lng>
+    </southwest>
+    <northeast>
+
+     <lat>50.9857168</lat>
+     <lng>-3.2288466</lng>
+    </northeast>
+   </viewport>
+   <bounds>
+    <southwest>
+     <lat>50.9825631</lat>
+
+     <lng>-3.2319944</lng>
+    </southwest>
+    <northeast>
+     <lat>50.9825753</lat>
+     <lng>-3.2319941</lng>
+    </northeast>
+   </bounds>
+
+  </geometry>
+ </result>
+ <result>
+  <type>street_address</type>
+  <formatted_address>9 Brendon Rd, Bexley, Greater London SE9 3, UK</formatted_address>
+  <address_component>
+   <long_name>9</long_name>
+
+   <short_name>9</short_name>
+   <type>street_number</type>
+  </address_component>
+  <address_component>
+   <long_name>Brendon Rd</long_name>
+   <short_name>Brendon Rd</short_name>
+   <type>route</type>
+
+  </address_component>
+  <address_component>
+   <long_name>Bexley</long_name>
+   <short_name>Bexley</short_name>
+   <type>locality</type>
+   <type>political</type>
+  </address_component>
+
+  <address_component>
+   <long_name>Bexley</long_name>
+   <short_name>Bexley</short_name>
+   <type>administrative_area_level_3</type>
+   <type>political</type>
+  </address_component>
+  <address_component>
+
+   <long_name>Greater London</long_name>
+   <short_name>Greater London</short_name>
+   <type>administrative_area_level_2</type>
+   <type>political</type>
+  </address_component>
+  <address_component>
+   <long_name>England</long_name>
+
+   <short_name>England</short_name>
+   <type>administrative_area_level_1</type>
+   <type>political</type>
+  </address_component>
+  <address_component>
+   <long_name>United Kingdom</long_name>
+   <short_name>GB</short_name>
+
+   <type>country</type>
+   <type>political</type>
+  </address_component>
+  <address_component>
+   <long_name>SE9 3</long_name>
+   <short_name>SE9 3</short_name>
+   <type>postal_code_prefix</type>
+
+   <type>postal_code</type>
+  </address_component>
+  <geometry>
+   <location>
+    <lat>51.4356865</lat>
+    <lng>0.0785593</lng>
+   </location>
+
+   <location_type>RANGE_INTERPOLATED</location_type>
+   <viewport>
+    <southwest>
+     <lat>51.4325359</lat>
+     <lng>0.0754201</lng>
+    </southwest>
+    <northeast>
+
+     <lat>51.4388311</lat>
+     <lng>0.0817154</lng>
+    </northeast>
+   </viewport>
+   <bounds>
+    <southwest>
+     <lat>51.4356805</lat>
+
+     <lng>0.0785593</lng>
+    </southwest>
+    <northeast>
+     <lat>51.4356865</lat>
+     <lng>0.0785762</lng>
+    </northeast>
+   </bounds>
+
+  </geometry>
+ </result>
+</GeocodeResponse>

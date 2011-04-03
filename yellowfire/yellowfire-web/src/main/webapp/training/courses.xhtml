@@ -1,0 +1,175 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:p="http://primefaces.prime.com.tr/ui"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:cc="http://java.sun.com/jsf/composite/cc"
+        template="/resources/layout/training-layout.xhtml">
+
+    <ui:define name="demoSampleParameters">
+        <f:metadata>
+            <f:viewParam name="section" value="#{navigator.section}"/>
+            <f:viewParam name="item" value="#{navigator.item}"/>
+            <f:viewParam name="skin" value="#{skinBean.skin}"/>
+        </f:metadata>
+    </ui:define> 
+    <ui:define name="head">
+    </ui:define>
+    <ui:define name="content">
+        <p:growl id="growl" showDetail="true" showSummary="true" globalOnly="true"/>
+        <h:form id="h2" prependId="false">
+            <p:panel id="commands">
+                <h:panelGrid columns="4">
+                    <p:commandButton
+                            id="b10"
+                            value="#{msgs['btn.add']}"
+                            actionListener="#{coursesController.dataModel.onAdd}"
+                            ajax="true"
+                            update="modify_display modify_messages modify_buttons growl"
+                            oncomplete="onNewComplete(xhr, status, args)"/>
+                    <p:commandButton
+                            id="b11"
+                            value="#{msgs['btn.refresh']}"
+                            actionListener="#{coursesController.dataModel.onLoad}"
+                            ajax="true"
+                            update="dt1 growl"/>
+                    #{" "} #{msgs['prompt.table.actions']}
+                </h:panelGrid>
+            </p:panel>
+        </h:form>
+        <h:form id="h1" prependId="false">
+            <p:dataTable
+                    id="dt1"
+                    widgetVar="dt1Var"
+                    binding="#{coursesController.dataModel.table}"
+                    var="row"
+                    value="#{coursesController.dataModel.rows}"
+                    rows="10"
+                    height="500"
+                    paginator="true"
+                    paginatorAlwaysVisible="true"
+                    style="vertical-align:text-top;"
+                    selectionMode="single"
+                    selection="#{coursesController.dataModel.selected}"
+                    onRowSelectUpdate="h3"
+                    onRowSelectComplete="modifyDialogVar.show()">
+
+                <p:column sortBy="#{row.object.id}" filterBy="#{row.object.id}" filterStyle="width:100%"  style="width:5px" headerText="#">
+                    <h:outputText value="#{row.object.id}"/>
+                </p:column>
+                <p:column sortBy="#{row.object.title}" filterBy="#{row.object.title}" filterStyle="width:100%" style="width:200px" headerText="#{msgs['fld.course.title']}">
+                    <h:outputText value="#{row.object.title}"/>
+                </p:column>
+                <p:column sortBy="#{row.object.durationText}" filterBy="#{row.object.durationText}" filterStyle="width:100%" style="width:200px" headerText="#{msgs['fld.duration']}">
+                    <h:outputText value="#{row.object.durationText}"/>
+                </p:column>
+                <p:column sortBy="#{row.object.provider.name}" filterBy="#{row.object.provider.name}" filterStyle="width:100%" style="width:200px" headerText="#{msgs['fld.training.provider']}">
+                    <h:outputText value="#{row.object.provider.name}"/>
+                </p:column>
+            </p:dataTable>
+        </h:form>
+        <h:form id="h3" prependId="false">
+            <p:dialog
+                    id="modifyDialog"
+                    header="#{msgs['dlg.training.course']}"
+                    widgetVar="modifyDialogVar"
+                    resizable="false"
+                    width="800"
+                    modal="true"
+                    showEffect="explode"
+                    hideEffect="explode">
+                <cc:courseForm
+                        bean="#{coursesController.dataModel.selected.object}"
+                        durationTypes="#{coursesController.durationTypes}"
+                        trainingProviders="#{coursesController.trainingProviders}"/>
+                <p:fieldset legend="#{msgs['pnl.messages']}">
+                    <h:panelGrid id="modify_messages" columns="1">
+                        <p:messages id="m1" showDetail="true" showSummary="false" globalOnly="false"  />
+                    </h:panelGrid>
+                </p:fieldset>
+                <h:panelGrid id="modify_buttons" columns="3" cellpadding="4">
+                    <p:commandButton
+                            id="b1"
+                            value="#{msgs['btn.save']}"
+                            image="ui-icon ui-icon-disk"
+                            actionListener="#{coursesController.dataModel.onSave}"
+                            ajax="true"
+                            oncomplete="onSaveComplete(xhr, status, args)"
+                            update="dt1 modify_display modify_messages"
+                            />
+                    
+                    <p:commandButton
+                            id="b4"
+                            value="#{msgs['btn.delete']}"
+                            image="ui-icon ui-icon-minus"
+                            actionListener="#{coursesController.dataModel.onDelete}"
+                            ajax="true"
+                            rendered="#{coursesController.dataModel.selected.object.id ne null}"
+                            oncomplete="onDeleteComplete(xhr, status, args)"
+                            update="dt1 modify_display modify_messages"
+                            />
+                    
+                    <p:commandButton
+                            id="b3"
+                            image="ui-icon ui-icon-close"
+                            value="#{msgs['btn.close']}"
+                            onclick="modifyDialogVar.hide()"
+                            update="dt1 modify_display modify_messages"
+                            />
+                </h:panelGrid>
+            </p:dialog>
+        </h:form>
+
+        <script type="text/javascript">
+
+        function onDeleteComplete(xhr, status, args) {
+            if (args.validationFailed) {
+                return false;
+            }
+            if (args.result != null) {
+                if (args.result.failed) {
+                    return false;
+                }
+            }
+            modifyDialogVar.hide();
+            return true;
+        }
+
+        function onSaveComplete(xhr, status, args) {
+            if (args.validationFailed) {
+                return false;
+            }
+            if (args.result != null) {
+                if (args.result.failed) {
+                    return false;
+                }
+            }
+            modifyDialogVar.hide();
+            return true;
+        }
+
+        function onAddComplete(xhr, status, args) {
+            alert(status);
+            if (args.validationFailed) {
+                return false;
+            }
+            if (args.result != null) {
+                if (args.result.failed) {
+                    return false;
+                }
+            }
+            modifyDialogVar.hide();
+            return true;
+        }
+        
+        function onNewComplete(xhr, status, args) {
+
+            if (handleComplete(xhr, status, args)) {
+                modifyDialogVar.show();
+            }
+            return true;
+        }
+        </script>
+    </ui:define>
+</ui:composition>

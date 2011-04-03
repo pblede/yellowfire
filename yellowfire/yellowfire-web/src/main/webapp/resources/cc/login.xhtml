@@ -1,0 +1,57 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:comp="http://java.sun.com/jsf/composite"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.prime.com.tr/ui"
+      xml:lang="en" lang="en">
+<comp:interface>
+    <comp:attribute name="userNameLabel" required="false" default="#{msgs['fld.username']}"/>
+    <comp:attribute name="passwordLabel" required="false" default="#{msgs['fld.password']}"/>
+    <comp:attribute name="loginLabel" required="false" default="#{msgs['btn.login']}" />
+    <comp:attribute name="registerLabel" required="false" default="#{msgs['btn.register']}" />
+    <comp:attribute name="actionMethod" method-signature="java.lang.String action()"/>
+    <comp:attribute name="actionListener" method-signature="void login(javax.faces.event.ActionEvent)" required="false" />
+    <comp:attribute name="registerMethod" method-signature="java.lang.String action()"/>
+    <comp:attribute name="bean" required="true"/>
+    <comp:attribute name="dialog" required="true"/>
+</comp:interface>
+<comp:implementation>
+    <h:form id="loginform" prependId="false">
+        <p:focus id="f" />
+        <h:panelGrid columns="3">
+            <h:outputLabel value="#{cc.attrs.userNameLabel}" for="u"/>
+            <h:inputText id="u" value="#{cc.attrs.bean.user.name}"/>
+            <h:message id="um" for="u"/>
+
+            <h:outputLabel value="#{cc.attrs.passwordLabel}" for="p"/>
+            <h:inputSecret id="p" value="#{cc.attrs.bean.user.password}"/>
+            <h:message id="pm" for="p"/>
+        </h:panelGrid>
+        <h:panelGrid columns="2" >
+            <p:commandButton
+                    id="b"
+                    value="#{cc.attrs.loginLabel}"
+                    action="#{cc.attrs.actionMethod}"
+                    ajax="false"
+                    update="f u p um pm"
+                    oncomplete="handleLoginRequest(xhr, status, args)"/>
+        	<p:commandButton
+                    value="#{cc.attrs.registerLabel}"
+                    id="lfcb2"
+                    ajax="false"
+                    action="#{cc.attrs.registerMethod}"/>
+        </h:panelGrid>
+        <script type="text/javascript">
+        function handleLoginRequest(xhr, status, args) {
+            if(args.validationFailed || !args.loggedIn) {
+                alert('failed');
+                jQuery('#dialog').parent().effect("shake", { times:5 }, 100);
+            } else {
+                d2.hide();
+                jQuery('#loginLink').fadeOut();
+            }
+        }
+    </script>
+    </h:form>
+</comp:implementation>
+</html>

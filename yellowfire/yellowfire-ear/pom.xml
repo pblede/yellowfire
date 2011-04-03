@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>yellowfire</groupId>
+        <artifactId>yellowfire</artifactId>
+        <version>0.0.1</version>
+    </parent>
+    <groupId>yellowfire</groupId>
+    <artifactId>yellowfire-ear</artifactId>
+    <packaging>ear</packaging>
+    <name>yellowfire-ear</name>
+    <dependencies>
+        <dependency>
+            <groupId>yellowfire</groupId>
+            <artifactId>yellowfire-ejb</artifactId>
+            <type>ejb</type>
+        </dependency>
+        <dependency>
+            <artifactId>yellowfire-web</artifactId>
+            <groupId>yellowfire</groupId>
+            <type>war</type>
+        </dependency>
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-ear-plugin</artifactId>
+                <configuration>
+                    <earName>yellowfire-0.0.1</earName>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                        </manifest>
+                    </archive>
+                    <defaultLibBundleDir>lib</defaultLibBundleDir>
+                    <modules>
+                        <webModule>
+                            <groupId>yellowfire</groupId>
+                            <artifactId>yellowfire-web</artifactId>
+                            <contextRoot>/yellowfire</contextRoot>
+                        </webModule>
+                    </modules>
+                    <security>
+                        <security-role id="SecurityRole_1234">
+                            <role-name>manager</role-name>
+                        </security-role>
+                        <security-role id="SecurityRole_5678">
+                            <description>My cool description</description>
+                            <role-name id="RoleName_12">teller</role-name>
+                        </security-role>
+                    </security>
+
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

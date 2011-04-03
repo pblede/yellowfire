@@ -1,0 +1,104 @@
+<?xml version="1.0"?>
+<xml-bindings
+	xmlns="http://www.eclipse.org/eclipselink/xsds/persistence/oxm"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.eclipse.org/eclipselink/xsds/persistence/oxm eclipselink_oxm_2_1.xsd">
+    <!--version="2.1"-->
+
+    <xml-schema>
+        <xml-ns prefix="race" namespace-uri="http://www.bluefire.co.za/race"/>
+    </xml-schema>
+    
+    <java-types>
+
+        <java-type name="za.co.yellowfire.domain.racing.Races">
+            <xml-root-element name="race:races"/>
+            <xml-type prop-order="races"/>
+            <java-attributes>
+                <xml-attribute java-attribute="races" xml-path="race:race"/>
+            </java-attributes>
+        </java-type>
+        <java-type name="za.co.yellowfire.domain.racing.Race">
+            <xml-type prop-order="id name date courses venue eventLink sponsorLinks notes"/>
+            <java-attributes>
+                <xml-attribute java-attribute="id" />
+                <xml-attribute java-attribute="name" />
+                <xml-attribute java-attribute="date">
+                    <xml-java-type-adapter value="za.co.yellowfire.domain.jaxb.DateTypeAdapter" />
+                </xml-attribute>
+                <xml-attribute java-attribute="courses"      xml-path="race:course"/>
+                <xml-attribute java-attribute="venue"        xml-path="race:venue" />
+                <xml-attribute java-attribute="eventLink"    xml-path="race:graphic-link" />
+                <xml-element   java-attribute="sponsorLinks" xml-path="race:sponsors/race:graphic-link" type="za.co.yellowfire.domain.racing.GraphicLink"/>
+                <xml-element   java-attribute="notes"        xml-path="race:notes/race:note" type="za.co.yellowfire.domain.racing.Note"  />
+            </java-attributes>
+        </java-type>
+        <java-type name="za.co.yellowfire.domain.racing.Course">
+            <xml-type prop-order="id distance startTime description categories" name="race:course"/>
+            <java-attributes>
+
+                <xml-attribute java-attribute="id" />
+                <xml-attribute java-attribute="distance" />
+                <xml-attribute java-attribute="description" />
+                <xml-attribute java-attribute="startTime" name="starttime">
+                    <xml-java-type-adapter value="za.co.yellowfire.domain.jaxb.TimeTypeAdapter" />
+                </xml-attribute>
+                <xml-element java-attribute="categories" xml-path="race:category" type="za.co.yellowfire.domain.racing.CourseCategory" />
+            </java-attributes>
+        </java-type>
+        <java-type name="za.co.yellowfire.domain.racing.CourseCategory">
+            <xml-type prop-order="id name fees prize" name="category"/>
+            <java-attributes>
+                <xml-attribute java-attribute="id" />
+                <xml-attribute java-attribute="name" />
+                <xml-attribute java-attribute="fees" xml-path="fee" name="fee"/>
+                <xml-attribute java-attribute="prize" xml-path="prize" name="prize"/>
+            </java-attributes>
+        </java-type>
+        <java-type name="za.co.yellowfire.domain.racing.CategoryFee">
+            <xml-type prop-order="id value description" name="fee"/>
+            <java-attributes>
+                <xml-attribute java-attribute="id" />
+                <xml-attribute java-attribute="value" />
+                <xml-attribute java-attribute="description"/>
+            </java-attributes>
+        </java-type>
+        <java-type name="za.co.yellowfire.domain.racing.CategoryPrize">
+            <xml-type prop-order="id value description" name="prize"/>
+            <java-attributes>
+                <xml-attribute java-attribute="id" />
+                <xml-attribute java-attribute="value" />
+                <xml-attribute java-attribute="description"/>
+            </java-attributes>
+        </java-type>
+        <java-type name="za.co.yellowfire.domain.Venue">
+            <xml-type prop-order="id name address gps"/>
+            <java-attributes>
+                <xml-attribute java-attribute="id" />
+                <xml-attribute java-attribute="name" />
+                <xml-attribute java-attribute="address" />
+                <xml-attribute java-attribute="gps" />
+            </java-attributes>
+        </java-type>
+        <java-type name="za.co.yellowfire.domain.racing.GraphicLink">
+            <xml-type prop-order="id linkURL imageURL scalePercentage alternativeText"/>
+            <java-attributes>
+                <xml-attribute java-attribute="id" />
+                <xml-attribute java-attribute="linkURL" />
+                <xml-attribute java-attribute="imageURL" />
+                <xml-attribute java-attribute="scalePercentage" />
+                <xml-attribute java-attribute="alternativeText" />
+            </java-attributes>
+        </java-type>
+        <java-type name="za.co.yellowfire.domain.racing.Note" xml-inline-binary-data="true">
+            <xml-type prop-order="id type" />
+            <java-attributes>
+                <xml-attribute java-attribute="id" />
+                <xml-attribute java-attribute="type">
+                    <xml-java-type-adapter value="za.co.yellowfire.domain.jaxb.NoteTypeAdapter" />
+                </xml-attribute>
+                <xml-element java-attribute="text" cdata="true" xml-inline-binary-data="true" xml-path="text()" />
+            </java-attributes>
+        </java-type>
+    </java-types>
+</xml-bindings>

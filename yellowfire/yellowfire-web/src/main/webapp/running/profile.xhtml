@@ -1,0 +1,134 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.prime.com.tr/ui"
+    xmlns:c="http://java.sun.com/jsp/jstl/core"
+    xmlns:cc="http://java.sun.com/jsf/composite/cc">
+
+<ui:composition template="/resources/layout/running-layout.xhtml">
+	<ui:define name="demoSampleParameters">
+		<f:metadata>
+            <f:viewParam name="section" value="#{navigator.section}" />
+			<f:viewParam name="item" value="#{navigator.item}" />
+			<f:viewParam name="skin" value="#{skinBean.skin}"/>
+		</f:metadata>
+	</ui:define>
+    <ui:define name="head">
+	</ui:define>
+	<ui:define name="content">
+        <p:growl id="g" showDetail="true" showSummary="true" />
+       	<h:form id="f1">
+        	<p:panel header="#{msgs['pnl.profile']}">
+                <cc:profile bean="#{profileController}"/>
+                <ui:remove><!--
+        		<h:panelGrid columns="4">
+        			<h:outputLabel id="l01" value="#{msgs['fld.username']}:" for="a01"/>
+        			<h:inputText id="a01" value="#{profileController.user.name}" disabled="true" />
+        			<o:floatingIconMessage 
+						for="a01" 
+						showDetail="true"
+						showSummary="false"
+						style="border: 1px solid red; background-color: #e0e0ff;" />
+        			<h:message for="a01" />
+
+                    <h:outputLabel id="l11" value="#{msgs['fld.firstname']}:" for="a11"/>
+        			<h:inputText id="a11" value="#{profileController.user.firstName}"/>
+        			<o:floatingIconMessage
+						for="a11"
+						showDetail="true"
+						showSummary="false"
+						style="border: 1px solid red; background-color: #e0e0ff;" />
+        			<h:message for="a11" />
+
+                    <h:outputLabel id="l12" value="#{msgs['fld.lastname']}:" for="a12"/>
+        			<h:inputText id="a12" value="#{profileController.user.lastName}"/>
+        			<o:floatingIconMessage
+						for="a12"
+						showDetail="true"
+						showSummary="false"
+						style="border: 1px solid red; background-color: #e0e0ff;" />
+        			<h:message for="a12" />
+
+        			<h:outputLabel id="l02" value="#{msgs['fld.email']}:" for="a02"/>
+        			<h:inputText id="a02" value="#{profileController.user.email}"/>
+        			<o:floatingIconMessage 
+						for="a02" 
+						showDetail="true"
+						showSummary="false"
+						style="border: 1px solid red; background-color: #e0e0ff;" />
+        			<h:message for="a02" />
+        			
+        			<h:outputLabel id="l03" value="#{msgs['fld.password']}:" for="a03"/>
+        			<h:inputSecret id="a03" value="#{profileController.user.password}"/>
+        			<o:floatingIconMessage for="a03" showDetail="true"
+						showSummary="false"
+						style="border: 1px solid red; background-color: #e0e0ff;" />
+        			<h:message for="a03" />
+        			
+        			<h:outputLabel id="l04" value="#{msgs['fld.confirm.password']}:" for="a04"/>
+        			<h:inputSecret id="a04" value="#{profileController.user.passwordConfirmation}"/>
+        			<o:floatingIconMessage
+						for="a04" 
+						showDetail="true"
+						showSummary="false"
+						style="border: 1px solid red; background-color: #e0e0ff;" />
+        			<h:message for="a04" />
+        			
+        			<h:outputLabel value="#{msgs['fld.birthdate']}:" for="a05" />
+					<p:calendar 
+						id="a05" 
+						pattern="yyyy-MM-dd"
+						onchange="O$.validate(this);"
+						value="#{profileController.user.birthDate}">
+						<f:attribute name="clientValidation" value="onDemand" />
+					</p:calendar>
+					<o:floatingIconMessage for="a05" showDetail="true"
+						showSummary="false"
+						style="border: 1px solid red; background-color: #e0e0ff;" />
+					<h:message for="a05" showDetail="true"  showSummary="false" />
+					
+					<h:outputLabel id="l06" value="#{msgs['fld.club']}:" for="a06"/>
+        			<h:selectOneMenu id="a06" value="#{profileController.user.club}" >
+        				<f:selectItems itemDescription="#{club.name}" itemLabel="#{club.name}" value="#{sessionController.clubs}" var="club" />
+        				<f:converter converterId="ClubConverter" />
+        			</h:selectOneMenu>
+        			<o:floatingIconMessage 
+						for="a06" 
+						showDetail="true"
+						showSummary="false"
+						style="border: 1px solid red; background-color: #e0e0ff;" />
+        			<h:message for="a06" />
+        		</h:panelGrid>--></ui:remove>
+        	</p:panel>
+        	<p:panel>
+        		<h:panelGrid columns="5">
+                    <p:commandButton
+                        id="b2"
+                        value="#{msgs['link.register']}"
+                        action="#{profileController.register}"
+                        ajax="false"
+                        update="registerForm od3e od3u od3p od3cp od3d od3em od3um od3pm od3cpm od3dm g"
+                        rendered="#{profileController.user.id eq null}"/>
+        			<p:commandButton 
+        				id="cb01" 
+        				value="#{msgs['btn.save']}"
+        				actionListener="#{profileController.persist}"
+        				ajax="true" 
+        				update="f1 g"
+                        rendered="#{profileController.user.id ne null}"/>
+        			<p:commandButton 
+        				id="cb02" 
+        				value="#{msgs['btn.delete']}"
+        				actionListener="#{profileController.delete}" 
+        				ajax="true" 
+        				update="f1 g"
+                        disabled="true"
+                        rendered="#{profileController.user.id ne null}"/>
+        		</h:panelGrid>
+        	</p:panel>
+        </h:form>
+	</ui:define>
+</ui:composition>
+
+</html>

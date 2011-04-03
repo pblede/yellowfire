@@ -1,0 +1,105 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.prime.com.tr/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:cc="http://java.sun.com/jsf/composite/cc"
+	template="/resources/layout/running-layout.xhtml">
+
+	<ui:define name="demoSampleParameters">
+		<f:metadata>
+			<f:viewParam name="section" value="#{navigator.section}" />
+			<f:viewParam name="item" value="#{navigator.item}" />
+			<f:viewParam name="skin" value="#{skinBean.skin}" />
+		</f:metadata>
+	</ui:define>
+	<ui:define name="head">
+	</ui:define>
+	<ui:define name="content">
+		<p:growl id="g" showDetail="true" showSummary="true" />
+		<h:form prependId="false" id="registerForm" autocomplete="off">
+            <p:panel header="#{msgs['pnl.profile']}">
+			<h:panelGrid columns="4">
+                <cc:profile bean="#{profileController}"/>
+                <ui:remove><!--
+				<h:outputLabel value="#{msgs['fld.email']}:" for="od3e" />
+				<h:inputText 
+					id="od3e" 
+					value="#{registerController.user.email}" 
+					onchange="O$.validate(this);">
+					<f:attribute name="clientValidation" value="onDemand" />
+					<o:validateEmail detail="The email address is not valid" />
+				</h:inputText>
+				<o:floatingIconMessage 
+					for="od3e" 
+					showDetail="true"
+					showSummary="false"
+					style="border: 1px solid red; background-color: #e0e0ff;" />
+				<h:message for="od3e" showDetail="true"  showSummary="false" />
+				
+				<h:outputLabel value="#{msgs['fld.username']}:" for="od3u" />
+				<h:inputText id="od3u" value="#{registerController.user.name}"
+					onchange="O$.validate(this);">
+					<f:attribute name="clientValidation" value="onDemand" />
+					<o:validateCustom id="od3um"
+						serverFunction="#{registerController.userNameAvailable}"
+						detail="The requested username is not available"
+						summary="Username not available" />
+				</h:inputText>
+				<o:floatingIconMessage 
+					for="od3u" 
+					showDetail="true"
+					showSummary="false"
+					style="border: 1px solid red; background-color: #e0e0ff;" />
+				<h:message for="od3u" showDetail="true"  showSummary="false" />
+				
+				<h:outputLabel value="#{msgs['fld.password']}:" for="od3p" />
+				<h:inputSecret id="od3p" value="#{registerController.user.password}"
+					onchange="O$.validate(this);">
+					<f:attribute name="clientValidation" value="onDemand" />
+				</h:inputSecret>
+				<o:floatingIconMessage for="od3p" showDetail="true"
+					showSummary="false"
+					style="border: 1px solid red; background-color: #e0e0ff;" />
+				<h:message for="od3p" showDetail="true"  showSummary="false" />
+				
+				<h:outputLabel value="#{msgs['fld.confirm.password']}:" for="od3cp" />
+				<h:inputSecret 
+					id="od3cp"
+					value="#{registerController.user.passwordConfirmation}"
+					onchange="O$.validate(this);" required="true" />
+				<o:floatingIconMessage 
+					for="od3cp" 
+					showDetail="true"
+					showSummary="false"
+					style="border: 1px solid red; background-color: #e0e0ff;" />
+				<h:message for="od3cp" showDetail="true"  showSummary="false" />
+				
+				<h:outputLabel value="#{msgs['fld.birthdate']}:" for="od3d" />
+				<p:calendar 
+					id="od3d" 
+					pattern="yyyy-MM-dd"
+					onchange="O$.validate(this);"
+					value="#{registerController.user.birthDate}">
+					<f:attribute name="clientValidation" value="onDemand" />
+				</p:calendar>
+				<o:floatingIconMessage for="od3d" showDetail="true"
+					showSummary="false"
+					style="border: 1px solid red; background-color: #e0e0ff;" />
+				<h:message for="od3d" showDetail="true"  showSummary="false" />
+				--></ui:remove>
+			</h:panelGrid>
+            </p:panel>
+            <p:panel>
+                <h:panelGrid columns="2">
+                    <p:commandButton
+                        id="b2"
+                        value="#{msgs['link.register']}"
+                        action="#{profileController.register}"
+                        ajax="false"
+                        update="registerForm od3e od3u od3p od3cp od3d od3em od3um od3pm od3cpm od3dm g" />
+                </h:panelGrid>
+            </p:panel>
+		</h:form>
+	</ui:define>
+</ui:composition>

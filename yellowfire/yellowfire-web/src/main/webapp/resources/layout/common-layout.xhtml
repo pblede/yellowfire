@@ -1,0 +1,51 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.prime.com.tr/ui" 
+      xmlns:cc="http://java.sun.com/jsf/composite/cc">
+    <f:view>
+        <h:head>
+            <title>.::YellowFire::.</title>
+            <link rel="shortcut icon" href="#{request.contextPath}/resources/images/favicon.ico" />
+            <link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/style/base2.css" media="all"  />
+            <link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/style/bluefire/skin.css"  />
+            <script type="text/javascript" src="#{request.contextPath}/resources/js/bluefire.js"></script>
+            <ui:insert name="head"/>
+        </h:head>
+        <body id="themeroller">
+            <!--[if IE 5]><div id="ie5" class="ie"><![endif]-->
+            <!--[if IE 6]><div id="ie6" class="ie"><![endif]-->
+            <!--[if IE 7]><div id="ie7" class="ie"><![endif]-->
+            <div id="wrapper">
+                <div id="banner">
+                    <h1 class="logo">
+                        <a href="#{request.contextPath}/index.html" title="#{msgs['application.name']}"><span>#{msgs['application.name']}</span></a>
+                    </h1>
+                    <div id="dock"></div>
+                    <div id="navigation"></div>
+                </div>
+                <div id="content-wrapper">
+                    <div id="content">
+                        <div class="content-top"></div>
+                        <div class="content">
+                            <div id="application-content" class="clearfix">
+                                <ui:insert name="content">...</ui:insert>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="footer">
+                    <div class="bg"></div>
+                    <div class="inner">
+                        <p>
+                            <span class="first" style="float: right; padding-right: 12px;"> 
+                                <h:outputText value="#{msgs['application.copyright']} "/><h:outputLink value="#{msgs['company.url']}"><h:outputText value="#{msgs['company.name']}" /></h:outputLink></span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </body>
+    </f:view>
+</html>

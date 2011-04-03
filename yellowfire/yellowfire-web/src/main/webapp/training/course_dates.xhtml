@@ -1,0 +1,290 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:p="http://primefaces.prime.com.tr/ui"
+        xmlns:f="http://java.sun.com/jsf/core"
+        template="/resources/layout/training-layout.xhtml">
+
+    <ui:define name="demoSampleParameters">
+        <f:metadata>
+            <f:viewParam name="section" value="#{navigator.section}"/>
+            <f:viewParam name="item" value="#{navigator.item}"/>
+            <f:viewParam name="skin" value="#{skinBean.skin}"/>
+        </f:metadata>
+    </ui:define> 
+    <ui:define name="head">
+    </ui:define>
+    <ui:define name="content">
+        <p:growl id="growl" showDetail="true" showSummary="true" globalOnly="true"/>
+        <h:form id="h2" prependId="false">
+            <p:panel id="commands">
+                <h:panelGrid columns="4">
+                    <p:commandButton
+                            id="b10"
+                            value="#{msgs['btn.add']}"
+                            actionListener="#{courseDatesController.onAddRow}"
+                            ajax="true"
+                            update="modify_display modify_messages modify_buttons growl"
+                            onsuccess="modifyDialogVar.show()"/>
+                    <p:commandButton
+                            id="b11"
+                            value="#{msgs['btn.refresh']}"
+                            actionListener="#{courseDatesController.onRefreshRows}"
+                            ajax="true"
+                            update="dt1 growl"/>
+                    #{" "} #{msgs['prompt.table.actions']}
+                </h:panelGrid>
+            </p:panel>
+        </h:form>
+        <h:form id="h1" prependId="false">
+            <p:dataTable
+                    id="dt1"
+                    widgetVar="dt1Var"
+                    binding="#{courseDatesController.dataTable}"
+                    var="row"
+                    value="#{courseDatesController.rows}"
+                    rows="10"
+                    height="500"
+                    paginator="true"
+                    paginatorAlwaysVisible="true"
+                    style="vertical-align:text-top;"
+                    selectionMode="single"
+                    selection="#{courseDatesController.selectedRow}"
+                    onRowSelectUpdate="modify_display modify_messages modify_buttons growl"
+                    onRowSelectComplete="modifyDialogVar.show()">
+
+                <p:column sortBy="#{row.object.id}" filterBy="#{row.object.id}" filterStyle="width:100%"  style="width:5px" headerText="#">
+                    <h:outputText value="#{row.object.id}"/>
+                </p:column>
+                <p:column sortBy="#{row.object.course.title}" filterBy="#{row.object.course.title}" filterStyle="width:100%" style="width:200px" headerText="#{msgs['fld.course.title']}">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{row.object.course.title}"/></f:facet>
+                        <f:facet name="input"><h:inputText value="#{row.object.course.title}"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+                <p:column sortBy="#{row.object.venue.name}" filterBy="#{row.object.venue.name}" filterStyle="width:100%" style="width:200px" headerText="#{msgs['fld.venue']}">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{row.object.venue.name}"/></f:facet>
+                        <f:facet name="input"><h:inputText value="#{row.object.venue.name}"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+                <p:column sortBy="#{row.object.startDate}" filterBy="#{row.object.startDate}" filterStyle="width:100%" style="width:200px" headerText="#{msgs['fld.start.date']}">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{row.object.startDate}"><f:convertDateTime pattern="yyyy-MM-dd" timeZone="#{courseDatesController.timezone}" type="date" /></h:outputText></f:facet>
+                        <f:facet name="input"><h:inputText value="#{row.object.startDate}"><f:convertDateTime pattern="yyyy-MM-dd" timeZone="#{courseDatesController.timezone}" type="date" /></h:inputText></f:facet>
+                    </p:cellEditor>
+                </p:column>
+                <p:column sortBy="#{row.object.endDate}" filterBy="#{row.object.endDate}" filterStyle="width:100%" style="width:200px" headerText="#{msgs['fld.end.date']}">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{row.object.endDate}"><f:convertDateTime pattern="yyyy-MM-dd" timeZone="#{courseDatesController.timezone}" type="date" /></h:outputText></f:facet>
+                        <f:facet name="input"><h:inputText value="#{row.object.endDate}"><f:convertDateTime pattern="yyyy-MM-dd" timeZone="#{courseDatesController.timezone}" type="date" /></h:inputText></f:facet>
+                    </p:cellEditor>
+                </p:column>
+                <p:column sortBy="#{row.object.startTime}" filterBy="#{row.object.startTime}" filterStyle="width:100%" style="width:200px" headerText="#{msgs['fld.start.time']}">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{row.object.startTime}" ><f:convertDateTime pattern="hh:mm" timeZone="#{courseDatesController.timezone}" type="time" /></h:outputText></f:facet>
+                        <f:facet name="input"><h:inputText value="#{row.object.startTime}"><f:convertDateTime pattern="hh:mm" timeZone="#{courseDatesController.timezone}" type="time" /></h:inputText></f:facet>
+                    </p:cellEditor>
+                </p:column>
+                <p:column sortBy="#{row.object.endTime}" filterBy="#{row.object.endTime}" filterStyle="width:100%" style="width:200px" headerText="#{msgs['fld.end.time']}">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{row.object.endTime}" ><f:convertDateTime pattern="hh:mm" timeZone="#{courseDatesController.timezone}" type="time" /></h:outputText></f:facet>
+                        <f:facet name="input"><h:inputText value="#{row.object.endTime}"><f:convertDateTime pattern="hh:mm" timeZone="#{courseDatesController.timezone}" type="time" /></h:inputText></f:facet>
+                    </p:cellEditor>
+                </p:column>
+            </p:dataTable>
+
+            <p:dialog
+                    id="modifyDialog"
+                    header="#{msgs['dlg.training.date']}"
+                    widgetVar="modifyDialogVar"
+                    resizable="false"
+                    width="500"
+                    modal="true"
+                    showEffect="explode"
+                    hideEffect="explode">
+                <p:fieldset legend="#{msgs['pnl.fields']}">
+                    <h:panelGrid id="modify_display" columns="2" cellpadding="4">
+
+                        <h:outputText value="#{msgs['fld.id']}:"/>
+                        <h:panelGroup style="width:100%">
+                            <h:outputText value="#{courseDatesController.selectedRow.object.id}" style="width:100%"/>
+                        </h:panelGroup>
+
+                        <h:outputLabel value="#{msgs['fld.title']}:" for="a03"/>
+                        <h:panelGroup>
+                            <h:panelGrid columns="2">
+                                <h:selectOneMenu
+                                        id="a03"
+                                        label="#{msgs['fld.course']}"
+                                        converter="TrainingCourseConverter"
+                                        value="#{courseDatesController.selectedRow.object.course}" >
+                                    
+                                    <f:selectItems value="#{courseDatesController.courses}" var="course" itemLabel="#{course.title}" itemDescription="#{course.title}" itemValue="#{course}"  />
+                                </h:selectOneMenu>
+                                <p:message for="a03" showSummary="false" showDetail="false" display="icon" />
+                            </h:panelGrid>
+                        </h:panelGroup>
+
+                        <h:outputLabel value="#{msgs['fld.venue']}:" for="a04"/>
+                        <h:panelGroup>
+                            <h:panelGrid columns="2">
+                                <h:selectOneMenu
+                                        id="a04"
+                                        label="#{msgs['fld.venue']}"
+                                        converter="VenueConverter"
+                                        value="#{courseDatesController.selectedRow.object.venue}" >
+                                    <f:selectItem itemLabel="Select one" itemValue="" />
+                                    <f:selectItems value="#{courseDatesController.venues}" var="venue" itemLabel="#{venue.name}" itemDescription="#{venue.name}" itemValue="#{venue}"  />
+                                </h:selectOneMenu>
+                                <p:message for="a03" showSummary="false" showDetail="false" display="icon" />
+                            </h:panelGrid>
+                        </h:panelGroup>
+
+                        <h:outputLabel value="#{msgs['fld.start.date']}:" for="a01"/>
+                        <h:panelGroup>
+                            <h:panelGrid columns="2">
+                                <p:calendar
+                                        id="a01"
+                                        size="55"
+                                        required="true"
+                                        timeZone="#{courseDatesController.timezone}"
+                                        pattern="yyyy-MM-dd"
+                                        widgetVar="startDateVar"
+                                        onSelectUpdate="a05"
+                                        selectListener="#{courseDatesController.onStartDateSelected}"
+                                        label="#{msgs['fld.start.date']}"
+                                        value="#{courseDatesController.selectedRow.object.startDate}"/>
+                                <p:message for="a01" showSummary="false" showDetail="false" display="icon" />
+                            </h:panelGrid>
+                        </h:panelGroup>
+
+                        <h:outputLabel value="#{msgs['fld.end.date']}:" for="a05"/>
+                        <h:panelGroup>
+                            <h:panelGrid columns="2">
+                                <p:calendar
+                                        id="a05"
+                                        size="55"
+                                        required="true"
+                                        timeZone="#{courseDatesController.timezone}"
+                                        pattern="yyyy-MM-dd"
+                                        widgetVar="endDateVar"
+                                        label="#{msgs['fld.end.date']}"
+                                        value="#{courseDatesController.selectedRow.object.endDate}"/>
+                                <p:message for="a05" showSummary="false" showDetail="false" display="icon" />
+                            </h:panelGrid>
+                        </h:panelGroup>
+
+                        <h:outputLabel value="#{msgs['fld.start.time']}:" for="a02"/>
+                        <h:panelGroup>
+                            <h:panelGrid columns="2">
+                                <h:inputText
+                                        id="a02"
+                                        size="55"
+                                        required="true"
+                                        label="#{msgs['fld.start.time']}"
+                                        value="#{courseDatesController.selectedRow.object.startTime}">
+                                    <f:convertDateTime pattern="hh:mm" timeZone="#{courseDatesController.timezone}" />
+                                </h:inputText>
+                                <p:message for="a02" showSummary="false" showDetail="false" display="icon" />
+                            </h:panelGrid>
+                        </h:panelGroup>
+
+                        <h:outputLabel value="#{msgs['fld.end.time']}:" for="a06"/>
+                        <h:panelGroup>
+                            <h:panelGrid columns="2">
+                                <h:inputText
+                                        id="a06"
+                                        size="55"
+                                        required="true"
+                                        label="#{msgs['fld.end.time']}"
+                                        value="#{courseDatesController.selectedRow.object.endTime}">
+                                    <f:convertDateTime pattern="hh:mm" timeZone="#{courseDatesController.timezone}" />
+                                </h:inputText>
+                                <p:message for="a06" showSummary="false" showDetail="false" display="icon" />
+                            </h:panelGrid>
+                        </h:panelGroup>
+                    </h:panelGrid>
+                </p:fieldset>
+                <p:fieldset legend="#{msgs['pnl.messages']}">
+                    <h:panelGrid id="modify_messages" columns="1">
+                        <p:messages id="m1" showDetail="true" showSummary="false" globalOnly="false"  />
+                    </h:panelGrid>
+                </p:fieldset>
+                <h:panelGrid id="modify_buttons" columns="3" cellpadding="4">
+                    <p:commandButton
+                            id="b1"
+                            value="#{msgs['btn.save']}"
+                            image="ui-icon ui-icon-disk"
+                            actionListener="#{courseDatesController.onSaveRow}"
+                            ajax="true"
+                            oncomplete="onSaveComplete(xhr, status, args)"
+                            update="dt1 modify_display modify_messages"
+                            />
+                    
+                    <p:commandButton
+                            id="b4"
+                            value="#{msgs['btn.delete']}"
+                            image="ui-icon ui-icon-minus"
+                            actionListener="#{courseDatesController.onDeleteRow}"
+                            ajax="true"
+                            rendered="#{courseDatesController.selectedRow.object.id ne null}"
+                            oncomplete="onDeleteComplete(xhr, status, args)"
+                            update="dt1 modify_display modify_messages"
+                            />
+                    
+                    <p:commandButton
+                            id="b3"
+                            image="ui-icon ui-icon-close"
+                            value="#{msgs['btn.close']}"
+                            onclick="modifyDialogVar.hide()"
+                            update="dt1 modify_display modify_messages"
+                            />
+                </h:panelGrid>
+            </p:dialog>
+        </h:form>
+
+        <script type="text/javascript">
+
+        function onDeleteComplete(xhr, status, args) {
+            if (args.validationFailed) {
+                return false;
+            }
+            if (args.result != null) {
+                if (args.result.failed) {
+                    return false;
+                }
+            }
+            modifyDialogVar.hide();
+            return true;
+        }
+
+        function onSaveComplete(xhr, status, args) {
+            if (args.validationFailed) {
+                return false;
+            }
+            if (args.result != null) {
+                if (args.result.failed) {
+                    return false;
+                }
+            }
+            modifyDialogVar.hide();
+            return true;
+        }
+
+        function onAddComplete(xhr, status, args) {
+            if (args.validationFailed) {
+                return false;
+            }
+            if (args.result != null) {
+                if (args.result.failed) {
+                    return false;
+                }
+            }
+            modifyDialogVar.hide();
+            return true;
+        }
+        </script>
+    </ui:define>
+</ui:composition>

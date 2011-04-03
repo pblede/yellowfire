@@ -1,0 +1,34 @@
+/*Override to use the full screen*/
+#wrapper {
+	margin: 0 auto;
+	position: relative;
+    width: auto;
+}
+
+/*Override the logo for training*/
+h1.logo,
+h1.logo a { width: 242px; height: 55px; }
+h1.logo a { background: url('../images/logo.png') no-repeat 10%; }
+
+/*Override the banner height to 80px*/
+#banner { height: 80px; }
+
+/*
+    toolbar replaces the navigation style so that PrimeFaces menus can be used
+    @date 2011-02-18
+*/
+#toolbar {
+	height: 20px;
+	float: left;
+	position: absolute;
+	top: 40px;
+	right: 0px;
+}
+
+/*panelgrid column classes*/
+.width100pc {width:100%}
+.width75pc {width:75%}
+.width50pc {width:50%}
+.width25pc {width:25%}
+
+

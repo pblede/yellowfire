@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	version="2.5">
+    <description>Yellowfire web application</description>
+    <display-name>yellowfire</display-name>
+	<context-param>
+		<param-name>com.sun.faces.allowTextChildren</param-name>
+		<param-value>true</param-value>
+	</context-param>
+	<context-param>
+		<param-name>facelets.DEVELOPMENT</param-name>
+		<param-value>false</param-value>
+	</context-param>
+	<context-param>
+		<param-name>org.richfaces.LoadScriptStrategy</param-name>
+		<param-value>ALL</param-value>
+	</context-param>
+	<context-param>
+		<param-name>org.richfaces.LoadStyleStrategy</param-name>
+		<param-value>ALL</param-value>
+	</context-param>
+	<context-param>
+		<param-name>org.richfaces.SKIN</param-name>
+		<param-value>blueSky</param-value>
+	</context-param>
+	<context-param>
+		<param-name>primefaces.THEME</param-name>
+		<param-value>none</param-value>
+	</context-param>
+	<servlet>
+		<servlet-name>Faces Servlet</servlet-name>
+		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Faces Servlet</servlet-name>
+		<url-pattern>*.jsf</url-pattern>
+	</servlet-mapping>
+	<session-config>
+		<session-timeout>5</session-timeout>
+	</session-config>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+	</welcome-file-list>
+	<context-param>
+		<description>State saving method: 'client' or 'server' (=default). See JSF Specification 2.5.2</description>
+		<param-name>javax.faces.STATE_SAVING_METHOD</param-name>
+		<param-value>server</param-value>
+	</context-param>
+     <context-param>
+        <param-name>javax.faces.PARTIAL_STATE_SAVING</param-name>
+        <param-value>false</param-value>
+    </context-param> 
+	<context-param>
+		<param-name>javax.servlet.jsp.jstl.fmt.localizationContext</param-name>
+		<param-value>resources.application</param-value>
+	</context-param>
+	<!-- FireFox does not associate the label with the input because the id contains a `:` This is a lie ;-( Tested on FF 3.6.13
+	<context-param>
+		<param-name>javax.faces.SEPARATOR_CHAR</param-name>
+		<param-value>_</param-value>
+	</context-param>
+	-->
+	<listener>
+		<listener-class>com.sun.faces.config.ConfigureListener</listener-class>
+	</listener>
+	<welcome-file-list>
+		<welcome-file>index.jsf</welcome-file>
+	</welcome-file-list>
+
+    <!--
+    <error-page>
+        <error-code>500</error-code>
+        <location>/500.html</location>
+    </error-page>
+    -->
+    <error-page>
+        <exception-type>javax.faces.application.ViewExpiredException</exception-type>
+        <location>/view_expired.xhtml</location>
+    </error-page>
+    
+	<!--  
+	<persistence-unit-ref>
+	<description></description>
+	<persistence-unit-ref-name>yellowfire.persistence</persistence-unit-ref-name>
+	<persistence-unit-name>yellowfire.persistence</persistence-unit-name>
+	<injection-target>
+		<injection-target-class>za.co.yellowfire.ui.security.Authenticator</injection-target-class>
+		<injection-target-name>em</injection-target-name>
+	</injection-target>
+	</persistence-unit-ref>
+	-->
+
+    <!--
+	<security-constraint>
+		<display-name>Admin Pages</display-name>
+		<web-resource-collection>
+			<web-resource-name>Protected Admin Area</web-resource-name>
+			<description />
+			<url-pattern>/admin/*</url-pattern>
+			<http-method>GET</http-method>
+			<http-method>POST</http-method>
+			<http-method>HEAD</http-method>
+			<http-method>PUT</http-method>
+			<http-method>OPTIONS</http-method>
+			<http-method>TRACE</http-method>
+			<http-method>DELETE</http-method>
+		</web-resource-collection>
+		<auth-constraint>
+			<description />
+			<role-name>admin</role-name>
+		</auth-constraint>
+	</security-constraint>
+	<security-constraint>
+		<display-name>User Pages</display-name>
+		<web-resource-collection>
+			<web-resource-name>Protected Users Area</web-resource-name>
+			<description />
+			<url-pattern>/pages/result_calendar.jsf</url-pattern>
+			<http-method>GET</http-method>
+			<http-method>POST</http-method>
+		</web-resource-collection>
+		<auth-constraint>
+			<description />
+			<role-name>blue</role-name>
+			<role-name>silver</role-name>
+			<role-name>gold</role-name>
+			<role-name>platinum</role-name>
+		</auth-constraint>
+	</security-constraint>
+	
+	<login-config>
+		<auth-method>FORM</auth-method> 
+		<realm-name>jdbc</realm-name>
+		<form-login-config>
+			<form-login-page>/pages/login.jsf</form-login-page>
+			<form-error-page>/pages/login.jsf</form-error-page>
+		</form-login-config>
+	</login-config>
+	 -->
+
+    <login-config>
+        <auth-method>BASIC</auth-method>
+        <realm-name>jdbcRealm</realm-name>
+    </login-config>
+</web-app>

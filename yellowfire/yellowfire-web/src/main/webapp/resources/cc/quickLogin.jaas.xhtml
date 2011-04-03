@@ -1,0 +1,39 @@
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:composite="http://java.sun.com/jsf/composite"
+        xmlns:p="http://primefaces.prime.com.tr/ui">
+
+<!-- INTERFACE -->
+<composite:interface>
+    <composite:attribute name="userLabel" default="User" />
+    <composite:attribute name="passwordLabel" default="Password" />
+    <composite:attribute name="loginLabel" default="Login" />
+    <composite:attribute name="registerLabel" default="Register" />
+    <composite:attribute name="loginImage" default="#{resource['img:key.png']}" />
+    <composite:actionSource name="loginActionListener" targets="sec:lfcb1"/>
+    <!--<composite:attribute name="rendered" default="true" displayName="Rendered" shortDescription="Whether the component is rendered"/>-->
+    <composite:attribute name="bean" required="true" shortDescription="The bean that quickLogin should use to get the userName and password"/>
+    <composite:attribute name="actionMethod" method-signature="java.lang.String action()"/>
+    <composite:attribute name="registerMethod" method-signature="java.lang.String action()"/>
+    <composite:attribute name="update" default="sec" required="false" shortDescription="The component ids to update"/>
+</composite:interface>
+
+<!-- IMPLEMENATION -->
+<composite:implementation>
+	<table>
+	<tr><td>
+		<form id="sec" method="post" action="j_security_check" >
+	        <h:panelGrid columns="6">
+	            <h:outputLabel value="#{cc.attrs.userLabel}:" />
+	            <input type="text" name="j_username" id="userid" />
+	            <h:outputLabel value="#{cc.attrs.passwordLabel}:" />
+	            <input type="password" name="j_password" id="pwd"/>
+	            <input type="submit" value="#{cc.attrs.loginLabel}" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" />
+	            <input type="button" value="#{cc.attrs.registerLabel}" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" onclick="window.location = '#{facesContext.externalContext.requestContextPath}/pages/register.jsf';" />
+	        </h:panelGrid>
+	    </form>
+	</td></tr>
+	</table>
+</composite:implementation>
+</html>

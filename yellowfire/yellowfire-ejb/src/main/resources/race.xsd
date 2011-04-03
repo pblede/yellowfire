@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+        xmlns:xs="http://www.w3.org/2001/XMLSchema"  
+        targetNamespace="http://www.bluefire.co.za/race"
+        xmlns:race="http://www.bluefire.co.za/race"
+        attributeFormDefault="unqualified"
+        elementFormDefault="qualified">
+
+    <xs:element name="races" type="race:races"/>
+
+   <xs:complexType name="races">
+        <xs:sequence>
+            <xs:element type="race:race" name="race" maxOccurs="unbounded" minOccurs="0"/>
+        </xs:sequence>
+   </xs:complexType>
+
+    <xs:complexType name="race">
+        <xs:sequence>
+    		<xs:element type="race:course" name="course" maxOccurs="unbounded" minOccurs="1"/>
+    		<xs:element type="race:venue" name="venue" maxOccurs="1" minOccurs="1"/>
+    		<xs:element type="race:notes" name="notes"/>
+    		<xs:element type="race:event-link" name="event-link" minOccurs="0" maxOccurs="1"/>
+    	</xs:sequence>
+        <xs:attribute type="xs:long" name="id" use="optional" />
+        <xs:attribute type="xs:string" name="name" use="required" />
+        <xs:attribute type="xs:date" name="date" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="course">
+        <xs:sequence maxOccurs="unbounded" minOccurs="1">
+            <xs:element type="race:category" name="category"/>
+        </xs:sequence>
+        <xs:attribute type="xs:long" name="id" use="optional"/>
+        <xs:attribute type="xs:string" name="distance" use="required"/>
+        <xs:attribute type="xs:string" name="description" use="optional"/>
+        <xs:attribute type="xs:time" name="starttime" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="category">
+        <xs:sequence>
+			<xs:element type="race:fee" name="fee" maxOccurs="unbounded" minOccurs="0"/>
+            <xs:element type="race:prize" name="prize" maxOccurs="unbounded" minOccurs="0"/>
+		</xs:sequence>
+        <xs:attribute type="xs:long" name="id" use="optional" />
+        <xs:attribute name="name" type="xs:string" use="optional"/>
+    </xs:complexType>
+
+    <xs:complexType name="venue">
+        <xs:attribute type="xs:long" name="id" use="optional" />
+        <xs:attribute type="xs:string" name="name" use="optional"/>
+        <xs:attribute type="xs:string" name="address" use="optional"/>
+        <xs:attribute type="xs:string" name="gps" use="optional"/>
+    </xs:complexType>
+
+    <xs:complexType name="notes">
+    	<xs:sequence>
+    		<xs:element type="race:note" name="note" minOccurs="0" maxOccurs="unbounded"/>
+    	</xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="prize">
+        <xs:attribute type="xs:string" name="name" use="optional"/>
+        <xs:attribute type="xs:string" name="value" use="optional"/>
+    </xs:complexType>
+
+    <xs:complexType name="fee">
+    	<xs:attribute name="description" type="xs:string" use="required"/>
+    	<xs:attribute name="value" type="xs:string" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="note" mixed="true">
+        <xs:attribute name="type" type="xs:string" />
+    </xs:complexType>
+
+    <xs:complexType name="event-link">
+        <xs:attribute name="link-url" type="xs:anyURI" use="required"/>
+        <xs:attribute name="image-url" type="xs:anyURI" use="required"/>
+        <xs:attribute name="scale" type="xs:integer" use="required"/>
+        <xs:attribute name="alt" type="xs:string" use="required"/>
+    </xs:complexType>
+</xs:schema>

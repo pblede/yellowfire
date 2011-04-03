@@ -1,0 +1,102 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.prime.com.tr/ui"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:cc="http://java.sun.com/jsf/composite/cc"
+                template="/resources/layout/running-layout.xhtml">
+   
+	<ui:define name="demoSampleParameters">
+		<f:metadata>
+            <f:viewParam name="section" value="#{navigator.section}" />
+			<f:viewParam name="item" value="#{navigator.item}" />
+			<f:viewParam name="skin" value="#{skinBean.skin}"/>
+		</f:metadata>
+	</ui:define>
+    <ui:define name="head">
+	</ui:define>
+	<ui:define name="content">
+        <p:growl showDetail="true" showSummary="true" />
+        <h:form id="tr1" prependId="false">
+            <p:panel header="Training Result">
+                <h:panelGrid id="pg1" columns="2">
+                                 
+                    <h:outputLabel id="la01" for="a01" value="#{msgs['fld.date']}:" />
+                    <h:panelGroup>
+                        <p:calendar id="a01"
+                            value="#{resultsController.selected.result.start}"
+                            pattern="yyyy-MM-dd"
+                            onchange="O$.validate(this);">
+                            <f:ajax event="change" execute="@form" listener="#{resultsController.onStartTimeChanged}" render="@form" />
+                            <f:attribute name="clientValidation" value="onDemand" />
+                        </p:calendar>
+                        <o:floatingIconMessage for="a01" showDetail="true"
+                            showSummary="false"
+                            style="border: 1px solid red; background-color: #e0e0ff;" />
+                        <h:message for="a01" showDetail="true"  showSummary="false" />
+                    </h:panelGroup>
+
+                    <h:outputLabel id="la02" for="a02" value="#{msgs['fld.result.timeTaken']}:" />
+                    <h:panelGroup id="pg01">
+                        <h:selectOneMenu id="a02" value="#{resultsController.selected.result.timeTakenHours}">
+                            <f:ajax event="change" execute="@form" listener="#{resultsController.onTimeTakenChanged}" render="@form" />
+                            <f:selectItems id="hsi01" value="#{resultsController.hours}"/>
+                        </h:selectOneMenu>
+                        #{":"}
+                        <h:selectOneMenu id="a03" value="#{resultsController.selected.result.timeTakenMinutes}">
+                            <f:ajax event="change" execute="@form" listener="#{resultsController.onTimeTakenChanged}" render="@form" />
+                            <f:selectItems id="msi01" value="#{resultsController.minutes}"/>
+                        </h:selectOneMenu>
+                         #{":"}
+                        <h:selectOneMenu id="a04" value="#{resultsController.selected.result.timeTakenSeconds}">
+                             <f:ajax event="change" execute="@form" listener="#{resultsController.onTimeTakenChanged}" render="@form" />
+                            <f:selectItems id="ssi01" value="#{resultsController.seconds}"/>
+                        </h:selectOneMenu>
+                        <o:floatingIconMessage for="a02" showDetail="true"
+                            showSummary="false"
+                            style="border: 1px solid red; background-color: #e0e0ff;" />
+                        <h:message for="a02" showDetail="true"  showSummary="false" />
+                    </h:panelGroup>
+
+                    <h:outputLabel id="la10" for="a10" value="#{msgs['fld.distance']}:" />
+                    <h:panelGroup>
+                        <h:inputText id="a10" value="#{resultsController.selected.result.distance}">
+                            <f:ajax event="change" execute="@form" listener="#{resultsController.onDistanceChanged}" render="@form" />
+                        </h:inputText>#{"km"}
+                        <o:floatingIconMessage for="a10" showDetail="true"
+                            showSummary="false"
+                            style="border: 1px solid red; background-color: #e0e0ff;" />
+                        <h:message for="a10" showDetail="true"  showSummary="false" />
+                    </h:panelGroup>
+
+                    <h:outputLabel id="la11" for="a11" value="#{msgs['fld.result.pace']}:" />
+                    <h:panelGroup>
+                        <h:inputText id="a11" value="#{resultsController.selected.result.pace}"/>
+                        <o:floatingIconMessage for="a11" showDetail="true"
+                            showSummary="false"
+                            style="border: 1px solid red; background-color: #e0e0ff;" />
+                        <h:message for="a11" showDetail="true"  showSummary="false" />
+                    </h:panelGroup>
+
+                    <h:outputLabel id="la20" for="a20" value="#{msgs['fld.notes']}:" />
+                    <h:panelGroup>
+                        <h:inputTextarea id="a20" value="#{resultsController.selected.result.notes}" cols="50" rows="5"/>
+                        <o:floatingIconMessage for="a20" showDetail="true"
+                            showSummary="false"
+                            style="border: 1px solid red; background-color: #e0e0ff;" />
+                        <h:message for="a20" showDetail="true"  showSummary="false" />
+                    </h:panelGroup>
+                </h:panelGrid>
+                
+                <h:panelGrid columns="4" id="pg2">
+                    <p:commandButton actionListener="#{resultsController.onSave}" value="Save" update="tr1,growl"/>
+                    <p:commandButton actionListener="#{resultsController.onClear}" value="Clear" update="tr1,growl"/>
+                    <p:ajaxStatus id="as1" style="height:24px;display:block;" widgetVar="statusVar">
+                        <f:facet name="start"><h:graphicImage value="../resources/images/loading.gif"/></f:facet>
+                        <f:facet name="complete"><h:outputText value=""/></f:facet>
+                    </p:ajaxStatus>
+                </h:panelGrid>
+            </p:panel>
+        </h:form>
+	</ui:define>
+</ui:composition>

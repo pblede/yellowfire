@@ -1,0 +1,32 @@
+/* Header */
+#logo {
+	width: 1020px;
+	height: 50px;
+	margin: 0 auto;
+	padding: 25px 10px 0 10px;
+}
+
+#logo h1, #logo p {
+	float: left;
+	margin: 0;
+}
+
+#logo h1 {
+	padding: 0 0 0 0;
+	letter-spacing: -1px;
+	font-weight: normal;
+	font-size: 3em;
+}
+
+#logo p {
+	text-transform: uppercase;
+	padding: 10px 0 0 3px;
+	font-size: 10px;
+	color: #000000;
+}
+
+#logo a {
+	border: none;
+	text-decoration: none;
+	color: #ffff99;
+}
