@@ -49,7 +49,7 @@
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.sun.faces:jsf-api:2.1.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.sun.faces:jsf-impl:2.1.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.sun.facelets:jsf-facelets:1.1.15.B1" level="project" />
-    <orderEntry type="library" name="Maven: org.primefaces:primefaces:3.0-SNAPSHOT" level="project" />
+    <orderEntry type="library" name="Maven: org.primefaces:primefaces:3.0" level="project" />
     <orderEntry type="library" name="Maven: org.primefaces.themes:aristo:1.0.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.glassfish.deployment:deployment-client:3.0.1" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.glassfish.common:common-util:3.0.1" level="project" />

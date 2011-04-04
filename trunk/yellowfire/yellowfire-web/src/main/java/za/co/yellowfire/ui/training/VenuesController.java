@@ -7,7 +7,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import za.co.yellowfire.domain.Venue;
 import za.co.yellowfire.domain.geocode.*;
-import za.co.yellowfire.domain.training.SkillArea;
 import za.co.yellowfire.log.LogType;
 import za.co.yellowfire.manager.DomainManager;
 import za.co.yellowfire.manager.DomainQueryHint;
@@ -23,6 +22,8 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.persistence.OptimisticLockException;
 import java.io.Serializable;
+import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -243,20 +244,27 @@ public class VenuesController implements Serializable, DataTableSearchListener<G
      * the Google search can be converted into a Venue used by the system.
      * @param event The action event
      */
-    public void onCreateVenue(ActionEvent event) {
-        DataTableRow<GeocodeResult> selected = this.getSearchModel().getSelected();
-        if (selected != null && selected.getObject() != null) {
-            GeocodeResult result = selected.getObject();
+    public void onCreateVenue(ActionEvent event) throws DataTableException {
 
-            Venue venue = new Venue();
-            venue.setAddress(result.getFormattedAddress());
-            venue.setGpsLatitude(result.getGeometry().getLocation().getLatitude());
-            venue.setGpsLongitude(result.getGeometry().getLocation().getLongitude());
-            venue.setName(result.getFormattedAddress());
+        try {
+            DataTableRow<GeocodeResult> selected = this.getSearchModel().getSelected();
+            if (selected != null && selected.getObject() != null) {
+                GeocodeResult result = selected.getObject();
 
-            this.selectedRow = new DataTableRow<Venue>(venue);
-        } else {
-            this.selectedRow = new DataTableRow<Venue>(EMPTY_VENUE());
+                DecimalFormat format = new DecimalFormat("##0.0######");
+
+                Venue venue = new Venue();
+                venue.setAddress(result.getFormattedAddress());
+                venue.setGpsLatitude(format.parse(result.getGeometry().getLocation().getLatitude()).doubleValue());
+                venue.setGpsLongitude(format.parse(result.getGeometry().getLocation().getLongitude()).doubleValue());
+                venue.setName(result.getFormattedAddress());
+
+                this.selectedRow = new DataTableRow<Venue>(venue);
+            } else {
+                this.selectedRow = new DataTableRow<Venue>(EMPTY_VENUE());
+            }
+        } catch (ParseException e) {
+            throw new DataTableException("Unable to create venue because GPS coordinates could not be parsed", e);
         }
     }
 
