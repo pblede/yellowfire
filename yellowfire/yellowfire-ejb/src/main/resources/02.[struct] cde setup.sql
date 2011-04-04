@@ -91,6 +91,9 @@ create table cde.venue (
 	venue_name varchar(128) null,
 	venue_address varchar(512) null,
 	venue_gps varchar(128) null,
+	venue_longitude decimal(10, 7),
+	venue_latitude decimal(10, 7),
+	venue_type smallint,
 	create_ts datetime null,
 	update_ts datetime null,
 	version int null

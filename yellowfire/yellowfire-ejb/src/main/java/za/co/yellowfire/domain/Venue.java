@@ -32,7 +32,6 @@ public class Venue implements DomainObject {
 	private static final long serialVersionUID = 1L;
 
     public static final String QRY_VENUES = "qry.venues";
-    public static final String QRY_VENUES_REFRESH_CACHE = "qry.venues.refresh.cache";
 
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -50,19 +49,26 @@ public class Venue implements DomainObject {
     @XmlAttribute(name = "address", required = true)
     private String address;
 
-    @Basic
-    @Column(name = "venue_gps", nullable = true, insertable = true, updatable = true, length = 128, precision = 0)
-    @XmlAttribute(name = "gps", required = false)
+    @Transient
     private String gps;
 
-    @Transient
-    private String gpsLatitude;
+    @Basic
+    @Column(name = "venue_latitude", nullable = true, insertable = true, updatable = true)
+    @XmlAttribute(name = "latitude", required = false)
+    private Double gpsLatitude;
 
-    @Transient
-    private String gpsLongitude;
+    @Basic
+    @Column(name = "venue_longitude", nullable = true, insertable = true, updatable = true)
+    @XmlAttribute(name = "longitude", required = false)
+    private Double gpsLongitude;
+
+    @Enumerated(EnumType.ORDINAL)
+    @Column(name = "venue_type", nullable = false, insertable = true, updatable = true)
+    private VenueType type;
 
     @Version
     @Column(name = "version")
+    @SuppressWarnings("unused")
     private int version;
 
     /* Default constructor */
@@ -99,49 +105,40 @@ public class Venue implements DomainObject {
     }
 
     public String getGps() {
-        return gps;
+        if (getGpsLatitude() != null && getGpsLongitude() != null) {
+            return getGpsLatitude() + "," + getGpsLongitude();
+        }
+        return null;
     }
 
     public void setGps(String gps) {
-        this.gps = gps;
+        parseGps(gps);
     }
 
-    protected void formatGps() {
-        setGps(this.gpsLongitude + ", " + this.gpsLatitude);
-    }
-
-    protected void parseGps() {
-        if (getGps() != null) {
-            String[] parts = getGps().split(",");
+    protected void parseGps(String gps) {
+        if (gps != null) {
+            String[] parts = gps.split(",");
             if (parts.length == 2) {
-                this.gpsLongitude = parts[0].trim();
-                this.gpsLatitude = parts[1].trim();
+                setGpsLongitude(Double.valueOf(parts[0].trim()));
+                setGpsLatitude(Double.valueOf(parts[1].trim()));
             }
         }
     }
 
-    public String getGpsLongitude() {
-        if (this.gpsLongitude == null) {
-            parseGps();
-        }
+    public Double getGpsLongitude() {
         return this.gpsLongitude;
     }
 
-    public String getGpsLatitude() {
-        if (this.gpsLatitude == null) {
-            parseGps();
-        }
+    public Double getGpsLatitude() {
         return this.gpsLatitude;
     }
 
-    public void setGpsLongitude(String value) {
+    public void setGpsLongitude(Double value) {
         this.gpsLongitude = value;
-        formatGps();
     }
 
-    public void setGpsLatitude(String value) {
+    public void setGpsLatitude(Double value) {
         this.gpsLatitude = value;
-        formatGps();
     }
 
     @Override
@@ -163,10 +160,7 @@ public class Venue implements DomainObject {
             return false;
         }
         final Venue other = (Venue) obj;
-        if ((this.name == null) ? (other.name != null) : !this.name.equals(other.name)) {
-            return false;
-        }
-        return true;
+        return !((this.name == null) ? (other.name != null) : !this.name.equals(other.name));
     }
 
 
