@@ -55,4 +55,11 @@ public interface DataTableListener<T> extends Serializable {
      * @throws DataTableException If there was an error encountered
      */
     void onModify(ActionEvent event, T object) throws DataTableException;
+
+    /**
+     * Called when a row in the table is selected
+     * @param row The selected row
+     * @throws DataTableException If there was an error
+     */
+    void onSelection(DataTableRow<T> row) throws DataTableException;
 }

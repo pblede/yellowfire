@@ -68,6 +68,16 @@ public abstract class AbstractDomainManagerDataTableListener<T extends DomainObj
     }
 
     /**
+     * Called when a row in the table is selected
+     *
+     * @param row The selected row
+     * @throws za.co.yellowfire.ui.model.DataTableException
+     *          If there was an error
+     */
+    @Override
+    public void onSelection(DataTableRow<T> row) throws DataTableException {}
+
+    /**
      * Called before the add function is intiated. The object returned will be used for the edit function.
      *
      * @param event The event that initiated the action

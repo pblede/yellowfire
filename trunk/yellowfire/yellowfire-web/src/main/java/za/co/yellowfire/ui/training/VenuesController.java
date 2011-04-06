@@ -2,7 +2,10 @@ package za.co.yellowfire.ui.training;
 
 import org.primefaces.component.datatable.DataTable;
 import org.primefaces.context.RequestContext;
+import org.primefaces.model.map.DefaultMapModel;
+import org.primefaces.model.map.LatLng;
 import org.primefaces.model.map.MapModel;
+import org.primefaces.model.map.Marker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import za.co.yellowfire.domain.Venue;
@@ -46,6 +49,7 @@ public class VenuesController implements Serializable, DataTableSearchListener<G
     private GeocodeManager geocodeManager;
     private DataTableModel<GeocodeResult> searchModel;
     private MapModel searchMapModel;
+
     private String searchText;
     
 //    private static final GeocodeResult EMPTY_RESULT() {
@@ -65,6 +69,8 @@ public class VenuesController implements Serializable, DataTableSearchListener<G
 
     @PostConstruct
     private void init() {
+        searchMapModel = new DefaultMapModel();
+        
         searchModel =
                 new DataTableModel<GeocodeResult>(
                         /* DataTableListener*/
@@ -80,6 +86,11 @@ public class VenuesController implements Serializable, DataTableSearchListener<G
                             }
 
                             @Override
+                            public void onSelection(DataTableRow<GeocodeResult> row) throws DataTableException {
+                                loadProximityVenues(row);
+                            }
+
+                            @Override
                             public GeocodeResult createEmpty() {
                                 GeocodeResult result = new GeocodeResult();
                                 result.setGeometry(new GeocodeGeometry(new GeocodeLocation("0", "0")));
@@ -88,6 +99,33 @@ public class VenuesController implements Serializable, DataTableSearchListener<G
                         },
                         /* DataTableSearchListener*/
                         this);
+    }
+
+    private void loadProximityVenues(DataTableRow<GeocodeResult> row) {
+
+        if (row != null && row.getObject() != null) {
+
+            GeocodeResult result = row.getObject();
+            double lat = Double.parseDouble(result.getGeometry().getLocation().getLatitude());
+            double lng = Double.parseDouble(result.getGeometry().getLocation().getLongitude());
+
+            List<Venue> venues = (List<Venue>) manager.query(
+                    Venue.QRY_VENUES_IN_PROXIMITY,
+                    Venue.getProximityQueryParams(
+                            lat,
+                            lng,
+                            0.000050));
+
+            if (venues != null && venues.size() > 0) {
+                for (Venue v : venues) {
+                    searchMapModel.getMarkers().add(
+                            new Marker(
+                                    new LatLng(v.getGpsLatitude(), v.getGpsLongitude()),
+                                    v.getName(),
+                                    v));
+                }
+            }
+        }
     }
 
     @SuppressWarnings("unchecked")

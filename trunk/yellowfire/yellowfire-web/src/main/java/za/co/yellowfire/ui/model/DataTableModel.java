@@ -86,6 +86,7 @@ public class DataTableModel<T> implements Serializable {
             this.selected = new DataTableRow<T>(this.listener.createEmpty());
         } else {
             this.selected = selected;
+            onSelection();
         }
     }
 
@@ -95,6 +96,27 @@ public class DataTableModel<T> implements Serializable {
 
     public ActionListener getDeleteActionListener() {
         return deleteActionListener;
+    }
+
+    public void onSelection() {
+        LOGGER.debug("onSelection()");
+
+        if (this.listener == null) {
+            LOGGER.debug("onSelection() : DataTableListener is null, not adding");
+            return;
+        }
+
+        RequestResult result = new RequestResult();
+        try {
+            this.listener.onSelection(getSelected());
+        } catch (Throwable e) {
+            result.failed(e.getMessage());
+
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", e.getMessage());
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+        }
+        RequestContext context = RequestContext.getCurrentInstance();
+        context.addCallbackParam("result", result);
     }
 
     public void onAdd(ActionEvent event) {

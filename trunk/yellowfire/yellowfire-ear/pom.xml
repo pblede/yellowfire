@@ -35,6 +35,7 @@
                             <addClasspath>true</addClasspath>
                         </manifest>
                     </archive>
+                    <fileNameMapping>no-version</fileNameMapping>
                     <defaultLibBundleDir>lib</defaultLibBundleDir>
                     <modules>
                         <webModule>
@@ -54,6 +55,31 @@
                     </security>
 
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.glassfish</groupId>
+                <artifactId>maven-embedded-glassfish-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <app>target/yellowfire-0.0.1.ear</app>
+                    <name>yellowfire</name>
+                    <ports>
+                        <http-listener>8080</http-listener>
+                        <https-listener>8181</https-listener>
+                    </ports>
+                    <autoDelete>true</autoDelete>
+                    <configFile>${basedir}/domain.xml</configFile>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>start</goal> <!-- this will run during pre-integration-test phase -->
+                            <goal>deploy</goal> <!-- this will run during pre-integration-test phase -->
+                            <goal>undeploy</goal> <!-- this will run during post-integration-test phase -->
+                            <goal>stop</goal> <!-- this will run during post-integration-test phase -->
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

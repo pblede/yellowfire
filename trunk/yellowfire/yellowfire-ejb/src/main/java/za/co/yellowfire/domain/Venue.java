@@ -4,6 +4,8 @@ import org.eclipse.persistence.config.QueryHints;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAttribute;
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**
@@ -20,8 +22,8 @@ import javax.xml.bind.annotation.XmlAttribute;
             query="select v from Venue v"
         ),
         @NamedQuery(
-            name="qry.venues.refresh.cache",
-            query="select v from Venue v",
+            name="qry.venues.in.proximity",
+            query="select v from Venue v where v.gpsLatitude >= :lat1 and v.gpsLatitude <= :lat2 and v.gpsLongitude >= :lng1 and v.gpsLongitude <= :lng2",
             hints = {
                 @QueryHint(name=QueryHints.REFRESH, value="true")
             }
@@ -32,7 +34,8 @@ public class Venue implements DomainObject {
 	private static final long serialVersionUID = 1L;
 
     public static final String QRY_VENUES = "qry.venues";
-
+    public static final String QRY_VENUES_IN_PROXIMITY = "qry.venues.in.proximity";
+    
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "venue_id", nullable = false, insertable = true, updatable = true, length = 19, precision = 0)
@@ -139,6 +142,28 @@ public class Venue implements DomainObject {
 
     public void setGpsLatitude(Double value) {
         this.gpsLatitude = value;
+    }
+
+    public boolean hasGpsCoordinates() {
+        return (getGpsLatitude() != null && getGpsLongitude() != null) && (getGpsLatitude() != 0 && getGpsLongitude() != 0);
+    }
+
+    public static Map<String, Object> getProximityQueryParams(double latitude, double longitude, double radius) {
+        Map<String, Object> params = new HashMap<String, Object>(4);
+        params.put("lat1", latitude - radius);
+        params.put("lat2", latitude + radius);
+        params.put("lng1", longitude - radius);
+        params.put("lng2", longitude + radius);
+        return params;
+    }
+
+    public static Map<String, Object> getProximityQueryParams(double fromLatitude, double toLatitude,  double fromLongitude, double toLongitude) {
+        Map<String, Object> params = new HashMap<String, Object>(4);
+        params.put("lat1", fromLatitude);
+        params.put("lat2", toLatitude);
+        params.put("lng1", fromLongitude);
+        params.put("lng2", toLongitude);
+        return params;
     }
 
     @Override
