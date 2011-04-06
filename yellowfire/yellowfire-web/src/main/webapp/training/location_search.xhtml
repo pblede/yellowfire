@@ -63,7 +63,14 @@
                         </p:dataTable>
                     </p:panel>
                     <p:panel header="#{msgs['dlg.map']}" styleClass="result_panel">
-                        <p:gmap id="map01" center="#{venuesController.searchModel.selected.object.geometry.location.gps}" zoom="15" type="ROADMAP" style="width:600px;height:400px" rendered="#{venuesController.searchModel.selected ne null}" model="#{venuesController.searchMapModel}" />
+                        <p:gmap
+                                id="map01"
+                                center="#{venuesController.searchModel.selected.object.geometry.location.gps}"
+                                zoom="15"
+                                type="ROADMAP"
+                                style="width:600px;height:400px"
+                                rendered="#{venuesController.searchModel.selected ne null}"
+                                model="#{venuesController.searchMapModel}" />
                     </p:panel>
                     <p:panel header="#{msgs['dlg.options']}" styleClass="options_panel">
                         <h:panelGrid columns="1" style="width:100%">
