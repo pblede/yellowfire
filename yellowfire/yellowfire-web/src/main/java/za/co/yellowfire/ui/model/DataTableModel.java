@@ -23,6 +23,8 @@ public class DataTableModel<T> implements Serializable {
     private static final long serialVersionUID = 1L;
     private static final Logger LOGGER = LoggerFactory.getLogger(LogType.MODEL.getCategory());
 
+    private String searchText;
+    
     private List<DataTableRow<T>> rows;
     private DataTableRow<T> selected;
     private transient DataTable table;
@@ -45,6 +47,14 @@ public class DataTableModel<T> implements Serializable {
 
         this.saveActionListener = new SaveActionListener(this);
         this.deleteActionListener = new DeleteActionListener(this);
+    }
+
+    public String getSearchText() {
+        return searchText;
+    }
+
+    public void setSearchText(String searchText) {
+        this.searchText = searchText;
     }
 
     public DataTable getTable() {
@@ -212,7 +222,7 @@ public class DataTableModel<T> implements Serializable {
 
         this.result.reset();
         try {
-            this.rows = this.searchListener.onSearch(event);
+            this.rows = this.searchListener.onSearch(event, getSearchText());
         } catch (Throwable e) {
             LOGGER.error(e.getMessage());
             this.result.failed(e.getMessage());
