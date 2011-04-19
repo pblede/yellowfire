@@ -2,6 +2,14 @@
 <project version="4">
   <component name="AntConfiguration">
     <defaultAnt bundledAnt="true" />
+    <buildFile url="file://$PROJECT_DIR$/build.xml">
+      <additionalClassPath />
+      <antReference projectDefault="true" />
+      <customJdkName value="" />
+      <maximumHeapSize value="128" />
+      <maximumStackSize value="2" />
+      <properties />
+    </buildFile>
   </component>
   <component name="ArtifactManager">
     <artifact type="ear" name="ear:ear">
@@ -60,10 +68,13 @@
             <element id="module-output" name="yellowfire-web" />
           </element>
           <element id="directory" name="lib">
+            <element id="library" level="project" name="Maven: commons-logging:commons-logging:1.1.1" />
+            <element id="library" level="project" name="Maven: org.apache.lucene:lucene-core:2.4.1" />
             <element id="library" level="project" name="Maven: javax.xml.bind:jaxb-api:2.2.2" />
             <element id="library" level="project" name="Maven: javax.xml.stream:stax-api:1.0-2" />
             <element id="library" level="project" name="Maven: com.sun.xml.bind:jaxb-impl:2.2.2" />
-            <element id="library" level="project" name="Maven: org.primefaces:primefaces:3.0" />
+            <element id="library" level="project" name="Maven: org.compass-project:compass:2.3.0" />
+            <element id="library" level="project" name="Maven: org.primefaces:primefaces:3.0.M1" />
             <element id="library" level="project" name="Maven: org.primefaces.themes:aristo:1.0.0" />
           </element>
         </element>
@@ -104,6 +115,10 @@
   <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false" />
   <component name="EntryPointsManager">
     <entry_points version="2.0" />
+  </component>
+  <component name="ExportToHTMLSettings">
+    <option name="OPEN_IN_BROWSER" value="true" />
+    <option name="OUTPUT_DIRECTORY" value="C:\Shared\Projects.Java\yellowfire" />
   </component>
   <component name="FacetAutodetectingManager">
     <autodetection-disabled>
@@ -270,11 +285,6 @@
       </item>
     </group>
   </component>
-  <component name="ProjectInspectionProfilesVisibleTreeState">
-    <entry key="Project Default">
-      <profile-state />
-    </entry>
-  </component>
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/yellowfire.iml" filepath="$PROJECT_DIR$/yellowfire.iml" />
@@ -297,81 +307,15 @@
   </component>
   <component name="WebServicesPlugin" addRequiredLibraries="true" />
   <component name="libraryTable">
-    <library name="Maven: com.sun.enterprise:auto-depends:1.0.0">
+    <library name="Maven: com.microsoft.sqlserver:sqljdbc4:3.0">
       <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/com/sun/enterprise/auto-depends/1.0.0/auto-depends-1.0.0.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/com/microsoft/sqlserver/sqljdbc4/3.0/sqljdbc4-3.0.jar!/" />
       </CLASSES>
       <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/com/sun/enterprise/auto-depends/1.0.0/auto-depends-1.0.0-javadoc.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/com/microsoft/sqlserver/sqljdbc4/3.0/sqljdbc4-3.0-javadoc.jar!/" />
       </JAVADOC>
       <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/com/sun/enterprise/auto-depends/1.0.0/auto-depends-1.0.0-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="Maven: com.sun.enterprise:config-types:1.0.0">
-      <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/com/sun/enterprise/config-types/1.0.0/config-types-1.0.0.jar!/" />
-      </CLASSES>
-      <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/com/sun/enterprise/config-types/1.0.0/config-types-1.0.0-javadoc.jar!/" />
-      </JAVADOC>
-      <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/com/sun/enterprise/config-types/1.0.0/config-types-1.0.0-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="Maven: com.sun.enterprise:config:1.0.0">
-      <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/com/sun/enterprise/config/1.0.0/config-1.0.0.jar!/" />
-      </CLASSES>
-      <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/com/sun/enterprise/config/1.0.0/config-1.0.0-javadoc.jar!/" />
-      </JAVADOC>
-      <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/com/sun/enterprise/config/1.0.0/config-1.0.0-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="Maven: com.sun.enterprise:hk2-core:1.0.0">
-      <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/com/sun/enterprise/hk2-core/1.0.0/hk2-core-1.0.0.jar!/" />
-      </CLASSES>
-      <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/com/sun/enterprise/hk2-core/1.0.0/hk2-core-1.0.0-javadoc.jar!/" />
-      </JAVADOC>
-      <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/com/sun/enterprise/hk2-core/1.0.0/hk2-core-1.0.0-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="Maven: com.sun.enterprise:hk2:1.0.0">
-      <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/com/sun/enterprise/hk2/1.0.0/hk2-1.0.0.jar!/" />
-      </CLASSES>
-      <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/com/sun/enterprise/hk2/1.0.0/hk2-1.0.0-javadoc.jar!/" />
-      </JAVADOC>
-      <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/com/sun/enterprise/hk2/1.0.0/hk2-1.0.0-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="Maven: com.sun.enterprise:osgi-adapter:1.0.0">
-      <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/com/sun/enterprise/osgi-adapter/1.0.0/osgi-adapter-1.0.0.jar!/" />
-      </CLASSES>
-      <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/com/sun/enterprise/osgi-adapter/1.0.0/osgi-adapter-1.0.0-javadoc.jar!/" />
-      </JAVADOC>
-      <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/com/sun/enterprise/osgi-adapter/1.0.0/osgi-adapter-1.0.0-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="Maven: com.sun.enterprise:tiger-types-osgi:1.0.0">
-      <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/com/sun/enterprise/tiger-types-osgi/1.0.0/tiger-types-osgi-1.0.0.jar!/" />
-      </CLASSES>
-      <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/com/sun/enterprise/tiger-types-osgi/1.0.0/tiger-types-osgi-1.0.0-javadoc.jar!/" />
-      </JAVADOC>
-      <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/com/sun/enterprise/tiger-types-osgi/1.0.0/tiger-types-osgi-1.0.0-sources.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/com/microsoft/sqlserver/sqljdbc4/3.0/sqljdbc4-3.0-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Maven: com.sun.facelets:jsf-facelets:1.1.15.B1">
@@ -405,72 +349,6 @@
       </JAVADOC>
       <SOURCES>
         <root url="jar://$MAVEN_REPOSITORY$/com/sun/faces/jsf-impl/2.1.0/jsf-impl-2.1.0-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="Maven: com.sun.grizzly:grizzly-config:1.9.18-o">
-      <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/com/sun/grizzly/grizzly-config/1.9.18-o/grizzly-config-1.9.18-o.jar!/" />
-      </CLASSES>
-      <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/com/sun/grizzly/grizzly-config/1.9.18-o/grizzly-config-1.9.18-o-javadoc.jar!/" />
-      </JAVADOC>
-      <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/com/sun/grizzly/grizzly-config/1.9.18-o/grizzly-config-1.9.18-o-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="Maven: com.sun.grizzly:grizzly-framework:1.9.18-o">
-      <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/com/sun/grizzly/grizzly-framework/1.9.18-o/grizzly-framework-1.9.18-o.jar!/" />
-      </CLASSES>
-      <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/com/sun/grizzly/grizzly-framework/1.9.18-o/grizzly-framework-1.9.18-o-javadoc.jar!/" />
-      </JAVADOC>
-      <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/com/sun/grizzly/grizzly-framework/1.9.18-o/grizzly-framework-1.9.18-o-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="Maven: com.sun.grizzly:grizzly-http:1.9.18-o">
-      <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/com/sun/grizzly/grizzly-http/1.9.18-o/grizzly-http-1.9.18-o.jar!/" />
-      </CLASSES>
-      <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/com/sun/grizzly/grizzly-http/1.9.18-o/grizzly-http-1.9.18-o-javadoc.jar!/" />
-      </JAVADOC>
-      <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/com/sun/grizzly/grizzly-http/1.9.18-o/grizzly-http-1.9.18-o-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="Maven: com.sun.grizzly:grizzly-portunif:1.9.18-o">
-      <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/com/sun/grizzly/grizzly-portunif/1.9.18-o/grizzly-portunif-1.9.18-o.jar!/" />
-      </CLASSES>
-      <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/com/sun/grizzly/grizzly-portunif/1.9.18-o/grizzly-portunif-1.9.18-o-javadoc.jar!/" />
-      </JAVADOC>
-      <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/com/sun/grizzly/grizzly-portunif/1.9.18-o/grizzly-portunif-1.9.18-o-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="Maven: com.sun.grizzly:grizzly-rcm:1.9.18-o">
-      <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/com/sun/grizzly/grizzly-rcm/1.9.18-o/grizzly-rcm-1.9.18-o.jar!/" />
-      </CLASSES>
-      <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/com/sun/grizzly/grizzly-rcm/1.9.18-o/grizzly-rcm-1.9.18-o-javadoc.jar!/" />
-      </JAVADOC>
-      <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/com/sun/grizzly/grizzly-rcm/1.9.18-o/grizzly-rcm-1.9.18-o-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="Maven: com.sun.grizzly:grizzly-utils:1.9.18-o">
-      <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/com/sun/grizzly/grizzly-utils/1.9.18-o/grizzly-utils-1.9.18-o.jar!/" />
-      </CLASSES>
-      <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/com/sun/grizzly/grizzly-utils/1.9.18-o/grizzly-utils-1.9.18-o-javadoc.jar!/" />
-      </JAVADOC>
-      <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/com/sun/grizzly/grizzly-utils/1.9.18-o/grizzly-utils-1.9.18-o-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Maven: com.sun.xml.bind:jaxb-impl:2.2.2">
@@ -572,26 +450,15 @@
         <root url="jar://$MAVEN_REPOSITORY$/javax/xml/stream/stax-api/1.0-2/stax-api-1.0-2-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Maven: javax:javaee-api:6.0">
+    <library name="Maven: junit:junit:4.8.2">
       <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/javax/javaee-api/6.0/javaee-api-6.0.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/junit/junit/4.8.2/junit-4.8.2.jar!/" />
       </CLASSES>
       <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/javax/javaee-api/6.0/javaee-api-6.0-javadoc.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/junit/junit/4.8.2/junit-4.8.2-javadoc.jar!/" />
       </JAVADOC>
       <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/javax/javaee-api/6.0/javaee-api-6.0-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="Maven: junit:junit:3.8.1">
-      <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/junit/junit/3.8.1/junit-3.8.1.jar!/" />
-      </CLASSES>
-      <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/junit/junit/3.8.1/junit-3.8.1-javadoc.jar!/" />
-      </JAVADOC>
-      <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/junit/junit/3.8.1/junit-3.8.1-sources.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/junit/junit/4.8.2/junit-4.8.2-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Maven: org.apache.httpcomponents:httpclient:4.1.1">
@@ -616,6 +483,83 @@
         <root url="jar://$MAVEN_REPOSITORY$/org/apache/httpcomponents/httpcore/4.1/httpcore-4.1-sources.jar!/" />
       </SOURCES>
     </library>
+    <library name="Maven: org.apache.lucene:lucene-analyzers:2.4.1">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/apache/lucene/lucene-analyzers/2.4.1/lucene-analyzers-2.4.1.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/org/apache/lucene/lucene-analyzers/2.4.1/lucene-analyzers-2.4.1-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/apache/lucene/lucene-analyzers/2.4.1/lucene-analyzers-2.4.1-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: org.apache.lucene:lucene-core:2.4.1">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/apache/lucene/lucene-core/2.4.1/lucene-core-2.4.1.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/org/apache/lucene/lucene-core/2.4.1/lucene-core-2.4.1-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/apache/lucene/lucene-core/2.4.1/lucene-core-2.4.1-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: org.apache.lucene:lucene-highlighter:2.4.1">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/apache/lucene/lucene-highlighter/2.4.1/lucene-highlighter-2.4.1.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/org/apache/lucene/lucene-highlighter/2.4.1/lucene-highlighter-2.4.1-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/apache/lucene/lucene-highlighter/2.4.1/lucene-highlighter-2.4.1-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: org.apache.lucene:lucene-queries:2.4.1">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/apache/lucene/lucene-queries/2.4.1/lucene-queries-2.4.1.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/org/apache/lucene/lucene-queries/2.4.1/lucene-queries-2.4.1-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/apache/lucene/lucene-queries/2.4.1/lucene-queries-2.4.1-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: org.apache.lucene:lucene-snowball:2.4.1">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/apache/lucene/lucene-snowball/2.4.1/lucene-snowball-2.4.1.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/org/apache/lucene/lucene-snowball/2.4.1/lucene-snowball-2.4.1-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/apache/lucene/lucene-snowball/2.4.1/lucene-snowball-2.4.1-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: org.apache.lucene:lucene-spellchecker:2.4.1">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/apache/lucene/lucene-spellchecker/2.4.1/lucene-spellchecker-2.4.1.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/org/apache/lucene/lucene-spellchecker/2.4.1/lucene-spellchecker-2.4.1-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/apache/lucene/lucene-spellchecker/2.4.1/lucene-spellchecker-2.4.1-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: org.compass-project:compass:2.3.0">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/compass-project/compass/2.3.0/compass-2.3.0.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/org/compass-project/compass/2.3.0/compass-2.3.0-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/compass-project/compass/2.3.0/compass-2.3.0-sources.jar!/" />
+      </SOURCES>
+    </library>
     <library name="Maven: org.eclipse.persistence:eclipselink:2.2.0">
       <CLASSES>
         <root url="jar://$MAVEN_REPOSITORY$/org/eclipse/persistence/eclipselink/2.2.0/eclipselink-2.2.0.jar!/" />
@@ -627,180 +571,26 @@
         <root url="jar://$MAVEN_REPOSITORY$/org/eclipse/persistence/eclipselink/2.2.0/eclipselink-2.2.0-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Maven: org.glassfish.admin:admin-cli:3.0.1">
+    <library name="Maven: org.glassfish.extras:glassfish-embedded-all:3.1">
       <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/glassfish/admin/admin-cli/3.0.1/admin-cli-3.0.1.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/glassfish/extras/glassfish-embedded-all/3.1/glassfish-embedded-all-3.1.jar!/" />
       </CLASSES>
       <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/org/glassfish/admin/admin-cli/3.0.1/admin-cli-3.0.1-javadoc.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/glassfish/extras/glassfish-embedded-all/3.1/glassfish-embedded-all-3.1-javadoc.jar!/" />
       </JAVADOC>
       <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/glassfish/admin/admin-cli/3.0.1/admin-cli-3.0.1-sources.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/glassfish/extras/glassfish-embedded-all/3.1/glassfish-embedded-all-3.1-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Maven: org.glassfish.admin:config-api:3.0.1">
+    <library name="Maven: org.hibernate:hibernate-validator:4.2.0.Beta2">
       <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/glassfish/admin/config-api/3.0.1/config-api-3.0.1.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/hibernate/hibernate-validator/4.2.0.Beta2/hibernate-validator-4.2.0.Beta2.jar!/" />
       </CLASSES>
       <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/org/glassfish/admin/config-api/3.0.1/config-api-3.0.1-javadoc.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/hibernate/hibernate-validator/4.2.0.Beta2/hibernate-validator-4.2.0.Beta2-javadoc.jar!/" />
       </JAVADOC>
       <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/glassfish/admin/config-api/3.0.1/config-api-3.0.1-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="Maven: org.glassfish.admin:launcher:3.0.1">
-      <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/glassfish/admin/launcher/3.0.1/launcher-3.0.1.jar!/" />
-      </CLASSES>
-      <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/org/glassfish/admin/launcher/3.0.1/launcher-3.0.1-javadoc.jar!/" />
-      </JAVADOC>
-      <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/glassfish/admin/launcher/3.0.1/launcher-3.0.1-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="Maven: org.glassfish.branding:branding:3.0.1">
-      <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/glassfish/branding/branding/3.0.1/branding-3.0.1.jar!/" />
-      </CLASSES>
-      <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/org/glassfish/branding/branding/3.0.1/branding-3.0.1-javadoc.jar!/" />
-      </JAVADOC>
-      <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/glassfish/branding/branding/3.0.1/branding-3.0.1-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="Maven: org.glassfish.common:common-util:3.0.1">
-      <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/glassfish/common/common-util/3.0.1/common-util-3.0.1.jar!/" />
-      </CLASSES>
-      <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/org/glassfish/common/common-util/3.0.1/common-util-3.0.1-javadoc.jar!/" />
-      </JAVADOC>
-      <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/glassfish/common/common-util/3.0.1/common-util-3.0.1-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="Maven: org.glassfish.common:glassfish-api:3.0.1">
-      <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/glassfish/common/glassfish-api/3.0.1/glassfish-api-3.0.1.jar!/" />
-      </CLASSES>
-      <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/org/glassfish/common/glassfish-api/3.0.1/glassfish-api-3.0.1-javadoc.jar!/" />
-      </JAVADOC>
-      <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/glassfish/common/glassfish-api/3.0.1/glassfish-api-3.0.1-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="Maven: org.glassfish.common:internal-api:3.0.1">
-      <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/glassfish/common/internal-api/3.0.1/internal-api-3.0.1.jar!/" />
-      </CLASSES>
-      <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/org/glassfish/common/internal-api/3.0.1/internal-api-3.0.1-javadoc.jar!/" />
-      </JAVADOC>
-      <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/glassfish/common/internal-api/3.0.1/internal-api-3.0.1-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="Maven: org.glassfish.core:glassfish:3.0.1">
-      <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/glassfish/core/glassfish/3.0.1/glassfish-3.0.1.jar!/" />
-      </CLASSES>
-      <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/org/glassfish/core/glassfish/3.0.1/glassfish-3.0.1-javadoc.jar!/" />
-      </JAVADOC>
-      <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/glassfish/core/glassfish/3.0.1/glassfish-3.0.1-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="Maven: org.glassfish.deployment:deployment-client:3.0.1">
-      <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/glassfish/deployment/deployment-client/3.0.1/deployment-client-3.0.1.jar!/" />
-      </CLASSES>
-      <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/org/glassfish/deployment/deployment-client/3.0.1/deployment-client-3.0.1-javadoc.jar!/" />
-      </JAVADOC>
-      <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/glassfish/deployment/deployment-client/3.0.1/deployment-client-3.0.1-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="Maven: org.glassfish.deployment:deployment-common:3.0.1">
-      <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/glassfish/deployment/deployment-common/3.0.1/deployment-common-3.0.1.jar!/" />
-      </CLASSES>
-      <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/org/glassfish/deployment/deployment-common/3.0.1/deployment-common-3.0.1-javadoc.jar!/" />
-      </JAVADOC>
-      <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/glassfish/deployment/deployment-common/3.0.1/deployment-common-3.0.1-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="Maven: org.glassfish.external:asm-all-repackaged:3.0.1">
-      <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/glassfish/external/asm-all-repackaged/3.0.1/asm-all-repackaged-3.0.1.jar!/" />
-      </CLASSES>
-      <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/org/glassfish/external/asm-all-repackaged/3.0.1/asm-all-repackaged-3.0.1-javadoc.jar!/" />
-      </JAVADOC>
-      <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/glassfish/external/asm-all-repackaged/3.0.1/asm-all-repackaged-3.0.1-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="Maven: org.glassfish.external:management-api:3.0.0-b012">
-      <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/glassfish/external/management-api/3.0.0-b012/management-api-3.0.0-b012.jar!/" />
-      </CLASSES>
-      <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/org/glassfish/external/management-api/3.0.0-b012/management-api-3.0.0-b012-javadoc.jar!/" />
-      </JAVADOC>
-      <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/glassfish/external/management-api/3.0.0-b012/management-api-3.0.0-b012-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="Maven: org.glassfish:bean-validator:3.0-JBoss-4.0.2">
-      <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/glassfish/bean-validator/3.0-JBoss-4.0.2/bean-validator-3.0-JBoss-4.0.2.jar!/" />
-      </CLASSES>
-      <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/org/glassfish/bean-validator/3.0-JBoss-4.0.2/bean-validator-3.0-JBoss-4.0.2-javadoc.jar!/" />
-      </JAVADOC>
-      <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/glassfish/bean-validator/3.0-JBoss-4.0.2/bean-validator-3.0-JBoss-4.0.2-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="Maven: org.glassfish:javax.enterprise.deploy:3.0.1">
-      <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/glassfish/javax.enterprise.deploy/3.0.1/javax.enterprise.deploy-3.0.1.jar!/" />
-      </CLASSES>
-      <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/org/glassfish/javax.enterprise.deploy/3.0.1/javax.enterprise.deploy-3.0.1-javadoc.jar!/" />
-      </JAVADOC>
-      <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/glassfish/javax.enterprise.deploy/3.0.1/javax.enterprise.deploy-3.0.1-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="Maven: org.glassfish:javax.servlet:3.0.1">
-      <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/glassfish/javax.servlet/3.0.1/javax.servlet-3.0.1.jar!/" />
-      </CLASSES>
-      <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/org/glassfish/javax.servlet/3.0.1/javax.servlet-3.0.1-javadoc.jar!/" />
-      </JAVADOC>
-      <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/glassfish/javax.servlet/3.0.1/javax.servlet-3.0.1-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="Maven: org.hibernate:hibernate-validator:4.0.2.GA">
-      <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/hibernate/hibernate-validator/4.0.2.GA/hibernate-validator-4.0.2.GA.jar!/" />
-      </CLASSES>
-      <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/org/hibernate/hibernate-validator/4.0.2.GA/hibernate-validator-4.0.2.GA-javadoc.jar!/" />
-      </JAVADOC>
-      <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/hibernate/hibernate-validator/4.0.2.GA/hibernate-validator-4.0.2.GA-sources.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/hibernate/hibernate-validator/4.2.0.Beta2/hibernate-validator-4.2.0.Beta2-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Maven: org.primefaces.themes:aristo:1.0.0">
@@ -814,15 +604,15 @@
         <root url="jar://$MAVEN_REPOSITORY$/org/primefaces/themes/aristo/1.0.0/aristo-1.0.0-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Maven: org.primefaces:primefaces:3.0">
+    <library name="Maven: org.primefaces:primefaces:3.0.M1">
       <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/primefaces/primefaces/3.0/primefaces-3.0.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/primefaces/primefaces/3.0.M1/primefaces-3.0.M1.jar!/" />
       </CLASSES>
       <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/org/primefaces/primefaces/3.0/primefaces-3.0-javadoc.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/primefaces/primefaces/3.0.M1/primefaces-3.0.M1-javadoc.jar!/" />
       </JAVADOC>
       <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/primefaces/primefaces/3.0/primefaces-3.0-sources.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/primefaces/primefaces/3.0.M1/primefaces-3.0.M1-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Maven: org.slf4j:slf4j-api:1.6.1">

@@ -7,6 +7,8 @@ import za.co.yellowfire.domain.DomainObject;
 import za.co.yellowfire.log.LogType;
 
 import javax.ejb.*;
+import javax.enterprise.event.Event;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.LockModeType;
 import javax.persistence.PersistenceContext;
@@ -26,8 +28,17 @@ public class DomainManagerBean implements DomainManager, DomainManagerRemote {
     private static final long serialVersionUID = 1L;
 	private static final Logger LOGGER = LoggerFactory.getLogger(LogType.MANAGER.getCategory());
 
-    @PersistenceContext(unitName="yellowfire.persistence")
+    @PersistenceContext(unitName="yellowfire")
     private EntityManager em;
+
+    @EJB(name = "SearchManager")
+    private SearchManager search;
+
+    @Inject @SearchableAdded
+    private Event<DomainObject> searchableAddedEvent;
+
+    @Inject @SearchableRemoved
+    private Event<DomainObject> searchableRemovedEvent;
 
     /**
      * Persists the object
@@ -35,7 +46,8 @@ public class DomainManagerBean implements DomainManager, DomainManagerRemote {
      */
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
     @Override public void persist(Object object) {
-        em.persist(object);    
+        em.persist(object);
+        //searchableAddedEvent.fire((DomainObject) object);
     }
 
     /**
@@ -44,7 +56,9 @@ public class DomainManagerBean implements DomainManager, DomainManagerRemote {
      */
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
     @Override public Object merge(Object object) {
-        return em.merge(object);
+        Object o = em.merge(object);
+        //searchableAddedEvent.fire((DomainObject) object);
+        return o;
     }
 
     /**
@@ -56,7 +70,8 @@ public class DomainManagerBean implements DomainManager, DomainManagerRemote {
         if (object != null) {
             Object o = em.find(object.getClass(), object.getId());
             if (o != null) {
-                em.remove(o);       
+                em.remove(o);
+                //searchableRemovedEvent.fire((DomainObject) object);
             }
         }
     }
