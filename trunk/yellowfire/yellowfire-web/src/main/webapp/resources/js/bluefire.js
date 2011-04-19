@@ -48,7 +48,12 @@ function onNewComplete(xhr, status, args, dialog) {
     return true;
 }
 
-
+function onSearchComplete(xhr, status, args, dialog) {
+    if (handleComplete(xhr, status, args)) {
+        //No dialog to hide
+    }
+    return true;
+}
 
 
 

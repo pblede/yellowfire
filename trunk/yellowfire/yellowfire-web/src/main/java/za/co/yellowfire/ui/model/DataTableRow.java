@@ -12,9 +12,15 @@ public class DataTableRow<T> implements Serializable {
     private boolean selected = false;
     private T object;
     private RequestResult result = new RequestResult();
-
+    private float score = 0;
+    
     public DataTableRow(T object) {
         this.object = object;
+    }
+
+    public DataTableRow(T object, float score) {
+        this.object = object;
+        this.score = score;
     }
 
     public boolean isSelected() {
@@ -39,6 +45,14 @@ public class DataTableRow<T> implements Serializable {
 
     public void setResult(RequestResult result) {
         this.result = result;
+    }
+
+    public float getScore() {
+        return score;
+    }
+
+    public void setScore(float score) {
+        this.score = score;
     }
 
     @Override

@@ -9,5 +9,5 @@ import java.util.List;
  * @version 0.0.1
  */
 public interface DataTableSearchListener<T> extends Serializable {
-    List<DataTableRow<T>> onSearch(ActionEvent event) throws DataTableException;
+    List<DataTableRow<T>> onSearch(ActionEvent event, String searchText) throws DataTableException;
 }

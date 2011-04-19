@@ -9,10 +9,14 @@ import org.primefaces.model.map.Marker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import za.co.yellowfire.domain.Venue;
-import za.co.yellowfire.domain.geocode.*;
+import za.co.yellowfire.domain.geocode.GeocodeGeometry;
+import za.co.yellowfire.domain.geocode.GeocodeLocation;
+import za.co.yellowfire.domain.geocode.GeocodeManager;
+import za.co.yellowfire.domain.geocode.GeocodeResult;
 import za.co.yellowfire.log.LogType;
 import za.co.yellowfire.manager.DomainManager;
 import za.co.yellowfire.manager.DomainQueryHint;
+import za.co.yellowfire.manager.SearchManager;
 import za.co.yellowfire.ui.model.*;
 
 import javax.annotation.PostConstruct;
@@ -35,14 +39,20 @@ import java.util.List;
  * @version 0.0.1
  */
 @ViewScoped @ManagedBean(name = "venuesController")
-public class VenuesController implements Serializable, DataTableSearchListener<GeocodeResult> {
+public class VenuesController implements Serializable {
     private static final Logger LOGGER = LoggerFactory.getLogger(LogType.CONTROLLER.getCategory());
 
+    @EJB(name = "SearchManager")
+    private SearchManager searchManager;
+    
     @EJB(name = "DomainManager")
     private DomainManager manager;
     private transient DataTable dataTable;
     private List<DataTableRow<Venue>> rows;
     private DataTableRow<Venue> selectedRow = new DataTableRow<Venue>(new Venue());
+
+    /*Venue*/
+    private DataTableModel<Venue> dataModel;
 
     /*Geocode*/
     @EJB(name = "GeocodeManager")
@@ -51,17 +61,6 @@ public class VenuesController implements Serializable, DataTableSearchListener<G
     private MapModel searchMapModel;
 
     private String searchText;
-    
-//    private static final GeocodeResult EMPTY_RESULT() {
-//        GeocodeResult result = new GeocodeResult();
-//        GeocodeLocation location = new GeocodeLocation();
-//        GeocodeGeometry geometry = new GeocodeGeometry();
-//        location.setLatitude("0");
-//        location.setLongitude("0");
-//        geometry.setLocation(location);
-//        result.setGeometry(geometry);
-//        return result;
-//    }
 
     private static final Venue EMPTY_VENUE() {
         return new Venue();
@@ -70,7 +69,6 @@ public class VenuesController implements Serializable, DataTableSearchListener<G
     @PostConstruct
     private void init() {
         searchMapModel = new DefaultMapModel();
-        
         searchModel =
                 new DataTableModel<GeocodeResult>(
                         /* DataTableListener*/
@@ -98,7 +96,46 @@ public class VenuesController implements Serializable, DataTableSearchListener<G
                             }
                         },
                         /* DataTableSearchListener*/
-                        this);
+                        new GeocodeManagerDataTableSearchListener() {
+                            @Override
+                            public GeocodeManager getManager() {
+                                return geocodeManager;
+                            }
+                        }
+                );
+
+        dataModel =
+                new DataTableModel<Venue>(
+                        /* DataTableListener*/
+                        new AbstractDomainManagerDataTableListener<Venue>() {
+                            @Override
+                            public DomainManager getManager() {
+                                return manager;
+                            }
+
+                            @Override
+                            public String getLoadQuery() {
+                                return Venue.QRY_VENUES;
+                            }
+
+                            @Override
+                            public void onSelection(DataTableRow<Venue> row) throws DataTableException {
+                                //
+                            }
+
+                            @Override
+                            public Venue createEmpty() {
+                                return new Venue();
+                            }
+                        },
+                        /* DataTableSearchListener*/
+                        new AbstractSearchManagerDataTableSearchListener<Venue>() {
+                            @Override
+                            public SearchManager getManager() {
+                                return searchManager;
+                            }
+                        }
+                );
     }
 
     private void loadProximityVenues(DataTableRow<GeocodeResult> row) {
@@ -127,6 +164,11 @@ public class VenuesController implements Serializable, DataTableSearchListener<G
             }
         }
     }
+
+    public DataTableModel<Venue> getDataModel() {
+        return dataModel;
+    }
+
 
     @SuppressWarnings("unchecked")
     public List<DataTableRow<Venue>> getRows() {
@@ -306,35 +348,4 @@ public class VenuesController implements Serializable, DataTableSearchListener<G
         }
     }
 
-    /**
-     * WARNING: Used by the DataTableModel.onSearch() method and should not be called directly
-     * @param event The ActionEvent
-     * @return List<DataTableRow<GeocodeResult>>
-     * @throws DataTableException If there was an error searching
-     */
-    @Override
-    public List<DataTableRow<GeocodeResult>> onSearch(ActionEvent event) throws DataTableException {
-        try {
-            List<DataTableRow<GeocodeResult>> rows = new ArrayList<DataTableRow<GeocodeResult>>();
-            GeocodeResponse response = geocodeManager.findAddress(getSearchText());
-            switch (response.getStatus()) {
-                case OK:
-                    for (GeocodeResult result : response.getResults()) {
-                        rows.add(new DataTableRow(result));
-                    }
-                    break;
-                case INVALID_REQUEST:
-                    throw new GeocodeException("Invalid request");
-                case REQUEST_DENIED:
-                    throw new GeocodeException("Request denied");
-                case OVER_QUERY_LIMIT:
-                    throw new GeocodeException("Over query limit");
-                case ZERO_RESULTS:
-                    break;
-            }
-            return rows;
-        } catch (Throwable e) {
-            throw new DataTableException("Search failed", e);
-        }
-    }
 }

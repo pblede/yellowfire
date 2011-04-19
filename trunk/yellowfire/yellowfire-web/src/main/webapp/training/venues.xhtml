@@ -8,47 +8,52 @@
         template="/resources/layout/training-layout.xhtml">
 
     <ui:define name="demoSampleParameters">
-        <f:metadata>
-            <f:viewParam name="section" value="#{navigator.section}"/>
-            <f:viewParam name="item" value="#{navigator.item}"/>
-            <f:viewParam name="skin" value="#{skinBean.skin}"/>
-        </f:metadata>
     </ui:define> 
     <ui:define name="head">
     </ui:define>
     <ui:define name="content">
+        <style type="text/css">
+            .search-col1 { text-align: left; }
+            .search-col2 { text-align : right; }
+            .search-text { text-align: right; width : 85%; }
+            .search-button { width : 10%; }
+            .search-status { width : 5%; }
+        </style>
         <p:growl id="growl" showDetail="true" showSummary="true" globalOnly="true"/>
         <h:form id="h2" prependId="false">
-            <p:panel id="commands">
-                <h:panelGrid columns="4">
-                    <p:commandButton
-                            id="b10"
-                            value="#{msgs['btn.add']}"
-                            actionListener="#{venuesController.onAddRow}"
+            <p:panel id="commands" styleClass="width100pc">
+                <h:panelGrid columns="2" columnClasses="search-col1,search-col2" styleClass="width100pc">
+                    <h:panelGrid columns="4">
+                        <p:message for="a01" display="icon" showDetail="false" showSummary="false"/>
+                        <p:commandButton
+                                id="b10"
+                                value="#{msgs['btn.add']}"
+                                actionListener="#{venuesController.dataModel.onAdd}"
+                                ajax="true"
+                                update="modify_display modify_messages modify_buttons growl"
+                                onsuccess="modifyDialogVar.show()"/>
+                        <p:commandButton
+                                id="b11"
+                                value="#{msgs['btn.refresh']}"
+                                actionListener="#{venuesController.dataModel.onLoad}"
+                                ajax="true"
+                                update="dt1 growl"/>
+                        #{" "} #{msgs['prompt.table.actions']}
+                    </h:panelGrid>
+                    <h:panelGrid columns="3" styleClass="width100pc" columnClasses="search-text,search-button,search-status">
+                        <h:inputText id="a01" value="#{venuesController.dataModel.searchText}" label="#{msgs['fld.search']}"/>
+                        <p:commandButton
+                            id="b30"
                             ajax="true"
-                            update="modify_display modify_messages modify_buttons growl"
-                            onsuccess="modifyDialogVar.show()"/>
-                    <p:commandButton
-                            id="b11"
-                            value="#{msgs['btn.refresh']}"
-                            actionListener="#{venuesController.onRefreshRows}"
-                            ajax="true"
-                            update="dt1 growl"/>
-                    #{" "} #{msgs['prompt.table.actions']}
-                    <ui:remove><!--
-					<p:commandButton
-                            id="b11"
-                            value="#{msgs['btn.modify']}"
-                            actionListener="#{venuesController.onModifyRow}"
-                            ajax="true"
-                            update="dt1 modify_display modify_messages growl"
-                            onsuccess="modifyDialog.show()"/>
-                    <p:commandButton
-                            id="b12"
-                            value="#{msgs['btn.delete']}"
-                            ajax="true"
-                            update="dt1 delete_display delete_messages growl"
-                            onclick="deleteDialog.show()" />--></ui:remove>
+                            value="#{msgs['btn.search']}"
+                            update="dt1 growl"
+                            actionListener="#{venuesController.dataModel.onSearch}"
+                            oncomplete="onSearchComplete(xhr, status, args)"/>
+                        <p:ajaxStatus id="as1" style="height:24px;display:block;" widgetVar="statusVar">
+                            <f:facet name="start"><h:graphicImage value="../resources/images/loading.gif"/></f:facet>
+                            <f:facet name="complete"><h:outputText value=""/></f:facet>
+                        </p:ajaxStatus>
+                    </h:panelGrid>
                 </h:panelGrid>
             </p:panel>
         </h:form>
@@ -58,14 +63,14 @@
                     widgetVar="dt1Var"
                     binding="#{venuesController.dataTable}"
                     var="row"
-                    value="#{venuesController.rows}"
+                    value="#{venuesController.dataModel.rows}"
                     rows="10"
                     height="500"
                     paginator="true"
                     paginatorAlwaysVisible="true"
                     style="vertical-align:text-top;"
                     selectionMode="single"
-                    selection="#{venuesController.selectedRow}"
+                    selection="#{venuesController.dataModel.selected}"
                     onRowSelectUpdate="h3"
                     onRowSelectComplete="modifyDialogVar.show()">
 	
@@ -108,7 +113,7 @@
                     showEffect="explode"
                     hideEffect="explode">
                 <p:fieldset legend="#{msgs['pnl.fields']}">
-                    <cc:venueForm bean="#{venuesController.selectedRow.object}" />
+                    <cc:venueForm bean="#{venuesController.dataModel.selected.object}" />
                 </p:fieldset>
                 <p:fieldset legend="#{msgs['pnl.messages']}">
                     <h:panelGrid id="modify_messages" columns="1">
@@ -120,7 +125,7 @@
                             id="b1"
                             value="#{msgs['btn.save']}"
                             image="ui-icon ui-icon-disk"
-                            actionListener="#{venuesController.onSaveRow}"
+                            actionListener="#{venuesController.dataModel.onSave}"
                             ajax="true"
                             oncomplete="onSaveComplete(xhr, status, args)"
                             update="dt1 modify_display modify_messages"
@@ -130,9 +135,9 @@
                             id="b4"
                             value="#{msgs['btn.delete']}"
                             image="ui-icon ui-icon-minus"
-                            actionListener="#{venuesController.onDeleteRow}"
+                            actionListener="#{venuesController.dataModel.onDelete}"
                             ajax="true"
-                            rendered="#{venuesController.selectedRow.object.id ne null}"
+                            rendered="#{venuesController.dataModel.selected.object.id ne null}"
                             oncomplete="onDeleteComplete(xhr, status, args)"
                             update="dt1 modify_display modify_messages"
                             />
