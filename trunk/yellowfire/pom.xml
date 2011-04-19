@@ -118,7 +118,7 @@
 			</snapshots>
 		</repository>
 
-        <!--repository>
+        <repository>
 			<id>prime-repo</id>
 			<name>Prime Technology Maven Repository</name>
 			<url>http://repository.prime.com.tr</url>
@@ -131,9 +131,8 @@
 				<enabled>true</enabled>
 				<updatePolicy>never</updatePolicy>
 			</snapshots>
-		</repository-->
+		</repository>
 
-        <!--
         <repository>
             <id>EclipseLink Repo</id>
             <url>http://www.eclipse.org/downloads/download.php?r=1&amp;nf=1&amp;file=/rt/eclipselink/maven.repo</url>
@@ -151,7 +150,7 @@
 			<snapshots>
 				<enabled>true</enabled>
 			</snapshots>
-		</repository-->
+		</repository>
 	</repositories>
 
     <pluginRepositories>
@@ -189,6 +188,18 @@
 
     <dependencies>
         <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.8.2</version>
+            <scope>test</scope>
+        </dependency>
+         <dependency>
+            <groupId>org.glassfish.extras</groupId>
+            <artifactId>glassfish-embedded-all</artifactId>
+            <version>3.1</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>1.6.1</version>
@@ -223,6 +234,18 @@
             <artifactId>jaxb-impl</artifactId>
             <version>2.2.2</version>
         </dependency>
+        <dependency>
+            <groupId>org.compass-project</groupId>
+            <artifactId>compass</artifactId>
+            <version>2.3.0</version>
+        </dependency>
+
+        <!--<dependency>-->
+            <!--<groupId>org.jboss.jsfunit</groupId>-->
+            <!--<artifactId>jsfunit-arquillian</artifactId>-->
+            <!--<version>2.0.0.Beta1</version>-->
+            <!--<scope>test</scope>-->
+        <!--</dependency>-->
     </dependencies>
     <dependencyManagement>
         <dependencies>
@@ -245,10 +268,40 @@
                 <type>war</type>
             </dependency>
             <dependency>
-            <groupId>com.sun.xml.bind</groupId>
-            <artifactId>jaxb-impl</artifactId>
-            <version>2.2.2</version>
-        </dependency>
+                <groupId>com.sun.xml.bind</groupId>
+                <artifactId>jaxb-impl</artifactId>
+                <version>2.2.2</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>1.6.1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-jdk14</artifactId>
+                <version>1.6.1</version>
+            </dependency>
+            <dependency>
+                <groupId>com.sun.xml.bind</groupId>
+                <artifactId>jaxb-impl</artifactId>
+                <version>2.2.2</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-codec</groupId>
+                <artifactId>commons-codec</artifactId>
+                <version>1.5</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpclient</artifactId>
+                <version>4.1.1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpcore</artifactId>
+                <version>4.1</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
     <distributionManagement>
@@ -260,7 +313,8 @@
     </distributionManagement>
 
     <properties>
-        <hibernate.validator.version>4.0.2.GA</hibernate.validator.version>
+        <hibernate.validator.version>4.2.0.Beta2</hibernate.validator.version>
         <jaxb.version>2.2.2</jaxb.version>
+        <compass.version>2.3.0</compass.version>
     </properties>
 </project>

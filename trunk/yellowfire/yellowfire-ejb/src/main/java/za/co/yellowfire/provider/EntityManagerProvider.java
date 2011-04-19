@@ -11,7 +11,7 @@ import javax.persistence.PersistenceContext;
  */
 public class EntityManagerProvider {
 
-    @PersistenceContext(unitName="yellowfire.persistence")
+    @PersistenceContext(unitName="yellowfire")
     private EntityManager em;
 
     @Produces
