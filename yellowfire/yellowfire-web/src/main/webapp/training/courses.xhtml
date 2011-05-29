@@ -55,18 +55,24 @@
                     onRowSelectUpdate="h3"
                     onRowSelectComplete="modifyDialogVar.show()">
 
-                <p:column sortBy="#{row.object.id}" filterBy="#{row.object.id}" filterStyle="width:100%"  style="width:5px" headerText="#">
+                <p:column  style="width:5px" headerText="#">
                     <h:outputText value="#{row.object.id}"/>
                 </p:column>
-                <p:column sortBy="#{row.object.title}" filterBy="#{row.object.title}" filterStyle="width:100%" style="width:200px" headerText="#{msgs['fld.course.title']}">
+                <p:column style="width:200px" headerText="#{msgs['fld.course.title']}">
                     <h:outputText value="#{row.object.title}"/>
                 </p:column>
-                <p:column sortBy="#{row.object.durationText}" filterBy="#{row.object.durationText}" filterStyle="width:100%" style="width:200px" headerText="#{msgs['fld.duration']}">
+                <p:column style="width:200px" headerText="#{msgs['fld.duration']}">
                     <h:outputText value="#{row.object.durationText}"/>
                 </p:column>
-                <p:column sortBy="#{row.object.provider.name}" filterBy="#{row.object.provider.name}" filterStyle="width:100%" style="width:200px" headerText="#{msgs['fld.training.provider']}">
+                <p:column style="width:200px" headerText="#{msgs['fld.training.provider']}">
                     <h:outputText value="#{row.object.provider.name}"/>
                 </p:column>
+                <p:column style="width:100px" headerText="Options">
+                    <h:commandLink action="#{coursesController.onStartConversation}" immediate="true" value="View">
+                        <f:setPropertyActionListener value="#{row}" target="#{coursesController.dataModel.selected}"/>
+                    </h:commandLink>
+                </p:column>
+
             </p:dataTable>
         </h:form>
         <h:form id="h3" prependId="false">
@@ -82,7 +88,10 @@
                 <cc:courseForm
                         bean="#{coursesController.dataModel.selected.object}"
                         durationTypes="#{coursesController.durationTypes}"
-                        trainingProviders="#{coursesController.trainingProviders}"/>
+                        trainingProviders="#{coursesController.trainingProviders}"
+                        contentTypes="#{coursesController.contentTypes}"
+                        categories="#{coursesController.categories}"
+                />
                 <p:fieldset legend="#{msgs['pnl.messages']}">
                     <h:panelGrid id="modify_messages" columns="1">
                         <p:messages id="m1" showDetail="true" showSummary="false" globalOnly="false"  />

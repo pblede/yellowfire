@@ -10,16 +10,22 @@
     <comp:attribute name="bean" required="true" shortDescription="The training course bean for the form" />
     <comp:attribute name="durationTypes" required="true" shortDescription="The duration types for the form" />
     <comp:attribute name="trainingProviders" required="true" shortDescription="The training providers for the form" />
+    <comp:attribute name="contentTypes" required="true" shortDescription="The content types for the form" />
+    <comp:attribute name="categories" required="true" shortDescription="The training categories for the form" />
 </comp:interface>
 <comp:implementation>
     <style type="text/css">
         .course_col1 {width: 50%; vertical-align: top;}
         .course_col2 {width: 50%; vertical-align: top;}
+        .duration_col1 {width: 30%;}
+        .duration_col2 {width: 60%;}
+        .duration_col3 {width: 5%;}
+        .align_top {vertical-align: top;}
     </style>
     <h:panelGrid columns="2" columnClasses="course_col1,course_col2">
         <h:panelGroup>
             <p:fieldset legend="#{msgs['pnl.overview']}">
-                <h:panelGrid id="modify_display" columns="2" cellpadding="4">
+                <h:panelGrid id="modify_display" columns="2" cellpadding="4" columnClasses="align_top,align_top">
 
                     <h:outputText value="#{msgs['fld.id']}:" for="a01"/>
                     <h:panelGroup style="width:100%">
@@ -49,41 +55,41 @@
 
                     <h:outputText value="#{msgs['fld.duration']}:" for="a12" />
                     <h:panelGroup style="width:100%">
-                        <h:panelGrid columns="4" style="width:100%">
-                            <h:inputText id="a12" label="#{msgs['fld.duration']}" value="#{cc.attrs.bean.duration}" style="width:80%" />
+                        <h:panelGrid columns="4" style="width:100%" columnClasses="duration_col1,duration_col3,duration_col2,duration_col3">
+                            <h:inputText id="a12" label="#{msgs['fld.duration']}" value="#{cc.attrs.bean.duration}" />
                             <p:message for="a12" showSummary="false" showDetail="false" display="icon" />
                             <h:selectOneMenu
                                     id="a22"
                                     label="#{msgs['fld.duration.type']}"
-                                    value="#{cc.attrs.bean.durationType}" >
+                                    value="#{cc.attrs.bean.durationType}">
                                 <f:selectItems value="#{cc.attrs.durationTypes}" var="type" />
                             </h:selectOneMenu>
-                            <p:message for="a22" showSummary="false" showDetail="false" display="icon" />
+                            <p:message for="a22" showSummary="false" showDetail="false" display="icon"/>
                         </h:panelGrid>
                     </h:panelGroup>
                 </h:panelGrid>
             </p:fieldset>
             <p:fieldset legend="#{msgs['pnl.settings']}">
-                <h:panelGrid columns="2">
+                <h:panelGrid columns="2" style="width:100%">
                     <h:selectBooleanCheckbox title="#{msgs['fld.core']}:" label="#{msgs['fld.core']}" value="#{cc.attrs.bean.core}" />
                     <h:selectBooleanCheckbox title="#{msgs['fld.internal']}:" label="#{msgs['fld.internal']}" value="#{cc.attrs.bean.internal}" />
                 </h:panelGrid>
             </p:fieldset>
         </h:panelGroup>
         <h:panelGroup style="width:100%">
-            <h:panelGrid columns="1">
+            <h:panelGrid columns="1" style="width:100%">
                 <p:fieldset legend="#{msgs['pnl.contact']}">
                     <h:panelGrid columns="2">
                         <h:outputText value="#{msgs['fld.contact.name']}:" for="a31"/>
                         <h:panelGroup style="width:100%">
-                            <h:panelGrid columns="2" style="width:100%">
+                            <h:panelGrid columns="2" styleClass="width100pc">
                                 <h:inputText id="a31" label="#{msgs['fld.contact.name']}" value="#{cc.attrs.bean.contact.name}" style="width:100%"/>
                                 <p:message for="a31" showSummary="false" showDetail="false" display="icon" />
                             </h:panelGrid>
                         </h:panelGroup>
                         <h:outputText value="#{msgs['fld.contact.tel']}:" for="a32"/>
                         <h:panelGroup style="width:100%">
-                            <h:panelGrid columns="2" style="width:100%">
+                            <h:panelGrid columns="2" styleClass="width100pc">
                                 <h:inputText id="a32" label="#{msgs['fld.contact.tel']}" value="#{cc.attrs.bean.contact.telephoneNo}" style="width:100%"/>
                                 <p:message for="a32" showSummary="false" showDetail="false" display="icon" />
                             </h:panelGrid>
@@ -91,68 +97,92 @@
                     </h:panelGrid>
                 </p:fieldset>
                 <p:fieldset legend="#{msgs['pnl.detail']}">
-                    <h:outputText value="#{msgs['fld.training.provider']}:" for="a03" />
-                    <h:panelGroup style="width:100%">
-                        <h:panelGrid columns="2" style="width:100%">
-                            <h:selectOneMenu
-                                    id="a03"
-                                    label="#{msgs['fld.training.provider']}"
-                                    converter="TrainingProviderConverter"
-                                    value="#{cc.attrs.bean.provider}" >
-
-                                <f:selectItems
-                                        value="#{cc.attrs.trainingProviders}"
-                                        var="provider"
-                                        itemLabel="#{provider.name}"
-                                        itemDescription="#{provider.name}"
-                                        itemValue="#{provider}"  />
-                            </h:selectOneMenu>
-                            <p:message for="a03" showSummary="false" showDetail="false" display="icon" />
-                        </h:panelGrid>
-                    </h:panelGroup>
-
-                    <cc:select
-                        id="a08"
-                        label="#{msgs['fld.content.type']}"
-                        value="#{cc.attrs.bean.contentType}"
-                        converter="ContentTypeConverter">
-                        <f:selectItems
-                            value="#{cc.attrs.contentTypes}"
-                            var="contentType"
-                            itemLabel="#{contentType.description}"
-                            itemDescription="#{provider.description}"
-                            itemValue="#{contentType}"  />
-                    </cc:select>
-
-                    <h:outputText value="#{msgs['fld.content.type']}:" for="a07" />
-                    <h:panelGroup style="width:100%">
-                        <h:panelGrid columns="2" style="width:100%">
-                            <h:selectOneMenu
-                                    id="a07"
-                                    label="#{msgs['fld.content.type']}"
-                                    converter="ContentTypeConverter"
-                                    value="#{cc.attrs.bean.contentType}" >
-
-                                <f:selectItem itemValue="-1" itemDescription="Select" noSelectionOption="true" />
-                                <f:selectItems
-                                        value="#{cc.attrs.contentTypes}"
-                                        var="contentType"
-                                        itemLabel="#{contentType.description}"
-                                        itemDescription="#{provider.description}"
-                                        itemValue="#{contentType}"  />
-                            </h:selectOneMenu>
-                            <p:message for="a07" showSummary="false" showDetail="false" display="icon" />
-                        </h:panelGrid>
-                    </h:panelGroup>
-
-                    <h:panelGrid columns="1">
-                        <h:outputText value="#{msgs['fld.accrediting.body']}:" for="a05"/>
+                    <h:panelGrid columns="2" columnClasses="align_top,align_top">
+                        <h:outputText value="#{msgs['fld.training.category']}:" for="a04" />
                         <h:panelGroup style="width:100%">
-                            <h:panelGrid columns="2" style="width:100%">
-                                <h:inputText id="a05" value="#{cc.attrs.bean.accreditingBody}" style="width:100%"/>
-                                <p:message for="a05" showSummary="false" showDetail="false" display="icon" />
+                            <h:panelGrid columns="2" styleClass="width100pc" columnClasses="width95pc,width5pc">
+                                <h:selectOneMenu
+                                        id="a04"
+                                        label="#{msgs['fld.training.category']}"
+                                        converter="TrainingCategoryConverter"
+                                        value="#{cc.attrs.bean.category}"
+                                        styleClass="width100pc">
+                                    <f:selectItem
+                                            itemValue="-1"
+                                            itemLabel="Select..."
+                                            itemDescription="Select..."
+                                            noSelectionOption="true"  />
+                                    <f:selectItems
+                                            value="#{cc.attrs.trainingCategories}"
+                                            var="category"
+                                            itemLabel="#{category.description}"
+                                            itemDescription="#{category.description}"
+                                            itemValue="#{category}"  />
+                                </h:selectOneMenu>
+                                <p:message for="a04" showSummary="false" showDetail="false" display="icon" />
                             </h:panelGrid>
                         </h:panelGroup>
+
+                        <h:outputText value="#{msgs['fld.training.provider']}:" for="a03" />
+                        <h:panelGroup style="width:100%">
+                            <h:panelGrid columns="2" styleClass="width100pc" columnClasses="width95pc,width5pc">
+                                <h:selectOneMenu
+                                        id="a03"
+                                        label="#{msgs['fld.training.provider']}"
+                                        converter="TrainingProviderConverter"
+                                        value="#{cc.attrs.bean.provider}"
+                                        styleClass="width100pc">
+                                    <f:selectItem
+                                            itemValue="-1"
+                                            itemLabel="Select..."
+                                            itemDescription="Select..."
+                                            noSelectionOption="true"  />
+                                    <f:selectItems
+                                            value="#{cc.attrs.trainingProviders}"
+                                            var="provider"
+                                            itemLabel="#{provider.name}"
+                                            itemDescription="#{provider.name}"
+                                            itemValue="#{provider}"  />
+                                </h:selectOneMenu>
+                                <p:message for="a03" showSummary="false" showDetail="false" display="icon" />
+                            </h:panelGrid>
+                        </h:panelGroup>
+
+                        <h:outputText value="#{msgs['fld.content.type']}:" for="a07" />
+                        <h:panelGroup style="width:100%">
+                            <h:panelGrid columns="2" styleClass="width100pc" columnClasses="width95pc,width5pc">
+                                <h:selectOneMenu
+                                        id="a07"
+                                        label="#{msgs['fld.content.type']}"
+                                        converter="ContentTypeConverter"
+                                        value="#{cc.attrs.bean.contentType}"
+                                        styleClass="width100pc">
+
+                                    <f:selectItem
+                                            itemValue="-1"
+                                            itemLabel="Select..."
+                                            itemDescription="Select..."
+                                            noSelectionOption="true"  />
+                                    <f:selectItems
+                                            value="#{cc.attrs.contentTypes}"
+                                            var="contentType"
+                                            itemLabel="#{contentType.description}"
+                                            itemDescription="#{contentType.description}"
+                                            itemValue="#{contentType}"  />
+                                </h:selectOneMenu>
+                                <p:message for="a07" showSummary="false" showDetail="false" display="icon" />
+                            </h:panelGrid>
+                        </h:panelGroup>
+
+                        <h:panelGrid columns="1">
+                            <h:outputText value="#{msgs['fld.accrediting.body']}:" for="a05"/>
+                            <h:panelGroup style="width:100%">
+                                <h:panelGrid columns="2" style="width:100%">
+                                    <h:inputText id="a05" value="#{cc.attrs.bean.accreditingBody}" style="width:100%"/>
+                                    <p:message for="a05" showSummary="false" showDetail="false" display="icon" />
+                                </h:panelGrid>
+                            </h:panelGroup>
+                        </h:panelGrid>
                     </h:panelGrid>
                 </p:fieldset>
             </h:panelGrid>

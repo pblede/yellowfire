@@ -73,4 +73,11 @@ public class FacesUtil {
     	FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, summary, e);
     	context.addMessage(null, msg);
     }
+
+    /**
+     * Invalidates the session
+     */
+    public static void invalidateSession() {
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+    }
 }

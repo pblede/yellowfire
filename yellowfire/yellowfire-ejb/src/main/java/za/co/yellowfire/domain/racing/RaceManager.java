@@ -1,11 +1,12 @@
 package za.co.yellowfire.domain.racing;
 
 import javax.ejb.Local;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 @Local
-public interface RaceManager {
+public interface RaceManager extends Serializable {
 
     /**
      * Retrieves the upcoming races

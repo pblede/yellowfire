@@ -64,6 +64,10 @@ create table trn.content_type (
 alter table trn.content_type add constraint pk_content_type_id primary key clustered ([content_type_id]);
 alter table trn.content_type add constraint df_content_type_create_ts default(getdate()) FOR [create_ts];
 
+insert into trn.content_type (content_type_description, create_ts, update_ts, [version]) values ('Computer Based', GETDATE(), GETDATE(), 1);
+insert into trn.content_type (content_type_description, create_ts, update_ts, [version]) values ('Instructor Led', GETDATE(), GETDATE(), 1);
+insert into trn.content_type (content_type_description, create_ts, update_ts, [version]) values ('Self Paced', GETDATE(), GETDATE(), 1);
+
 create table trn.course_category (
     course_category_id bigint not null identity(1, 1),
 	course_category_description varchar(64) not null,

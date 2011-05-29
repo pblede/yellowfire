@@ -142,6 +142,13 @@ public class SessionController extends AbstractController {
 
 	}
 
+    /**
+     * Used by the training-layout.xhtml poll component
+     */
+    public void ping() {
+        //Empty implementation used by the front-end to ping
+    }
+
 	/**
 	 * Used by the prime-layout.xhtml login function
 	 */

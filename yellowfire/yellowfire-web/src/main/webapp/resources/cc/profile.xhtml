@@ -2,10 +2,8 @@
         xmlns="http://www.w3.org/1999/xhtml"
         xmlns:h="http://java.sun.com/jsf/html"
         xmlns:composite="http://java.sun.com/jsf/composite"
-        xmlns:cc="http://java.sun.com/jsf/composite/cc"
         xmlns:p="http://primefaces.prime.com.tr/ui"
-        xmlns:f="http://java.sun.com/jsf/core"
-        xmlns:o="http://openfaces.org/" xmlns:ui="http://java.sun.com/jsf/facelets">
+        xmlns:f="http://java.sun.com/jsf/core">
 
 <!-- INTERFACE -->
 <composite:interface>
@@ -14,77 +12,37 @@
 
 <!-- IMPLEMENATION -->
 <composite:implementation>
-    <h:panelGrid columns="4">
+    <h:panelGrid columns="3">
         <h:outputLabel id="l00" value="#{msgs['fld.username']}:" for="a00" rendered="#{cc.attrs.bean.user.id eq null}"/>
         <h:inputText id="a00" value="#{cc.attrs.bean.user.name}" disabled="false"
                      rendered="#{cc.attrs.bean.user.id eq null}">
-            <f:attribute name="clientValidation" value="onDemand"/>
-            <o:validateCustom
-                serverFunction="#{cc.attrs.bean.userNameAvailable}"
-                detail="The requested username is not available"
-                summary="Username not available"/>
         </h:inputText>
-        <o:floatingIconMessage
-                for="a00"
-                showDetail="true"
-                showSummary="false"
-                style="border: 1px solid red; background-color: #e0e0ff;"
-                rendered="#{cc.attrs.bean.user.id eq null}"/>
         <h:message for="a00" rendered="#{cc.attrs.bean.user.id eq null}"/>
 
         <h:outputLabel id="l01" value="#{msgs['fld.username']}:" for="a01" rendered="#{cc.attrs.bean.user.id ne null}"/>
         <h:inputText id="a01" value="#{cc.attrs.bean.user.name}" disabled="true"
                      rendered="#{cc.attrs.bean.user.id ne null}"/>
-        <o:floatingIconMessage
-                for="a01"
-                showDetail="true"
-                showSummary="false"
-                style="border: 1px solid red; background-color: #e0e0ff;"
-                rendered="#{cc.attrs.bean.user.id ne null}"/>
         <h:message for="a01" rendered="#{cc.attrs.bean.user.id ne null}"/>
 
         <h:outputLabel id="l11" value="#{msgs['fld.firstname']}:" for="a11"/>
         <h:inputText id="a11" value="#{cc.attrs.bean.user.firstName}"/>
-        <o:floatingIconMessage
-                for="a11"
-                showDetail="true"
-                showSummary="false"
-                style="border: 1px solid red; background-color: #e0e0ff;"/>
         <h:message for="a11"/>
 
         <h:outputLabel id="l12" value="#{msgs['fld.lastname']}:" for="a12"/>
         <h:inputText id="a12" value="#{cc.attrs.bean.user.lastName}"/>
-        <o:floatingIconMessage
-                for="a12"
-                showDetail="true"
-                showSummary="false"
-                style="border: 1px solid red; background-color: #e0e0ff;"/>
         <h:message for="a12"/>
 
         <h:outputLabel id="l02" value="#{msgs['fld.email']}:" for="a02"/>
         <h:inputText id="a02" value="#{cc.attrs.bean.user.email}"/>
-        <o:floatingIconMessage
-                for="a02"
-                showDetail="true"
-                showSummary="false"
-                style="border: 1px solid red; background-color: #e0e0ff;"/>
         <h:message for="a02"/>
 
         <h:outputLabel id="l03" value="#{msgs['fld.password']}:" for="a03"/>
         <p:password id="a03" value="#{cc.attrs.bean.user.password}" minLength="6" feedback="true" goodLabel="Good"
                     promptLabel="Prompt" weakLabel="Weak" strongLabel="Strong"/>
-        <o:floatingIconMessage for="a03" showDetail="true"
-                               showSummary="false"
-                               style="border: 1px solid red; background-color: #e0e0ff;"/>
         <h:message for="a03"/>
 
         <h:outputLabel id="l04" value="#{msgs['fld.confirm.password']}:" for="a04"/>
         <p:password id="a04" value="#{cc.attrs.bean.user.passwordConfirmation}" minLength="6" feedback="true"/>
-        <o:floatingIconMessage
-                for="a04"
-                showDetail="true"
-                showSummary="false"
-                style="border: 1px solid red; background-color: #e0e0ff;"/>
         <h:message for="a04"/>
 
         <h:outputLabel value="#{msgs['fld.birthdate']}:" for="a05"/>
@@ -95,9 +53,6 @@
                 value="#{cc.attrs.bean.user.birthDate}">
             <f:attribute name="clientValidation" value="onDemand"/>
         </p:calendar>
-        <o:floatingIconMessage for="a05" showDetail="true"
-                               showSummary="false"
-                               style="border: 1px solid red; background-color: #e0e0ff;"/>
         <h:message for="a05" showDetail="true" showSummary="false"/>
 
         <h:outputLabel id="l06" value="#{msgs['fld.club']}:" for="a06"/>
@@ -106,11 +61,6 @@
                            var="club"/>
             <f:converter converterId="ClubConverter"/>
         </h:selectOneMenu>
-        <o:floatingIconMessage
-                for="a06"
-                showDetail="true"
-                showSummary="false"
-                style="border: 1px solid red; background-color: #e0e0ff;"/>
         <h:message for="a06"/>
     </h:panelGrid>
 </composite:implementation>

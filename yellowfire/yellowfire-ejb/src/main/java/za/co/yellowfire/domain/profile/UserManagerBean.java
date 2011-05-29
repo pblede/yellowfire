@@ -77,7 +77,7 @@ public class UserManagerBean extends DomainManagerBean implements UserManager, U
     @Override public User register(User user) throws UserRegistrationException {
     	
     	if (!isUsernameAvailable(user.getName())) {
-    		throw new UserRegistrationException("The password confirmation should match the password");
+    		throw new UserRegistrationException(String.format("The username %1 is not available", user.getName()));
     	}
     	if (user.getPassword() == null) {
     		throw new UserRegistrationException("The password is required");

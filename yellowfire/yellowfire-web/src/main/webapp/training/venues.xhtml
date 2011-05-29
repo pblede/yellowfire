@@ -42,6 +42,7 @@
                     </h:panelGrid>
                     <h:panelGrid columns="3" styleClass="width100pc" columnClasses="search-text,search-button,search-status">
                         <h:inputText id="a01" value="#{venuesController.dataModel.searchText}" label="#{msgs['fld.search']}"/>
+                        <p:watermark for="a01" value="#{msgs['fld.search']}..." />
                         <p:commandButton
                             id="b30"
                             ajax="true"
