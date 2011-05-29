@@ -4,6 +4,7 @@ import za.co.yellowfire.domain.Contact;
 import za.co.yellowfire.domain.DomainEntity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlAttribute;
 
@@ -41,6 +42,7 @@ public class TrainingCourse extends DomainEntity {
     @Column(name = "course_duration_type_id")
     private DurationType durationType;
 
+    @NotNull(message = "error.training.provider.notnull")
     @ManyToOne(fetch = FetchType.EAGER, optional = false, targetEntity = TrainingProvider.class)
     @JoinColumn(name = "training_provider_id", nullable = false, updatable = true, referencedColumnName = "training_provider_id")
     private TrainingProvider provider;
@@ -52,6 +54,10 @@ public class TrainingCourse extends DomainEntity {
     @ManyToOne(fetch = FetchType.EAGER, optional = false, targetEntity = ContentType.class)
     @JoinColumn(name = "content_type_id", nullable = false, updatable = true, referencedColumnName = "content_type_id")
     private ContentType contentType;
+
+    @ManyToOne(fetch = FetchType.EAGER, optional = false, targetEntity = Category.class)
+    @JoinColumn(name = "course_category_id", nullable = false, updatable = true, referencedColumnName = "course_category_id")
+    private Category category;
 
     @Size(min = 0, max = 64)
     @Column(name = "course_accrediting_body", length = 64)
@@ -149,6 +155,14 @@ public class TrainingCourse extends DomainEntity {
 
     public void setContentType(ContentType contentType) {
         this.contentType = contentType;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     public String getAccreditingBody() {

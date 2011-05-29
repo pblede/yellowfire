@@ -61,6 +61,12 @@
     	<converter-id>DurationTypeConverter</converter-id>
     	<converter-class>za.co.yellowfire.ui.converter.DurationTypeConverter</converter-class>
     </converter>
+    <converter>
+    	<description>Converts a TrainingCategory into a String and back into a TrainingCategory</description>
+    	<display-name>TrainingCategory Converter</display-name>
+    	<converter-id>TrainingCategoryConverter</converter-id>
+    	<converter-class>za.co.yellowfire.ui.converter.TrainingCategoryConverter</converter-class>
+    </converter>
     <factory>
         <exception-handler-factory>za.co.yellowfire.ui.listener.ViewExpiredExceptionExceptionHandlerFactory</exception-handler-factory>
     </factory>

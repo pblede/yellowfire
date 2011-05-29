@@ -1,19 +1,20 @@
 package za.co.yellowfire.ui.security;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import za.co.yellowfire.domain.profile.*;
+import za.co.yellowfire.domain.racing.Club;
+import za.co.yellowfire.domain.racing.RaceManager;
+import za.co.yellowfire.domain.training.TrainingCourse;
+import za.co.yellowfire.log.LogType;
+
 import javax.ejb.EJB;
 import javax.ejb.Stateful;
 import javax.enterprise.context.SessionScoped;
 import javax.enterprise.event.Observes;
+import javax.enterprise.inject.Default;
 import javax.enterprise.inject.Produces;
 import javax.inject.Named;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import za.co.yellowfire.log.LogType;
-import za.co.yellowfire.domain.profile.*;
-import za.co.yellowfire.domain.racing.Club;
-import za.co.yellowfire.domain.racing.RaceManager;
-
 import java.io.Serializable;
 import java.util.List;
 
@@ -25,6 +26,8 @@ public class CurrentUserManager implements Serializable {
 	private User user = new User();
     private boolean loggedIn = false;
 
+    private TrainingCourse course;
+
     @EJB(name = "RaceManager")
 	private RaceManager raceManager;
 
@@ -33,8 +36,19 @@ public class CurrentUserManager implements Serializable {
 		return user;
 	}
 
+    @Produces @Default @Named()
+    public TrainingCourse getCurrentCourse() {
+        return course;
+    }
+
+    @Produces @Named("isLoggedIn")
     public boolean isLoggedIn() {
         return loggedIn;
+    }
+
+    @Produces @Named("sessionTimeout")
+    public int getSessionTimeout() {
+        return 5000;
     }
 
     @Produces @Guest
@@ -65,5 +79,10 @@ public class CurrentUserManager implements Serializable {
         LOGGER.info("onAuthenticationFailure : " + failure.getType() + ":" + failure.getUser());
         this.user = new User();
         this.loggedIn = false;
+    }
+
+    public void onEditTrainingCourse(@Observes TrainingCourse course) {
+        LOGGER.info("onEditTrainingCourse : " + course);
+        this.course = course;
     }
 }

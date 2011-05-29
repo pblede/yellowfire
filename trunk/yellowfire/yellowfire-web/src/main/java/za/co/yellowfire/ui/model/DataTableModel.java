@@ -4,13 +4,17 @@ import org.primefaces.component.datatable.DataTable;
 import org.primefaces.context.RequestContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import za.co.yellowfire.domain.profile.Authenticated;
+import za.co.yellowfire.domain.profile.User;
 import za.co.yellowfire.log.LogType;
 
+import javax.enterprise.event.Event;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AbortProcessingException;
 import javax.faces.event.ActionEvent;
 import javax.faces.event.ActionListener;
+import javax.inject.Inject;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,8 +36,8 @@ public class DataTableModel<T> implements Serializable {
     private DataTableListener<T> listener;
     private RequestResult result = new RequestResult();
 
-    private ActionListener saveActionListener;
-    private ActionListener deleteActionListener;
+    private transient ActionListener saveActionListener;
+    private transient ActionListener deleteActionListener;
 
     public DataTableModel(DataTableListener<T> listener, DataTableSearchListener<T> searchListener) {
         this.searchListener = searchListener;
@@ -87,6 +91,7 @@ public class DataTableModel<T> implements Serializable {
     }
 
     public DataTableRow<T> getSelected() {
+        LOGGER.debug("getSelected() : {}", selected);
         return selected;
     }
 
@@ -126,7 +131,8 @@ public class DataTableModel<T> implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null, msg);
         }
         RequestContext context = RequestContext.getCurrentInstance();
-        context.addCallbackParam("result", result);
+        if (context != null)
+            context.addCallbackParam("result", result);
     }
 
     public void onAdd(ActionEvent event) {

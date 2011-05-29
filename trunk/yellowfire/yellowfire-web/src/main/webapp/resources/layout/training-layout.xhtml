@@ -38,6 +38,12 @@
                     </div>
                     <div id="toolbar">
                         <h:form prependId="false">
+                            <ui:remove>
+                            <!--p:idleMonitor timeout="500" update="growl">
+                                <p:ajax event="idle" listener="#{userSession.onIdleSession}" update="growl" />
+                                <p:ajax event="active" listener="#{userSession.onActivatedSession}" update="growl" />
+                            </p:idleMonitor-->
+                            </ui:remove>
                             <p:menubar widgetVar="toolbar">
                                 <p:submenu label="#{msgs['menu.administration']}">
                                 </p:submenu>

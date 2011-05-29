@@ -8,6 +8,8 @@ import org.eclipse.persistence.config.QueryHints;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -35,7 +37,7 @@ import java.util.Map;
 })
 @Searchable
 @SearchableConstant(name = "type", values = {"venue", "location"})
-//@XmlType(name = "venue", propOrder = {"id", "name", "address", "gps"})
+@XmlType(name = "venue", propOrder = {"id", "name", "address", "gpsLatitude", "gpsLongitude"})
 public class Venue implements DomainObject {
 	private static final long serialVersionUID = 1L;
 
@@ -94,6 +96,7 @@ public class Venue implements DomainObject {
         setGps(gps);
     }
 
+    @XmlTransient
     public Long getId() {
         return id;
     }
@@ -102,6 +105,7 @@ public class Venue implements DomainObject {
         this.id = id;
     }
 
+    @XmlTransient
     public String getName() {
         return name;
     }
@@ -109,7 +113,8 @@ public class Venue implements DomainObject {
     public void setName(String name) {
         this.name = name;
     }
-    
+
+    @XmlTransient
     public String getAddress() {
         return address;
     }
@@ -118,6 +123,7 @@ public class Venue implements DomainObject {
         this.address = address;
     }
 
+    @XmlTransient
     public String getGps() {
         if (getGpsLatitude() != null && getGpsLongitude() != null) {
             return getGpsLatitude() + "," + getGpsLongitude();
@@ -139,10 +145,12 @@ public class Venue implements DomainObject {
         }
     }
 
+    @XmlTransient
     public Double getGpsLongitude() {
         return this.gpsLongitude;
     }
 
+    @XmlTransient
     public Double getGpsLatitude() {
         return this.gpsLatitude;
     }

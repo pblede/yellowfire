@@ -74,8 +74,10 @@
             <element id="library" level="project" name="Maven: javax.xml.stream:stax-api:1.0-2" />
             <element id="library" level="project" name="Maven: com.sun.xml.bind:jaxb-impl:2.2.2" />
             <element id="library" level="project" name="Maven: org.compass-project:compass:2.3.0" />
+            <element id="library" level="project" name="Maven: com.sun.jersey:jersey-core:1.6" />
             <element id="library" level="project" name="Maven: org.primefaces:primefaces:3.0.M1" />
             <element id="library" level="project" name="Maven: org.primefaces.themes:aristo:1.0.0" />
+            <element id="library" level="project" name="Maven: org.apache.lucene:lucene-highlighter:2.4.1" />
           </element>
         </element>
       </root>
@@ -137,6 +139,22 @@
     </autodetection-disabled>
   </component>
   <component name="IdProvider" IDEtalkID="631CF00C852F05B5B9104E7684DE5402" />
+  <component name="InspectionProjectProfileManager">
+    <profiles>
+      <profile version="1.0" is_locked="false">
+        <option name="myName" value="Project Default" />
+        <option name="myLocal" value="false" />
+        <inspection_tool class="SpellCheckingInspection" enabled="false" level="TYPO" enabled_by_default="false">
+          <option name="processCode" value="true" />
+          <option name="processLiterals" value="true" />
+          <option name="processComments" value="true" />
+        </inspection_tool>
+      </profile>
+    </profiles>
+    <option name="PROJECT_PROFILE" value="Project Default" />
+    <option name="USE_PROJECT_PROFILE" value="true" />
+    <version value="1.0" />
+  </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_STRING" value="-target 1.6" />
   </component>
@@ -300,6 +318,43 @@
     <output url="file://$PROJECT_DIR$/classes" />
   </component>
   <component name="SvnBranchConfigurationManager">
+    <option name="myConfigurationMap">
+      <map>
+        <entry key="$PROJECT_DIR$/yellowfire-ejb">
+          <value>
+            <SvnBranchConfiguration>
+              <option name="branchMap">
+                <map>
+                  <entry key="https://yellowfire.googlecode.com/svn/branches">
+                    <value>
+                      <list />
+                    </value>
+                  </entry>
+                  <entry key="https://yellowfire.googlecode.com/svn/tags">
+                    <value>
+                      <list />
+                    </value>
+                  </entry>
+                  <entry key="https://yellowfire.googlecode.com/svn/wiki">
+                    <value>
+                      <list />
+                    </value>
+                  </entry>
+                </map>
+              </option>
+              <option name="branchUrls">
+                <list>
+                  <option value="https://yellowfire.googlecode.com/svn/branches" />
+                  <option value="https://yellowfire.googlecode.com/svn/tags" />
+                  <option value="https://yellowfire.googlecode.com/svn/wiki" />
+                </list>
+              </option>
+              <option name="trunkUrl" value="https://yellowfire.googlecode.com/svn/trunk" />
+            </SvnBranchConfiguration>
+          </value>
+        </entry>
+      </map>
+    </option>
     <option name="mySupportsUserInfoFilter" value="true" />
   </component>
   <component name="VcsDirectoryMappings">
@@ -307,6 +362,17 @@
   </component>
   <component name="WebServicesPlugin" addRequiredLibraries="true" />
   <component name="libraryTable">
+    <library name="Maven: asm:asm:3.1">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/asm/asm/3.1/asm-3.1.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/asm/asm/3.1/asm-3.1-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/asm/asm/3.1/asm-3.1-sources.jar!/" />
+      </SOURCES>
+    </library>
     <library name="Maven: com.microsoft.sqlserver:sqljdbc4:3.0">
       <CLASSES>
         <root url="jar://$MAVEN_REPOSITORY$/com/microsoft/sqlserver/sqljdbc4/3.0/sqljdbc4-3.0.jar!/" />
@@ -349,6 +415,160 @@
       </JAVADOC>
       <SOURCES>
         <root url="jar://$MAVEN_REPOSITORY$/com/sun/faces/jsf-impl/2.1.0/jsf-impl-2.1.0-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: com.sun.grizzly:grizzly-framework:1.9.31">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/sun/grizzly/grizzly-framework/1.9.31/grizzly-framework-1.9.31.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/com/sun/grizzly/grizzly-framework/1.9.31/grizzly-framework-1.9.31-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/sun/grizzly/grizzly-framework/1.9.31/grizzly-framework-1.9.31-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: com.sun.grizzly:grizzly-http-servlet:1.9.31">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/sun/grizzly/grizzly-http-servlet/1.9.31/grizzly-http-servlet-1.9.31.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/com/sun/grizzly/grizzly-http-servlet/1.9.31/grizzly-http-servlet-1.9.31-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/sun/grizzly/grizzly-http-servlet/1.9.31/grizzly-http-servlet-1.9.31-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: com.sun.grizzly:grizzly-http:1.9.31">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/sun/grizzly/grizzly-http/1.9.31/grizzly-http-1.9.31.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/com/sun/grizzly/grizzly-http/1.9.31/grizzly-http-1.9.31-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/sun/grizzly/grizzly-http/1.9.31/grizzly-http-1.9.31-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: com.sun.grizzly:grizzly-lzma:1.9.31">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/sun/grizzly/grizzly-lzma/1.9.31/grizzly-lzma-1.9.31.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/com/sun/grizzly/grizzly-lzma/1.9.31/grizzly-lzma-1.9.31-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/sun/grizzly/grizzly-lzma/1.9.31/grizzly-lzma-1.9.31-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: com.sun.grizzly:grizzly-portunif:1.9.31">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/sun/grizzly/grizzly-portunif/1.9.31/grizzly-portunif-1.9.31.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/com/sun/grizzly/grizzly-portunif/1.9.31/grizzly-portunif-1.9.31-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/sun/grizzly/grizzly-portunif/1.9.31/grizzly-portunif-1.9.31-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: com.sun.grizzly:grizzly-rcm:1.9.31">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/sun/grizzly/grizzly-rcm/1.9.31/grizzly-rcm-1.9.31.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/com/sun/grizzly/grizzly-rcm/1.9.31/grizzly-rcm-1.9.31-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/sun/grizzly/grizzly-rcm/1.9.31/grizzly-rcm-1.9.31-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: com.sun.grizzly:grizzly-servlet-webserver:1.9.31">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/sun/grizzly/grizzly-servlet-webserver/1.9.31/grizzly-servlet-webserver-1.9.31.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/com/sun/grizzly/grizzly-servlet-webserver/1.9.31/grizzly-servlet-webserver-1.9.31-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/sun/grizzly/grizzly-servlet-webserver/1.9.31/grizzly-servlet-webserver-1.9.31-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: com.sun.grizzly:grizzly-utils:1.9.31">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/sun/grizzly/grizzly-utils/1.9.31/grizzly-utils-1.9.31.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/com/sun/grizzly/grizzly-utils/1.9.31/grizzly-utils-1.9.31-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/sun/grizzly/grizzly-utils/1.9.31/grizzly-utils-1.9.31-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: com.sun.jersey.jersey-test-framework:jersey-test-framework-core:1.6">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/sun/jersey/jersey-test-framework/jersey-test-framework-core/1.6/jersey-test-framework-core-1.6.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/com/sun/jersey/jersey-test-framework/jersey-test-framework-core/1.6/jersey-test-framework-core-1.6-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/sun/jersey/jersey-test-framework/jersey-test-framework-core/1.6/jersey-test-framework-core-1.6-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: com.sun.jersey.jersey-test-framework:jersey-test-framework-grizzly:1.6">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/sun/jersey/jersey-test-framework/jersey-test-framework-grizzly/1.6/jersey-test-framework-grizzly-1.6.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/com/sun/jersey/jersey-test-framework/jersey-test-framework-grizzly/1.6/jersey-test-framework-grizzly-1.6-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/sun/jersey/jersey-test-framework/jersey-test-framework-grizzly/1.6/jersey-test-framework-grizzly-1.6-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: com.sun.jersey:jersey-client:1.6">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/sun/jersey/jersey-client/1.6/jersey-client-1.6.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/com/sun/jersey/jersey-client/1.6/jersey-client-1.6-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/sun/jersey/jersey-client/1.6/jersey-client-1.6-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: com.sun.jersey:jersey-core:1.6">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/sun/jersey/jersey-core/1.6/jersey-core-1.6.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/com/sun/jersey/jersey-core/1.6/jersey-core-1.6-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/sun/jersey/jersey-core/1.6/jersey-core-1.6-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: com.sun.jersey:jersey-grizzly:1.6">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/sun/jersey/jersey-grizzly/1.6/jersey-grizzly-1.6.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/com/sun/jersey/jersey-grizzly/1.6/jersey-grizzly-1.6-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/sun/jersey/jersey-grizzly/1.6/jersey-grizzly-1.6-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: com.sun.jersey:jersey-server:1.6">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/sun/jersey/jersey-server/1.6/jersey-server-1.6.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/com/sun/jersey/jersey-server/1.6/jersey-server-1.6-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/sun/jersey/jersey-server/1.6/jersey-server-1.6-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Maven: com.sun.xml.bind:jaxb-impl:2.2.2">
@@ -415,6 +635,17 @@
       </JAVADOC>
       <SOURCES>
         <root url="jar://$MAVEN_REPOSITORY$/javax/activation/activation/1.1.1/activation-1.1.1-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: javax.servlet:servlet-api:2.5">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/javax/servlet/servlet-api/2.5/servlet-api-2.5.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/javax/servlet/servlet-api/2.5/servlet-api-2.5-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/javax/servlet/servlet-api/2.5/servlet-api-2.5-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Maven: javax.validation:validation-api:1.0.0.GA">
@@ -580,6 +811,17 @@
       </JAVADOC>
       <SOURCES>
         <root url="jar://$MAVEN_REPOSITORY$/org/glassfish/extras/glassfish-embedded-all/3.1/glassfish-embedded-all-3.1-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: org.glassfish:javax.servlet:3.0">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/glassfish/javax.servlet/3.0/javax.servlet-3.0.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/org/glassfish/javax.servlet/3.0/javax.servlet-3.0-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/glassfish/javax.servlet/3.0/javax.servlet-3.0-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Maven: org.hibernate:hibernate-validator:4.2.0.Beta2">

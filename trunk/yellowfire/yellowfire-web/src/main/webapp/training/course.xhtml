@@ -1,0 +1,99 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:p="http://primefaces.prime.com.tr/ui"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:cc="http://java.sun.com/jsf/composite/cc"
+        template="/resources/layout/training-layout.xhtml">
+
+    <ui:define name="demoSampleParameters">
+        <f:metadata>
+            <f:viewParam name="section" value="#{navigator.section}"/>
+            <f:viewParam name="item" value="#{navigator.item}"/>
+            <f:viewParam name="skin" value="#{skinBean.skin}"/>
+        </f:metadata>
+    </ui:define> 
+    <ui:define name="head">
+    </ui:define>
+    <ui:define name="content">
+        <p:growl id="growl" showDetail="true" showSummary="true" globalOnly="true"/>
+        <h:form id="h2" prependId="false">
+            <p:panel>
+                <h:panelGrid columns="1" style="width:100%">
+                <cc:courseForm
+                        bean="#{coursesController.dataModel.selected.object}"
+                        durationTypes="#{coursesController.durationTypes}"
+                        trainingProviders="#{coursesController.trainingProviders}"
+                        contentTypes="#{coursesController.contentTypes}"
+                        categories="#{coursesController.categories}"
+                />
+                <p:fieldset legend="#{msgs['pnl.messages']}">
+                    <h:panelGrid id="modify_messages" columns="1">
+                        <p:messages id="m1" showDetail="true" showSummary="false" globalOnly="false"  />
+                    </h:panelGrid>
+                </p:fieldset>
+                <h:panelGrid id="modify_buttons" columns="3" cellpadding="4" rendered="#{coursesController.inConversation}">
+                    <p:commandButton
+                            id="b1"
+                            value="#{msgs['btn.save']}"
+                            image="ui-icon ui-icon-disk"
+                            actionListener="#{coursesController.dataModel.onSave}"
+                            ajax="true"
+                            oncomplete="onSaveComplete(xhr, status, args, modifyDialogVar, 1)"
+                            update="modify_messages display_messages"
+                            />
+
+                    <p:commandButton
+                            id="b4"
+                            value="#{msgs['btn.delete']}"
+                            image="ui-icon ui-icon-minus"
+                            actionListener="#{coursesController.dataModel.onDelete}"
+                            ajax="true"
+                            rendered="#{coursesController.dataModel.selected.object.id ne null}"
+                            oncomplete="onDeleteComplete(xhr, status, args, modifyDialogVar, 1)"
+                            update="modify_messages display_messages"
+                            />
+
+                    <p:commandButton
+                            id="b3"
+                            image="ui-icon ui-icon-close"
+                            value="#{msgs['btn.back']}"
+                            action="#{coursesController.onCompleteConversation}"
+                            ajax="false"
+                            immediate="true"
+                            update="modify_messages"
+                            />
+                </h:panelGrid>
+            </h:panelGrid>
+            </p:panel>
+        </h:form>
+        <h:form id="h3" prependId="false">
+            <p:dialog
+                    id="messageDialog"
+                    header="#{msgs['dlg.training.course']}"
+                    widgetVar="modifyDialogVar"
+                    resizable="false"
+                    width="400"
+                    modal="true"
+                    showEffect="explode"
+                    hideEffect="explode">
+                <p:fieldset legend="#{msgs['pnl.messages']}">
+                    <h:panelGrid id="display_messages" columns="1">
+                        <h:outputText value="#{msgs['msg.training.course.saved']}" />
+                    </h:panelGrid>
+                </p:fieldset>
+                <h:panelGrid id="display_buttons" columns="3" cellpadding="4">
+                    <p:commandButton
+                            id="b10"
+                            image="ui-icon ui-icon-close"
+                            value="#{msgs['btn.ok']}"
+                            action="#{coursesController.onCompleteConversation}"
+                            ajax="false"
+                            immediate="true"
+                            />
+                </h:panelGrid>
+            </p:dialog>
+        </h:form>
+    </ui:define>
+</ui:composition>

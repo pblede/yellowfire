@@ -12,7 +12,8 @@ import javax.naming.NamingException;
 import javax.persistence.LockModeType;
 
 public class ContentTypeConverter extends AbstractConverter implements Converter {
-	/**
+	private static final String SELECT = "Select...";
+    /**
 	 * Converts the value into a DomainObject instance by looking up the value as the id of the Club
 	 */
 	@Override public Object getAsObject(FacesContext context, UIComponent component, String value) {		
@@ -22,10 +23,10 @@ public class ContentTypeConverter extends AbstractConverter implements Converter
 		if (value.equals("")) { 
 			return null;
 		}
-		
+
 		Long id;
 		try {
-			id = Long.parseLong(value);
+			id = Long.parseLong(value.equals(SELECT) ? "-1" : value);
 		} catch (NumberFormatException e) {
 			throw new ConverterException("Unable to convert " + value + " to a Long", e);
 		}
@@ -51,7 +52,7 @@ public class ContentTypeConverter extends AbstractConverter implements Converter
 			return null;
 		}
 		if (!(value instanceof DomainObject)) {
-			return "-1";
+			return SELECT;
 		}
 		
 		return ((DomainObject) value).getId().toString();
