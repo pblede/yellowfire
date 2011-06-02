@@ -70,6 +70,11 @@
                 <p:column style="width:100px" headerText="Options">
                     <h:commandLink action="#{coursesController.onStartConversation}" immediate="true" value="View">
                         <f:setPropertyActionListener value="#{row}" target="#{coursesController.dataModel.selected}"/>
+                        <f:setPropertyActionListener value="true" target="#{coursesController.dataModel.selected.readonly}"/>
+                    </h:commandLink>#{"   "}
+                    <h:commandLink action="#{coursesController.onStartConversation}" immediate="true" value="Edit">
+                        <f:setPropertyActionListener value="#{row}" target="#{coursesController.dataModel.selected}"/>
+                        <f:setPropertyActionListener value="false" target="#{coursesController.dataModel.selected.readonly}"/>
                     </h:commandLink>
                 </p:column>
 

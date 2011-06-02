@@ -11,22 +11,23 @@
    <comp:interface>
       <comp:attribute name="label" required="true" shortDescription="The label for the output"/>
       <comp:attribute name="value" required="false" shortDescription="The value for the output"/>
-      <comp:attribute name="size" required="false" default="50" shortDescription="The value for the output"/>
+      <comp:attribute name="rows" required="false" default="3" shortDescription="The value for the rows"/>
+      <comp:attribute name="cols" required="false" default="50" shortDescription="The value for the cols"/>
       <comp:attribute name="required" required="false" default="false" shortDescription="The value for the output"/>
        <comp:attribute name="readonly" required="false" default="true" shortDescription="The field is read-only"/>
    </comp:interface>
 
     <comp:implementation>
         <h:panelGroup style="width:100%">
-            <h:inputText
-                    id="input"
-                    size="#{cc.attrs.size}"
-                    required="#{cc.attrs.required}"
-                    label="#{cc.attrs.label}"
-                    value="#{cc.attrs.value}"
-                    rendered="#{cc.attrs.readonly ne true}"
-                    styleClass="width95pc"/>
-            <h:outputText id="t02" value="#{cc.attrs.value}" styleClass="width100pc" rendered="#{cc.attrs.readonly}" />
+            <h:inputTextarea
+                id="input"
+                rows="#{cc.attrs.rows}"
+                cols="#{cc.attrs.cols}"
+                required="#{cc.attrs.required}"
+                label="#{cc.attrs.label}"
+                value="#{cc.attrs.value}"
+                readonly="#{cc.attrs.readonly}"
+                styleClass="width95pc"/>
             <p:message id="msg" for="input" showSummary="false" showDetail="false" display="icon" style="width:5%" />
         </h:panelGroup>
     </comp:implementation>

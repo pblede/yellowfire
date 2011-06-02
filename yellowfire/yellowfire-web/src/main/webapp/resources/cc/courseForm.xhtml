@@ -4,14 +4,15 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.prime.com.tr/ui"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
       xml:lang="en" lang="en">
 <comp:interface>
-    <comp:attribute name="bean" required="true" shortDescription="The training course bean for the form" />
+    <comp:attribute name="bean" required="true" type="za.co.yellowfire.domain.training.TrainingCourse" shortDescription="The training course bean for the form" />
+    <comp:attribute name="readonly" required="false" default="true" type="java.lang.Boolean" shortDescription="The training categories for the form" />
     <comp:attribute name="durationTypes" required="true" shortDescription="The duration types for the form" />
     <comp:attribute name="trainingProviders" required="true" shortDescription="The training providers for the form" />
     <comp:attribute name="contentTypes" required="true" shortDescription="The content types for the form" />
     <comp:attribute name="categories" required="true" shortDescription="The training categories for the form" />
+
 </comp:interface>
 <comp:implementation>
     <style type="text/css">
@@ -27,52 +28,29 @@
             <p:fieldset legend="#{msgs['pnl.overview']}">
                 <h:panelGrid id="modify_display" columns="2" cellpadding="4" columnClasses="align_top,align_top">
 
-                    <h:outputText value="#{msgs['fld.id']}:" for="a01"/>
-                    <h:panelGroup style="width:100%">
-                        <h:outputText id="a01" value="#{cc.attrs.bean.id}" style="width:100%" />
-                    </h:panelGroup>
+                    <h:outputText value="#{msgs['fld.id']}:"/>
+                    <cc:inputText label="#{msgs['fld.id']}" value="#{cc.attrs.bean.title}" readonly="true" required="true" />
 
-                    <h:outputText value="#{msgs['fld.title']}:" for="a02"/>
-                    <h:panelGroup style="width:100%">
-                        <h:panelGrid columns="2" style="width:100%">
-                            <h:inputText id="a02" label="#{msgs['fld.title']}" value="#{cc.attrs.bean.title}" style="width:100%"/>
-                            <p:message for="a02" showSummary="false" showDetail="false" display="icon" />
-                        </h:panelGrid>
-                    </h:panelGroup>
+                    <h:outputText value="#{msgs['fld.title']}:"/>
+                    <cc:inputText label="#{msgs['fld.title']}" value="#{cc.attrs.bean.title}" readonly="#{cc.attrs.readonly}" required="true" />
 
-                    <h:outputLabel value="#{msgs['fld.overview']}:" for="a06"/>
-                    <h:panelGroup>
-                        <h:panelGrid columns="2">
-                            <h:inputTextarea
-                                    id="a06"
-                                    rows="3" cols="50"
-                                    required="false"
-                                    label="#{msgs['fld.overview']}"
-                                    value="#{cc.attrs.bean.overview}"/>
-                            <p:message for="a06" showSummary="false" showDetail="false" display="icon" />
-                        </h:panelGrid>
-                    </h:panelGroup>
+                    <h:outputLabel value="#{msgs['fld.overview']}:"/>
+                    <cc:inputTextArea label="#{msgs['fld.overview']}" value="#{cc.attrs.bean.overview}" rows="3" cols="50" readonly="#{cc.attrs.readonly}"/>
 
-                    <h:outputText value="#{msgs['fld.duration']}:" for="a12" />
-                    <h:panelGroup style="width:100%">
-                        <h:panelGrid columns="4" style="width:100%" columnClasses="duration_col1,duration_col3,duration_col2,duration_col3">
-                            <h:inputText id="a12" label="#{msgs['fld.duration']}" value="#{cc.attrs.bean.duration}" />
-                            <p:message for="a12" showSummary="false" showDetail="false" display="icon" />
-                            <h:selectOneMenu
-                                    id="a22"
-                                    label="#{msgs['fld.duration.type']}"
-                                    value="#{cc.attrs.bean.durationType}">
-                                <f:selectItems value="#{cc.attrs.durationTypes}" var="type" />
-                            </h:selectOneMenu>
-                            <p:message for="a22" showSummary="false" showDetail="false" display="icon"/>
-                        </h:panelGrid>
-                    </h:panelGroup>
+                    <h:outputText value="#{msgs['fld.duration']}:" />
+                    <cc:inputDuration label="#{msgs['fld.duration']}" value="#{cc.attrs.bean.duration}" durationType="#{cc.attrs.bean.durationType}" durationTypes="#{cc.attrs.durationTypes}" readonly="#{cc.attrs.readonly}" />
                 </h:panelGrid>
             </p:fieldset>
             <p:fieldset legend="#{msgs['pnl.settings']}">
                 <h:panelGrid columns="2" style="width:100%">
-                    <h:selectBooleanCheckbox title="#{msgs['fld.core']}:" label="#{msgs['fld.core']}" value="#{cc.attrs.bean.core}" />
-                    <h:selectBooleanCheckbox title="#{msgs['fld.internal']}:" label="#{msgs['fld.internal']}" value="#{cc.attrs.bean.internal}" />
+                    <h:panelGroup>
+                        <h:outputLabel value="#{msgs['fld.core']}:" for="cb01"/>
+                        <h:selectBooleanCheckbox id="cb01" title="#{msgs['fld.core']}:" label="#{msgs['fld.core']}" value="#{cc.attrs.bean.core}" />
+                    </h:panelGroup>
+                    <h:panelGroup>
+                        <h:outputLabel value="#{msgs['fld.internal']}:" for="cb02" />
+                        <h:selectBooleanCheckbox id="cb02" title="#{msgs['fld.internal']}:" label="#{msgs['fld.internal']}" value="#{cc.attrs.bean.internal}" />
+                    </h:panelGroup>
                 </h:panelGrid>
             </p:fieldset>
         </h:panelGroup>
@@ -80,24 +58,15 @@
             <h:panelGrid columns="1" style="width:100%">
                 <p:fieldset legend="#{msgs['pnl.contact']}">
                     <h:panelGrid columns="2">
-                        <h:outputText value="#{msgs['fld.contact.name']}:" for="a31"/>
-                        <h:panelGroup style="width:100%">
-                            <h:panelGrid columns="2" styleClass="width100pc">
-                                <h:inputText id="a31" label="#{msgs['fld.contact.name']}" value="#{cc.attrs.bean.contact.name}" style="width:100%"/>
-                                <p:message for="a31" showSummary="false" showDetail="false" display="icon" />
-                            </h:panelGrid>
-                        </h:panelGroup>
-                        <h:outputText value="#{msgs['fld.contact.tel']}:" for="a32"/>
-                        <h:panelGroup style="width:100%">
-                            <h:panelGrid columns="2" styleClass="width100pc">
-                                <h:inputText id="a32" label="#{msgs['fld.contact.tel']}" value="#{cc.attrs.bean.contact.telephoneNo}" style="width:100%"/>
-                                <p:message for="a32" showSummary="false" showDetail="false" display="icon" />
-                            </h:panelGrid>
-                        </h:panelGroup>
+                        <h:outputText value="#{msgs['fld.contact.name']}:"/>
+                        <cc:inputText label="#{msgs['fld.contact.name']}" value="#{cc.attrs.bean.contact.name}" readonly="#{cc.attrs.readonly}" required="false" />
+                        <h:outputText value="#{msgs['fld.contact.tel']}:"/>
+                        <cc:inputText label="#{msgs['fld.contact.tel']}" value="#{cc.attrs.bean.contact.telephoneNo}" readonly="#{cc.attrs.readonly}" required="false" />
                     </h:panelGrid>
                 </p:fieldset>
                 <p:fieldset legend="#{msgs['pnl.detail']}">
                     <h:panelGrid columns="2" columnClasses="align_top,align_top">
+                        
                         <h:outputText value="#{msgs['fld.training.category']}:" for="a04" />
                         <h:panelGroup style="width:100%">
                             <h:panelGrid columns="2" styleClass="width100pc" columnClasses="width95pc,width5pc">
@@ -174,15 +143,10 @@
                             </h:panelGrid>
                         </h:panelGroup>
 
-                        <h:panelGrid columns="1">
-                            <h:outputText value="#{msgs['fld.accrediting.body']}:" for="a05"/>
-                            <h:panelGroup style="width:100%">
-                                <h:panelGrid columns="2" style="width:100%">
-                                    <h:inputText id="a05" value="#{cc.attrs.bean.accreditingBody}" style="width:100%"/>
-                                    <p:message for="a05" showSummary="false" showDetail="false" display="icon" />
-                                </h:panelGrid>
-                            </h:panelGroup>
-                        </h:panelGrid>
+
+                        <h:outputText value="#{msgs['fld.accrediting.body']}:"/>
+                        <cc:inputText label="#{msgs['fld.accrediting.body']}" value="#{cc.attrs.bean.accreditingBody}" readonly="#{cc.attrs.readonly}" />
+                        
                     </h:panelGrid>
                 </p:fieldset>
             </h:panelGrid>

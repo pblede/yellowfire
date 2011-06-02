@@ -27,10 +27,12 @@ h1.logo a { background: url('../images/logo.png') no-repeat 10%; }
 
 /*panelgrid column classes*/
 .width100pc {width:100%}
-.width90pc {width:95%}
+.width95pc {width:95%}
 .width90pc {width:90%}
 .width75pc {width:75%}
+.width60pc {width:60%}
 .width50pc {width:50%}
+.width30pc {width:30%}
 .width25pc {width:25%}
 .width5pc {width:5%}
 
