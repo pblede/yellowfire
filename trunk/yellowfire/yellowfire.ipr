@@ -75,7 +75,7 @@
             <element id="library" level="project" name="Maven: com.sun.xml.bind:jaxb-impl:2.2.2" />
             <element id="library" level="project" name="Maven: org.compass-project:compass:2.3.0" />
             <element id="library" level="project" name="Maven: com.sun.jersey:jersey-core:1.6" />
-            <element id="library" level="project" name="Maven: org.primefaces:primefaces:3.0.M1" />
+            <element id="library" level="project" name="Maven: org.primefaces:primefaces:3.0.M2-SNAPSHOT" />
             <element id="library" level="project" name="Maven: org.primefaces.themes:aristo:1.0.0" />
             <element id="library" level="project" name="Maven: org.apache.lucene:lucene-highlighter:2.4.1" />
           </element>
@@ -144,10 +144,38 @@
       <profile version="1.0" is_locked="false">
         <option name="myName" value="Project Default" />
         <option name="myLocal" value="false" />
+        <inspection_tool class="CachedNumberConstructorCall" enabled="true" level="WARNING" enabled_by_default="true" />
+        <inspection_tool class="ClassWithMultipleLoggers" enabled="true" level="WARNING" enabled_by_default="true">
+          <option name="loggerNamesString" value="java.util.logging.Logger,org.slf4j.Logger,org.apache.commons.logging.Log,org.apache.log4j.Logger" />
+        </inspection_tool>
+        <inspection_tool class="ClassWithoutLogger" enabled="true" level="WARNING" enabled_by_default="true">
+          <option name="loggerNamesString" value="java.util.logging.Logger,org.slf4j.Logger,org.apache.commons.logging.Log,org.apache.log4j.Logger" />
+          <option name="ignoreSuperLoggers" value="false" />
+        </inspection_tool>
+        <inspection_tool class="LengthOneStringInIndexOf" enabled="true" level="WARNING" enabled_by_default="true" />
+        <inspection_tool class="LoggerInitializedWithForeignClass" enabled="true" level="WARNING" enabled_by_default="true">
+          <option name="loggerClassName" value="org.apache.log4j.Logger" />
+          <option name="loggerFactoryMethodName" value="getLogger" />
+        </inspection_tool>
+        <inspection_tool class="NonStaticFinalLogger" enabled="true" level="WARNING" enabled_by_default="true">
+          <option name="loggerClassName" value="java.util.logging.Logger" />
+        </inspection_tool>
+        <inspection_tool class="SerialVersionUIDNotStaticFinal" enabled="true" level="WARNING" enabled_by_default="true" />
+        <inspection_tool class="SerializableHasSerialVersionUIDField" enabled="true" level="WARNING" enabled_by_default="true">
+          <option name="ignoreAnonymousInnerClasses" value="false" />
+          <option name="superClassString" value="java.awt.Component" />
+        </inspection_tool>
         <inspection_tool class="SpellCheckingInspection" enabled="false" level="TYPO" enabled_by_default="false">
           <option name="processCode" value="true" />
           <option name="processLiterals" value="true" />
           <option name="processComments" value="true" />
+        </inspection_tool>
+        <inspection_tool class="TailRecursion" enabled="true" level="WARNING" enabled_by_default="true" />
+        <inspection_tool class="TypeMayBeWeakened" enabled="true" level="WARNING" enabled_by_default="true">
+          <option name="useRighthandTypeAsWeakestTypeInAssignments" value="true" />
+          <option name="useParameterizedTypeForCollectionMethods" value="true" />
+          <option name="doNotWeakenToJavaLangObject" value="true" />
+          <option name="onlyWeakentoInterface" value="true" />
         </inspection_tool>
       </profile>
     </profiles>
@@ -846,15 +874,15 @@
         <root url="jar://$MAVEN_REPOSITORY$/org/primefaces/themes/aristo/1.0.0/aristo-1.0.0-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Maven: org.primefaces:primefaces:3.0.M1">
+    <library name="Maven: org.primefaces:primefaces:3.0.M2-SNAPSHOT">
       <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/primefaces/primefaces/3.0.M1/primefaces-3.0.M1.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/primefaces/primefaces/3.0.M2-SNAPSHOT/primefaces-3.0.M2-SNAPSHOT.jar!/" />
       </CLASSES>
       <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/org/primefaces/primefaces/3.0.M1/primefaces-3.0.M1-javadoc.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/primefaces/primefaces/3.0.M2-SNAPSHOT/primefaces-3.0.M2-SNAPSHOT-javadoc.jar!/" />
       </JAVADOC>
       <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/primefaces/primefaces/3.0.M1/primefaces-3.0.M1-sources.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/primefaces/primefaces/3.0.M2-SNAPSHOT/primefaces-3.0.M2-SNAPSHOT-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Maven: org.slf4j:slf4j-api:1.6.1">

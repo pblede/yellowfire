@@ -23,6 +23,7 @@
                 <h:panelGrid columns="1" style="width:100%">
                 <cc:courseForm
                         bean="#{coursesController.dataModel.selected.object}"
+                        readonly="#{coursesController.dataModel.selected.readonly}"
                         durationTypes="#{coursesController.durationTypes}"
                         trainingProviders="#{coursesController.trainingProviders}"
                         contentTypes="#{coursesController.contentTypes}"
@@ -42,6 +43,7 @@
                             ajax="true"
                             oncomplete="onSaveComplete(xhr, status, args, modifyDialogVar, 1)"
                             update="modify_messages display_messages"
+                            rendered="#{!coursesController.dataModel.selected.readonly}"
                             />
 
                     <p:commandButton
@@ -50,7 +52,7 @@
                             image="ui-icon ui-icon-minus"
                             actionListener="#{coursesController.dataModel.onDelete}"
                             ajax="true"
-                            rendered="#{coursesController.dataModel.selected.object.id ne null}"
+                            rendered="#{coursesController.dataModel.selected.object.id ne null and coursesController.dataModel.selected.readonly ne true}"
                             oncomplete="onDeleteComplete(xhr, status, args, modifyDialogVar, 1)"
                             update="modify_messages display_messages"
                             />

@@ -45,12 +45,25 @@
                         </webModule>
                     </modules>
                     <security>
-                        <security-role id="SecurityRole_1234">
-                            <role-name>manager</role-name>
+                        <security-role id="SecurityRole_1">
+                            <description>Administrative role</description>
+                            <role-name>Administrator</role-name>
                         </security-role>
-                        <security-role id="SecurityRole_5678">
-                            <description>My cool description</description>
-                            <role-name id="RoleName_12">teller</role-name>
+                        <security-role id="SecurityRole_2">
+                            <description>Blue role</description>
+                            <role-name id="RoleName_2">Blue</role-name>
+                        </security-role>
+                        <security-role id="SecurityRole_3">
+                            <description>Silver role</description>
+                            <role-name id="RoleName_3">Silver</role-name>
+                        </security-role>
+                        <security-role id="SecurityRole_4">
+                            <description>Gold role</description>
+                            <role-name id="RoleName_4">Gold</role-name>
+                        </security-role>
+                        <security-role id="SecurityRole_5">
+                            <description>Platinum role</description>
+                            <role-name id="RoleName_5">Platinum</role-name>
                         </security-role>
                     </security>
 

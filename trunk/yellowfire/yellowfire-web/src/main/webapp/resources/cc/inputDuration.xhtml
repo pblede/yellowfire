@@ -1,0 +1,49 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.prime.com.tr/ui"
+                xmlns:comp="http://java.sun.com/jsf/composite" xmlns:f="http://java.sun.com/jsf/core">
+
+   <comp:interface>
+      <comp:attribute name="label" required="true" shortDescription="The label for the output"/>
+      <comp:attribute name="value" required="true" shortDescription="The value for the output"/>
+      <comp:attribute name="durationType" required="true" shortDescription="The duration type"/>
+      <comp:attribute name="durationTypes" required="true" shortDescription="The list of duration types"/>
+      <comp:attribute name="required" required="false" default="false" shortDescription="The value for the output"/>
+       <comp:attribute name="readonly" required="false" default="true" shortDescription="The field is read-only"/>
+   </comp:interface>
+
+    <comp:implementation>
+        <h:panelGroup style="width:100%">
+            <h:panelGrid columns="4" style="width:100%" columnClasses="width60pc,width5pc,width30pc,width5pc" rendered="#{cc.attrs.readonly ne true}">
+                <h:inputText
+                    id="input"
+                    label="#{cc.attrs.label}"
+                    value="#{cc.attrs.value}"
+                    style="width:100%"/>
+                <p:message for="input" showSummary="false" showDetail="false" display="icon" />
+                <h:selectOneMenu
+                    id="select"
+                    value="#{cc.attrs.durationType}"
+                    style="width:100%">
+                    <f:selectItems value="#{cc.attrs.durationTypes}" var="type" />
+                </h:selectOneMenu>
+                <p:message for="select" showSummary="false" showDetail="false" display="icon"/>
+            </h:panelGrid>
+            <h:panelGrid columns="4" style="width:100%" columnClasses="width60pc,width5pc,width30pc,width5pc" rendered="#{cc.attrs.readonly}">
+                <h:outputText
+                    id="output"
+                    value="#{cc.attrs.value}"
+                    style="width:100%"/>
+                <p:message for="output" showSummary="false" showDetail="false" display="icon" />
+                <h:outputText
+                    id="duration"
+                    value="#{cc.attrs.durationType}"
+                    style="width:100%"/>
+                <p:message for="duration" showSummary="false" showDetail="false" display="icon"/>
+            </h:panelGrid>
+        </h:panelGroup>
+    </comp:implementation>
+</ui:composition>

@@ -13,7 +13,8 @@ public class DataTableRow<T> implements Serializable {
     private T object;
     private RequestResult result = new RequestResult();
     private float score = 0;
-    
+    private boolean readonly;
+
     public DataTableRow(T object) {
         this.object = object;
     }
@@ -29,6 +30,14 @@ public class DataTableRow<T> implements Serializable {
 
     public void setSelected(boolean selected) {
         this.selected = selected;
+    }
+
+    public boolean isReadonly() {
+        return readonly;
+    }
+
+    public void setReadonly(boolean readonly) {
+        this.readonly = readonly;
     }
 
     public T getObject() {

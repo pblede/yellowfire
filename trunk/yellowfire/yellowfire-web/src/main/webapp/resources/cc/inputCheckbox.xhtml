@@ -18,6 +18,11 @@
 
     <comp:implementation>
         <h:panelGroup style="width:100%">
+            <h:selectBooleanCheckbox
+                title="#{msgs['fld.core']}:"
+                label="#{msgs['fld.core']}"
+                value="#{cc.attrs.bean.core}" />
+
             <h:inputText
                     id="input"
                     size="#{cc.attrs.size}"
