@@ -1,13 +1,16 @@
 package za.co.yellowfire.ui.training;
 
+import org.jboss.seam.solder.logging.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import za.co.yellowfire.domain.Contact;
 import za.co.yellowfire.domain.NullDomainObject;
 import za.co.yellowfire.domain.profile.SystemManager;
 import za.co.yellowfire.domain.training.*;
+import za.co.yellowfire.domain.training.Category;
 import za.co.yellowfire.log.LogType;
 import za.co.yellowfire.manager.DomainManager;
+import za.co.yellowfire.ui.UILogger;
 import za.co.yellowfire.ui.model.*;
 
 import javax.annotation.PostConstruct;
@@ -38,6 +41,9 @@ public class CoursesController implements Serializable {
     private DomainManager manager;
     private DataTableModel<TrainingCourse> dataModel;
 
+    @Inject @org.jboss.seam.solder.logging.Category("courses")
+    private UILogger logger;
+
     private String timezone;
     private List<DurationType> durationTypes = Arrays.asList(DurationType.Days, DurationType.Hours);
     private List<TrainingProvider> trainingProviders;
@@ -49,6 +55,7 @@ public class CoursesController implements Serializable {
 
     @PostConstruct
         private void init() {
+            logger.logTest("CourseController");
             dataModel =
                     new DataTableModel<TrainingCourse>(
                             /* DataTableListener*/
