@@ -12,6 +12,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.ConverterException;
 import javax.faces.convert.FacesConverter;
+import javax.inject.Inject;
 import javax.naming.NamingException;
 import javax.persistence.LockModeType;
 import java.io.Serializable;
@@ -21,7 +22,7 @@ import java.io.Serializable;
 public class TrainingProviderConverter extends AbstractConverter implements Converter, Serializable {
     private static final String SELECT = "Select...";
 
-    @EJB(name = "DomainManager")
+    @Inject
     private DomainManager manager;
 
 	/**
