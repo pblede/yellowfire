@@ -12,19 +12,21 @@ import javax.naming.NamingException;
 import javax.persistence.LockModeType;
 
 public class VenueConverter extends AbstractConverter implements Converter {
+    private static final String SELECT = "Select...";
 	/**
 	 * Converts the value into a DomainObject instance by looking up the value as the id of the Club
 	 */
 	@Override public Object getAsObject(FacesContext context, UIComponent component, String value) {		
-		if (value == null) { 
-			LOGGER.debug("VenueConverter.getAsObject() : value is null");
+		if (value == null) {
 			return null; 
 		}
 		if (value.equals("")) { 
-			LOGGER.debug("VenueConverter.getAsObject() : value is empty string");
 			return null; 
 		}
-		
+		if (value.equals(SELECT)) {
+			return null;
+		}
+
 		Long id = null;
 		try {
 			LOGGER.debug("VenueConverter.getAsObject() : parsing value " + value + " to a long");

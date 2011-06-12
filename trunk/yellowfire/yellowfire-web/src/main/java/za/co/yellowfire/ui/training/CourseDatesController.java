@@ -22,6 +22,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+import javax.inject.Named;
 import javax.persistence.OptimisticLockException;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -31,7 +32,7 @@ import java.util.List;
  * @author Mark P Ashworth
  * @version 0.0.1
  */
-@ViewScoped @ManagedBean(name = "courseDatesController")
+@ViewScoped @Named("courseDatesController")
 public class CourseDatesController implements Serializable {
     private static final Logger LOGGER = LoggerFactory.getLogger(LogType.CONTROLLER.getCategory());
 

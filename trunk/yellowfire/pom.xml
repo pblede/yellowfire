@@ -235,26 +235,41 @@
             <version>2.2.2</version>
         </dependency>
         <dependency>
-            <groupId>org.compass-project</groupId>
-            <artifactId>compass</artifactId>
-            <version>2.3.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.lucene</groupId>
-            <artifactId>lucene-highlighter</artifactId>
-            <version>2.4.1</version>
-        </dependency>
-        <dependency>
             <groupId>com.sun.jersey</groupId>
             <artifactId>jersey-core</artifactId>
             <version>${jersey.version}</version>
         </dependency>
-        <!--<dependency>-->
-            <!--<groupId>org.jboss.jsfunit</groupId>-->
-            <!--<artifactId>jsfunit-arquillian</artifactId>-->
-            <!--<version>2.0.0.Beta1</version>-->
-            <!--<scope>test</scope>-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>${joda-time.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.seam.solder</groupId>
+            <artifactId>seam-solder-api</artifactId>
+            <version>${seam.faces.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.seam.solder</groupId>
+            <artifactId>seam-solder</artifactId>
+            <version>${seam.faces.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.seam.international</groupId>
+            <artifactId>seam-international</artifactId>
+            <version>${seam.faces.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.seam.faces</groupId>
+            <artifactId>seam-faces-api</artifactId>
+            <version>${seam.faces.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.seam.faces</groupId>
+            <artifactId>seam-faces-impl</artifactId>
+            <version>${seam.faces.version}</version>
+            <scope>runtime</scope>
+        </dependency>
     </dependencies>
     <dependencyManagement>
         <dependencies>
@@ -276,11 +291,11 @@
                 <version>0.0.1</version>
                 <type>war</type>
             </dependency>
-            <dependency>
+            <!--dependency>
                 <groupId>com.sun.xml.bind</groupId>
                 <artifactId>jaxb-impl</artifactId>
                 <version>2.2.2</version>
-            </dependency>
+            </dependency-->
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-api</artifactId>
@@ -294,7 +309,7 @@
             <dependency>
                 <groupId>com.sun.xml.bind</groupId>
                 <artifactId>jaxb-impl</artifactId>
-                <version>2.2.2</version>
+                <version>${jaxb.version}</version>
             </dependency>
             <dependency>
                 <groupId>commons-codec</groupId>
@@ -322,9 +337,11 @@
     </distributionManagement>
 
     <properties>
+        <seam.faces.version>3.0.0.Final</seam.faces.version>
         <hibernate.validator.version>4.2.0.Beta2</hibernate.validator.version>
         <jaxb.version>2.2.2</jaxb.version>
         <compass.version>2.3.0</compass.version>
         <jersey.version>1.6</jersey.version>
+        <joda-time.version>1.6.2</joda-time.version>
     </properties>
 </project>

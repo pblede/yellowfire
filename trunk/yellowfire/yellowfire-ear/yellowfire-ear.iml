@@ -20,6 +20,7 @@
     <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpcore:4.1" level="project" />
     <orderEntry type="library" name="Maven: commons-logging:commons-logging:1.1.1" level="project" />
     <orderEntry type="library" name="Maven: commons-codec:commons-codec:1.5" level="project" />
+    <orderEntry type="library" name="Maven: org.compass-project:compass:2.3.0" level="project" />
     <orderEntry type="library" name="Maven: org.apache.lucene:lucene-core:2.4.1" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.6.1" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-jdk14:1.6.1" level="project" />
@@ -30,12 +31,16 @@
     <orderEntry type="library" name="Maven: javax.xml.stream:stax-api:1.0-2" level="project" />
     <orderEntry type="library" name="Maven: javax.activation:activation:1.1" level="project" />
     <orderEntry type="library" name="Maven: com.sun.xml.bind:jaxb-impl:2.2.2" level="project" />
-    <orderEntry type="library" name="Maven: org.compass-project:compass:2.3.0" level="project" />
     <orderEntry type="library" name="Maven: com.sun.jersey:jersey-core:1.6" level="project" />
+    <orderEntry type="library" name="Maven: joda-time:joda-time:1.6.2" level="project" />
+    <orderEntry type="library" name="Maven: org.jboss.seam.solder:seam-solder-api:3.0.0.Final" level="project" />
+    <orderEntry type="library" name="Maven: org.jboss.seam.solder:seam-solder:3.0.0.Final" level="project" />
+    <orderEntry type="library" name="Maven: org.jboss.seam.international:seam-international:3.0.0.Final" level="project" />
+    <orderEntry type="library" name="Maven: org.jboss.seam.faces:seam-faces-api:3.0.0.Final" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Maven: org.jboss.seam.faces:seam-faces-impl:3.0.0.Final" level="project" />
     <orderEntry type="module" module-name="yellowfire-web" />
     <orderEntry type="library" scope="TEST" name="Maven: junit:junit:4.8.2" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.glassfish.extras:glassfish-embedded-all:3.1" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.lucene:lucene-highlighter:2.4.1" level="project" />
   </component>
 </module>
 

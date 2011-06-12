@@ -1,9 +1,8 @@
 package za.co.yellowfire.controller;
 
 import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
 import javax.enterprise.event.Event;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
@@ -26,7 +25,7 @@ import java.util.List;
  * @version 0.0.1
  */
 @RequestScoped
-@ManagedBean(name = "profileController")
+@Named("profileController")
 public class ProfileController extends AbstractController {
 	private static final long serialVersionUID = 1L;
 	private static final Logger LOGGER = LoggerFactory.getLogger(LogType.CONTROLLER.getCategory());

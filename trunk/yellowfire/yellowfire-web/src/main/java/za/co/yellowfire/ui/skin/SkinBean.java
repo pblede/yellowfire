@@ -5,13 +5,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.faces.bean.ManagedBean;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.SessionScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 @SessionScoped
-@ManagedBean(name = "skinBean")
+@Named("skinBean")
 public class SkinBean implements Serializable {
     private static final long serialVersionUID = -2399884208294434812L;
     private static final String SKIN_VIEW_PARAMETER = "skin";
@@ -36,11 +38,17 @@ public class SkinBean implements Serializable {
 
     // TODO: move to utility class. used in navigator also.
     private String getViewParameter(String name) {
-        FacesContext fc = FacesContext.getCurrentInstance();
-        String param = (String) fc.getExternalContext().getRequestParameterMap().get(name);
-        if (param != null && param.trim().length() > 0) {
-            return param;
+
+
+        if (FacesContext.getCurrentInstance() != null && FacesContext.getCurrentInstance().getExternalContext() != null) {
+            String param = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get(name);
+            if (param != null && param.trim().length() > 0) {
+                return param;
+            } else {
+                return null;
+            }
         } else {
+            System.out.println("The Faces external context could not be resolved, returning null");
             return null;
         }
     }

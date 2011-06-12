@@ -12,12 +12,6 @@
             <base-name>za.co.yellowfire.ui.resources.components</base-name>
             <var>cmpt</var>
         </resource-bundle>
-        <!--
-        <system-event-listener>
-            <system-event-listener-class>za.co.yellowfire.ui.listener.SystemEventListener</system-event-listener-class>
-            <system-event-class>javax.faces.event.ExceptionQueuedEvent</system-event-class>
-        </system-event-listener>
-        -->
     </application>
     <converter>
     	<description>Converts a Club into a String and back into a Club</description>
@@ -43,7 +37,7 @@
     	<converter-id>VenueConverter</converter-id>
     	<converter-class>za.co.yellowfire.ui.converter.VenueConverter</converter-class>
     </converter>
-    <converter>
+    <!--converter>
     	<description>Converts a TrainingProvider into a String and back into a TrainingProvider</description>
     	<display-name>TrainingProvider Converter</display-name>
     	<converter-id>TrainingProviderConverter</converter-id>
@@ -54,82 +48,28 @@
     	<display-name>ContentType Converter</display-name>
     	<converter-id>ContentTypeConverter</converter-id>
     	<converter-class>za.co.yellowfire.ui.converter.ContentTypeConverter</converter-class>
-    </converter>
+    </converter-->
     <converter>
     	<description>Converts a DurationType into a String and back into a DurationType</description>
     	<display-name>DurationType Converter</display-name>
     	<converter-id>DurationTypeConverter</converter-id>
     	<converter-class>za.co.yellowfire.ui.converter.DurationTypeConverter</converter-class>
     </converter>
-    <converter>
+    <!--converter>
     	<description>Converts a TrainingCategory into a String and back into a TrainingCategory</description>
     	<display-name>TrainingCategory Converter</display-name>
     	<converter-id>TrainingCategoryConverter</converter-id>
     	<converter-class>za.co.yellowfire.ui.converter.TrainingCategoryConverter</converter-class>
-    </converter>
+    </converter-->
     <factory>
         <exception-handler-factory>za.co.yellowfire.ui.listener.ViewExpiredExceptionExceptionHandlerFactory</exception-handler-factory>
     </factory>
-    <!--
-    <faces-config-extension>
-        <faces-config version="2.0">
-            <lifecycle>
-                <phase-listener id="racesModelListener">za.co.yellowfire.ui.model.RacesModelPhaseListener</phase-listener>
-            </lifecycle>
-        </faces-config>
-    </faces-config-extension>
-    -->
-    <!--managed-bean>
-		<managed-bean-name>navigator</managed-bean-name>
-		<managed-bean-class>za.co.yellowfire.navigation.Navigator</managed-bean-class>
-		<managed-bean-scope>application</managed-bean-scope>
-		<managed-property>
-			<property-name>groups</property-name>
-			<property-class>java.util.List</property-class>
-			<value>#{navigationParser.groupsList}</value>
-		</managed-property>
-	</managed-bean>
-	<managed-bean>
-		<managed-bean-name>skinBean</managed-bean-name>
-		<managed-bean-class>za.co.yellowfire.ui.skin.SkinBean</managed-bean-class>
-		<managed-bean-scope>session</managed-bean-scope>
-		<managed-property>
-			<property-name>skin</property-name>
-			<property-class>java.lang.String</property-class>
-			<value>sunny</value>
-		</managed-property>
-	</managed-bean>
-	<managed-bean>
-		<managed-bean-name>navigationParser</managed-bean-name>
-		<managed-bean-class>za.co.yellowfire.navigation.NavigationParser</managed-bean-class>
-		<managed-bean-scope>application</managed-bean-scope>
-	</managed-bean>
-	<managed-bean>
-		<managed-bean-name>racesController</managed-bean-name>
-		<managed-bean-class>za.co.yellowfire.controller.RacesController</managed-bean-class>
-		<managed-bean-scope>request</managed-bean-scope>
-	</managed-bean>
-	<managed-bean>
-		<managed-bean-name>localeBean</managed-bean-name>
-		<managed-bean-class>za.co.yellowfire.ui.LocaleBean</managed-bean-class>
-		<managed-bean-scope>session</managed-bean-scope>
-	</managed-bean-->
-	
-	<navigation-rule>
-		<from-view-id>/pages/races.xhtml</from-view-id>
-		<navigation-case>
-			<from-outcome>race</from-outcome>
-			<to-view-id>/pages/race</to-view-id>
-		</navigation-case>
-	</navigation-rule>
-	
-	
+   
     <navigation-rule>
-        <from-view-id>/pages/*</from-view-id>
+        <from-view-id>*</from-view-id>
         <navigation-case>
-            <from-outcome>races</from-outcome>
-            <to-view-id>/pages/races.xhtml</to-view-id>
+            <from-outcome>view_expired</from-outcome>
+            <to-view-id>/view_expired.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
-
 </faces-config>

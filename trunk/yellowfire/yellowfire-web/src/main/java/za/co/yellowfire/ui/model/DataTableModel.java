@@ -17,6 +17,7 @@ import javax.faces.event.ActionListener;
 import javax.inject.Inject;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -74,6 +75,9 @@ public class DataTableModel<T> implements Serializable {
         if (this.rows == null && this.listener != null) {
             try {
                 this.rows = this.listener.onLoad(null);
+                if (this.rows != null) {
+                    Collections.sort(rows);
+                }
             } catch (DataTableException e) {
                 e.printStackTrace();
             }

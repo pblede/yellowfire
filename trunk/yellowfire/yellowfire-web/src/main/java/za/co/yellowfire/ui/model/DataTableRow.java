@@ -1,12 +1,14 @@
 package za.co.yellowfire.ui.model;
 
+import za.co.yellowfire.domain.Archiveable;
+
 import java.io.Serializable;
 
 /**
  * @author Mark P Ashworth
  * @version 0.0.1
  */
-public class DataTableRow<T> implements Serializable {
+public class DataTableRow<T> implements Serializable, Comparable<DataTableRow<T>> {
     private static final long serialVersionUID = 1L;
 
     private boolean selected = false;
@@ -32,12 +34,35 @@ public class DataTableRow<T> implements Serializable {
         this.selected = selected;
     }
 
+    public void setReadonly(boolean readonly) {
+        this.readonly = readonly;
+    }
+
+    /**
+     * Determines if the object is read-only
+     * @return boolean
+     */
     public boolean isReadonly() {
         return readonly;
     }
 
-    public void setReadonly(boolean readonly) {
-        this.readonly = readonly;
+    /**
+     * Determines if the object is archived
+     * @return boolean
+     */
+    public boolean isArchived() {
+        if (getObject() != null && getObject() instanceof Archiveable && ((Archiveable) getObject()).isArchived()) return true;
+        return false;
+    }
+
+    /**
+     * Determines if the object is editable. Editable objects are those that are not read-only and not archived.
+     * @return boolean
+     */
+    public boolean isEditable() {
+        if (isReadonly()) return false;
+        if (isArchived()) return false;
+        return true;
     }
 
     public T getObject() {
@@ -62,6 +87,15 @@ public class DataTableRow<T> implements Serializable {
 
     public void setScore(float score) {
         this.score = score;
+    }
+
+    @Override
+    public int compareTo(DataTableRow<T> o) {
+        Object x = o.getObject();
+        if (getObject() instanceof  Comparable && x instanceof Comparable) {
+            return ((Comparable) getObject()).compareTo(x);
+        }
+        return 0;
     }
 
     @Override

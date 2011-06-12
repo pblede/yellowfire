@@ -22,9 +22,9 @@ import java.util.Set;
  * @version 0.0.1
  */
 @Local(DomainManager.class)
-@Remote(DomainManagerRemote.class)
-@Stateless(name = "DomainManager", mappedName = "yellowfire/session/DomainManager")
-public class DomainManagerBean implements DomainManager, DomainManagerRemote {
+//@Remote(DomainManagerRemote.class)
+@Stateless(name = "DomainManager"/*, mappedName = "yellowfire/session/DomainManager"*/)
+public class DomainManagerBean implements DomainManager/*, DomainManagerRemote*/ {
     private static final long serialVersionUID = 1L;
 	private static final Logger LOGGER = LoggerFactory.getLogger(LogType.MANAGER.getCategory());
 

@@ -15,14 +15,14 @@ import java.util.List;
 import java.util.Map;
 
 @Local(RaceManager.class)
-@Remote(RaceManagerRemote.class)
+//@Remote(RaceManagerRemote.class)
 @Stateless(
   name = "RaceManager", 
-  mappedName = "yellowfire/session/RaceManager",
+  //mappedName = "yellowfire/session/RaceManager",
   description = "Manages the race related information")
-public class RaceManagerBean extends DomainManagerBean implements RaceManager, RaceManagerRemote {
+public class RaceManagerBean extends DomainManagerBean implements RaceManager/*, RaceManagerRemote*/ {
 	private static final long serialVersionUID = 1L;
-	private static Logger LOGGER = LoggerFactory.getLogger(LogType.MANAGER.getCategory());
+	//private static Logger LOGGER = LoggerFactory.getLogger(LogType.MANAGER.getCategory());
 
     
     /**

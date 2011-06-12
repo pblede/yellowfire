@@ -10,6 +10,7 @@
             <title>.::YellowFire::.</title>
             <link rel="shortcut icon" href="#{request.contextPath}/resources/images/favicon.ico" />
             <link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/style/base2.css" media="all"  />
+            <link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/style/common.css" media="all"  />
             <link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/style/bluefire/skin.css"  />
             <script type="text/javascript" src="#{request.contextPath}/resources/js/bluefire.js"></script>
             <ui:insert name="head"/>
@@ -23,8 +24,31 @@
                     <h1 class="logo">
                         <a href="#{request.contextPath}/index.html" title="#{msgs['application.name']}"><span>#{msgs['application.name']}</span></a>
                     </h1>
-                    <div id="dock"></div>
-                    <div id="navigation"></div>
+                    <div id="dock">
+                    	<cc:quickBar
+                            loginMethod="#{loginController.login}"
+                            logoutMethod="#{loginController.logout}"
+                            registerUrl="#{request.contextPath}/training/register.jsf"
+                            registerMethod="#{loginController.createProfile}"
+                            credentialBean="#{loginController.credential}"
+                            userBean="#{userSession.user}"
+                            bean="#{userSession}"
+                            loggedIn="#{userSession.loggedIn}"
+                            version="#{msgs['application.version']}"
+                            showLogin="false"/>
+                    </div>
+                    <div id="toolbar">
+                        <h:form prependId="false">
+                            <p:menubar widgetVar="toolbar">
+                                <p:menuitem value="#{msgs['menu.application.races']}" url="/pages/races.jsf" />
+                                <p:menuitem value="#{msgs['menu.application.training']}" url="training/index.jsf" />
+                                <p:submenu label="#{msgs['menu.help']}">
+                                    <p:menuitem value="#{msgs['menu.help.topics']}"/>
+                                    <p:menuitem value="#{msgs['menu.help.about']}"/>
+                                </p:submenu>
+                            </p:menubar>
+                        </h:form>
+                    </div>
                 </div>
                 <div id="content-wrapper">
                     <div id="content">
@@ -36,8 +60,8 @@
                         </div>
                     </div>
                 </div>
-                <div id="footer">
-                    <div class="bg"></div>
+                <div id="footer" class="ui-panel ui-widget ui-widget-content ui-corner-all">
+                    <div></div>
                     <div class="inner">
                         <p>
                             <span class="first" style="float: right; padding-right: 12px;"> 

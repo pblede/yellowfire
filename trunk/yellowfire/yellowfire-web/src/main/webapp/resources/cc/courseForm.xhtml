@@ -7,7 +7,7 @@
       xml:lang="en" lang="en">
 <comp:interface>
     <comp:attribute name="bean" required="true" type="za.co.yellowfire.domain.training.TrainingCourse" shortDescription="The training course bean for the form" />
-    <comp:attribute name="readonly" required="false" default="true" type="java.lang.Boolean" shortDescription="The training categories for the form" />
+    <comp:attribute name="readonly" required="false" default="true" type="java.lang.Boolean" shortDescription="Whether the data is editable" />
     <comp:attribute name="durationTypes" required="true" shortDescription="The duration types for the form" />
     <comp:attribute name="trainingProviders" required="true" shortDescription="The training providers for the form" />
     <comp:attribute name="contentTypes" required="true" shortDescription="The content types for the form" />
@@ -42,22 +42,22 @@
                 </h:panelGrid>
             </p:fieldset>
             <p:fieldset legend="#{msgs['pnl.settings']}">
-                <h:panelGrid columns="2" style="width:100%">
+                <h:panelGrid columns="2" styleClass="width100pc">
                     <h:panelGroup>
                         <h:outputLabel value="#{msgs['fld.core']}:" for="cb01"/>
-                        <h:selectBooleanCheckbox id="cb01" title="#{msgs['fld.core']}:" label="#{msgs['fld.core']}" value="#{cc.attrs.bean.core}" />
+                        <cc:inputCheckbox id="cb01" label="#{msgs['fld.core']}" value="#{cc.attrs.bean.core}" readonly="#{cc.attrs.readonly}" />
                     </h:panelGroup>
                     <h:panelGroup>
                         <h:outputLabel value="#{msgs['fld.internal']}:" for="cb02" />
-                        <h:selectBooleanCheckbox id="cb02" title="#{msgs['fld.internal']}:" label="#{msgs['fld.internal']}" value="#{cc.attrs.bean.internal}" />
+                        <cc:inputCheckbox id="cb02" label="#{msgs['fld.internal']}" value="#{cc.attrs.bean.internal}" readonly="#{cc.attrs.readonly}" />
                     </h:panelGroup>
                 </h:panelGrid>
             </p:fieldset>
         </h:panelGroup>
         <h:panelGroup style="width:100%">
-            <h:panelGrid columns="1" style="width:100%">
+            <h:panelGrid columns="1" styleClass="width100pc">
                 <p:fieldset legend="#{msgs['pnl.contact']}">
-                    <h:panelGrid columns="2">
+                    <h:panelGrid columns="2" columnClasses="align_top width30pc,align_top width70pc" styleClass="width100pc">
                         <h:outputText value="#{msgs['fld.contact.name']}:"/>
                         <cc:inputText label="#{msgs['fld.contact.name']}" value="#{cc.attrs.bean.contact.name}" readonly="#{cc.attrs.readonly}" required="false" />
                         <h:outputText value="#{msgs['fld.contact.tel']}:"/>
@@ -65,7 +65,7 @@
                     </h:panelGrid>
                 </p:fieldset>
                 <p:fieldset legend="#{msgs['pnl.detail']}">
-                    <h:panelGrid columns="2" columnClasses="align_top,align_top">
+                    <h:panelGrid columns="2" columnClasses="align_top width30pc,align_top width70pc" styleClass="width100pc">
                         
                         <h:outputText value="#{msgs['fld.training.category']}:" for="a04" />
                         <h:panelGroup style="width:100%">
@@ -75,12 +75,9 @@
                                         label="#{msgs['fld.training.category']}"
                                         converter="TrainingCategoryConverter"
                                         value="#{cc.attrs.bean.category}"
-                                        styleClass="width100pc">
-                                    <f:selectItem
-                                            itemValue="-1"
-                                            itemLabel="Select..."
-                                            itemDescription="Select..."
-                                            noSelectionOption="true"  />
+                                        styleClass="width100pc"
+                                        rendered="#{!cc.attrs.readonly}">
+                                    <f:selectItem value="#{coursesController.nullSelectItem}" />
                                     <f:selectItems
                                             value="#{cc.attrs.trainingCategories}"
                                             var="category"
@@ -88,6 +85,7 @@
                                             itemDescription="#{category.description}"
                                             itemValue="#{category}"  />
                                 </h:selectOneMenu>
+                                <h:outputText id="ra04" value="#{cc.attrs.bean.category != null ? cc.attrs.bean.category.description : 'None'}" styleClass="width100pc" rendered="#{cc.attrs.readonly}" />
                                 <p:message for="a04" showSummary="false" showDetail="false" display="icon" />
                             </h:panelGrid>
                         </h:panelGroup>
@@ -100,12 +98,9 @@
                                         label="#{msgs['fld.training.provider']}"
                                         converter="TrainingProviderConverter"
                                         value="#{cc.attrs.bean.provider}"
-                                        styleClass="width100pc">
-                                    <f:selectItem
-                                            itemValue="-1"
-                                            itemLabel="Select..."
-                                            itemDescription="Select..."
-                                            noSelectionOption="true"  />
+                                        styleClass="width100pc"
+                                        rendered="#{!cc.attrs.readonly}">
+                                    <f:selectItem value="#{coursesController.nullSelectItem}" />
                                     <f:selectItems
                                             value="#{cc.attrs.trainingProviders}"
                                             var="provider"
@@ -113,6 +108,7 @@
                                             itemDescription="#{provider.name}"
                                             itemValue="#{provider}"  />
                                 </h:selectOneMenu>
+                                <h:outputText id="ra03" value="#{cc.attrs.bean.provider != null ? cc.attrs.bean.provider.name : 'None'}" styleClass="width100pc" rendered="#{cc.attrs.readonly}" />
                                 <p:message for="a03" showSummary="false" showDetail="false" display="icon" />
                             </h:panelGrid>
                         </h:panelGroup>
@@ -125,13 +121,10 @@
                                         label="#{msgs['fld.content.type']}"
                                         converter="ContentTypeConverter"
                                         value="#{cc.attrs.bean.contentType}"
-                                        styleClass="width100pc">
+                                        styleClass="width100pc"
+                                        rendered="#{!cc.attrs.readonly}">
 
-                                    <f:selectItem
-                                            itemValue="-1"
-                                            itemLabel="Select..."
-                                            itemDescription="Select..."
-                                            noSelectionOption="true"  />
+                                    <f:selectItem value="#{coursesController.nullSelectItem}" />
                                     <f:selectItems
                                             value="#{cc.attrs.contentTypes}"
                                             var="contentType"
@@ -139,10 +132,10 @@
                                             itemDescription="#{contentType.description}"
                                             itemValue="#{contentType}"  />
                                 </h:selectOneMenu>
+                                <h:outputText id="ra07" value="#{cc.attrs.bean.contentType != null ? cc.attrs.bean.contentType.description : 'None'}" styleClass="width100pc" rendered="#{cc.attrs.readonly}" />
                                 <p:message for="a07" showSummary="false" showDetail="false" display="icon" />
                             </h:panelGrid>
                         </h:panelGroup>
-
 
                         <h:outputText value="#{msgs['fld.accrediting.body']}:"/>
                         <cc:inputText label="#{msgs['fld.accrediting.body']}" value="#{cc.attrs.bean.accreditingBody}" readonly="#{cc.attrs.readonly}" />

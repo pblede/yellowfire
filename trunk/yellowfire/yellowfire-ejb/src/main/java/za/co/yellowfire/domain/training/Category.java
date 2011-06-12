@@ -13,6 +13,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 @Entity(name = "TrainingCourseCategory")
 @Access(AccessType.FIELD)
 @Table(name = "course_category", schema = "trn")
+@Cacheable(true)
 @NamedQueries({
         @NamedQuery(
             name="qry.course.categories",
