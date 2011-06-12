@@ -1,18 +1,17 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core">
-<h:head>
-    <title>Nice View Expired Page</title>
-</h:head>
-<h:body>
-    <h:form>
-        <p>To protect your security, we have taken the liberty of logging you
-            out. Those who sacrifice liberty for security deserve to have
-            their views expired.</p>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.prime.com.tr/ui"
+                template="/resources/layout/common-layout.xhtml">
 
-        <p>You were on page #{currentViewId}. Maybe that's useful.</p>
-    </h:form>
-</h:body>
-</html>
+    <ui:define name="menuLeft">
+    </ui:define>
+    <ui:define name="content">
+        <h:form>
+            <h:panelGrid columns="1">
+                #{"To protect your security, we have taken the liberty of logging you out. Those who sacrifice liberty for security deserve to have their views expired."}
+                #{"Click "}<h:outputLink action="#{currentViewId}" value="here" />#{" to retry."}
+            </h:panelGrid>
+        </h:form>
+    </ui:define>
+</ui:composition>

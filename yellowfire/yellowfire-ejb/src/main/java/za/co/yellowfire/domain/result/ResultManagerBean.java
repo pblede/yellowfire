@@ -15,12 +15,12 @@ import java.util.List;
 import java.util.Map;
 
 @Local(ResultManager.class)
-@Remote(ResultManagerRemote.class)
+//@Remote(ResultManagerRemote.class)
 @Stateless(
 		name = "ResultManager",
-		mappedName = "yellowfire/session/ResultManager",
+		//mappedName = "yellowfire/session/ResultManager",
 		description = "Manages the result related information")
-public class ResultManagerBean extends DomainManagerBean implements ResultManager, ResultManagerRemote  {
+public class ResultManagerBean extends DomainManagerBean implements ResultManager/*, ResultManagerRemote*/  {
 	private static final long serialVersionUID = 1L;
 	private static final Logger LOGGER = LoggerFactory.getLogger(LogType.MANAGER.getCategory());
 	

@@ -12,6 +12,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 @Entity(name = "TrainingProvider")
 @Access(AccessType.FIELD)
 @Table(name = "training_provider", schema = "trn")
+@Cacheable(true)
 @NamedQueries({
         @NamedQuery(
             name="qry.training.providers",
@@ -36,6 +37,7 @@ public class TrainingProvider extends DomainEntity {
 
     @Version
     @Column(name = "version")
+    @SuppressWarnings("unused")
     private int version;
 
     public Long getId() {
@@ -69,9 +71,7 @@ public class TrainingProvider extends DomainEntity {
 
         TrainingProvider that = (TrainingProvider) o;
 
-        if (id != null ? !id.equals(that.id) : that.id != null) return false;
-
-        return true;
+        return !(id != null ? !id.equals(that.id) : that.id != null);
     }
 
     @Override

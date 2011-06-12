@@ -3,12 +3,12 @@ package za.co.yellowfire.ui.security;
 import java.util.Map;
 
 import javax.ejb.EJB;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+import javax.inject.Named;
 
 //import org.openfaces.event.AjaxActionEvent;
 import org.primefaces.context.RequestContext;
@@ -20,10 +20,11 @@ import za.co.yellowfire.domain.profile.User;
 import za.co.yellowfire.domain.profile.UserManager;
 
 /**
- *
+ * @author Mark P Ashworth
+ * @version 0.0.1
  */
 @SessionScoped
-@ManagedBean(name = "userController")
+@Named("userController")
 public class UserController extends AbstractController {
 	private static final long serialVersionUID = 1L;
 	private static final String ERROR_USER_LOGIN = "controller.user.login.error";

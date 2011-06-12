@@ -8,16 +8,16 @@ import za.co.yellowfire.domain.profile.User;
 import za.co.yellowfire.domain.profile.UserManager;
 import za.co.yellowfire.domain.profile.UserRegistrationException;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+import javax.inject.Named;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
 @RequestScoped
-@ManagedBean(name = "registerController")
+@Named("registerController")
 public class RegisterController extends AbstractController {
     private static final long serialVersionUID = 1L;
 	private static final Logger LOGGER = LoggerFactory.getLogger(LogType.CONTROLLER.getCategory());

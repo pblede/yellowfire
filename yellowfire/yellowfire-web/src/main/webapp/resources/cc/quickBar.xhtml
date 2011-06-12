@@ -11,34 +11,39 @@
     <composite:attribute name="bean" required="true" shortDescription="The bean that quickBar should use to get the userName, password, remoteUser"/>
     <composite:attribute name="credentialBean" required="true"/>
     <composite:attribute name="userBean" required="true"/>
-    <composite:attribute name="loginMethod" required="true" method-signature="java.lang.String action()" shortDescription="The method to login"/>
+    <composite:attribute name="loginMethod" required="false" method-signature="java.lang.String action()" shortDescription="The method to login"/>
     <composite:attribute name="registerUrl" default="#{request.contextPath}/pages/register.jsf"/>
-    <composite:attribute name="registerMethod" required="true" method-signature="java.lang.String action()" shortDescription="The method to register"/>
-    <composite:attribute name="logoutMethod" required="true" method-signature="java.lang.String action()" shortDescription="The method to logout"/>
+    <composite:attribute name="registerMethod" required="false" method-signature="java.lang.String action()" shortDescription="The method to register"/>
+    <composite:attribute name="logoutMethod" required="false" method-signature="java.lang.String action()" shortDescription="The method to logout"/>
     <composite:attribute name="loggedIn" required="true" shortDescription="Whether the user is logged in"/>
     <composite:attribute name="version" required="true" shortDescription="The version of the application" />
+    <composite:attribute name="showLogin" required="false" default="true" type="java.lang.Boolean" shortDescription="Whether the login is shown" />
 </composite:interface>
 
 <!-- IMPLEMENATION -->
 <composite:implementation>
     <h:panelGrid id="lfp1" columns="4" rendered="#{cc.attrs.loggedIn ne true}">
-        <cc:quickLogin
-            credentialBean="#{cc.attrs.credentialBean}"
-            actionMethod="#{cc.attrs.loginMethod}"
-            registerUrl="#{cc.attrs.registerUrl}"
-            registerMethod="#{cc.attrs.registerMethod}"
-            id="ql1"
-            update="lfp1 lfp2">
-            <!--<f:actionListener for="loginActionListener" type="yellowfire.jsf.security.WeblogicLoginActionListener"/>-->
-        </cc:quickLogin>
+        <h:panelGroup rendered="#{cc.attrs.showLogin}">
+            <cc:quickLogin
+                credentialBean="#{cc.attrs.credentialBean}"
+                actionMethod="#{cc.attrs.loginMethod}"
+                registerUrl="#{cc.attrs.registerUrl}"
+                registerMethod="#{cc.attrs.registerMethod}"
+                id="ql1"
+                update="lfp1 lfp2">
+                <!--<f:actionListener for="loginActionListener" type="yellowfire.jsf.security.WeblogicLoginActionListener"/>-->
+            </cc:quickLogin>
+        </h:panelGroup>
         <h:outputText value="Version: #{cc.attrs.version}"/>
         <h:outputText value="Date: "/>
         <h:outputText value="#{cc.attrs.bean.businessDate}"><f:convertDateTime pattern="MMMM dd, yyyy"/></h:outputText>
     </h:panelGrid>
     <h:panelGrid id="lfp2" columns="4" rendered="#{cc.attrs.loggedIn}">
-        <cc:quickLogout userBean="#{cc.attrs.userBean}" actionMethod="#{cc.attrs.logoutMethod}" id="ql2" update="lfp1 lfp2">
-            <!--<f:actionListener for="logoutActionListener" type="yellowfire.jsf.security.LogoutActionListener"/>-->
-        </cc:quickLogout>
+        <h:panelGroup rendered="#{cc.attrs.showLogin}">
+            <cc:quickLogout userBean="#{cc.attrs.userBean}" actionMethod="#{cc.attrs.logoutMethod}" id="ql2" update="lfp1 lfp2">
+                <!--<f:actionListener for="logoutActionListener" type="yellowfire.jsf.security.LogoutActionListener"/>-->
+            </cc:quickLogout>
+        </h:panelGroup>
         <h:outputText value="Version: #{cc.attrs.version}"/>
         <h:outputText value="Date: "/>
         <h:outputText value="#{cc.attrs.bean.businessDate}"><f:convertDateTime pattern="MMMM dd, yyyy"/></h:outputText>

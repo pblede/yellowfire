@@ -1,7 +1,13 @@
 package za.co.yellowfire.domain.training;
 
+import org.eclipse.persistence.annotations.Partitioned;
+import org.eclipse.persistence.annotations.UnionPartitioning;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import za.co.yellowfire.domain.Archiveable;
 import za.co.yellowfire.domain.Contact;
 import za.co.yellowfire.domain.DomainEntity;
+import za.co.yellowfire.log.LogType;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -14,14 +20,24 @@ import javax.xml.bind.annotation.XmlAttribute;
  */
 @Entity(name = "TrainingCourse")
 @Access(AccessType.FIELD)
-@Table(name = "course", schema = "trn")
+@Table(name = "course")
+@Cacheable(false)
 @NamedQueries({
         @NamedQuery(
             name="qry.training.courses",
             query="select c from TrainingCourse c"
         )
 })
-public class TrainingCourse extends DomainEntity {
+@UnionPartitioning(
+        name="UnionPartitioningAllNodes",
+        /*Do not replicate changes to all data sources*/
+        replicateWrites=false)
+@Partitioned("UnionPartitioningAllNodes")
+public class TrainingCourse extends DomainEntity implements Archiveable, Comparable<TrainingCourse> {
+    private static final long serialVersionUID = 1L;
+
+    @SuppressWarnings("unused")
+    private static final Logger LOGGER = LoggerFactory.getLogger(LogType.DOMAIN.getCategory());
 
     public static final String QRY_TRAINING_COURSES = "qry.training.courses";
 
@@ -84,7 +100,11 @@ public class TrainingCourse extends DomainEntity {
     @Column(name = "version")
     @SuppressWarnings("unused")
     private int version;
-    
+
+    @Column(name = "archived")
+    @SuppressWarnings("unused")
+    private boolean archived;
+
     public Long getId() {
         return id;
     }
@@ -117,14 +137,17 @@ public class TrainingCourse extends DomainEntity {
         this.durationType = durationType;
     }
 
+    @SuppressWarnings("unused")
     public String getDurationText() {
         return getDuration() + " " + getDurationType();
     }
 
+    @SuppressWarnings("unused")
     public void setDurationText(String text) {
         if (text == null || text.trim().equals("")) {
             duration = 0;
             durationType = DurationType.Days;
+            return;
         }
 
         String[] parts = text.split(" ");
@@ -133,6 +156,7 @@ public class TrainingCourse extends DomainEntity {
         setDurationType(DurationType.valueOf(parts[1]));
     }
 
+    @SuppressWarnings("unused")
     public TrainingProvider getProvider() {
         return provider;
     }
@@ -141,46 +165,57 @@ public class TrainingCourse extends DomainEntity {
         this.provider = provider;
     }
 
+    @SuppressWarnings("unused")
     public SkillArea getSkillArea() {
         return skillArea;
     }
 
+    @SuppressWarnings("unused")
     public void setSkillArea(SkillArea skillArea) {
         this.skillArea = skillArea;
     }
 
+    @SuppressWarnings("unused")
     public ContentType getContentType() {
         return contentType;
     }
 
+    @SuppressWarnings("unused")
     public void setContentType(ContentType contentType) {
         this.contentType = contentType;
     }
 
+    @SuppressWarnings("unused")
     public Category getCategory() {
         return category;
     }
 
+    @SuppressWarnings("unused")
     public void setCategory(Category category) {
         this.category = category;
     }
 
+    @SuppressWarnings("unused")
     public String getAccreditingBody() {
         return accreditingBody;
     }
 
+    @SuppressWarnings("unused")
     public void setAccreditingBody(String accreditingBody) {
         this.accreditingBody = accreditingBody;
     }
 
+    @SuppressWarnings("unused")
     public String getOverview() {
         return overview;
     }
 
+    @SuppressWarnings("unused")
     public void setOverview(String overview) {
         this.overview = overview;
     }
 
+    @SuppressWarnings("unused")
     public Contact getContact() {
         return contact;
     }
@@ -189,20 +224,28 @@ public class TrainingCourse extends DomainEntity {
         this.contact = contact;
     }
 
+    @SuppressWarnings("unused")
     public boolean isInternal() {
         return internal;
     }
 
+    @SuppressWarnings("unused")
     public void setInternal(boolean internal) {
         this.internal = internal;
     }
 
+    @SuppressWarnings("unused")
     public boolean isCore() {
         return core;
     }
 
+    @SuppressWarnings("unused")
     public void setCore(boolean core) {
         this.core = core;
+    }
+
+    public boolean isArchived() {
+        return archived;
     }
 
     @Override
@@ -212,14 +255,17 @@ public class TrainingCourse extends DomainEntity {
 
         TrainingCourse that = (TrainingCourse) o;
 
-        if (id != null ? !id.equals(that.id) : that.id != null) return false;
-
-        return true;
+        return !(id != null ? !id.equals(that.id) : that.id != null);
     }
 
     @Override
     public int hashCode() {
         return id != null ? id.hashCode() : 0;
+    }
+
+    @Override
+    public int compareTo(TrainingCourse o) {
+        return (int) (this.id - o.getId());
     }
 
     @Override

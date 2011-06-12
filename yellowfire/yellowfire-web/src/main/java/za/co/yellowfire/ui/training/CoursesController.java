@@ -3,6 +3,7 @@ package za.co.yellowfire.ui.training;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import za.co.yellowfire.domain.Contact;
+import za.co.yellowfire.domain.NullDomainObject;
 import za.co.yellowfire.domain.profile.SystemManager;
 import za.co.yellowfire.domain.training.*;
 import za.co.yellowfire.log.LogType;
@@ -14,6 +15,7 @@ import javax.ejb.EJB;
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
 import javax.faces.event.ActionEvent;
+import javax.faces.model.SelectItem;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
@@ -41,12 +43,12 @@ public class CoursesController implements Serializable {
     private List<TrainingProvider> trainingProviders;
     private List<ContentType> contentTypes;
     private List<Category> categories;
+    private SelectItem nullSelectItem = new SelectItem(new NullDomainObject(), "Select...", "Select...", false, false, true);
     
     @Inject Conversation conversation;
 
     @PostConstruct
         private void init() {
-            System.out.println("init()");
             dataModel =
                     new DataTableModel<TrainingCourse>(
                             /* DataTableListener*/
@@ -94,6 +96,10 @@ public class CoursesController implements Serializable {
             timezone = systemManager.getTimezone();
         }
         return timezone;
+    }
+
+    public SelectItem getNullSelectItem() {
+        return nullSelectItem;
     }
 
     public List<DurationType> getDurationTypes() {

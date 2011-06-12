@@ -29,6 +29,11 @@
 		<param-name>primefaces.THEME</param-name>
 		<param-value>none</param-value>
 	</context-param>
+    <!-- Might need to turn this off for WLS because of bug JAVASERVERFACES-1856-->
+    <context-param>
+        <param-name>com.sun.faces.enableMissingResourceLibraryDetection</param-name>
+        <param-value>true</param-value>
+    </context-param>
 	<servlet>
 		<servlet-name>Faces Servlet</servlet-name>
 		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
@@ -80,7 +85,15 @@
         <exception-type>javax.faces.application.ViewExpiredException</exception-type>
         <location>/view_expired.xhtml</location>
     </error-page>
-    
+    <error-page>
+        <exception-type>org.jboss.weld.context.NonexistentConversationException</exception-type>
+        <location>/view_expired.xhtml</location>
+    </error-page>
+    <error-page>
+        <exception-type>javax.enterprise.context.NonexistentConversationException</exception-type>
+        <location>/view_expired.xhtml</location>
+    </error-page>
+
 	<!--  
 	<persistence-unit-ref>
 	<description></description>

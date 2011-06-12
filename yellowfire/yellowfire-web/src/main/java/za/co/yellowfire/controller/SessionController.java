@@ -15,11 +15,11 @@ import za.co.yellowfire.domain.result.ResultManager;
 import za.co.yellowfire.log.LogType;
 
 import javax.ejb.EJB;
+import javax.enterprise.context.SessionScoped;
 import javax.enterprise.event.Event;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
+import javax.inject.Named;
 import java.util.Date;
 import java.util.List;
 
@@ -28,7 +28,7 @@ import java.util.List;
  * @version 0.0.1
  */
 @SessionScoped
-@ManagedBean(name = "sessionController")
+@Named("sessionController")
 public class SessionController extends AbstractController {
 	private static final long serialVersionUID = 1L;
 	private static final Logger LOGGER = LoggerFactory.getLogger(LogType.CONTROLLER.getCategory());

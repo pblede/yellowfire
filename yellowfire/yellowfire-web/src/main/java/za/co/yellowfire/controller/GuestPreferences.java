@@ -1,11 +1,12 @@
 package za.co.yellowfire.controller;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Named;
+import java.io.Serializable;
 
 @SessionScoped
-@ManagedBean(name = "guestPreferences")
-public class GuestPreferences {
+@Named("guestPreferences")
+public class GuestPreferences implements Serializable {
     public String getTheme() {
         return "overcast";
     }

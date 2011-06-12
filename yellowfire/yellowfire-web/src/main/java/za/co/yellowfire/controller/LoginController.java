@@ -13,6 +13,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -20,7 +21,7 @@ import javax.servlet.http.HttpServletRequest;
  * @version 0.0.1
  */
 @ViewScoped
-@ManagedBean(name = "loginController")
+@Named("loginController")
 public class LoginController extends AbstractController {
 	private static final long serialVersionUID = 1L;
 	private static final Logger LOGGER = LoggerFactory.getLogger(LogType.CONTROLLER.getCategory());

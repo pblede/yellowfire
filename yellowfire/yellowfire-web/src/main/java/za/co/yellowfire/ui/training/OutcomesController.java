@@ -12,13 +12,14 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.inject.Named;
 import java.io.Serializable;
 
 /**
  * @author Mark P Ashworth
  * @version 0.0.1
  */
-@ViewScoped @ManagedBean(name = "outcomesController")
+@ViewScoped @Named("outcomesController")
 public class OutcomesController implements Serializable {
     private static final Logger LOGGER = LoggerFactory.getLogger(LogType.CONTROLLER.getCategory());
     private static final String NAME = "OutcomesController";

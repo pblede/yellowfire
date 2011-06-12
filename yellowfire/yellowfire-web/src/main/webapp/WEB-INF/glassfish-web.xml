@@ -33,5 +33,8 @@
 	    <description>Keep a copy of the generated servlet class' java code.</description>
 	  </property>
 	</jsp-config>
+
+    <parameter-encoding default-charset="UTF-8"/>
+
 	<!--property name="useBundledJsf" value="true"/-->
 </glassfish-web-app>

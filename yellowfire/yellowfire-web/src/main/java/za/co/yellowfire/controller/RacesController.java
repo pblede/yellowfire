@@ -7,11 +7,12 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.event.PhaseId;
+import javax.inject.Named;
 
 import za.co.yellowfire.domain.racing.Race;
 
 @ViewScoped
-@ManagedBean(name = "racesController")
+@Named("racesController")
 public class RacesController extends AbstractController {
     private static final long serialVersionUID = 1L;
             

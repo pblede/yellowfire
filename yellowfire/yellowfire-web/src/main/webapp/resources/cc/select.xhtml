@@ -8,25 +8,26 @@
    xmlns:cc="http://java.sun.com/jsf/composite">
 
    <cc:interface>
-      <cc:attribute name="label" required="true" shortDescription="The label for the output"/>
-      <cc:attribute name="value" required="true" shortDescription="The value for the output"/>
-      <cc:attribute name="converter" required="true" shortDescription="The converter for the output select items"/>
+       <cc:attribute name="label" required="true" shortDescription="The label for the output"/>
+       <cc:attribute name="value" required="true" shortDescription="The value for the output"/>
+       <cc:attribute name="display" required="true" shortDescription="The value for the output when in readonly mode"/>
+       <cc:attribute name="items" required="true" shortDescription="The items of the select"/>
+       <cc:attribute name="readonly" required="false" default="false" type="java.lang.Boolean" shortDescription="Whether the select is readonly"/>
    </cc:interface>
 
     <cc:implementation>
-        <h:outputText id="label" value="#{cc.attrs.label}" for="select" />
-        <h:panelGroup style="width:100%">
-            <h:panelGrid columns="2" style="width:100%">
-                <h:selectOneMenu
-                        id="select"
-                        label="#{cc.attrs.label}"
-                        converter="ContentTypeConverter"
-                        value="#{cc.attrs.value}" >
-                    <f:selectItem id="blank" itemValue="-1" itemLabel="Select"  itemDescription="Select" noSelectionOption="true" />
-                    <cc:insertChildren />
-                </h:selectOneMenu>
-                <p:message id="msg" for="select" showSummary="false" showDetail="false" display="icon" />
-            </h:panelGrid>
-        </h:panelGroup>
+        <h:panelGrid columns="2" styleClass="width100pc" columnClasses="width95pc,width5pc">
+            <h:selectOneMenu
+                    id="select"
+                    label="#{cc.attrs.label}"
+                    converter="#{cc.attrs.converter}"
+                    value="#{cc.attrs.value}"
+                    styleClass="width100pc"
+                    rendered="#{!cc.attrs.readonly}">
+                <cc:insertChildren />
+            </h:selectOneMenu>
+            <h:outputText id="select2" value="#{cc.attrs.display}" styleClass="width100pc" rendered="#{cc.attrs.readonly}" />
+            <p:message for="select" showSummary="false" showDetail="false" display="icon" />
+        </h:panelGrid>
     </cc:implementation>
 </ui:composition>

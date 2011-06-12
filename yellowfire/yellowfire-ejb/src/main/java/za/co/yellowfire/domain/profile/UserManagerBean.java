@@ -13,9 +13,9 @@ import java.util.List;
 import java.util.Map;
 
 @Local(UserManager.class)
-@Remote(UserManagerRemote.class)
-@Stateless(name = "UserManager", mappedName = "yellowfire/session/UserManager")
-public class UserManagerBean extends DomainManagerBean implements UserManager, UserManagerRemote {
+//@Remote(UserManagerRemote.class)
+@Stateless(name = "UserManager"/*, mappedName = "yellowfire/session/UserManager"*/)
+public class UserManagerBean extends DomainManagerBean implements UserManager/*, UserManagerRemote*/ {
 	private static final long serialVersionUID = 1L;
 	private static final Logger LOGGER = LoggerFactory.getLogger(LogType.MANAGER.getCategory());
 

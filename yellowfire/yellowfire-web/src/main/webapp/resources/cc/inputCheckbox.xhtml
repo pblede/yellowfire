@@ -10,29 +10,22 @@
 
    <comp:interface>
       <comp:attribute name="label" required="true" shortDescription="The label for the output"/>
-      <comp:attribute name="value" required="false" shortDescription="The value for the output"/>
+      <comp:attribute name="value" required="false" type="java.lang.Boolean" shortDescription="The value for the output"/>
       <comp:attribute name="size" required="false" default="50" shortDescription="The value for the output"/>
-      <comp:attribute name="required" required="false" default="false" shortDescription="The value for the output"/>
-       <comp:attribute name="readonly" required="false" default="true" shortDescription="The field is read-only"/>
+      <comp:attribute name="required" required="false" default="false" type="java.lang.Boolean" shortDescription="The value for the output"/>
+       <comp:attribute name="readonly" required="false" default="true" type="java.lang.Boolean" shortDescription="The field is read-only"/>
    </comp:interface>
 
     <comp:implementation>
         <h:panelGroup style="width:100%">
             <h:selectBooleanCheckbox
-                title="#{msgs['fld.core']}:"
-                label="#{msgs['fld.core']}"
-                value="#{cc.attrs.bean.core}" />
-
-            <h:inputText
-                    id="input"
-                    size="#{cc.attrs.size}"
-                    required="#{cc.attrs.required}"
-                    label="#{cc.attrs.label}"
-                    value="#{cc.attrs.value}"
-                    rendered="#{cc.attrs.readonly ne true}"
-                    styleClass="width95pc"/>
-            <h:outputText id="t02" value="#{cc.attrs.value}" styleClass="width100pc" rendered="#{cc.attrs.readonly}" />
-            <p:message id="msg" for="input" showSummary="false" showDetail="false" display="icon" style="width:5%" />
+                id="checkbox"
+                title="#{cc.attrs.label}"
+                label="#{cc.attrs.label}"
+                value="#{cc.attrs.value}"
+                rendered="#{!cc.attrs.readonly}"/>
+            <h:outputText value="#{cc.attrs.value ? 'True' : 'False'}" styleClass="width100pc" rendered="#{cc.attrs.readonly}" />
+            <p:message id="msg" for="checkbox" showSummary="false" showDetail="false" display="icon" style="width:5%" />
         </h:panelGroup>
     </comp:implementation>
 </ui:composition>
