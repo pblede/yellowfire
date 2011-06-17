@@ -5,11 +5,8 @@ import org.jboss.seam.solder.logging.MessageLogger;
 import org.jboss.seam.solder.messages.Message;
 
 /**
- * Created by IntelliJ IDEA.
- * User: MarkA
- * Date: 2011/06/12
- * Time: 7:38 AM
- * To change this template use File | Settings | File Templates.
+ * @author Mark P Ashworth
+ * @version 0.0.1
  */
 @MessageLogger
 public interface UILogger {

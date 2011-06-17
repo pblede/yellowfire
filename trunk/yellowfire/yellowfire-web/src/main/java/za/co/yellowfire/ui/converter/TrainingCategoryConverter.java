@@ -16,13 +16,9 @@ import javax.naming.NamingException;
 import javax.persistence.LockModeType;
 import java.io.Serializable;
 
-@SessionScoped
-@FacesConverter("TrainingCategoryConverter")
+@FacesConverter(forClass = Category.class)
 public class TrainingCategoryConverter extends AbstractConverter implements Converter, Serializable {
 	private static final String SELECT = "Select...";
-
-    @EJB(name = "DomainManager")
-    private DomainManager manager;
 
     /**
 	 * Converts the value into a DomainObject instance by looking up the value as the id of the Club
@@ -47,7 +43,7 @@ public class TrainingCategoryConverter extends AbstractConverter implements Conv
 		
 		DomainObject object;
 		try {
-			object = (DomainObject) manager.find(Category.class, id, LockModeType.OPTIMISTIC);
+			object = (DomainObject) getDomainManager().find(Category.class, id, LockModeType.OPTIMISTIC);
 		    return object;
 		//} catch (NamingException e) {
 		//	FacesUtil.addErrorMessage(context, component.getClientId(), "Converter Error", e);

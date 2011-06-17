@@ -73,7 +73,6 @@
                                 <h:selectOneMenu
                                         id="a04"
                                         label="#{msgs['fld.training.category']}"
-                                        converter="TrainingCategoryConverter"
                                         value="#{cc.attrs.bean.category}"
                                         styleClass="width100pc"
                                         rendered="#{!cc.attrs.readonly}">
@@ -96,7 +95,6 @@
                                 <h:selectOneMenu
                                         id="a03"
                                         label="#{msgs['fld.training.provider']}"
-                                        converter="TrainingProviderConverter"
                                         value="#{cc.attrs.bean.provider}"
                                         styleClass="width100pc"
                                         rendered="#{!cc.attrs.readonly}">
@@ -119,7 +117,6 @@
                                 <h:selectOneMenu
                                         id="a07"
                                         label="#{msgs['fld.content.type']}"
-                                        converter="ContentTypeConverter"
                                         value="#{cc.attrs.bean.contentType}"
                                         styleClass="width100pc"
                                         rendered="#{!cc.attrs.readonly}">

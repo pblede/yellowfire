@@ -2,28 +2,19 @@ package za.co.yellowfire.ui.converter;
 
 import za.co.yellowfire.domain.DomainObject;
 import za.co.yellowfire.domain.training.TrainingProvider;
-import za.co.yellowfire.manager.DomainManager;
 import za.co.yellowfire.ui.FacesUtil;
 
-import javax.ejb.EJB;
-import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.ConverterException;
 import javax.faces.convert.FacesConverter;
-import javax.inject.Inject;
-import javax.naming.NamingException;
 import javax.persistence.LockModeType;
 import java.io.Serializable;
 
-@SessionScoped
-@FacesConverter("TrainingProviderConverter")
+@FacesConverter(forClass = TrainingProvider.class)
 public class TrainingProviderConverter extends AbstractConverter implements Converter, Serializable {
     private static final String SELECT = "Select...";
-
-    @Inject
-    private DomainManager manager;
 
 	/**
 	 * Converts the value into a DomainObject instance by looking up the value as the id of the Club
@@ -48,7 +39,7 @@ public class TrainingProviderConverter extends AbstractConverter implements Conv
 		
 		DomainObject object;
 		try {
-			object = (DomainObject) manager.find(TrainingProvider.class, id, LockModeType.OPTIMISTIC);
+			object = (DomainObject) getDomainManager().find(TrainingProvider.class, id, LockModeType.OPTIMISTIC);
 		    return object;
 		//} catch (NamingException e) {
 		//	FacesUtil.addErrorMessage(context, component.getClientId(), "Converter Error", e);

@@ -251,6 +251,24 @@ select
 from rce.property
 where property_name like 'system.%'
 go
-
-
 insert into cde.vw_system_property (property_name, property_value, [version]) values ('system.timezone', 'CAT', 1);
+go
+create table cde.notification (
+	notification_id bigint not null identity(1, 1),
+	notification_type varchar(32) not null,
+	notification_from varchar(128) not null,
+	notification_to varchar(256) not null,
+	notification_cc varchar(256) null,
+	notification_bcc varchar(256) null,
+	notification_subject varchar(256) null,
+	notification_body varchar(max) null,
+	notification_sent datetime null,
+	create_ts datetime null,
+	update_ts datetime null,
+	version int null,
+	archived bit null,
+	
+)
+
+alter table cde.notification add constraint pk_notification_id primary key clustered ([notification_id]);
+alter table cde.notification add constraint df_property_archived default(0) FOR [archived];

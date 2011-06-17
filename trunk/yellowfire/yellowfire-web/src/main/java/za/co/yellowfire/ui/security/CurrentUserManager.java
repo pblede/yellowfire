@@ -7,6 +7,7 @@ import za.co.yellowfire.domain.racing.Club;
 import za.co.yellowfire.domain.racing.RaceManager;
 import za.co.yellowfire.domain.training.TrainingCourse;
 import za.co.yellowfire.log.LogType;
+import za.co.yellowfire.manager.DomainManager;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateful;
@@ -28,8 +29,8 @@ public class CurrentUserManager implements Serializable {
 
     private TrainingCourse course;
 
-    @EJB(name = "RaceManager")
-	private RaceManager raceManager;
+    @EJB(name = "DomainManager")
+	private DomainManager manager;
 
 	@Produces @Authenticated @Named("currentUser")
 	public User getCurrentUser() {
@@ -56,12 +57,6 @@ public class CurrentUserManager implements Serializable {
 	public User getGuestUser() {
 		return new User();
 	}
-
-    //TODO Refactor this out
-    @Produces @SessionScoped @Named("runningClubs")
-    public List<Club> getClubs() {
-        return raceManager.retrieveClubs();    
-    }
 
 	public void onLogin(@Observes @Authenticated User user) {
 		LOGGER.info("onLogin : " + user);
