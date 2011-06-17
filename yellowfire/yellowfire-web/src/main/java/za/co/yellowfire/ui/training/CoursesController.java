@@ -1,23 +1,21 @@
 package za.co.yellowfire.ui.training;
 
-import org.jboss.seam.solder.logging.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import za.co.yellowfire.domain.Contact;
 import za.co.yellowfire.domain.NullDomainObject;
 import za.co.yellowfire.domain.profile.SystemManager;
 import za.co.yellowfire.domain.training.*;
-import za.co.yellowfire.domain.training.Category;
 import za.co.yellowfire.log.LogType;
 import za.co.yellowfire.manager.DomainManager;
 import za.co.yellowfire.ui.UILogger;
-import za.co.yellowfire.ui.model.*;
+import za.co.yellowfire.ui.model.AbstractDomainManagerDataTableListener;
+import za.co.yellowfire.ui.model.DataTableModel;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
-import javax.faces.event.ActionEvent;
 import javax.faces.model.SelectItem;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -41,7 +39,8 @@ public class CoursesController implements Serializable {
     private DomainManager manager;
     private DataTableModel<TrainingCourse> dataModel;
 
-    @Inject @org.jboss.seam.solder.logging.Category("courses")
+    @Inject
+    @org.jboss.seam.solder.logging.Category("courses")
     private UILogger logger;
 
     private String timezone;
@@ -50,46 +49,57 @@ public class CoursesController implements Serializable {
     private List<ContentType> contentTypes;
     private List<Category> categories;
     private SelectItem nullSelectItem = new SelectItem(new NullDomainObject(), "Select...", "Select...", false, false, true);
-    
-    @Inject Conversation conversation;
+
+    @Inject
+    Conversation conversation;
 
     @PostConstruct
-        private void init() {
-            logger.logTest("CourseController");
-            dataModel =
-                    new DataTableModel<TrainingCourse>(
-                            /* DataTableListener*/
-                            new AbstractDomainManagerDataTableListener<TrainingCourse>() {
-                                @Override
-                                public DomainManager getManager() {
-                                    return manager;
-                                }
+    private void init() {
+        logger.logTest("CourseController");
+        dataModel =
+                new DataTableModel<TrainingCourse>(
+                        /* DataTableListener*/
+                        new AbstractDomainManagerDataTableListener<TrainingCourse>() {
+                            @Override
+                            public DomainManager getManager() {
+                                return manager;
+                            }
 
-                                @Override
-                                public String getLoadQuery() {
-                                    return TrainingCourse.QRY_TRAINING_COURSES;
-                                }
+                            @Override
+                            public String getLoadQuery() {
+                                return TrainingCourse.QRY_TRAINING_COURSES;
+                            }
 
-                                @Override
-                                public TrainingCourse createEmpty() {
-                                    return createEmptyEntity();
-                                }
-                            },
-                            /* DataTableSearchListener*/
-                            null);
-        }
+                            @Override
+                            public TrainingCourse createEmpty() {
+                                return createEmptyEntity();
+                            }
+                        },
+                        /* DataTableSearchListener*/
+                        null);
+    }
 
     public boolean isInConversation() {
         return (conversation != null && !conversation.isTransient());
     }
 
+    /**
+     * Starts the conversation of editing the course
+     *
+     * @return The view to proceed to
+     */
     public String onStartConversation() {
         if (conversation.isTransient())
             conversation.begin();
-        
+
         return "course";
     }
 
+    /**
+     * Completes the conversation
+     *
+     * @return The view to redirect to
+     */
     public String onCompleteConversation() {
         if (!conversation.isTransient())
             conversation.end();
@@ -105,6 +115,11 @@ public class CoursesController implements Serializable {
         return timezone;
     }
 
+    /**
+     * Returns the domain object that represents a null
+     *
+     * @return SelectItem
+     */
     public SelectItem getNullSelectItem() {
         return nullSelectItem;
     }

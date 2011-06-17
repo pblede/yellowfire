@@ -12,6 +12,7 @@ import javax.faces.event.ActionEvent;
 import javax.persistence.OptimisticLockException;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -52,7 +53,7 @@ public abstract class AbstractDomainManagerDataTableListener<T extends DomainObj
         if (query == null) {
             rows = new ArrayList<DataTableRow<T>>(0);
         } else {
-            List<T> values = (List<T>) getManager().query(query, null, DomainQueryHint.REFRESH);
+            Collection<T> values = (List<T>) getManager().query(query, null, DomainQueryHint.REFRESH);
             if (values != null) {
                 rows = new ArrayList<DataTableRow<T>>(values.size());
                 for (T value : values) {

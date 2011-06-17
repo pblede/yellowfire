@@ -50,6 +50,22 @@
       <column name="version" sqlType="int" length="10" precision="0" nullable="true" jdbcType="4" />
       <foreign-key name="fk_answer_text_answer_id" columns="answer_id" ref-table="answer" ref-schema="cde" ref-catalog="race" ref-columns="answer_id" />
     </table>
+    <table name="notification" schema="cde" catalog="race" type="TABLE">
+      <column name="notification_id" sqlType="bigint identity" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true" />
+      <column name="notification_type" sqlType="varchar" length="32" precision="0" nullable="false" jdbcType="12" />
+      <column name="notification_from" sqlType="varchar" length="128" precision="0" nullable="false" jdbcType="12" />
+      <column name="notification_to" sqlType="varchar" length="256" precision="0" nullable="false" jdbcType="12" />
+      <column name="notification_cc" sqlType="varchar" length="256" precision="0" nullable="true" jdbcType="12" />
+      <column name="notification_bcc" sqlType="varchar" length="256" precision="0" nullable="true" jdbcType="12" />
+      <column name="notification_subject" sqlType="varchar" length="256" precision="0" nullable="true" jdbcType="12" />
+      <column name="notification_body" sqlType="varchar" length="2147483647" precision="0" nullable="true" jdbcType="12" />
+      <column name="notification_sent" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" />
+      <column name="create_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" />
+      <column name="update_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" />
+      <column name="version" sqlType="int" length="10" precision="0" nullable="true" jdbcType="4" />
+      <column name="archived" sqlType="bit" length="1" precision="0" nullable="true" jdbcType="-7" default="((0))" />
+      <primary-key name="pk_notification_id" columns="notification_id" />
+    </table>
     <table name="person" schema="cde" catalog="race" type="TABLE">
       <column name="person_id" sqlType="bigint identity" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true" />
       <column name="person_name" sqlType="varchar" length="32" precision="0" nullable="false" jdbcType="12" />

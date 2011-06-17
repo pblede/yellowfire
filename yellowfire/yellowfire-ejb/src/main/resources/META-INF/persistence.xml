@@ -117,9 +117,9 @@
         <!--
         Integrate Compass into EclipseLink
         -->
-        <property name="eclipselink.session.customizer" value="za.co.yellowfire.manager.CompassSessionCustomizer" />
-        <property name="compass.engine.connection" value="file://C:/Shared/Projects.Java" />
-        <property name="compass.debug" value="true"/>
+        <!--property name="eclipselink.session.customizer" value="za.co.yellowfire.manager.CompassSessionCustomizer" /-->
+        <!--property name="compass.engine.connection" value="file://C:/Shared/Projects.Java" /-->
+        <!--property name="compass.debug" value="true"/-->
         
 
         <!-- EclipseLink Connection Pool *WRITE* -->

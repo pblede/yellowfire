@@ -1,5 +1,15 @@
 package za.co.yellowfire.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import za.co.yellowfire.domain.profile.Registered;
+import za.co.yellowfire.domain.profile.User;
+import za.co.yellowfire.domain.profile.UserManager;
+import za.co.yellowfire.domain.profile.UserRegistrationException;
+import za.co.yellowfire.domain.racing.Club;
+import za.co.yellowfire.log.LogType;
+import za.co.yellowfire.manager.DomainManager;
+
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.event.Event;
@@ -9,14 +19,6 @@ import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.naming.NamingException;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import za.co.yellowfire.log.LogType;
-import za.co.yellowfire.domain.racing.Club;
-import za.co.yellowfire.domain.profile.*;
-
 import java.util.List;
 
 /**
@@ -41,17 +43,24 @@ public class ProfileController extends AbstractController {
     @Inject @Named("currentUser")
     private User user;
 
-    @Inject @Named("runningClubs")
-    private List<Club> clubs;
-
     @EJB(name = "UserManager")
 	private UserManager manager;
 
+    @EJB(name = "DomainManager")
+    private DomainManager domainManager;
+
+    private List<Club> clubs;
+    
     public User getUser() {
         return user;
     }
 
-    public List<Club> getClubs() { return clubs; }
+    public List<Club> getClubs() {
+        if (clubs == null) {
+            clubs = (List<Club>) domainManager.query(Club.QRY_CLUBS, null);
+        }
+        return clubs;
+    }
 
     public boolean getUserNameAvailable(String value) throws NamingException {
     	LOGGER.info("getUserNameAvailable() called");
@@ -79,12 +88,10 @@ public class ProfileController extends AbstractController {
 		}
 	}
 
-    public String register() {
+    public void onRegister() {
     	LOGGER.info("register() called");
 
     	try {
-            
-
     		/* Register the user */
     		manager.register(user);
 
@@ -93,7 +100,6 @@ public class ProfileController extends AbstractController {
 
     		/* Welcome and forward to races */
     		addInfoMessage("Welcome " + user.getFirstName() + user.getLastName(), "An email will be sent to " + user.getEmail() + " for verification.");
-    		return VIEW_RACES;
     	} catch (UserRegistrationException e) {
     		LOGGER.error("Registration error", e);
     		addErrorMessage(ERROR_USER_REGISTER, e.getMessage());
@@ -101,6 +107,9 @@ public class ProfileController extends AbstractController {
     		LOGGER.error(ERROR_USER_REGISTER, e);
     		addErrorMessage("Error", e);
     	}
-    	return null;
+    }
+
+    public String onCompleteConversation() {
+        return "index";
     }
 }

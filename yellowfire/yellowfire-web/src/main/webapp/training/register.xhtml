@@ -26,11 +26,38 @@
                     <p:commandButton
                         id="b2"
                         value="#{msgs['link.register']}"
-                        action="#{profileController.register}"
-                        ajax="false"
+                        action="#{profileController.onRegister}"
+                        oncomplete="onSaveComplete(xhr, status, args, messageDialogVar, 1)"
                         update="registerForm od3e od3u od3p od3cp od3d od3em od3um od3pm od3cpm od3dm g" />
                 </h:panelGrid>
             </p:fieldset>
 		</h:form>
+        <h:form id="h3" prependId="false">
+            <p:dialog
+                    id="messageDialog"
+                    header="#{msgs['dlg.register']}"
+                    widgetVar="messageDialogVar"
+                    resizable="false"
+                    width="400"
+                    modal="true"
+                    showEffect="explode"
+                    hideEffect="explode">
+                <p:fieldset legend="#{msgs['pnl.messages']}">
+                    <h:panelGrid id="display_messages" columns="1">
+                        <h:outputText value="#{msgs['msg.registered']}" />
+                    </h:panelGrid>
+                </p:fieldset>
+                <h:panelGrid id="display_buttons" columns="3" cellpadding="4">
+                    <p:commandButton
+                            id="b10"
+                            image="ui-icon ui-icon-close"
+                            value="#{msgs['btn.ok']}"
+                            action="#{profileController.onCompleteConversation}"
+                            ajax="false"
+                            immediate="true"
+                            />
+                </h:panelGrid>
+            </p:dialog>
+        </h:form>
 	</ui:define>
 </ui:composition>
