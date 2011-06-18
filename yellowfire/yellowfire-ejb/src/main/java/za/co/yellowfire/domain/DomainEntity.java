@@ -13,7 +13,8 @@ import java.util.Map;
  * @version 0.0.1
  */
 public abstract class DomainEntity implements DomainObject {
-
+    private static final long serialVersionUID = 1L;
+    
     @Column(name = "create_ts")
     private Date created;
 

@@ -58,6 +58,8 @@ public class BackgroundEventSender {
     }
 
     public void event(@Observes @InForeground @NotifyEvent Notification event) {
+        logger.enter("event", event);
+        
         try {
             ObjectMessage msg = session.createObjectMessage();
             msg.setObject(event);
@@ -69,6 +71,8 @@ public class BackgroundEventSender {
     }
 
     public void event(@Observes @InForeground @IndexEvent DomainEntity object) {
+        logger.enter("event", object);
+
         try {
             ObjectMessage msg = session.createObjectMessage();
             msg.setObject(object);

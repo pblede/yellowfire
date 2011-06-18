@@ -37,7 +37,7 @@ public class VerifyServlet extends HttpServlet {
                 User user = manager.verify(key);
                 if (user != null) {
                     verifiedEventSrc.fire(user);
-                    response.sendRedirect("./pages/races.jsf");
+                    response.sendRedirect("./index.jsf");
                 } else {
                     /* No user found for the verification key ;-?*/
                     response.sendRedirect("./pages/error.jsf");

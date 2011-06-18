@@ -30,9 +30,9 @@ public class NotificationProcessor implements MessageListener {
 	}
 
     @Override
-    @TransactionAttribute
+    @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
     public void onMessage(Message message) {
-
+        System.out.println("message = " + message);
         try {
             if (message instanceof ObjectMessage) {
                 ObjectMessage om = (ObjectMessage) message;
@@ -40,7 +40,7 @@ public class NotificationProcessor implements MessageListener {
                 getEmailSender().send(notification);
             }
         } catch (Exception e) {
-            throw new EJBException("Unable to process notification", e);
+            e.printStackTrace();
         }
     }
 }

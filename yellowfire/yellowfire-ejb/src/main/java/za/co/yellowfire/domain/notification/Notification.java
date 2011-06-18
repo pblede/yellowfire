@@ -2,6 +2,7 @@ package za.co.yellowfire.domain.notification;
 
 import za.co.yellowfire.domain.Archiveable;
 import za.co.yellowfire.domain.DomainEntity;
+import za.co.yellowfire.domain.listener.DomainEntityListener;
 import za.co.yellowfire.domain.listener.SearchIndexListener;
 import za.co.yellowfire.domain.search.Searchable;
 import za.co.yellowfire.domain.search.SearchableProperty;
@@ -18,7 +19,7 @@ import java.util.Map;
  * @version 0.0.1
  */
 @Entity(name = "Notification")
-@EntityListeners({SearchIndexListener.class})
+@EntityListeners({DomainEntityListener.class, SearchIndexListener.class})
 @Access(AccessType.FIELD)
 @Table(name = "notification", schema = "cde")
 @Cacheable(true)
