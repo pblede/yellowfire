@@ -12,6 +12,8 @@ import org.jboss.seam.solder.messages.Message;
 @MessageLogger
 public interface DomainLogger {
 
+    static final int PersistError = 0001;
+
     @Log(level = Logger.Level.INFO)
     @Message("%s : %s")
     void enter(String methodName, Object params);
@@ -19,4 +21,8 @@ public interface DomainLogger {
     @Log(level = Logger.Level.INFO)
     @Message("%s")
     void exit(String methodName);
+
+    @Log(level = Logger.Level.ERROR)
+    @Message(id = PersistError, value = "Unable to persist - %s")
+    void persistError(Throwable e);
 }

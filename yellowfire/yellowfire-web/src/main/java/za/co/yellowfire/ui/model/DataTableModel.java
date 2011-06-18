@@ -4,17 +4,13 @@ import org.primefaces.component.datatable.DataTable;
 import org.primefaces.context.RequestContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import za.co.yellowfire.domain.profile.Authenticated;
-import za.co.yellowfire.domain.profile.User;
 import za.co.yellowfire.log.LogType;
 
-import javax.enterprise.event.Event;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AbortProcessingException;
 import javax.faces.event.ActionEvent;
 import javax.faces.event.ActionListener;
-import javax.inject.Inject;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -135,8 +131,11 @@ public class DataTableModel<T> implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null, msg);
         }
         RequestContext context = RequestContext.getCurrentInstance();
-        if (context != null)
+        if (context != null) {
             context.addCallbackParam("result", result);
+        } else {
+            LOGGER.warn("Cannot set PrimeFaces result because context is null");
+        }
     }
 
     public void onAdd(ActionEvent event) {

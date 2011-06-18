@@ -2,20 +2,27 @@ package za.co.yellowfire.domain.notification;
 
 import za.co.yellowfire.domain.Archiveable;
 import za.co.yellowfire.domain.DomainEntity;
+import za.co.yellowfire.domain.listener.SearchIndexListener;
+import za.co.yellowfire.domain.search.Searchable;
+import za.co.yellowfire.domain.search.SearchableProperty;
+import za.co.yellowfire.domain.search.SearchablePropertyId;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlAttribute;
 import java.util.Date;
+import java.util.Map;
 
 /**
  * @author Mark P Ashworth
  * @version 0.0.1
  */
 @Entity(name = "Notification")
+@EntityListeners({SearchIndexListener.class})
 @Access(AccessType.FIELD)
 @Table(name = "notification", schema = "cde")
 @Cacheable(true)
+@Searchable(name = "Notification")
 @NamedQueries({
         @NamedQuery(
             name="qry.notifications",
@@ -34,6 +41,7 @@ public class Notification extends DomainEntity implements Archiveable, Comparabl
     @Column(name = "notification_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @XmlAttribute(name = "id", required = false)
+    @SearchablePropertyId
     private Long id;
 
     @Enumerated(EnumType.STRING)
@@ -42,6 +50,7 @@ public class Notification extends DomainEntity implements Archiveable, Comparabl
 
     @Size(min = 1, max = 128)
     @Column(name = "notification_from", length = 128)
+    @SearchableProperty(name = "from", boost = 2)
     private String from;
 
     @Size(min = 1, max = 256)
@@ -169,7 +178,7 @@ public class Notification extends DomainEntity implements Archiveable, Comparabl
     public boolean isArchived() {
         return archived;
     }
-
+    
     @Override
     public int compareTo(Notification o) {
         return (int) (this.id - o.getId());

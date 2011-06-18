@@ -30,16 +30,6 @@ public class DomainManagerBean implements DomainManager, DomainManagerRemote {
 
     @PersistenceContext(unitName="yellowfire")
     private EntityManager em;
-
-    @EJB(name = "SearchManager")
-    private SearchManager search;
-
-    @Inject @SearchableAdded
-    private Event<DomainObject> searchableAddedEvent;
-
-    @Inject @SearchableRemoved
-    private Event<DomainObject> searchableRemovedEvent;
-
     /**
      * Persists the object
      * @param object The object to persist

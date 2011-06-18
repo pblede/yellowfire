@@ -13,14 +13,14 @@ import java.util.Calendar;
  */
 public class DomainEntityListener {
     @PrePersist
-    private void prePersist(DomainEntity entity) {
+    public void prePersist(DomainEntity entity) {
         Calendar now = Calendar.getInstance();
         entity.setCreated(now.getTime());
         entity.setUpdated(now.getTime());
     }
 
     @PreUpdate
-    private void preUpdate(DomainEntity entity) {
+    public void preUpdate(DomainEntity entity) {
         Calendar now = Calendar.getInstance();
         entity.setUpdated(now.getTime());
     }

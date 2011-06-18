@@ -1,8 +1,5 @@
 package za.co.yellowfire.manager;
 
-import org.compass.core.CompassDetachedHits;
-import org.compass.core.CompassHit;
-import org.compass.core.CompassHits;
 import org.glassfish.embeddable.Deployer;
 import org.glassfish.embeddable.GlassFish;
 import org.glassfish.embeddable.GlassFishProperties;
@@ -101,33 +98,33 @@ public class DomainManagerTest {
 
     @Test
     public void testVenueSearch() throws Exception {
-        Venue venue = new Venue("Mark's Test", "9 Test Ave", "23.000000,24.000000");
-
-        DomainManager domain = resolveDomainManager();
-        domain.persist(venue);
-        System.out.println("venue = " + venue);
-
-        SearchManager manager = resolveSearchManager();
-        CompassDetachedHits hits = (CompassDetachedHits) manager.search("Mark's Test");
-        for (CompassHit hit : hits) {
-            System.out.println("***************************");
-            System.out.println("hit = " + hit.getAlias());
-            System.out.println("hit = " + hit.data());
-            System.out.println("hit = " + hit.getScore());
-//            System.out.println("hit = " + hit.getHighlightedText().getHighlightedText());
-        }
-
-        domain.remove(venue);
-
-        manager = resolveSearchManager();
-        hits = (CompassDetachedHits) manager.search("9 Mark's Test");
-        for (CompassHit hit : hits) {
-            System.out.println("***************************");
-            System.out.println("hit = " + hit.getAlias());
-            System.out.println("hit = " + hit.data());
-            System.out.println("hit = " + hit.getScore());
-//            System.out.println("hit = " + hit.getHighlightedText().getHighlightedText());
-        }
+//        Venue venue = new Venue("Mark's Test", "9 Test Ave", "23.000000,24.000000");
+//
+//        DomainManager domain = resolveDomainManager();
+//        domain.persist(venue);
+//        System.out.println("venue = " + venue);
+//
+//        SearchManager manager = resolveSearchManager();
+//        CompassDetachedHits hits = (CompassDetachedHits) manager.search("Mark's Test");
+//        for (CompassHit hit : hits) {
+//            System.out.println("***************************");
+//            System.out.println("hit = " + hit.getAlias());
+//            System.out.println("hit = " + hit.data());
+//            System.out.println("hit = " + hit.getScore());
+////            System.out.println("hit = " + hit.getHighlightedText().getHighlightedText());
+//        }
+//
+//        domain.remove(venue);
+//
+//        manager = resolveSearchManager();
+//        hits = (CompassDetachedHits) manager.search("9 Mark's Test");
+//        for (CompassHit hit : hits) {
+//            System.out.println("***************************");
+//            System.out.println("hit = " + hit.getAlias());
+//            System.out.println("hit = " + hit.data());
+//            System.out.println("hit = " + hit.getScore());
+////            System.out.println("hit = " + hit.getHighlightedText().getHighlightedText());
+//        }
 
         
     }

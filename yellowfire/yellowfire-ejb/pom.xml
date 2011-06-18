@@ -46,11 +46,19 @@
             <artifactId>httpclient</artifactId>
             <version>4.1.1</version>
         </dependency>
+        <!--
         <dependency>
             <groupId>org.compass-project</groupId>
             <artifactId>compass</artifactId>
             <version>2.3.0</version>
         </dependency>
+        -->
+        <dependency>
+            <groupId>org.apache.solr</groupId>
+            <artifactId>solr-solrj</artifactId>
+            <version>3.2.0</version>
+        </dependency>
+        <!--
         <dependency>
             <groupId>org.apache.lucene</groupId>
             <artifactId>lucene-core</artifactId>
@@ -86,6 +94,7 @@
             <version>2.4.1</version>
             <optional>true</optional>
         </dependency>
+        -->
     </dependencies>
 
     <dependencyManagement>
