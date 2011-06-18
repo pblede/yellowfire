@@ -2,7 +2,9 @@ package za.co.yellowfire.manager;
 
 import org.apache.solr.client.solrj.SolrServer;
 import org.apache.solr.client.solrj.impl.CommonsHttpSolrServer;
+import org.apache.solr.client.solrj.response.SolrPingResponse;
 import org.apache.solr.common.SolrInputDocument;
+import org.apache.solr.common.params.SolrParams;
 import za.co.yellowfire.domain.DomainEntity;
 import za.co.yellowfire.domain.DomainObject;
 import za.co.yellowfire.domain.search.Searchable;
@@ -76,8 +78,6 @@ public class SearchManagerBean implements SearchManager {
 //        }
 
 
-
-        List<SolrInputDocument> docs = new ArrayList<SolrInputDocument>();
         SolrInputDocument doc = new SolrInputDocument();
 
         Searchable searchable = object.getClass().getAnnotation(Searchable.class);
@@ -86,12 +86,13 @@ public class SearchManagerBean implements SearchManager {
             return;
         }
 
-        Field[] fields =  object.getClass().getFields();
+        Field[] fields =  object.getClass().getDeclaredFields();
         for (Field field : fields) {
             SearchablePropertyId property = field.getAnnotation(SearchablePropertyId.class);
             if (property != null) {
                 Object id = null;
                 try {
+                    field.setAccessible(true);
                     id = field.get(object);
                 } catch (IllegalAccessException e) {
                     e.printStackTrace();
@@ -117,6 +118,7 @@ public class SearchManagerBean implements SearchManager {
                 }
 
                 try {
+                    field.setAccessible(true);
                     doc.addField(name, field.get(object));
                 } catch (IllegalAccessException e) {
                     e.printStackTrace();
@@ -124,9 +126,17 @@ public class SearchManagerBean implements SearchManager {
             }
         }
 
+
         try {
-            getSolr().add(docs);
-            getSolr().commit();
+            if (!doc.isEmpty()) {
+                SolrPingResponse response = getSolr().ping();
+                System.out.println("Solr ping status = " + response.getStatus());
+                
+                getSolr().add(doc);
+                getSolr().commit();
+            } else {
+                System.out.println("Not adding domain object because no searchable properties found");
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
