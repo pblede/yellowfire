@@ -293,7 +293,7 @@ public class User implements Serializable {
         return "User{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", password='" + password + '\'' +
+                ", password='*******\'" +
                 ", birthDate=" + birthDate +
                 ", verified=" + verified +
                 ", verifiedDate=" + verifiedDate +

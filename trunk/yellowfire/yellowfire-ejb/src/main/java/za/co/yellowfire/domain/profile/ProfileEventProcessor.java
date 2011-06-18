@@ -28,13 +28,8 @@ public class ProfileEventProcessor implements Serializable {
     @Inject @Category("profileEventProcessor")
     private ProfileLogger logger;
 
-    //TODO The plan is to use JMS when I can get to be configured correct in Glassfish.
     @Inject @InForeground @NotifyEvent
     private Event<Notification> notificationEvent;
-
-    //TODO Deprecate the call here in time
-    @EJB(name = "za.co.yellowfire.domain.notification.EmailSender")
-    private EmailSender sender;
 
     /**
      * Event sink for user profile registration.
@@ -56,10 +51,10 @@ public class ProfileEventProcessor implements Serializable {
             Notification notification = new Notification();
             notification.setType(NotificationType.Email);
             notification.setFrom("mp.ashworth@gmail.com");
-            notification.setTo("mp.ashworth@gmail.com");
+            notification.setTo(user.getEmail());
             notification.setSubject("Registration");
-            notification.setBody("Please click on <a href='http://localhost:8080/bluefire/verify?key=" + user.getVerificationKey() + "'></a> to verify your email account.");
-            sender.send(notification);
+            notification.setBody("Please click on <a href='http://localhost:8080/yellowfire/verify?key=" + user.getVerificationKey() + "'></a> to verify your email account.");
+            notificationEvent.fire(notification);
         } catch (Exception e) {
             logger.registrationNotificationError(e);
         }

@@ -12,6 +12,8 @@ public class Naming {
     
     public static final String MANAGER_DOMAIN = "yellowfire/session/DomainManager";
 
+    public static final String EMAIL_SENDER = "yellowfire/session/EmailSender";
+
     public static final String MANAGER_RACE = "yellowfire/session/RaceManager";
 
     public static final String MANAGER_USER = "yellowfire/session/UserManager";

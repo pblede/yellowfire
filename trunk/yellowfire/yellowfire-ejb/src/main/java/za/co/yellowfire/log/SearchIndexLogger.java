@@ -5,14 +5,13 @@ import org.jboss.seam.solder.logging.Log;
 import org.jboss.seam.solder.logging.MessageLogger;
 import org.jboss.seam.solder.messages.Message;
 import za.co.yellowfire.domain.notification.Notification;
-import za.co.yellowfire.log.DomainLogger;
 
 /**
  * @author Mark P Ashworth
  * @version 0.0.1
  */
 @MessageLogger
-public interface EventLogger extends DomainLogger {
+public interface SearchIndexLogger extends DomainLogger {
 
     static final int InitializeError = 2001;
     static final int CloseError = 2002;

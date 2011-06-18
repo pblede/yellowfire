@@ -1,5 +1,6 @@
 package za.co.yellowfire.controller;
 
+import org.primefaces.context.RequestContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import za.co.yellowfire.domain.profile.Registered;
@@ -9,6 +10,7 @@ import za.co.yellowfire.domain.profile.UserRegistrationException;
 import za.co.yellowfire.domain.racing.Club;
 import za.co.yellowfire.log.LogType;
 import za.co.yellowfire.manager.DomainManager;
+import za.co.yellowfire.ui.model.RequestResult;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
@@ -91,6 +93,7 @@ public class ProfileController extends AbstractController {
     public void onRegister() {
     	LOGGER.info("register() called");
 
+        RequestResult result = new RequestResult();
     	try {
     		/* Register the user */
     		manager.register(user);
@@ -101,12 +104,22 @@ public class ProfileController extends AbstractController {
     		/* Welcome and forward to races */
     		addInfoMessage("Welcome " + user.getFirstName() + user.getLastName(), "An email will be sent to " + user.getEmail() + " for verification.");
     	} catch (UserRegistrationException e) {
+            result.failed(e.getMessage());
     		LOGGER.error("Registration error", e);
     		addErrorMessage(ERROR_USER_REGISTER, e.getMessage());
     	} catch (Exception e) {
+            result.failed(e.getMessage());
     		LOGGER.error(ERROR_USER_REGISTER, e);
     		addErrorMessage("Error", e);
     	}
+
+        RequestContext context = RequestContext.getCurrentInstance();
+        if (context != null) {
+            LOGGER.info("Setting PrimeFaces result %s", result);
+            context.addCallbackParam("result", result);
+        } else {
+            LOGGER.warn("Cannot set PrimeFaces result because context is null");
+        }
     }
 
     public String onCompleteConversation() {

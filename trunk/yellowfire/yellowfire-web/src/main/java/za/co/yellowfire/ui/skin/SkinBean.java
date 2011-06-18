@@ -48,7 +48,6 @@ public class SkinBean implements Serializable {
                 return null;
             }
         } else {
-            System.out.println("The Faces external context could not be resolved, returning null");
             return null;
         }
     }

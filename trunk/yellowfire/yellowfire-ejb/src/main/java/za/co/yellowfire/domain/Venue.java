@@ -1,9 +1,5 @@
 package za.co.yellowfire.domain;
 
-import org.compass.annotations.Searchable;
-import org.compass.annotations.SearchableConstant;
-import org.compass.annotations.SearchableId;
-import org.compass.annotations.SearchableProperty;
 import org.eclipse.persistence.config.QueryHints;
 
 import javax.persistence.*;
@@ -35,8 +31,6 @@ import java.util.Map;
             }
         )
 })
-@Searchable
-@SearchableConstant(name = "type", values = {"venue", "location"})
 @XmlType(name = "venue", propOrder = {"id", "name", "address", "gpsLatitude", "gpsLongitude"})
 public class Venue implements DomainObject {
 	private static final long serialVersionUID = 1L;
@@ -48,19 +42,16 @@ public class Venue implements DomainObject {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "venue_id", nullable = false, insertable = true, updatable = true, length = 19, precision = 0)
     @XmlAttribute(name = "id", required = false)
-    @SearchableId
     private Long id;
 
     @Basic
     @Column(name = "venue_name", nullable = false, insertable = true, updatable = true, length =128, precision = 0)
     @XmlAttribute(name = "name", required = true)
-    @SearchableProperty
     private String name;
 
     @Basic
     @Column(name = "venue_address", nullable = true, insertable = true, updatable = true, length = 512, precision = 0)
     @XmlAttribute(name = "address", required = true)
-    @SearchableProperty
     private String address;
 
     @Transient
@@ -69,13 +60,11 @@ public class Venue implements DomainObject {
     @Basic
     @Column(name = "venue_latitude", nullable = true, insertable = true, updatable = true)
     @XmlAttribute(name = "latitude", required = false)
-    @SearchableProperty
     private Double gpsLatitude;
 
     @Basic
     @Column(name = "venue_longitude", nullable = true, insertable = true, updatable = true)
     @XmlAttribute(name = "longitude", required = false)
-    @SearchableProperty
     private Double gpsLongitude;
 
     @Enumerated(EnumType.ORDINAL)
