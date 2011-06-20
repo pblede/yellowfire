@@ -21,8 +21,9 @@ public interface SearchManager extends Serializable {
     
     /**
      * Searches for the value in the seatch engine
+     * @param domainClass The domain class to search for
      * @param value The value to search
-     * @return CompassDetachedHits
+     * @return Unknown
      */
-    Object search(String value);
+    Object search(Class domainClass, String value);
 }

@@ -8,6 +8,7 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import za.co.yellowfire.domain.Venue;
+import za.co.yellowfire.domain.notification.Notification;
 
 import javax.annotation.sql.DataSourceDefinition;
 import javax.naming.InitialContext;
@@ -22,7 +23,7 @@ import java.util.List;
  */
 @DataSourceDefinition(name = "yellowfire.ds",
  className = "com.microsoft.sqlserver.jdbc.SQLServerDriver",
- portNumber = 1433,
+ portNumber = 51588,
  serverName = "localhost",
  databaseName = "race",
  user = "race",
@@ -64,37 +65,37 @@ public class DomainManagerTest {
         return (SearchManager) ic.lookup("java:global/classes/SearchManager!za.co.yellowfire.manager.SearchManager");
     }
 
-    @Test
-    public void testQueryVenues() {
-        try {
-            InitialContext ic = new InitialContext();
-            DomainManager manager = (DomainManager) ic
-                    .lookup("java:global/classes/DomainManager!za.co.yellowfire.manager.DomainManager");
-
-            List<Venue> results = (List<Venue>) manager.query(Venue.QRY_VENUES, null);
-            for (Venue venue : results) {
-                System.out.println(venue);
-            }
-        } catch (NamingException e) {
-            throw new AssertionError(e);
-        }
-    }
-
-    @Test
-    public void testQueryVenuesInProximity() {
-        try {
-            InitialContext ic = new InitialContext();
-            DomainManager manager = (DomainManager) ic
-                    .lookup("java:global/classes/DomainManager!za.co.yellowfire.manager.DomainManager");
-
-            List<Venue> results = (List<Venue>) manager.query(Venue.QRY_VENUES_IN_PROXIMITY, Venue.getProximityQueryParams(23, -10, 5), DomainQueryHint.REFRESH);
-            for (Venue venue : results) {
-                System.out.println(venue);
-            }
-        } catch (NamingException e) {
-            throw new AssertionError(e);
-        }
-    }
+//    @Test
+//    public void testQueryVenues() {
+//        try {
+//            InitialContext ic = new InitialContext();
+//            DomainManager manager = (DomainManager) ic
+//                    .lookup("java:global/classes/DomainManager!za.co.yellowfire.manager.DomainManager");
+//
+//            List<Venue> results = (List<Venue>) manager.query(Venue.QRY_VENUES, null);
+//            for (Venue venue : results) {
+//                System.out.println(venue);
+//            }
+//        } catch (NamingException e) {
+//            throw new AssertionError(e);
+//        }
+//    }
+//
+//    @Test
+//    public void testQueryVenuesInProximity() {
+//        try {
+//            InitialContext ic = new InitialContext();
+//            DomainManager manager = (DomainManager) ic
+//                    .lookup("java:global/classes/DomainManager!za.co.yellowfire.manager.DomainManager");
+//
+//            List<Venue> results = (List<Venue>) manager.query(Venue.QRY_VENUES_IN_PROXIMITY, Venue.getProximityQueryParams(23, -10, 5), DomainQueryHint.REFRESH);
+//            for (Venue venue : results) {
+//                System.out.println(venue);
+//            }
+//        } catch (NamingException e) {
+//            throw new AssertionError(e);
+//        }
+//    }
 
     @Test
     public void testVenueSearch() throws Exception {
@@ -104,7 +105,7 @@ public class DomainManagerTest {
 //        domain.persist(venue);
 //        System.out.println("venue = " + venue);
 //
-//        SearchManager manager = resolveSearchManager();
+        SearchManager manager = new SearchManagerBean();
 //        CompassDetachedHits hits = (CompassDetachedHits) manager.search("Mark's Test");
 //        for (CompassHit hit : hits) {
 //            System.out.println("***************************");
@@ -115,9 +116,11 @@ public class DomainManagerTest {
 //        }
 //
 //        domain.remove(venue);
-//
-//        manager = resolveSearchManager();
-//        hits = (CompassDetachedHits) manager.search("9 Mark's Test");
+
+        //manager = resolveSearchManager();
+        Object object = manager.search(Notification.class, "mp.ashworth@gmail.com");
+        System.out.println("object = " + object);
+
 //        for (CompassHit hit : hits) {
 //            System.out.println("***************************");
 //            System.out.println("hit = " + hit.getAlias());

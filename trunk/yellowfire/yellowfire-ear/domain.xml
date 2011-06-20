@@ -55,20 +55,50 @@
       <property name="databaseName" value="${com.sun.aas.instanceRoot}/lib/databases/embedded_default" />
       <property name="connectionAttributes" value=";create=true" />
     </jdbc-connection-pool>
-    <jdbc-connection-pool driver-classname="" datasource-classname="com.microsoft.sqlserver.jdbc.SQLServerDataSource" res-type="javax.sql.DataSource" description="" name="YellowfirePool" ping="true">
+    <jdbc-connection-pool driver-classname="" datasource-classname="com.microsoft.sqlserver.jdbc.SQLServerDataSource" res-type="javax.sql.DataSource" description="" name="pool.yellowfire.online" ping="true">
       <property name="databaseName" value="race"></property>
       <property name="serverName" value="localhost\SQLSERVER2008R2"></property>
       <property name="user" value="race"></property>
       <property name="password" value="race"></property>
     </jdbc-connection-pool>
-    <mail-resource host="smtp.gmail.com" description="" jndi-name="mail/yellowfire.mail" from="mp.ashworth@gmail.com" user="mp.ashworth@gmail.com"></mail-resource>
+    <jdbc-connection-pool driver-classname="" datasource-classname="com.microsoft.sqlserver.jdbc.SQLServerXADataSource" res-type="javax.sql.XADataSource" steady-pool-size="1" statement-cache-size="10" description="" name="pool.training.online" ping="true">
+      <property name="databaseName" value="race"></property>
+      <property name="serverName" value="localhost\SQLSERVER2008R2"></property>
+      <property name="user" value="training"></property>
+      <property name="password" value="training"></property>
+    </jdbc-connection-pool>
+    <jdbc-connection-pool driver-classname="" datasource-classname="com.microsoft.sqlserver.jdbc.SQLServerXADataSource" res-type="javax.sql.XADataSource" steady-pool-size="1" statement-cache-size="10" description="" name="pool.training.archive" ping="true">
+      <property name="databaseName" value="race"></property>
+      <property name="serverName" value="localhost\SQLSERVER2008R2"></property>
+      <property name="user" value="archive"></property>
+      <property name="password" value="archive"></property>
+    </jdbc-connection-pool>
+    <mail-resource host="smtp.gmail.com" description="" jndi-name="mail/yellowfire.mail" from="mp.ashworth@gmail.com" user="mp.ashworth@gmail.com">
+		<property name="mail.smtp.starttls.enable" value="true"></property>
+		<property name="mail.smtp.password" value="delphi18*"></property>
+		<property name="mail.smtp.auth" value="true"></property>
+		<property name="mail.smtp.user" value="mp.ashworth@gmail.com"></property>
+	</mail-resource>
+    <connector-connection-pool description="" name="yellowfire.jms.cf" resource-adapter-name="jmsra" connection-definition-name="javax.jms.ConnectionFactory" transaction-support=""></connector-connection-pool>
+    <connector-resource pool-name="yellowfire.jms.cf" jndi-name="yellowfire.jms.cf"></connector-resource>
+    <admin-object-resource res-adapter="jmsra" res-type="javax.jms.Queue" description="" jndi-name="yellowfire.jms.queue.notification">
+      <property description="null" name="Name" value="yellowfire.jms.queue.notification"></property>
+    </admin-object-resource>
+    <admin-object-resource res-adapter="jmsra" res-type="javax.jms.Queue" description="" jndi-name="yellowfire.jms.queue.solr">
+      <property description="null" name="Name" value="yellowfire.jms.queue.solr"></property>
+    </admin-object-resource>
   </resources>
   <servers>
     <server name="server" config-ref="server-config"> 
       <resource-ref ref="jdbc/__TimerPool" />
       <resource-ref ref="jdbc/__default" />
       <resource-ref ref="yellowfire.ds"></resource-ref>
+      <resource-ref ref="yellowfire.training.online.ds"></resource-ref>
+      <resource-ref ref="yellowfire.training.archive.ds"></resource-ref>
       <resource-ref ref="mail/yellowfire.mail"></resource-ref>
+      <resource-ref ref="yellowfire.jms.cf"></resource-ref>
+      <resource-ref ref="yellowfire.jms.queue.notification"></resource-ref>
+      <resource-ref ref="yellowfire.jms.queue.solr"></resource-ref>
     </server>
   </servers>
  <configs>
