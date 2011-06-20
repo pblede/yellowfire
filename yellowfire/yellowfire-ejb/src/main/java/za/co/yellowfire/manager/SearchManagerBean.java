@@ -1,11 +1,16 @@
 package za.co.yellowfire.manager;
 
+import org.apache.solr.client.solrj.SolrRequest;
 import org.apache.solr.client.solrj.SolrServer;
 import org.apache.solr.client.solrj.impl.CommonsHttpSolrServer;
+import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.client.solrj.response.SolrPingResponse;
+import org.apache.solr.client.solrj.response.UpdateResponse;
+import org.apache.solr.common.SolrDocument;
+import org.apache.solr.common.SolrDocumentList;
 import org.apache.solr.common.SolrInputDocument;
-import org.apache.solr.common.params.SolrParams;
-import za.co.yellowfire.domain.DomainEntity;
+import org.apache.solr.common.params.CommonParams;
+import org.apache.solr.common.params.ModifiableSolrParams;
 import za.co.yellowfire.domain.DomainObject;
 import za.co.yellowfire.domain.search.Searchable;
 import za.co.yellowfire.domain.search.SearchableProperty;
@@ -17,8 +22,7 @@ import javax.ejb.Singleton;
 import javax.enterprise.event.Observes;
 import java.lang.reflect.Field;
 import java.net.MalformedURLException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Map;
 
 /**
  * @author Mark P Ashworth
@@ -68,15 +72,6 @@ public class SearchManagerBean implements SearchManager {
     }
 
     public void onSearchableAdded(@Observes @SearchableAdded DomainObject object) {
-//		LOGGER.info("onSearchableAdded : {}", object);
-//        CompassSession session = null;
-//        try {
-//            session = getCompass().openSession();
-//		    session.save(object);
-//        } finally {
-//            try {if (session != null) session.close();} catch (Exception e) { /*Ignore*/ }
-//        }
-
 
         SolrInputDocument doc = new SolrInputDocument();
 
@@ -129,10 +124,16 @@ public class SearchManagerBean implements SearchManager {
 
         try {
             if (!doc.isEmpty()) {
-                SolrPingResponse response = getSolr().ping();
-                System.out.println("Solr ping status = " + response.getStatus());
-                
-                getSolr().add(doc);
+                SolrPingResponse ping = getSolr().ping();
+                System.out.println("Solr ping status = " + ping.getStatus());
+
+                UpdateResponse response = getSolr().add(doc);
+                if (response.getResponse() != null) {
+                    System.out.println("Solr response:");
+                    for (Map.Entry<String,Object> entry : response.getResponse()) {
+                        System.out.println(entry.getKey() + " = " + entry.getValue());
+                    }
+                }
                 getSolr().commit();
             } else {
                 System.out.println("Not adding domain object because no searchable properties found");
@@ -144,33 +145,71 @@ public class SearchManagerBean implements SearchManager {
 
 
     public void onSearchableRemoved(@Observes @SearchableRemoved DomainObject object) {
-//		LOGGER.info("onSearchableRemoved : {}", object);
 
-//        CompassSession session = null;
-//        try {
-//            session = getCompass().openSession();
-//		    session.delete(object);
-//        } finally {
-//            try {if (session != null)session.close();} catch (Exception e) { /*Ignore*/ }
-//        }
+        String id = null;
+
+        Searchable searchable = object.getClass().getAnnotation(Searchable.class);
+        if (searchable == null) {
+            System.out.println("The domain entity is not searchable " + object);
+            return;
+        }
+
+        Field[] fields =  object.getClass().getDeclaredFields();
+        for (Field field : fields) {
+            SearchablePropertyId property = field.getAnnotation(SearchablePropertyId.class);
+            if (property != null) {
+                Object value = null;
+                try {
+                    field.setAccessible(true);
+                    value = field.get(object);
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+
+                if (value == null) {
+                    System.out.println("The objects id is null " + object);
+                    return;
+                }
+
+                id = searchable.name() + ":" + value.toString();
+                break;
+            }
+        }
+
+        try {
+            if (id != null) {
+                getSolr().deleteById(id);
+                getSolr().commit();
+            } else {
+                System.out.println("Not deleting domain object because no searchable id property found");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 	}
 
     @Override
-    public Object search(String value) {
-//        System.out.println("3 = " + 3);
-//        CompassSearchSession session = null;
-//        try {
-//            session = getCompass().openSearchSession();
-//            System.out.println("4 = " + 4);
-//            CompassHits hits = session.find(value);
-//            return hits.detach();
-//        } finally {
-//            if (session != null) {
-//                try {session.close();} catch (Exception e) { /*Ignore*/ }
-//            }
-//        }
+    public Object search(Class domainClass, String value) {
+
+        String query = new StringBuffer(1024).append("q=").append(value).append("&fl=*,score").toString();
+
+        try {
+            ModifiableSolrParams params = new ModifiableSolrParams();
+            params.add(CommonParams.Q, value);
+            params.add(CommonParams.FL, "*,score");
+            QueryResponse response = getSolr().query(params, SolrRequest.METHOD.GET);
+            if (response != null) {
+                SolrDocumentList docs = response.getResults();
+                if (docs != null && !docs.isEmpty()) {
+                    for (SolrDocument doc : docs) {
+                        Object id = doc.get("id");
+                        System.out.println("id = " + id);
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return null;
     }
-
-
 }
