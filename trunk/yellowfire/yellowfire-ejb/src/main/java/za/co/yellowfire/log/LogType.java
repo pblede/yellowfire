@@ -9,6 +9,7 @@ public enum LogType {
 	DOMAIN("domain"),
 	AUDIT("audit"),
 	LISTENER("listener"),
+	SEARCH("search"),
 	;
 	
 	private static final String LOGGER_NAME_PREFIX = "za.co.bluefire.log.";

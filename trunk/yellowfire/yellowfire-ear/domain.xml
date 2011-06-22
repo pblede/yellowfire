@@ -73,6 +73,9 @@
       <property name="user" value="archive"></property>
       <property name="password" value="archive"></property>
     </jdbc-connection-pool>
+    <jdbc-resource pool-name="pool.yellowfire.online" description="" jndi-name="yellowfire.ds"></jdbc-resource>
+    <jdbc-resource pool-name="pool.training.online" description="" jndi-name="yellowfire.training.online.ds"></jdbc-resource>
+    <jdbc-resource pool-name="pool.training.archive" description="" jndi-name="yellowfire.training.archive.ds"></jdbc-resource>
     <mail-resource host="smtp.gmail.com" description="" jndi-name="mail/yellowfire.mail" from="mp.ashworth@gmail.com" user="mp.ashworth@gmail.com">
 		<property name="mail.smtp.starttls.enable" value="true"></property>
 		<property name="mail.smtp.password" value="delphi18*"></property>
@@ -103,6 +106,8 @@
   </servers>
  <configs>
    <config name="server-config">
+     <system-property name="solr.data.dir" value="C:\SDE\solr\data"></system-property>
+     <system-property name="solr.solr.home" value="C:\SDE\solr"></system-property>
      <http-service>
         <access-log rotation-interval-in-minutes="15" rotation-suffix="yyyy-MM-dd" />
 	<virtual-server id="server" network-listeners="http-listener, https-listener" />
@@ -199,9 +204,9 @@
 	<jvm-options>-Djavax.net.ssl.keyStore=${com.sun.aas.instanceRoot}/config/keystore.jks</jvm-options>
         <jvm-options>-Djavax.net.ssl.trustStore=${com.sun.aas.instanceRoot}/config/cacerts.jks</jvm-options>
         <jvm-options>-Dorg.glassfish.jms.InitializeOnDemand=true</jvm-options>
-        <jvm-options>-XX:MaxPermSize=192m</jvm-options>
+        <jvm-options>-XX:MaxPermSize=512m</jvm-options>
         <jvm-options>-client</jvm-options>
-        <jvm-options>-Xmx512m</jvm-options>
+        <jvm-options>-Xmx2048m</jvm-options>
         <jvm-options>-XX:+UnlockDiagnosticVMOptions</jvm-options>
         <jvm-options>-XX:NewRatio=2</jvm-options>
       </java-config>
@@ -220,8 +225,8 @@
           </protocol>
         </protocols>
         <network-listeners>
-          <network-listener port="0" protocol="http-listener" transport="tcp" name="http-listener" thread-pool="http-thread-pool" enabled="false" />
-          <network-listener port="0" protocol="https-listener" transport="tcp" name="https-listener" thread-pool="http-thread-pool" enabled="false" />
+          <network-listener port="9080" protocol="http-listener" transport="tcp" name="http-listener" thread-pool="http-thread-pool" enabled="true" />
+          <network-listener port="9081" protocol="https-listener" transport="tcp" name="https-listener" thread-pool="http-thread-pool" enabled="false" />
         </network-listeners>
         <transports>
           <transport name="tcp"></transport>
