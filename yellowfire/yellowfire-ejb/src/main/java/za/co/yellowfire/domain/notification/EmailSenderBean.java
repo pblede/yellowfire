@@ -1,7 +1,8 @@
 package za.co.yellowfire.domain.notification;
 
-import org.jboss.seam.solder.logging.Category;
-import za.co.yellowfire.log.EventLogger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import za.co.yellowfire.log.LogType;
 import za.co.yellowfire.manager.DomainManager;
 
 import javax.annotation.Resource;
@@ -9,7 +10,6 @@ import javax.ejb.EJB;
 import javax.ejb.Local;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
-import javax.inject.Inject;
 import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.Transport;
@@ -28,9 +28,7 @@ import java.util.Date;
         mappedName = "yellowfire/session/EmailSender"
 )
 public class EmailSenderBean implements EmailSender {
-
-    @Inject @Category("emailSender")
-    private EventLogger logger;
+    private static final Logger LOGGER = LoggerFactory.getLogger(LogType.MANAGER.getCategory());
 
     @Resource(mappedName = "mail/yellowfire.mail")
     private Session session;
@@ -43,17 +41,17 @@ public class EmailSenderBean implements EmailSender {
      * @param notification The notification to queue
      */
     public void queue(Notification notification) {
-        logger.queueEventInfo(notification);
+        LOGGER.info("Queuing notification {} ", notification);
 
         if (notification == null) {
-            logger.queuedEventIsNull();
+            LOGGER.warn("Notification is null");
             return;
         }
         try {
             notification.setSent(null);
             manager.persist(notification);
         } catch (Exception e) {
-            logger.queueEventError(e);
+            LOGGER.error("Unable to persist notification", e);
         }
     }
 
@@ -63,8 +61,6 @@ public class EmailSenderBean implements EmailSender {
      * @throws MessagingException If there was an error
      */
     public void send(Notification notification) {
-        logger.enter("send", notification);
-
         try {
             MimeMessage message = new MimeMessage(session);
             message.setFrom(new InternetAddress(notification.getFrom()));
@@ -86,10 +82,10 @@ public class EmailSenderBean implements EmailSender {
             notification.setSent(new Date());
             manager.persist(notification);
         } catch (MessagingException e) {
-            logger.sendError(e);
+            LOGGER.error("Unable to send message", e);
             queue(notification);
         } catch (Exception e) {
-            logger.sendError(e);
+            LOGGER.error("Unable to send message", e);
         }
     }
 }

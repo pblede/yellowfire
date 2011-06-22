@@ -1,16 +1,16 @@
 package za.co.yellowfire.event;
 
-import org.jboss.seam.solder.logging.Category;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import za.co.yellowfire.domain.DomainEntity;
 import za.co.yellowfire.domain.notification.Notification;
-import za.co.yellowfire.log.EventLogger;
+import za.co.yellowfire.log.LogType;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
 import javax.ejb.Stateless;
 import javax.enterprise.event.Observes;
-import javax.inject.Inject;
 import javax.jms.*;
 
 /**
@@ -19,8 +19,8 @@ import javax.jms.*;
  */
 @Stateless
 public class BackgroundEventSender {
-    @Inject @Category("backgroundEventSender")
-    private EventLogger logger;
+    private static final Logger LOGGER = LoggerFactory.getLogger(LogType.MANAGER.getCategory());
+
     @Resource(mappedName="yellowfire.jms.cf")
     private ConnectionFactory connectionFactory;
     @Resource(mappedName="yellowfire.jms.queue.notification")
@@ -42,7 +42,7 @@ public class BackgroundEventSender {
             notifyProducer=session.createProducer(notifyEventQueue);
             solrProducer=session.createProducer(solrEventQueue);
         } catch (JMSException ex) {
-            logger.initializationError(ex);
+            LOGGER.error("Error initializing", ex);
             throw new RuntimeException(ex);
         }
     }
@@ -53,32 +53,28 @@ public class BackgroundEventSender {
             if (connection != null)
                 connection.close();
         } catch (Exception e) {
-            logger.closeError(e);
+            LOGGER.error("Error closing connection", e);
         }
     }
 
     public void event(@Observes @InForeground @NotifyEvent Notification event) {
-        logger.enter("event", event);
-        
         try {
             ObjectMessage msg = session.createObjectMessage();
             msg.setObject(event);
             notifyProducer.send(msg);
         } catch (JMSException ex) {
-            logger.sendError(ex);
+            LOGGER.error("Error producing JMS message", ex);
             throw new RuntimeException(ex);
         }
     }
 
     public void event(@Observes @InForeground @IndexEvent DomainEntity object) {
-        logger.enter("event", object);
-
         try {
             ObjectMessage msg = session.createObjectMessage();
             msg.setObject(object);
             solrProducer.send(msg);
         } catch (JMSException ex) {
-            logger.sendError(ex);
+            LOGGER.error("Error producing JMS message", ex);
             throw new RuntimeException(ex);
         }
     }

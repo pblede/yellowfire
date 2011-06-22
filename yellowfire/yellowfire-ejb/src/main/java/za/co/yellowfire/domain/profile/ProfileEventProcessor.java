@@ -1,14 +1,13 @@
 package za.co.yellowfire.domain.profile;
 
-import org.jboss.seam.solder.logging.Category;
-import za.co.yellowfire.domain.notification.EmailSender;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import za.co.yellowfire.domain.notification.Notification;
 import za.co.yellowfire.domain.notification.NotificationType;
 import za.co.yellowfire.event.InForeground;
 import za.co.yellowfire.event.NotifyEvent;
-import za.co.yellowfire.log.ProfileLogger;
+import za.co.yellowfire.log.LogType;
 
-import javax.ejb.EJB;
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.event.Event;
 import javax.enterprise.event.Observes;
@@ -24,9 +23,7 @@ import java.io.Serializable;
 @Named("ProfileEventProcessor")
 public class ProfileEventProcessor implements Serializable {
     private static final long serialVersionUID = 1L;
-
-    @Inject @Category("profileEventProcessor")
-    private ProfileLogger logger;
+    private static final Logger LOGGER = LoggerFactory.getLogger(LogType.MANAGER.getCategory());
 
     @Inject @InForeground @NotifyEvent
     private Event<Notification> notificationEvent;
@@ -40,10 +37,8 @@ public class ProfileEventProcessor implements Serializable {
     @SuppressWarnings("unused")
     public void onRegistration(@Observes @Registered User user) {
         /* The user has registered, send out a email verification email*/
-        logger.enter("onRegistration", user != null ? user : "null");
-
         if (user == null) {
-            logger.profileIsNull();
+            LOGGER.warn("Profile is null");
             return;
         }
         
@@ -56,7 +51,7 @@ public class ProfileEventProcessor implements Serializable {
             notification.setBody("Please click on <a href='http://localhost:8080/yellowfire/verify?key=" + user.getVerificationKey() + "'></a> to verify your email account.");
             notificationEvent.fire(notification);
         } catch (Exception e) {
-            logger.registrationNotificationError(e);
+            LOGGER.error("Unable to send notification", e);
         }
 	}
 
@@ -67,7 +62,7 @@ public class ProfileEventProcessor implements Serializable {
     @SuppressWarnings("unused")
     public void onVerification(@Observes @Verified User user) {
         /* The user's email has been verified, enable the profile */
-        logger.enter("onVerification", user != null ? user : "null");
+
     }
 
     /**
@@ -76,7 +71,7 @@ public class ProfileEventProcessor implements Serializable {
      */
     @SuppressWarnings("unused")
     public void onLogin(@Observes @Authenticated User user) {
-		logger.enter("onVerification", user != null ? user : "null");
+
 	}
 
     /**
@@ -85,7 +80,7 @@ public class ProfileEventProcessor implements Serializable {
      */
     @SuppressWarnings("unused")
     public void onLogout(@Observes @Guest User user) {
-		logger.enter("onVerification", user != null ? user : "null");
+
 	}
 
     /**
@@ -94,6 +89,6 @@ public class ProfileEventProcessor implements Serializable {
      */
     @SuppressWarnings("unused")
     public void onAuthenticationFailure(@Observes @AuthenticateFailure AuthenticationFailure failure) {
-        logger.enter("onVerification", failure != null ? failure.getType() + ":" + failure.getUser() : "null");
+
     }
 }

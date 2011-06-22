@@ -7,6 +7,7 @@ import za.co.yellowfire.domain.listener.SearchIndexListener;
 import za.co.yellowfire.domain.search.Searchable;
 import za.co.yellowfire.domain.search.SearchableProperty;
 import za.co.yellowfire.domain.search.SearchablePropertyId;
+import za.co.yellowfire.domain.search.SearchablePropertyType;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -51,31 +52,37 @@ public class Notification extends DomainEntity implements Archiveable, Comparabl
 
     @Size(min = 1, max = 128)
     @Column(name = "notification_from", length = 128)
-    @SearchableProperty(name = "from", boost = 2)
+    @SearchableProperty(name = "from", dynamic = true, type = SearchablePropertyType.STRING)
     private String from;
 
     @Size(min = 1, max = 256)
     @Column(name = "notification_to", length = 256)
+    @SearchableProperty(name = "to", boost = 2)
     private String to;
 
     @Size(min = 0, max = 256)
     @Column(name = "notification_cc", length = 256)
+    @SearchableProperty(name = "cc", dynamic = true, type = SearchablePropertyType.STRING)
     private String cc;
 
     @Size(min = 0, max = 256)
     @Column(name = "notification_bcc", length = 256)
+    @SearchableProperty(name = "bcc", dynamic = true, type = SearchablePropertyType.STRING)
     private String bcc;
 
     @Size(min = 0, max = 256)
     @Column(name = "notification_subject", length = 256)
+    @SearchableProperty(name = "subject")
     private String subject;
 
     @Size(min = 1)
     @Column(name = "notification_body")
+    @SearchableProperty(name = "body")
     private String body;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "notification_sent")
+    @SearchableProperty(name = "notification_sent", dynamic = true, type = SearchablePropertyType.DATE)
     private Date sent;
 
     @Version

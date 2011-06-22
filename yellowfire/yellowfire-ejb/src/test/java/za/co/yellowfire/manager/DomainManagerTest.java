@@ -44,6 +44,11 @@ public class DomainManagerTest {
         glassfish = runtime.newGlassFish(props);
         glassfish.start();
         Deployer deployer = glassfish.getDeployer();
+
+        /*Deploy Solr*/
+        deployer.deploy(new File("C:\\Shared\\Projects.Java\\yellowfire\\deployments\\apache-solr-3.2.0.war").toURI());
+                
+        /*Deploy Yellowfire*/
         URI uri = new File("target/classes").toURI();
         deployer.deploy(uri);
     }
@@ -118,7 +123,7 @@ public class DomainManagerTest {
 //        domain.remove(venue);
 
         //manager = resolveSearchManager();
-        Object object = manager.search(Notification.class, "mp.ashworth@gmail.com");
+        Object object = manager.search(Notification.class, "to:mark");
         System.out.println("object = " + object);
 
 //        for (CompassHit hit : hits) {
