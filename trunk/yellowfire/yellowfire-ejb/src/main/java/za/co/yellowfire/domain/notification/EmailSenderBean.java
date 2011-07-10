@@ -30,7 +30,7 @@ import java.util.Date;
 public class EmailSenderBean implements EmailSender {
     private static final Logger LOGGER = LoggerFactory.getLogger(LogType.MANAGER.getCategory());
 
-    @Resource(mappedName = "mail/yellowfire.mail")
+    @Resource(mappedName = "mail/yellowfire.exchange.mail")
     private Session session;
 
     @EJB(name = "DomainManager")
