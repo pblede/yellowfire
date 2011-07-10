@@ -9,6 +9,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import za.co.yellowfire.domain.Venue;
 import za.co.yellowfire.domain.notification.Notification;
+import za.co.yellowfire.solarflare.SearchManager;
+import za.co.yellowfire.solarflare.SearchManagerBean;
 
 import javax.annotation.sql.DataSourceDefinition;
 import javax.naming.InitialContext;

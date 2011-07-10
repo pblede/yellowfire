@@ -1,5 +1,7 @@
 package za.co.yellowfire.domain.racing;
 
+import za.co.yellowfire.domain.DomainEntity;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -27,7 +29,7 @@ import javax.xml.bind.annotation.XmlElement;
         )
 )
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Club implements Serializable {
+public class Club extends DomainEntity {
 	private static final long serialVersionUID = 1L;
 	
 	public static final String QRY_CLUBS = "qry.clubs";

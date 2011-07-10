@@ -1,11 +1,11 @@
 package za.co.yellowfire.domain.racing;
 
 import za.co.yellowfire.Format;
-import za.co.yellowfire.domain.jaxb.TimeTypeAdapter;
+import za.co.yellowfire.domain.DomainEntity;
+import za.co.yellowfire.jaxb.TimeTypeAdapter;
 
 import javax.persistence.*;
 
-import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 @Table(name = "course", schema = "rce")
 @XmlAccessorType(XmlAccessType.FIELD)
 //@XmlType(name = "course", propOrder = {"id", "categories","distance", "startTime", "description"}, namespace="race")
-public class Course implements Serializable {
+public class Course extends DomainEntity {
 	private static final long serialVersionUID = 1L;
 	
     @Id

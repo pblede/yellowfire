@@ -1,5 +1,7 @@
 package za.co.yellowfire.domain.racing;
 
+import za.co.yellowfire.domain.DomainEntity;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -27,7 +29,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 @Access(AccessType.FIELD)
 @Table(name = "district", schema = "rce")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class District implements Serializable {
+public class District extends DomainEntity {
 	private static final long serialVersionUID = 1L;
 	
 	@Id

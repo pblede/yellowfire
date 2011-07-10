@@ -24,7 +24,7 @@
                 <xml-attribute java-attribute="id" />
                 <xml-attribute java-attribute="name" />
                 <xml-attribute java-attribute="date">
-                    <xml-java-type-adapter value="za.co.yellowfire.domain.jaxb.DateTypeAdapter" />
+                    <xml-java-type-adapter value="za.co.yellowfire.jaxb.DateTypeAdapter" />
                 </xml-attribute>
                 <xml-attribute java-attribute="courses"      xml-path="race:course"/>
                 <xml-attribute java-attribute="venue"        xml-path="race:venue" />
@@ -41,7 +41,7 @@
                 <xml-attribute java-attribute="distance" />
                 <xml-attribute java-attribute="description" />
                 <xml-attribute java-attribute="startTime" name="starttime">
-                    <xml-java-type-adapter value="za.co.yellowfire.domain.jaxb.TimeTypeAdapter" />
+                    <xml-java-type-adapter value="za.co.yellowfire.jaxb.TimeTypeAdapter" />
                 </xml-attribute>
                 <xml-element java-attribute="categories" xml-path="race:category" type="za.co.yellowfire.domain.racing.CourseCategory" />
             </java-attributes>
@@ -95,7 +95,7 @@
             <java-attributes>
                 <xml-attribute java-attribute="id" />
                 <xml-attribute java-attribute="type">
-                    <xml-java-type-adapter value="za.co.yellowfire.domain.jaxb.NoteTypeAdapter" />
+                    <xml-java-type-adapter value="za.co.yellowfire.jaxb.NoteTypeAdapter" />
                 </xml-attribute>
                 <xml-element java-attribute="text" cdata="true" xml-inline-binary-data="true" xml-path="text()" />
             </java-attributes>

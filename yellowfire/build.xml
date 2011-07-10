@@ -1,5 +1,5 @@
 <project name="yellowfire">
-    <property name="glassfish.location" value="C:\SDE\glassfish31rc1\glassfish\domains\domain1\autodeploy" />
+    <property name="glassfish.location" value="C:\Program Files\glassfish-3.1.1-b08\glassfish\domains\domain1\autodeploy" />
 
     <target name="deploy.glassfish" >
         <copyfile src="yellowfire-ear\target\yellowfire-0.0.1.ear" dest="${glassfish.location}\yellowfire-0.0.1.ear"/>

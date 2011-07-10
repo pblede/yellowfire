@@ -1,5 +1,7 @@
 package za.co.yellowfire.domain.racing;
 
+import za.co.yellowfire.domain.DomainEntity;
+
 import java.io.Serializable;
 
 import javax.persistence.*;
@@ -16,14 +18,14 @@ import javax.xml.bind.annotation.XmlType;
 @Access(AccessType.FIELD)
 @Table(name = "category_prize", schema = "rce")
 @XmlType(name = "prize", propOrder={"id", "value", "description"})
-public class CategoryPrize implements Serializable {
+public class CategoryPrize extends DomainEntity {
 	private static final long serialVersionUID = 1L;
 
 	@Id
     @Column(name = "category_prize_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     @XmlAttribute(name = "id", required = false)
-    private long id;
+    private Long id;
 
     @XmlTransient
     @ManyToOne
@@ -49,11 +51,11 @@ public class CategoryPrize implements Serializable {
         this.value = value;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
