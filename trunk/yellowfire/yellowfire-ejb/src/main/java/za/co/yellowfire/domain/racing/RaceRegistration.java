@@ -21,6 +21,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 
+import za.co.yellowfire.domain.DomainEntity;
 import za.co.yellowfire.domain.profile.User;
 
 /**
@@ -32,7 +33,7 @@ import za.co.yellowfire.domain.profile.User;
 @Access(AccessType.FIELD)
 @Table(name = "race_registration", schema = "rce")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class RaceRegistration implements Serializable {
+public class RaceRegistration extends DomainEntity {
 	private static final long serialVersionUID = 1L;
 
 	@Id

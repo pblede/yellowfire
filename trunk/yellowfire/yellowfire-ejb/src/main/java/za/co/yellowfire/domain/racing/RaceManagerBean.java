@@ -3,9 +3,13 @@ package za.co.yellowfire.domain.racing;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import za.co.yellowfire.DateUtil;
+import za.co.yellowfire.domain.profile.User;
+import za.co.yellowfire.domain.result.Result;
 import za.co.yellowfire.log.LogType;
+import za.co.yellowfire.manager.DomainManager;
 import za.co.yellowfire.manager.DomainManagerBean;
 
+import javax.ejb.EJB;
 import javax.ejb.Local;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
@@ -20,10 +24,11 @@ import java.util.Map;
   name = "RaceManager", 
   mappedName = "yellowfire/session/RaceManager",
   description = "Manages the race related information")
-public class RaceManagerBean extends DomainManagerBean implements RaceManager, RaceManagerRemote {
+public class RaceManagerBean implements RaceManager, RaceManagerRemote {
 	private static final long serialVersionUID = 1L;
 	//private static Logger LOGGER = LoggerFactory.getLogger(LogType.MANAGER.getCategory());
 
+    @EJB private DomainManager manager;
     
     /**
      * Queries for the list of domain objects
@@ -51,7 +56,7 @@ public class RaceManagerBean extends DomainManagerBean implements RaceManager, R
     @Override public List<Race> retrieveUpcomingRaces() {	
         Map<String, Object> params = new HashMap<String, Object>(1);
         params.put(Race.FIELD_DATE, DateUtil.getDate(false, false));
-        return (List<Race>) query(Race.QRY_UPCOMING_RACES, params);
+        return (List<Race>) manager.query(Race.QRY_UPCOMING_RACES, params);
     }
     
     /**
@@ -63,7 +68,7 @@ public class RaceManagerBean extends DomainManagerBean implements RaceManager, R
     @Override public List<Race> retrieveRacesForDate(Date date) {	
         Map<String, Object> params = new HashMap<String, Object>(1);
         params.put(Race.FIELD_DATE, DateUtil.getDate(date, false, false));
-        return (List<Race>) query(Race.QRY_RACES_FOR_DATE, params);
+        return (List<Race>) manager.query(Race.QRY_RACES_FOR_DATE, params);
     }
     
     /**
@@ -76,7 +81,7 @@ public class RaceManagerBean extends DomainManagerBean implements RaceManager, R
     public List<Race> retrieveRacesForId(Long id) {
     	Map<String, Object> params = new HashMap<String, Object>(1);
         params.put(Race.FIELD_ID, id);
-        return (List<Race>) query(Race.QRY_RACES_FOR_ID, params);
+        return (List<Race>) manager.query(Race.QRY_RACES_FOR_ID, params);
     }
     
     /**
@@ -85,7 +90,7 @@ public class RaceManagerBean extends DomainManagerBean implements RaceManager, R
      */
     @SuppressWarnings("unchecked")
     @Override public List<Club> retrieveClubs() {
-        return (List<Club>) query(Club.QRY_CLUBS, null);
+        return (List<Club>) manager.query(Club.QRY_CLUBS, null);
     }
     
     /**
@@ -95,7 +100,7 @@ public class RaceManagerBean extends DomainManagerBean implements RaceManager, R
      */
     @Override
     public Club retrieveClub(Long id) {
-    	return (Club) super.find(Club.class, id);
+    	return (Club) manager.find(Club.class, id);
     }
     
     /**
@@ -105,7 +110,7 @@ public class RaceManagerBean extends DomainManagerBean implements RaceManager, R
      */
     @Override
     public Race retrieveRace(Long id) {
-    	return (Race) super.find(Race.class, id);
+    	return (Race) manager.find(Race.class, id);
     }
     
     /**
@@ -114,22 +119,22 @@ public class RaceManagerBean extends DomainManagerBean implements RaceManager, R
      * @return RaceRegistration
      */
     public RaceRegistration register(RaceRegistration raceRegistration) {
-    	super.persist(raceRegistration);
+    	manager.persist(raceRegistration);
     	return raceRegistration;
     }
     
     
     public Race persistRace(Race race) {
-        super.persist(race);
+        manager.persist(race);
         return race;
     }
 
     public Race mergeRace(Race race) {
-        return (Race) super.merge(race);
+        return (Race) manager.merge(race);
     }
 
     public void removeRace(Race race) {
-        race = (Race) super.find(Race.class, race.getId());
-        super.remove(race);
+        race = (Race) manager.find(Race.class, race.getId());
+        manager.remove(race);
     }
 }

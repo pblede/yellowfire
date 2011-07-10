@@ -4,7 +4,7 @@
                 xmlns:p="http://primefaces.prime.com.tr/ui"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:cc="http://java.sun.com/jsf/composite/cc"
-                template="/resources/layout/running-layout.xhtml">
+                template="/resources/layout/training-layout.xhtml">
    
 	<ui:define name="demoSampleParameters">
 		<f:metadata>
@@ -27,9 +27,6 @@
                             <f:selectItems value="${resultsController.racesForDate}" itemDescription="#{race.name}" itemLabel="#{race.name}" var="race" />
                             <f:converter converterId="RaceConverter" />
                         </h:selectOneMenu>
-                        <o:floatingIconMessage for="a00" showDetail="true"
-                            showSummary="false"
-                            style="border: 1px solid red; background-color: #e0e0ff;" />
                         <h:message for="a00" showDetail="true"  showSummary="false" />
                     </h:panelGroup>
                     
@@ -42,9 +39,6 @@
                             <f:ajax event="change" execute="@form" listener="#{resultsController.onStartTimeChanged}" render="@form" />
                             <f:attribute name="clientValidation" value="onDemand" />
                         </p:calendar>
-                        <o:floatingIconMessage for="a01" showDetail="true"
-                            showSummary="false"
-                            style="border: 1px solid red; background-color: #e0e0ff;" />
                         <h:message for="a01" showDetail="true"  showSummary="false" />
                     </h:panelGroup>
 
@@ -64,9 +58,6 @@
                              <f:ajax event="change" execute="@form" listener="#{resultsController.onTimeTakenChanged}" render="@form" />
                             <f:selectItems id="ssi01" value="#{resultsController.seconds}"/>
                         </h:selectOneMenu>
-                        <o:floatingIconMessage for="a02" showDetail="true"
-                            showSummary="false"
-                            style="border: 1px solid red; background-color: #e0e0ff;" />
                         <h:message for="a02" showDetail="true"  showSummary="false" />
                     </h:panelGroup>
 
@@ -75,27 +66,18 @@
                         <h:inputText id="a10" value="#{resultsController.selected.result.distance}">
                             <f:ajax event="change" execute="@form" listener="#{resultsController.onDistanceChanged}" render="@form" />
                         </h:inputText>#{"km"}
-                        <o:floatingIconMessage for="a10" showDetail="true"
-                            showSummary="false"
-                            style="border: 1px solid red; background-color: #e0e0ff;" />
                         <h:message for="a10" showDetail="true"  showSummary="false" />
                     </h:panelGroup>
 
                     <h:outputLabel id="la11" for="a11" value="#{msgs['fld.result.pace']}:" />
                     <h:panelGroup>
                         <h:inputText id="a11" value="#{resultsController.selected.result.pace}"/>
-                        <o:floatingIconMessage for="a11" showDetail="true"
-                            showSummary="false"
-                            style="border: 1px solid red; background-color: #e0e0ff;" />
                         <h:message for="a11" showDetail="true"  showSummary="false" />
                     </h:panelGroup>
 
                     <h:outputLabel id="la20" for="a20" value="#{msgs['fld.notes']}:" />
                     <h:panelGroup>
                         <h:inputTextarea id="a20" value="#{resultsController.selected.result.notes}" cols="50" rows="5"/>
-                        <o:floatingIconMessage for="a20" showDetail="true"
-                            showSummary="false"
-                            style="border: 1px solid red; background-color: #e0e0ff;" />
                         <h:message for="a20" showDetail="true"  showSummary="false" />
                     </h:panelGroup>
                 </h:panelGrid>

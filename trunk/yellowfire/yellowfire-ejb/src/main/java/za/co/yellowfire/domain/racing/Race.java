@@ -35,7 +35,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import org.apache.commons.collections.Predicate;
 import org.apache.commons.collections.iterators.FilterIterator;
 import za.co.yellowfire.domain.*;
-import za.co.yellowfire.domain.jaxb.DateTypeAdapter;
+import za.co.yellowfire.jaxb.DateTypeAdapter;
 
 /**
  * @author Mark P Ashworth

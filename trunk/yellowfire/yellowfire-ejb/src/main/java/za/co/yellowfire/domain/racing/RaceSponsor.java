@@ -1,5 +1,7 @@
 package za.co.yellowfire.domain.racing;
 
+import za.co.yellowfire.domain.DomainEntity;
+
 import javax.persistence.*;
 import javax.xml.bind.annotation.*;
 import java.io.Serializable;
@@ -12,7 +14,7 @@ import java.io.Serializable;
 @Access(AccessType.FIELD)
 @Table(name = "race_sponsor", schema = "rce")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class RaceSponsor implements Serializable {
+public class RaceSponsor extends DomainEntity {
     private static final long serialVersionUID = 1L;
 
 	@Id

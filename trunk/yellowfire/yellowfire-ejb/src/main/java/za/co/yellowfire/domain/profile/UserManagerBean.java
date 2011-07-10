@@ -3,10 +3,10 @@ package za.co.yellowfire.domain.profile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import za.co.yellowfire.log.LogType;
-import za.co.yellowfire.manager.DomainManagerBean;
+import za.co.yellowfire.manager.DomainManager;
 
+import javax.ejb.EJB;
 import javax.ejb.Local;
-import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import java.util.HashMap;
 import java.util.List;
@@ -15,9 +15,11 @@ import java.util.Map;
 @Local(UserManager.class)
 //@Remote(UserManagerRemote.class)
 @Stateless(name = "UserManager"/*, mappedName = "yellowfire/session/UserManager"*/)
-public class UserManagerBean extends DomainManagerBean implements UserManager/*, UserManagerRemote*/ {
+public class UserManagerBean implements UserManager/*, UserManagerRemote*/ {
 	private static final long serialVersionUID = 1L;
 	private static final Logger LOGGER = LoggerFactory.getLogger(LogType.MANAGER.getCategory());
+
+    @EJB private DomainManager manager;
 
 	/**
      * Retrieves the user by name
@@ -29,7 +31,7 @@ public class UserManagerBean extends DomainManagerBean implements UserManager/*,
     	Map<String, Object> params = new HashMap<String, Object>(1);
         params.put(User.FIELD_NAME, name);
      
-        List<User> users = (List<User>) query(User.QRY_USER_NAME, params);
+        List<User> users = (List<User>) manager.query(User.QRY_USER_NAME, params);
         if (users != null && users.size() > 0) {
         	return users.get(0);
         }
@@ -48,7 +50,7 @@ public class UserManagerBean extends DomainManagerBean implements UserManager/*,
         params.put(User.FIELD_NAME, credential.getName());
         params.put(User.FIELD_PASSWORD, credential.getPassword());
         
-        List<User> users = (List<User>) query(User.QRY_USER_LOGIN, params);
+        List<User> users = (List<User>) manager.query(User.QRY_USER_LOGIN, params);
         if (users != null && users.size() > 0) {
         	return users.get(0);
         }
@@ -65,7 +67,7 @@ public class UserManagerBean extends DomainManagerBean implements UserManager/*,
         Map<String, Object> params = new HashMap<String, Object>(1);
         params.put(User.FIELD_NAME, userName);
         
-        List<User> users = (List<User>) query(User.QRY_USER_NAME, params);
+        List<User> users = (List<User>) manager.query(User.QRY_USER_NAME, params);
         return users != null && users.size() == 0;
     }
     
@@ -87,7 +89,7 @@ public class UserManagerBean extends DomainManagerBean implements UserManager/*,
     		throw new UserRegistrationException("The password confirmation should match the password");
     	}
 
-    	super.persist(user);
+    	manager.persist(user);
         return user;
     }
     
@@ -127,7 +129,7 @@ public class UserManagerBean extends DomainManagerBean implements UserManager/*,
     	user.setEntityUpdated();
 
         LOGGER.info("Persisting user");
-        return (User) super.merge(user);
+        return (User) manager.merge(user);
 
         //return user;
     }
@@ -144,7 +146,7 @@ public class UserManagerBean extends DomainManagerBean implements UserManager/*,
         Map<String, Object> params = new HashMap<String, Object>(1);
         params.put(User.FIELD_VERIFICATION_KEY, verificationKey);
 
-        List<User> users = (List<User>) query(User.QRY_USER_VERIFICATION_KEY, params);
+        List<User> users = (List<User>) manager.query(User.QRY_USER_VERIFICATION_KEY, params);
         if (users != null && users.size() != 0) {
             User user = users.get(0);
             user.setVerified(true);

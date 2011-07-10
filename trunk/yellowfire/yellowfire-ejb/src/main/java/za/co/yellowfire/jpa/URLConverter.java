@@ -1,4 +1,4 @@
-package za.co.yellowfire.domain.racing;
+package za.co.yellowfire.jpa;
 
 import org.eclipse.persistence.mappings.DatabaseMapping;
 import org.eclipse.persistence.mappings.converters.Converter;

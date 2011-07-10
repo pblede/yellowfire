@@ -1,8 +1,7 @@
 package za.co.yellowfire.domain.racing;
 
-import za.co.yellowfire.domain.jaxb.NoteTypeAdapter;
-
-import java.io.Serializable;
+import za.co.yellowfire.domain.DomainEntity;
+import za.co.yellowfire.jaxb.NoteTypeAdapter;
 
 import javax.persistence.*;
 
@@ -19,7 +18,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 @Table(name = "note", schema = "rce")
 @XmlAccessorType(XmlAccessType.FIELD)
 //@XmlType(name = "note", propOrder = {"id", "type", "text"})
-public class Note implements Serializable {
+public class Note extends DomainEntity {
 	private static final long serialVersionUID = 1L;
 
 	@Id
