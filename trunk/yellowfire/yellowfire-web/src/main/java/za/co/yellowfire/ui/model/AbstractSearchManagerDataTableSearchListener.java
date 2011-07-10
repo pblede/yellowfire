@@ -2,7 +2,7 @@ package za.co.yellowfire.ui.model;
 
 //import org.compass.core.CompassDetachedHits;
 //import org.compass.core.CompassHit;
-import za.co.yellowfire.manager.SearchManager;
+import za.co.yellowfire.solarflare.SearchManager;
 
 import javax.faces.event.ActionEvent;
 import java.util.ArrayList;

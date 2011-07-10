@@ -7,6 +7,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
 import org.primefaces.model.LazyScheduleModel;
+import org.primefaces.model.ScheduleEvent;
 import org.slf4j.Logger;
 
 import org.slf4j.LoggerFactory;
@@ -22,34 +23,18 @@ import za.co.yellowfire.log.LogType;
  * @author Mark Ashworth
  * @version 0.0.1
  */
-public class ResultsScheduleModel extends LazyScheduleModel {
+public abstract class AbstractScheduleModel<T extends ScheduleEvent> extends LazyScheduleModel {
 	private static final long serialVersionUID = 1L;
 	private static final Logger LOGGER = LoggerFactory.getLogger(LogType.MODEL.getCategory());
-	
-	private User person;
-	
-	public ResultsScheduleModel(User person) {
-		this.person = person;
-	}
-	
-	public ResultManager getResultManager() throws NamingException {
-		return (ResultManager) new InitialContext().lookup(Naming.MANAGER_RESULT);
-	}
-	
+
+    public abstract List<T> onLoadEvents(Date start, Date end);
+
 	@Override public void loadEvents(Date start, Date end) {
 		clear();
-		
-		try {
-			if (person != null) {
-				List<Result> results = getResultManager().calendar(person, start, end);
-				if (results != null) {
-					for(Result r : results) {
-						addEvent(new ResultEvent(r));
-					}
-				}
-			}
-		} catch (NamingException e) {
-			LOGGER.error("Unable to load result events ", e);
-		}
+
+        List<T> events = onLoadEvents(start, end);
+        for (T event : events) {
+            addEvent(event);
+        }
 	}
 }
