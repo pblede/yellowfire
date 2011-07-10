@@ -1,13 +1,14 @@
 package za.co.yellowfire.domain.racing;
 
 import org.eclipse.persistence.annotations.Converter;
+import za.co.yellowfire.domain.DomainEntity;
+import za.co.yellowfire.jpa.URLConverter;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
-import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -21,7 +22,7 @@ import java.net.URL;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "graphic-link", propOrder = { "id", "linkURL", "imageURL",
 		"scalePercentage", "alternativeText" })
-public class GraphicLink implements Serializable {
+public class GraphicLink extends DomainEntity {
 	private static final long serialVersionUID = 1L;
 
 	@Id
