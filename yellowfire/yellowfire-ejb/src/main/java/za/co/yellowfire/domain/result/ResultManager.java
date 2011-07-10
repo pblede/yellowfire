@@ -22,13 +22,4 @@ public interface ResultManager extends Serializable {
      * @return Result
      */
     Result persist(Result result);
-    
-    /**
-     * Retrieves the results for a specific person's calendar
-     * @param person The person for whom the results should be shown
-     * @param start The start date of the calendar
-     * @param end The end date of the calendar
-     * @return List<Result>
-     */
-    List<Result> calendar(User person, Date start, Date end);
 }

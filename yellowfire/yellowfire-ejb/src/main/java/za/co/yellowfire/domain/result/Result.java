@@ -1,5 +1,9 @@
 package za.co.yellowfire.domain.result;
 
+import org.eclipse.persistence.annotations.ConversionValue;
+import org.eclipse.persistence.annotations.Convert;
+import org.eclipse.persistence.annotations.ObjectTypeConverter;
+import za.co.yellowfire.domain.DomainEntity;
 import za.co.yellowfire.domain.racing.Race;
 import za.co.yellowfire.domain.profile.User;
 
@@ -19,7 +23,15 @@ import java.util.Date;
                 @QueryHint(name=QueryHints.SCROLLABLE_CURSOR, value="true")}*/
         )
 )
-public class Result implements Serializable {
+@ObjectTypeConverter(
+        name = "ResultTypeConverter",
+        dataType = Integer.class,
+        objectType = ResultType.class,
+        conversionValues = {
+            @ConversionValue(dataValue = "1", objectValue = "Race"),
+            @ConversionValue(dataValue = "2", objectValue = "Training")
+})
+public class Result extends DomainEntity {
 	private static final long serialVersionUID = 1L;
 
 	public static final String QRY_RESULT_CALENDAR = "qry.result.calendar";
@@ -75,9 +87,9 @@ public class Result implements Serializable {
 	private Date end;
 	
 //	@XmlAttribute(name = "type", required = true)
-//	@Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.ORDINAL)
 	@Column(name = "result_type_id", nullable = false, insertable = true, updatable = true)
-	//@Converter(name = "ResultTypeConverter", converterClass = ResultTypeConverter.class)
+	@Convert("ResultTypeConverter")
 	private ResultType type;
 	
 //	@XmlAttribute(name = "pace", required = false)

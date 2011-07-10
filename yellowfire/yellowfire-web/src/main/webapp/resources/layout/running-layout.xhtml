@@ -24,12 +24,15 @@
                         <a href="#{request.contextPath}/index.html" title="#{msgs['application.name']}"><span>#{msgs['application.name']}</span></a>
                     </h1>
                     <div id="dock">
-                    	<cc:quickBar
-                            loginMethod="#{sessionController.login}"
-                            logoutMethod="#{sessionController.logout}"
-                            registerMethod="#{sessionController.createProfile}"
-                            bean="#{sessionController}"
-                            loggedIn="#{sessionController.loggedIn}"
+                        <cc:quickBar
+                            loginMethod="#{loginController.login}"
+                            logoutMethod="#{loginController.logout}"
+                            registerUrl="#{request.contextPath}/running/register.jsf"
+                            registerMethod="#{loginController.createProfile}"
+                            credentialBean="#{loginController.credential}"
+                            userBean="#{userSession.user}"
+                            bean="#{userSession}"
+                            loggedIn="#{userSession.loggedIn}"
                             version="#{msgs['application.version']}"/>
                     </div>
                     <div id="navigation">

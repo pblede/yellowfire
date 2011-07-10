@@ -1,4 +1,4 @@
-package za.co.yellowfire.controller;
+package za.co.yellowfire.ui.racing;
 
 import org.primefaces.event.DateSelectEvent;
 import org.primefaces.event.ScheduleEntryMoveEvent;
@@ -8,16 +8,16 @@ import org.primefaces.model.ScheduleEvent;
 import org.primefaces.model.ScheduleModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import za.co.yellowfire.DateUtil;
 import za.co.yellowfire.log.LogType;
 import za.co.yellowfire.domain.racing.Race;
-import za.co.yellowfire.domain.racing.RaceManager;
 import za.co.yellowfire.domain.profile.User;
 import za.co.yellowfire.domain.result.Result;
-import za.co.yellowfire.domain.result.ResultManager;
 import za.co.yellowfire.domain.result.ResultType;
+import za.co.yellowfire.manager.DomainManager;
 import za.co.yellowfire.ui.FacesUtil;
 import za.co.yellowfire.ui.model.ResultEvent;
-import za.co.yellowfire.ui.model.ResultsScheduleModel;
+import za.co.yellowfire.ui.model.AbstractScheduleModel;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -54,7 +54,7 @@ public class ResultsController implements Serializable {
 	private List<Race> races;
 	
 	/* Result calendar model */
-	private ScheduleModel resultModel;
+	private AbstractScheduleModel<ResultEvent> resultModel;
 
     private List<Long> hours;
     private List<Long> minutes;
@@ -62,12 +62,9 @@ public class ResultsController implements Serializable {
 
     @Inject @Named("currentUser")
 	private User user;
-	
-	@EJB
-	private RaceManager raceManager;
 
     @EJB
-    private ResultManager resultManager;
+    private DomainManager manager;
 
     @Inject
     private  Conversation conversation;
@@ -80,7 +77,18 @@ public class ResultsController implements Serializable {
         /* Start a conversation */
         conversation.begin();
 
-        this.resultModel = new ResultsScheduleModel(this.user);
+        this.resultModel = new AbstractScheduleModel<ResultEvent>() {
+            @Override
+            public List<ResultEvent> onLoadEvents(Date start, Date end) {
+                List<ResultEvent> events = new ArrayList<ResultEvent>();
+                List<Result> results = getCalendar(user, start, end);
+                for (Result result : results) {
+                    events.add(new ResultEvent(result));
+                }
+                return events;
+            }
+        };
+
         this.hours = new ArrayList<Long>();
         for (long i = 0; i <= 23; i++) {
             this.hours.add(i);
@@ -100,9 +108,6 @@ public class ResultsController implements Serializable {
 	}
 
 	public ScheduleModel getResultModel() {
-		if (resultModel == null) {
-			this.resultModel = new ResultsScheduleModel(user);
-		}
 		return resultModel;
 	}
 
@@ -112,7 +117,7 @@ public class ResultsController implements Serializable {
 			LOGGER.info("\tgetRacesForDate() is null");
 			if (selected != null && selected.getResult() != null && selected.getResult().getStart() != null) {
 				LOGGER.info("\t\tgetRacesForDate() loading races for " + selected.getResult().getStart());
-				this.races = raceManager.retrieveRacesForDate(selected.getResult().getStart());
+				this.races = retrieveRacesForDate(selected.getResult().getStart());
 			} else {
 				LOGGER.info("\t\tgetRacesForDate() loading races for nothing selected");
 				this.races = new ArrayList<Race>();
@@ -120,7 +125,49 @@ public class ResultsController implements Serializable {
 		}
 		return this.races;
 	}
-	
+
+    /**
+     * Retrieves the races for a specified date
+     * @param date The date of the races to retrieve
+     * @return The races that match the date
+     */
+    @SuppressWarnings("unchecked")
+    public List<Race> retrieveRacesForDate(Date date) {
+        Map<String, Object> params = new HashMap<String, Object>(1);
+        params.put(Race.FIELD_DATE, DateUtil.getDate(date, false, false));
+        return (List<Race>) manager.query(Race.QRY_RACES_FOR_DATE, params);
+    }
+
+    /**
+     * Retrieves the races for a specified id
+     * @param id The id of the races to retrieve
+     * @return The races that match the id
+     */
+    @SuppressWarnings("unchecked")
+    public List<Race> retrieveRacesForId(Long id) {
+    	Map<String, Object> params = new HashMap<String, Object>(1);
+        params.put(Race.FIELD_ID, id);
+        return (List<Race>) manager.query(Race.QRY_RACES_FOR_ID, params);
+    }
+
+    /**
+     * Retrieves the results for a specific person's calendar
+     * @param person The person for whom the results should be shown
+     * @param start The start date of the calendar
+     * @param end The end date of the calendar
+     * @return List<Result>
+     */
+    @SuppressWarnings("unchecked")
+    public List<Result> getCalendar(User person, Date start, Date end) {
+    	LOGGER.debug("ResultsController.calendar() : {} : {} : {}", new Object[]{person, start, end});
+    	Map<String, Object> params = new HashMap<String, Object>(3);
+    	params.put(Result.FIELD_PERSON, person.getId());
+    	params.put(Result.FIELD_START, start);
+    	params.put(Result.FIELD_END, end);
+
+    	return (List<Result>) manager.query(Result.QRY_RESULT_CALENDAR, params);
+    }
+
 	public List<ResultType> getResultTypes() {
 		return resultTypes;
 	}
@@ -146,7 +193,7 @@ public class ResultsController implements Serializable {
 
 		//Load the races for the event
         if (this.selected.getResult().getRace() != null) {
-		    this.races = raceManager.retrieveRacesForId(this.selected.getResult().getRace().getId());
+		    this.races = retrieveRacesForId(this.selected.getResult().getRace().getId());
         }
 	}
 	
@@ -155,7 +202,7 @@ public class ResultsController implements Serializable {
 		this.selected = new ResultEvent(new Result(selectEvent.getDate(), selectEvent.getDate()));
 		
 		//Load the races for the date
-		this.races = raceManager.retrieveRacesForDate(selectEvent.getDate());
+		this.races = retrieveRacesForDate(selectEvent.getDate());
 		
 	}
 	
@@ -246,7 +293,7 @@ public class ResultsController implements Serializable {
             r.setName("Training - " + new SimpleDateFormat("yyyy-MM-dd").format(r.getStart()));
         }
 
-        r = resultManager.persist(r);
+        manager.persist(r);
         this.selected.setResult(r);
 
         FacesUtil.addInfoMessage("Training Saved", "The training session saved");

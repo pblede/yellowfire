@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import org.eclipse.persistence.config.QueryHints;
 import org.hibernate.validator.constraints.Email;
 import za.co.yellowfire.domain.racing.Club;
-import za.co.yellowfire.domain.jaxb.DateTypeAdapter;
+import za.co.yellowfire.jaxb.DateTypeAdapter;
 
 import java.io.Serializable;
 import java.util.Date;
