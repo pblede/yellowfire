@@ -4,14 +4,36 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.ConverterException;
+import javax.inject.Named;
+import javax.inject.Scope;
 import javax.naming.NamingException;
 import javax.persistence.LockModeType;
 
 import za.co.yellowfire.domain.racing.Club;
+import za.co.yellowfire.manager.DomainManager;
 import za.co.yellowfire.ui.FacesUtil;
 
+/**
+ * @author Mark P Ashworth
+ * @version 0.0.1
+ */
+@Named("ClubConverter")
 public class ClubConverter extends AbstractConverter implements Converter {
-	/**
+
+    /**
+     * Default constructor
+     */
+    public ClubConverter() { }
+
+    /**
+     * Constructs the converter with the domain manager to use
+     * @param manager The domain manager
+     */
+    public ClubConverter(DomainManager manager) {
+        super(manager);
+    }
+
+    /**
 	 * Converts the value into a Club instance by looking up the value as the id of the Club
 	 */
 	@Override public Object getAsObject(FacesContext context, UIComponent component, String value) {		

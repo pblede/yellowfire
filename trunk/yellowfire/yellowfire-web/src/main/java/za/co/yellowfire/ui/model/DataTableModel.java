@@ -17,6 +17,8 @@ import java.util.Collections;
 import java.util.List;
 
 /**
+ * A model of entities within a data table.
+ * 
  * @author Mark P Ashworth
  * @version 0.0.1
  */
@@ -113,6 +115,9 @@ public class DataTableModel<T> implements Serializable {
         return deleteActionListener;
     }
 
+    /**
+     * Triggered when a user selects an item within the data table
+     */
     public void onSelection() {
         LOGGER.debug("onSelection()");
 
@@ -138,6 +143,11 @@ public class DataTableModel<T> implements Serializable {
         }
     }
 
+    /**
+     * Triggered when the user selects an action to add an entity to the data table. This action usually occurs before
+     * an entity is displayed to the user for modification.
+     * @param event The JSF action event
+     */
     public void onAdd(ActionEvent event) {
         LOGGER.debug("onAdd() : {}", event);
 
@@ -161,6 +171,11 @@ public class DataTableModel<T> implements Serializable {
         context.addCallbackParam("result", result);
     }
 
+    /**
+     * Triggered when the user selects an action to modify an entity. This action usually occurs before the entity is
+     * displayed to the user for modification.
+     * @param event The JSF action event
+     */
     public void onModify(ActionEvent event) {
         LOGGER.debug("onModify() : " + event);
 
@@ -185,6 +200,10 @@ public class DataTableModel<T> implements Serializable {
         context.addCallbackParam("result", result);
     }
 
+    /**
+     * Triggered when the user requests the entity to be saved.
+     * @param event The JSF action event
+     */
     public void onSave(ActionEvent event) {
         LOGGER.debug("onSave() : {}", event);
 
@@ -217,10 +236,18 @@ public class DataTableModel<T> implements Serializable {
         context.addCallbackParam("result", this.selected.getResult());
     }
 
+    /**
+     * Triggered when the user selects that the changes should be discarded.
+     * @param event The JSF action event
+     */
     public void onDiscard(ActionEvent event) {
          LOGGER.debug("onDiscard() : {}", event);
     }
 
+    /**
+     * Triggered when the user selects to search for an entity
+     * @param event The JSF action event
+     */
     public void onSearch(ActionEvent event) {
         LOGGER.debug("onSearch() : {}", event);
 
@@ -244,6 +271,10 @@ public class DataTableModel<T> implements Serializable {
         context.addCallbackParam("result", this.result);
     }
 
+    /**
+     * Triggered by the system when the data table is loaded for the first time or when the user triggers a reload
+     * @param event The JSF action event
+     */
     public void onLoad(ActionEvent event) {
         LOGGER.debug("onLoad() : {}", event);
 

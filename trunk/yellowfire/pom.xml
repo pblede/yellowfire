@@ -354,6 +354,7 @@
                 <artifactId>httpcore</artifactId>
                 <version>4.1</version>
             </dependency>
+            
         </dependencies>
     </dependencyManagement>
     <distributionManagement>

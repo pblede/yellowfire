@@ -14,27 +14,26 @@
 		</f:metadata>
 	</ui:define>
     <ui:define name="head">
-		<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 	</ui:define>
 	<ui:define name="content">
         <p:growl showDetail="true" showSummary="true" />
-        <h:form id="f2" rendered="#{sessionController.loggedIn ne true}">
+        <h:form id="f2" rendered="#{userSession.loggedIn ne true}">
         	<cc:infoPanel text="#{msgs['prompt.login.registration']}" />
        	</h:form>
         <h:form prependId="false" id="racesForm">
-        <p:dataGrid value="#{racesController.races}" var="race" columns="1">
+        <p:dataGrid value="#{racesController.dataModel.rows}" var="row" columns="1">
             <p:column>
                 <p:panel>
                     <h:panelGrid columns="10">
-                        <p:graphicImage value="#{race.new ? '../resources/images/new.png' : '../resources/images/bullet_white.png'}" />
-                        <h:outputText value="[#{race.district.code}]"/>
-                        <h:outputText value="#{race.name}"/>
-                        <h:outputText value="#{race.date}"><f:convertDateTime timeStyle="medium" type="date"/></h:outputText>
+                        <p:graphicImage value="#{row.object.new ? '../resources/images/new.png' : '../resources/images/bullet_white.png'}" />
+                        <h:outputText value="[#{row.object.district.code}]"/>
+                        <h:outputText value="#{row.object.name}"/>
+                        <h:outputText value="#{row.object.date}"><f:convertDateTime timeStyle="medium" type="date"/></h:outputText>
                         <h:commandLink id="lc01" action="#{racesController.view}" value="Detail">
-                            <f:setPropertyActionListener value="#{race}" target="#{sessionController.race}" />
+                            <f:setPropertyActionListener value="#{row.object}" target="#{sessionController.race}" />
                         </h:commandLink>
                         <h:commandLink id="lc02" action="#{racesController.register}" value="Register" rendered="#{sessionController.loggedIn}">
-                            <f:setPropertyActionListener value="#{race}" target="#{sessionController.race}" />
+                            <f:setPropertyActionListener value="#{row.object}" target="#{sessionController.race}" />
                         </h:commandLink>
                     </h:panelGrid>
                 </p:panel>
