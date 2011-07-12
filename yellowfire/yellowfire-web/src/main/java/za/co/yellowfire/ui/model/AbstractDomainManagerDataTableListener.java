@@ -14,8 +14,12 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 /**
+ * The AbstractDomainManagerDataTableListener is an implementation of DataTableListener that uses the DomainManager
+ * to manage the entities within a DataTableModel.
+ *
  * @author Mark P Ashworth
  * @version 0.0.1
  */
@@ -24,9 +28,26 @@ public abstract class AbstractDomainManagerDataTableListener<T extends DomainObj
     private static final long serialVersionUID = 1L;
 
 
+    /**
+     * The domain manager used for the model
+     * @return DomainManager
+     */
     public abstract DomainManager getManager();
 
+    /**
+     * Retrieves the named query that is used to load the model with domain objects.
+     * @return String
+     */
     public abstract String getLoadQuery();
+
+    /**
+     * Retrieves the parameters for the load query.<br />
+     * For example: <strong>select r from Race where where r.date >= :date</strong>, then <strong>{"date", new Date()}</strong> should be returned.
+     * @return An empty map or null if there are no parameters, else a named value pair of map parameters that match the named query specification.
+     */
+    public Map<String, Object> getLoadQueryParameters() {
+        return null;
+    }
 
     /**
      * Used to initialize the domain object while the loading from the persistent store
@@ -53,7 +74,7 @@ public abstract class AbstractDomainManagerDataTableListener<T extends DomainObj
         if (query == null) {
             rows = new ArrayList<DataTableRow<T>>(0);
         } else {
-            Collection<T> values = (List<T>) getManager().query(query, null, DomainQueryHint.REFRESH);
+            Collection<T> values = (List<T>) getManager().query(query, getLoadQueryParameters(), DomainQueryHint.REFRESH);
             if (values != null) {
                 rows = new ArrayList<DataTableRow<T>>(values.size());
                 for (T value : values) {

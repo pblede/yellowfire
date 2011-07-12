@@ -8,6 +8,7 @@ import javax.naming.NamingException;
 import javax.persistence.LockModeType;
 
 import za.co.yellowfire.domain.racing.Race;
+import za.co.yellowfire.manager.DomainManager;
 
 /**
  * 
@@ -16,7 +17,20 @@ import za.co.yellowfire.domain.racing.Race;
  */
 public class RaceConverter extends AbstractConverter implements Converter {
 
-	/**
+    /**
+     * Default constructor
+     */
+    public RaceConverter() {}
+
+    /**
+     * Constructs the converter with the domain manager instance to use.
+     * @param manager The domain manager
+     */
+    public RaceConverter(DomainManager manager) {
+        super(manager);
+    }
+
+    /**
 	 * Converts the value into a Race instance by looking up the value as the id of the Race
 	 */
 	@Override public Object getAsObject(FacesContext arg0, UIComponent arg1, String value) {

@@ -72,4 +72,11 @@
             <to-view-id>/view_expired.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
+    <navigation-rule>
+        <from-view-id>*</from-view-id>
+        <navigation-case>
+            <from-outcome>profile</from-outcome>
+            <to-view-id>/profile.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
 </faces-config>
