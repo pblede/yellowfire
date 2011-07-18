@@ -16,6 +16,19 @@
 	</ui:define>
     <ui:define name="head">
 	</ui:define>
+    <ui:define name="toolbar">
+        <h:form prependId="false">
+            <p:menubar widgetVar="t">
+                <c:forEach items="#{profileController.menu.subMenus}" var="subMenu" varStatus="subMenuStatus">
+                    <p:submenu label="#{subMenu.message}">
+                        <c:forEach items="#{subMenu.menuItems}" var="menuItem" varStatus="menuItemStatus">
+                            <p:menuitem value="#{menuItem.message}"  url="#{menuItem.url}" />
+                        </c:forEach>
+                    </p:submenu>
+                </c:forEach>
+            </p:menubar>
+        </h:form>
+    </ui:define>
 	<ui:define name="content">
         <p:growl id="g" showDetail="true" showSummary="true" />
        	<h:form id="f1">

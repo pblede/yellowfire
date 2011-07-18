@@ -275,17 +275,17 @@
         <dependency>
             <groupId>org.jboss.seam.solder</groupId>
             <artifactId>seam-solder-api</artifactId>
-            <version>${seam.faces.version}</version>
+            <version>${seam.solder.version}</version>
         </dependency>
         <dependency>
             <groupId>org.jboss.seam.solder</groupId>
             <artifactId>seam-solder</artifactId>
-            <version>${seam.faces.version}</version>
+            <version>${seam.solder.version}</version>
         </dependency>
         <dependency>
             <groupId>org.jboss.seam.international</groupId>
             <artifactId>seam-international</artifactId>
-            <version>${seam.faces.version}</version>
+            <version>${seam.solder.version}</version>
         </dependency>
         <dependency>
             <groupId>org.jboss.seam.faces</groupId>
@@ -366,7 +366,8 @@
     </distributionManagement>
 
     <properties>
-        <seam.faces.version>3.0.0.Final</seam.faces.version>
+        <seam.faces.version>3.0.2.Final</seam.faces.version>
+        <seam.solder.version>3.0.0.Final</seam.solder.version>
         <hibernate.validator.version>4.2.0.Beta2</hibernate.validator.version>
         <jaxb.version>2.2.2</jaxb.version>
         <compass.version>2.3.0</compass.version>

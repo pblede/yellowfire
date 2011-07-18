@@ -33,7 +33,7 @@ import java.util.List;
  * @version 0.0.1
  */
 @ViewScoped @Named("courseDatesController")
-public class CourseDatesController implements Serializable {
+public class CourseDatesController extends AbstractTrainingUIController {
     private static final Logger LOGGER = LoggerFactory.getLogger(LogType.CONTROLLER.getCategory());
 
     @EJB(name = "DomainManager")

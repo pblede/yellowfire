@@ -20,7 +20,7 @@ import java.io.Serializable;
  * @version 0.0.1
  */
 @ViewScoped @Named("skillAreasController")
-public class SkillAreasController implements Serializable {
+public class SkillAreasController extends AbstractTrainingUIController {
     private static final Logger LOGGER = LoggerFactory.getLogger(LogType.CONTROLLER.getCategory());
     private static final String NAME = "SkillAreasController";
 

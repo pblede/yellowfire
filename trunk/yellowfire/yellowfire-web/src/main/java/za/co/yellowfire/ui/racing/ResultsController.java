@@ -9,15 +9,15 @@ import org.primefaces.model.ScheduleModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import za.co.yellowfire.DateUtil;
-import za.co.yellowfire.log.LogType;
-import za.co.yellowfire.domain.racing.Race;
 import za.co.yellowfire.domain.profile.User;
+import za.co.yellowfire.domain.racing.Race;
 import za.co.yellowfire.domain.result.Result;
 import za.co.yellowfire.domain.result.ResultType;
+import za.co.yellowfire.log.LogType;
 import za.co.yellowfire.manager.DomainManager;
 import za.co.yellowfire.ui.FacesUtil;
-import za.co.yellowfire.ui.model.ResultEvent;
 import za.co.yellowfire.ui.model.AbstractScheduleModel;
+import za.co.yellowfire.ui.model.ResultEvent;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -30,7 +30,6 @@ import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.event.ValueChangeEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -40,7 +39,7 @@ import java.util.*;
  * @version 0.0.1
  */
 @Named("resultsController") @Stateful @ConversationScoped
-public class ResultsController implements Serializable {
+public class ResultsController extends AbstractRacingUIController {
 	private static final long serialVersionUID = 1L;
 	private static final Logger LOGGER = LoggerFactory.getLogger(LogType.CONTROLLER.getCategory());
 	
