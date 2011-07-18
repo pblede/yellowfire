@@ -4,6 +4,7 @@
                 xmlns:p="http://primefaces.prime.com.tr/ui"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:cc="http://java.sun.com/jsf/composite/cc"
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
                 template="/resources/layout/training-layout.xhtml">
    
 	<ui:define name="demoSampleParameters">
@@ -15,6 +16,19 @@
 	</ui:define>
     <ui:define name="head">
 	</ui:define>
+    <ui:define name="toolbar">
+        <h:form prependId="false">
+            <p:menubar widgetVar="t">
+                <c:forEach items="#{trainingIndexController.menu.subMenus}" var="subMenu" varStatus="subMenuStatus">
+                    <p:submenu label="#{subMenu.message}">
+                        <c:forEach items="#{subMenu.menuItems}" var="menuItem" varStatus="menuItemStatus">
+                            <p:menuitem value="#{menuItem.message}"  url="#{menuItem.url}" />
+                        </c:forEach>
+                    </p:submenu>
+                </c:forEach>
+            </p:menubar>
+        </h:form>
+    </ui:define>
 	<ui:define name="content">
         <p:growl showDetail="true" showSummary="true" />
         <h:form id="h1" prependId="false">
