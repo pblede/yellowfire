@@ -20,7 +20,7 @@ import java.io.Serializable;
  * @version 0.0.1
  */
 @ViewScoped @Named("contentTypesController")
-public class ContentTypesController implements Serializable {
+public class ContentTypesController extends AbstractTrainingUIController {
     private static final Logger LOGGER = LoggerFactory.getLogger(LogType.CONTROLLER.getCategory());
     private static final String NAME = "ContentTypesController";
 

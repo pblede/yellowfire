@@ -9,8 +9,11 @@ import za.co.yellowfire.domain.training.*;
 import za.co.yellowfire.log.LogType;
 import za.co.yellowfire.manager.DomainManager;
 import za.co.yellowfire.ui.UILogger;
+import za.co.yellowfire.ui.annotation.Racing;
+import za.co.yellowfire.ui.annotation.Training;
 import za.co.yellowfire.ui.model.AbstractDomainManagerDataTableListener;
 import za.co.yellowfire.ui.model.DataTableModel;
+import za.co.yellowfire.ui.model.MenuModel;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -29,7 +32,7 @@ import java.util.List;
  */
 @ConversationScoped
 @Named("coursesController")
-public class CoursesController implements Serializable {
+public class CoursesController extends AbstractTrainingUIController {
     private static final Logger LOGGER = LoggerFactory.getLogger(LogType.CONTROLLER.getCategory());
 
     @EJB(name = "SystemManager")

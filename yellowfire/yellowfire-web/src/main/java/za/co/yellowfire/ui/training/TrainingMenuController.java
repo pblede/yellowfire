@@ -10,6 +10,6 @@ import java.io.Serializable;
  */
 @RequestScoped
 @Named("trainingMenu")
-public class TrainingMenuController implements Serializable {
+public class TrainingMenuController extends AbstractTrainingUIController {
 
 }

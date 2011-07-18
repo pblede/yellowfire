@@ -4,7 +4,8 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.prime.com.tr/ui"
-      xmlns:cc="http://java.sun.com/jsf/composite/cc">
+      xmlns:cc="http://java.sun.com/jsf/composite/cc"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
     <f:view>
         <h:head>
             <title>.::Yellowfire::.</title>
@@ -37,32 +38,7 @@
                             version="#{msgs['application.version']}"/>
                     </div>
                     <div id="toolbar">
-                        <h:form prependId="false">
-                            <ui:remove>
-                            <!--p:idleMonitor timeout="500" update="growl">
-                                <p:ajax event="idle" listener="#{userSession.onIdleSession}" update="growl" />
-                                <p:ajax event="active" listener="#{userSession.onActivatedSession}" update="growl" />
-                            </p:idleMonitor-->
-                            </ui:remove>
-                            <p:menubar widgetVar="toolbar">
-                                <p:submenu label="#{msgs['menu.administration']}">
-                                </p:submenu>
-                                <p:submenu label="#{msgs['menu.administration.venue']}">
-                                    <p:menuitem value="#{msgs['menu.administration.venue.venues']}"  url="/training/venues.jsf" />
-                                    <p:menuitem value="#{msgs['menu.administration.venue.location.search']}"  url="/training/location_search.jsf" />
-                                </p:submenu>
-                                <p:submenu label="#{msgs['menu.administration.training']}">
-                                    <p:menuitem value="#{msgs['menu.administration.training.outcomes']}" url="/training/outcomes.jsf" />
-                                    <p:menuitem value="#{msgs['menu.administration.skill.areas']}" url="/training/skill_areas.jsf" />
-                                    <p:menuitem value="#{msgs['menu.administration.training.courses']}" url="/training/courses.jsf" />
-                                    <p:menuitem value="#{msgs['menu.administration.training.course.dates']}"  url="/training/course_dates.jsf" />
-                                </p:submenu>
-                                <p:submenu label="#{msgs['menu.help']}">
-                                    <p:menuitem value="#{msgs['menu.help.topics']}"/>
-                                    <p:menuitem value="#{msgs['menu.help.about']}"/> 
-                                </p:submenu>
-                            </p:menubar>
-                        </h:form>
+                        <ui:insert name="toolbar">...</ui:insert>
                     </div>
                 </div>
                 <div id="content-wrapper">

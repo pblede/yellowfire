@@ -1,8 +1,9 @@
-package za.co.yellowfire.controller;
+package za.co.yellowfire.ui.racing;
 
 import org.joda.time.DateMidnight;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import za.co.yellowfire.controller.AbstractController;
 import za.co.yellowfire.domain.racing.Race;
 import za.co.yellowfire.log.LogType;
 import za.co.yellowfire.manager.DomainManager;
@@ -20,7 +21,7 @@ import java.util.Map;
 
 @ViewScoped
 @Named("racesController")
-public class RacesController extends AbstractController {
+public class RacesController extends AbstractRacingUIController {
     private static final long serialVersionUID = 1L;
     private static final Logger LOGGER = LoggerFactory.getLogger(LogType.CONTROLLER.getCategory());
 

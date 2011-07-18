@@ -40,7 +40,7 @@ import java.util.List;
  * @version 0.0.1
  */
 @ViewScoped @Named("venuesController")
-public class VenuesController implements Serializable {
+public class VenuesController extends AbstractTrainingUIController {
     private static final Logger LOGGER = LoggerFactory.getLogger(LogType.CONTROLLER.getCategory());
 
     @EJB(name = "SearchManager")
