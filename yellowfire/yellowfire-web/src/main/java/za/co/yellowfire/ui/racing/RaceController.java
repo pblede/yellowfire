@@ -1,21 +1,15 @@
-package za.co.yellowfire.controller;
-
-import java.io.Serializable;
-import java.util.Map;
-
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
-import javax.inject.Named;
+package za.co.yellowfire.ui.racing;
 
 import za.co.yellowfire.domain.racing.Race;
 
+import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
+import javax.inject.Named;
+import java.util.Map;
+
 @ViewScoped
 @Named("raceController")
-public class RaceController implements Serializable {
-
-    //@EJB(beanInterface = RaceManager.class, beanName = "RaceManager", mappedName = "bluefire/session/RaceManager")
-    //private RaceManager raceManager;
+public class RaceController extends AbstractRacingUIController {
 
     private Race selected;
 

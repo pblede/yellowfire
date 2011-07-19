@@ -1,7 +1,6 @@
 package za.co.yellowfire.ui.model;
 
-//import org.compass.core.CompassDetachedHits;
-//import org.compass.core.CompassHit;
+import za.co.yellowfire.domain.Venue;
 import za.co.yellowfire.solarflare.SearchManager;
 
 import javax.faces.event.ActionEvent;
@@ -15,15 +14,18 @@ import java.util.List;
 public abstract class AbstractSearchManagerDataTableSearchListener<T> implements DataTableSearchListener<T> {
 
     public abstract SearchManager getManager();
-
-    //@SuppressWarnings("unused")
-    //public void onSearchedRow(CompassHit hit) {}
+    public abstract Class getModelClass();
 
     @Override
     @SuppressWarnings("unchecked")
     public List<DataTableRow<T>> onSearch(ActionEvent event, String searchText) throws DataTableException {
 
         List<DataTableRow<T>> rows = new ArrayList<DataTableRow<T>>(0);
+
+        List<Object> results = getManager().search(getModelClass(), searchText);
+        for (Object result : results) {
+            rows.add(new DataTableRow<T>((T) result, 1.0f));
+        }
 
 //        if (searchText == null) {
 //            rows = new ArrayList<DataTableRow<T>>(0);

@@ -4,6 +4,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import za.co.yellowfire.log.LogType;
 
+import javax.ejb.EJBException;
+import javax.el.ELException;
 import javax.enterprise.context.NonexistentConversationException;
 import javax.faces.FacesException;
 import javax.faces.application.NavigationHandler;
@@ -14,6 +16,7 @@ import javax.faces.context.ExceptionHandlerWrapper;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ExceptionQueuedEvent;
 import javax.faces.event.ExceptionQueuedEventContext;
+import javax.persistence.PersistenceException;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -42,7 +45,33 @@ public class ViewExpiredExceptionExceptionHandler extends ExceptionHandlerWrappe
             Map<String, Object> requestMap = fc.getExternalContext().getRequestMap();
             NavigationHandler nav = fc.getApplication().getNavigationHandler();
 
-            if (t instanceof NonexistentConversationException) {
+            if (t instanceof ELException) {
+                Throwable cause = t.getCause();
+                if (cause instanceof EJBException && cause.getCause() instanceof PersistenceException) {
+                    try {
+                        LOGGER.error("PERSISTENCE EXCEPTION : fc {}", fc != null ? fc.getViewRoot() : "null");
+                        LOGGER.error("PERSISTENCE EXCEPTION : fc {}", fc != null ? fc.getViewRoot().getViewId() : "null");
+                        
+                        // Push some useful stuff to the request scope for use in the page
+                        requestMap.put("currentException", t);
+                        // If the view roow it null, then set it to the view that expired.
+                        if (fc.getViewRoot() == null) {
+                            UIViewRoot view = fc.getApplication().getViewHandler().createView(fc, "/index.jsf");
+                            fc.setViewRoot(view);
+                        }
+                        //Navigate to the view_expired outcome. Use view_expired.xhtml for implicit handling or
+                        //configure a navigation rule in the faces-config.xml for this outcome
+                        nav.handleNavigation(fc, null, "error");
+                        //Skip to rendering the response
+                        fc.renderResponse();
+                    } catch (Throwable e) {
+                        LOGGER.error("ViewExpiredExceptionExceptionHandler.handle() error {}", e);
+                    } finally {
+                        //Remove this unhandled exception
+                        i.remove();
+                    }
+                }
+            } else if (t instanceof NonexistentConversationException) {
 
                 try {
                     // Push some useful stuff to the request scope for use in the page

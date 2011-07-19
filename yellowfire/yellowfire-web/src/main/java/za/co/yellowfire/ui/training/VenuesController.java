@@ -27,6 +27,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.OptimisticLockException;
 import java.io.Serializable;
@@ -43,7 +44,7 @@ import java.util.List;
 public class VenuesController extends AbstractTrainingUIController {
     private static final Logger LOGGER = LoggerFactory.getLogger(LogType.CONTROLLER.getCategory());
 
-    @EJB(name = "SearchManager")
+    @Inject
     private SearchManager searchManager;
     
     @EJB(name = "DomainManager")
@@ -131,10 +132,8 @@ public class VenuesController extends AbstractTrainingUIController {
                         },
                         /* DataTableSearchListener*/
                         new AbstractSearchManagerDataTableSearchListener<Venue>() {
-                            @Override
-                            public SearchManager getManager() {
-                                return searchManager;
-                            }
+                            @Override public SearchManager getManager() { return searchManager; }
+                            @Override public Class getModelClass() { return Venue.class; }
                         }
                 );
     }

@@ -87,7 +87,7 @@ public class Result extends DomainEntity {
 	private Date end;
 	
 //	@XmlAttribute(name = "type", required = true)
-    @Enumerated(EnumType.ORDINAL)
+//  @Enumerated(EnumType.ORDINAL)
 	@Column(name = "result_type_id", nullable = false, insertable = true, updatable = true)
 	@Convert("ResultTypeConverter")
 	private ResultType type;

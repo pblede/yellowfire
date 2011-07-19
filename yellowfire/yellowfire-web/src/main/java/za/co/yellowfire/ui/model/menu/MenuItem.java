@@ -1,23 +1,21 @@
-package za.co.yellowfire.ui.model;
+package za.co.yellowfire.ui.model.menu;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author Mark P Ashworth
  * @version 0.0.1
  */
-public class SubMenu implements Serializable {
+public class MenuItem implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private String messageId;
     private String message;
+    private String url;
 
-    private List<MenuItem> menuItems = new ArrayList<MenuItem>();
-
-    public SubMenu(String message) {
+    public MenuItem(String message, String url) {
         this.message = message;
+        this.url = url;
     }
 
     public String getMessageId() {
@@ -36,11 +34,11 @@ public class SubMenu implements Serializable {
         this.message = message;
     }
 
-    public void addMenuItem(MenuItem menuItem) {
-        this.menuItems.add(menuItem);
+    public String getUrl() {
+        return url;
     }
 
-    public List<MenuItem> getMenuItems() {
-        return this.menuItems;
+    public void setUrl(String url) {
+        this.url = url;
     }
 }

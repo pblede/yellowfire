@@ -2,7 +2,7 @@ package za.co.yellowfire.ui.common;
 
 import za.co.yellowfire.ui.UIController;
 import za.co.yellowfire.ui.annotation.Common;
-import za.co.yellowfire.ui.model.MenuModel;
+import za.co.yellowfire.ui.model.menu.MenuModel;
 
 import javax.inject.Inject;
 

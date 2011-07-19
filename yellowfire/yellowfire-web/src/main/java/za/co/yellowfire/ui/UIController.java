@@ -1,6 +1,6 @@
 package za.co.yellowfire.ui;
 
-import za.co.yellowfire.ui.model.MenuModel;
+import za.co.yellowfire.ui.model.menu.MenuModel;
 
 import java.io.Serializable;
 
