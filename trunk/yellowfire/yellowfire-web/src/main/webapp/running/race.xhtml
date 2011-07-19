@@ -18,6 +18,19 @@
     <ui:define name="head">
 		<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 	</ui:define>
+    <ui:define name="toolbar">
+        <h:form prependId="false">
+            <p:menubar widgetVar="t">
+                <c:forEach items="#{raceController.menu.subMenus}" var="subMenu" varStatus="subMenuStatus">
+                    <p:submenu label="#{subMenu.message}">
+                        <c:forEach items="#{subMenu.menuItems}" var="menuItem" varStatus="menuItemStatus">
+                            <p:menuitem value="#{menuItem.message}"  url="#{menuItem.url}" />
+                        </c:forEach>
+                    </p:submenu>
+                </c:forEach>
+            </p:menubar>
+        </h:form>
+    </ui:define>
 	<ui:define name="content">
         <p:growl showDetail="true" showSummary="true" />
         <h:form>

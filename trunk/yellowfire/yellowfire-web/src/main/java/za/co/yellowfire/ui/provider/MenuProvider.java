@@ -1,4 +1,4 @@
-package za.co.yellowfire.ui.model;
+package za.co.yellowfire.ui.provider;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -6,6 +6,9 @@ import za.co.yellowfire.log.LogType;
 import za.co.yellowfire.ui.annotation.Common;
 import za.co.yellowfire.ui.annotation.Racing;
 import za.co.yellowfire.ui.annotation.Training;
+import za.co.yellowfire.ui.model.menu.MenuItem;
+import za.co.yellowfire.ui.model.menu.MenuModel;
+import za.co.yellowfire.ui.model.menu.SubMenu;
 
 import javax.enterprise.inject.Produces;
 import javax.inject.Named;
@@ -13,6 +16,7 @@ import java.util.ResourceBundle;
 
 /**
  * @author Mark P Ashworth
+ * @version 0.0.1
  */
 @Named("MenuProvider")
 public class MenuProvider {
@@ -26,6 +30,10 @@ public class MenuProvider {
 
     private MenuModel racingMenu = null;
 
+    /**
+     * Provides the menu for the common sub-web
+     * @return MenuModel
+     */
     @Produces @Common
     public MenuModel getCommonMenu() {
         if (commonMenu == null) {
@@ -39,6 +47,10 @@ public class MenuProvider {
         return commonMenu;
     }
 
+    /**
+     * Provides the menu for the training sub-web
+     * @return MenuModel
+     */
     @Produces @Training
     public MenuModel getTrainingMenu() {
         if (trainingMenu == null) {
@@ -63,6 +75,10 @@ public class MenuProvider {
         return trainingMenu;
     }
 
+    /**
+     * Provides the menu for the racing sub-web
+     * @return MenuModel
+     */
     @Produces @Racing
     public MenuModel getRacingMenu() {
         if (racingMenu == null) {
@@ -74,12 +90,12 @@ public class MenuProvider {
             subMenu = new SubMenu(rb.getString("menu.administration.running"));
             subMenu.addMenuItem(new MenuItem(rb.getString("menu.administration.running.races"), "/running/races.jsf"));
             subMenu.addMenuItem(new MenuItem(rb.getString("menu.administration.running.result.calendar"), "/running/result_calendar.jsf"));
-            //racingMenu.addSubMenu(subMenu);
+            racingMenu.addSubMenu(subMenu);
             
             subMenu = new SubMenu(rb.getString("menu.help"));
             subMenu.addMenuItem(new MenuItem(rb.getString("menu.help.topics"), "/topics.jsf"));
             subMenu.addMenuItem(new MenuItem(rb.getString("menu.help.about"), "/about.jsf"));
-            //racingMenu.addSubMenu(subMenu);
+            racingMenu.addSubMenu(subMenu);
         }
         return racingMenu;
     }

@@ -9,11 +9,8 @@ import za.co.yellowfire.domain.training.*;
 import za.co.yellowfire.log.LogType;
 import za.co.yellowfire.manager.DomainManager;
 import za.co.yellowfire.ui.UILogger;
-import za.co.yellowfire.ui.annotation.Racing;
-import za.co.yellowfire.ui.annotation.Training;
 import za.co.yellowfire.ui.model.AbstractDomainManagerDataTableListener;
 import za.co.yellowfire.ui.model.DataTableModel;
-import za.co.yellowfire.ui.model.MenuModel;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -22,7 +19,6 @@ import javax.enterprise.context.ConversationScoped;
 import javax.faces.model.SelectItem;
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 

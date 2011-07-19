@@ -1,0 +1,8 @@
+<ui>
+    <toolbar name="racing">
+        <menu id="menu.running">
+            <submenu id="menu.running.races" />
+            <submenu id="menu.running.race_results" />
+        </menu>
+    </toolbar>
+</ui>

@@ -1,6 +1,10 @@
 package za.co.yellowfire.domain;
 
 import org.eclipse.persistence.config.QueryHints;
+import za.co.yellowfire.solarflare.annotation.Searchable;
+import za.co.yellowfire.solarflare.annotation.SearchableProperty;
+import za.co.yellowfire.solarflare.annotation.SearchablePropertyId;
+import za.co.yellowfire.solarflare.annotation.SearchablePropertyType;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -15,6 +19,7 @@ import java.util.Map;
  * @version 0.0.1
  * TODO Need a filter between Sport venues and Training venues
  */
+@Searchable(name = "Venue")
 @Entity(name = "Venue")
 @Access(AccessType.FIELD)
 @Table(name = "venue", schema = "cde")
@@ -42,16 +47,19 @@ public class Venue implements DomainObject {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "venue_id", nullable = false, insertable = true, updatable = true, length = 19, precision = 0)
     @XmlAttribute(name = "id", required = false)
+    @SearchablePropertyId
     private Long id;
 
     @Basic
     @Column(name = "venue_name", nullable = false, insertable = true, updatable = true, length =128, precision = 0)
     @XmlAttribute(name = "name", required = true)
+    @SearchableProperty()
     private String name;
 
     @Basic
     @Column(name = "venue_address", nullable = true, insertable = true, updatable = true, length = 512, precision = 0)
     @XmlAttribute(name = "address", required = true)
+    @SearchableProperty(name = "address", dynamic = true, type = SearchablePropertyType.STRING)
     private String address;
 
     @Transient
@@ -60,15 +68,18 @@ public class Venue implements DomainObject {
     @Basic
     @Column(name = "venue_latitude", nullable = true, insertable = true, updatable = true)
     @XmlAttribute(name = "latitude", required = false)
+    @SearchableProperty(name = "latitude", dynamic = true, type = SearchablePropertyType.DOUBLE)
     private Double gpsLatitude;
 
     @Basic
     @Column(name = "venue_longitude", nullable = true, insertable = true, updatable = true)
     @XmlAttribute(name = "longitude", required = false)
+    @SearchableProperty(name = "longitude", dynamic = true, type = SearchablePropertyType.DOUBLE)
     private Double gpsLongitude;
 
     @Enumerated(EnumType.ORDINAL)
     @Column(name = "venue_type", nullable = false, insertable = true, updatable = true)
+    @SearchableProperty(name = "type", dynamic = true)
     private VenueType type;
 
     @Version

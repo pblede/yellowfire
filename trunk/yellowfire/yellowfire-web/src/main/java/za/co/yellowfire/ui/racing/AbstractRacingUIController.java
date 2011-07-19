@@ -2,8 +2,7 @@ package za.co.yellowfire.ui.racing;
 
 import za.co.yellowfire.ui.UIController;
 import za.co.yellowfire.ui.annotation.Racing;
-import za.co.yellowfire.ui.annotation.Training;
-import za.co.yellowfire.ui.model.MenuModel;
+import za.co.yellowfire.ui.model.menu.MenuModel;
 
 import javax.inject.Inject;
 

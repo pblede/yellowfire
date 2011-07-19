@@ -75,12 +75,6 @@
 		<welcome-file>index.jsf</welcome-file>
 	</welcome-file-list>
 
-    <!--
-    <error-page>
-        <error-code>500</error-code>
-        <location>/500.html</location>
-    </error-page>
-    -->
     <error-page>
         <exception-type>javax.faces.application.ViewExpiredException</exception-type>
         <location>/view_expired.xhtml</location>
@@ -93,7 +87,11 @@
         <exception-type>javax.enterprise.context.NonexistentConversationException</exception-type>
         <location>/view_expired.xhtml</location>
     </error-page>
-
+    <error-page>
+        <exception-type>org.eclipse.persistence.exceptions.DatabaseException</exception-type>
+        <location>/error.xhtml</location>
+    </error-page>
+    
 	<!--  
 	<persistence-unit-ref>
 	<description></description>
