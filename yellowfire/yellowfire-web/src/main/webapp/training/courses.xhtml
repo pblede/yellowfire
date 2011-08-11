@@ -41,9 +41,7 @@
                             immediate="true"
                             action="#{coursesController.onStartConversation}"
                             actionListener="#{coursesController.dataModel.onAdd}"
-                            ajax="false"
-                            update="modify_display modify_messages modify_buttons growl"
-                            oncomplete="handleComplete(xhr, status, args)">
+                            ajax="false">
                         <f:setPropertyActionListener value="false" target="#{coursesController.dataModel.selected.readonly}"/>
                     </p:commandButton>
                     <p:commandButton
@@ -73,25 +71,25 @@
                 <p:column  style="width:5px" headerText="#">
                     <h:outputText value="#{row.object.id}"/>
                 </p:column>
-                <p:column style="width:200px" headerText="#{msgs['fld.course.title']}">
+                <p:column style="width:100px" headerText="#{msgs['fld.course.title']}">
                     <h:outputText value="#{row.object.title}"/>
                 </p:column>
-                <p:column style="width:200px" headerText="#{msgs['fld.duration']}">
+                <p:column style="width:40px" headerText="#{msgs['fld.duration']}">
                     <h:outputText value="#{row.object.durationText}"/>
                 </p:column>
-                <p:column style="width:200px" headerText="#{msgs['fld.training.provider']}">
+                <p:column style="width:80px" headerText="#{msgs['fld.training.provider']}">
                     <h:outputText value="#{row.object.provider.name}"/>
                 </p:column>
-                <p:column style="width:200px" headerText="#{msgs['fld.content.type']}">
+                <p:column style="width:100px" headerText="#{msgs['fld.content.type']}">
                     <h:outputText value="#{row.object.contentType.description}"/>
                 </p:column>
-                <p:column style="width:200px" headerText="#{msgs['fld.contact.name']}">
+                <p:column style="width:50px" headerText="#{msgs['fld.contact.name']}">
                     <h:outputText value="#{row.object.contact.name}"/>
                 </p:column>
-                <p:column style="width:200px" headerText="#{msgs['fld.contact.tel']}">
+                <p:column style="width:50px" headerText="#{msgs['fld.contact.tel']}">
                     <h:outputText value="#{row.object.contact.telephoneNo}"/>
                 </p:column>
-                <p:column style="width:100px" headerText="Options">
+                <p:column style="width:80px" headerText="Options">
                     <h:commandLink action="#{coursesController.onStartConversation}" immediate="true" value="Edit" rendered="#{row.editable}">
                         <f:setPropertyActionListener value="#{row}" target="#{coursesController.dataModel.selected}"/>
                         <f:setPropertyActionListener value="false" target="#{coursesController.dataModel.selected.readonly}"/>
@@ -104,113 +102,5 @@
 
             </p:dataTable>
         </h:form>
-        <ui:remove>
-        <!--h:form id="h3" prependId="false">
-            <p:dialog
-                    id="modifyDialog"
-                    header="#{msgs['dlg.training.course']}"
-                    widgetVar="modifyDialogVar"
-                    resizable="false"
-                    width="800"
-                    modal="true"
-                    showEffect="explode"
-                    hideEffect="explode">
-                <cc:courseForm
-                        bean="#{coursesController.dataModel.selected.object}"
-                        durationTypes="#{coursesController.durationTypes}"
-                        trainingProviders="#{coursesController.trainingProviders}"
-                        contentTypes="#{coursesController.contentTypes}"
-                        categories="#{coursesController.categories}"
-                        readonly="#{!coursesController.dataModel.selected.editable}"
-                />
-                <p:fieldset legend="#{msgs['pnl.messages']}">
-                    <h:panelGrid id="modify_messages" columns="1">
-                        <p:messages id="m1" showDetail="true" showSummary="false" globalOnly="false"  />
-                    </h:panelGrid>
-                </p:fieldset>
-                <h:panelGrid id="modify_buttons" columns="3" cellpadding="4">
-                    <p:commandButton
-                            id="b1"
-                            value="#{msgs['btn.save']}"
-                            image="ui-icon ui-icon-disk"
-                            actionListener="#{coursesController.dataModel.onSave}"
-                            ajax="true"
-                            oncomplete="onSaveComplete(xhr, status, args)"
-                            update="dt1 modify_display modify_messages"
-                            />
-                    
-                    <p:commandButton
-                            id="b4"
-                            value="#{msgs['btn.delete']}"
-                            image="ui-icon ui-icon-minus"
-                            actionListener="#{coursesController.dataModel.onDelete}"
-                            ajax="true"
-                            rendered="#{coursesController.dataModel.selected.object.id ne null}"
-                            oncomplete="onDeleteComplete(xhr, status, args)"
-                            update="dt1 modify_display modify_messages"
-                            />
-                    
-                    <p:commandButton
-                            id="b3"
-                            image="ui-icon ui-icon-close"
-                            value="#{msgs['btn.close']}"
-                            onclick="modifyDialogVar.hide()"
-                            update="dt1 modify_display modify_messages"
-                            />
-                </h:panelGrid>
-            </p:dialog>
-        </h:form-->
-        </ui:remove>
-        
-        <script type="text/javascript">
-
-        function onDeleteComplete(xhr, status, args) {
-            if (args.validationFailed) {
-                return false;
-            }
-            if (args.result != null) {
-                if (args.result.failed) {
-                    return false;
-                }
-            }
-            modifyDialogVar.hide();
-            return true;
-        }
-
-        function onSaveComplete(xhr, status, args) {
-            if (args.validationFailed) {
-                return false;
-            }
-            if (args.result != null) {
-                if (args.result.failed) {
-                    return false;
-                }
-            }
-            modifyDialogVar.hide();
-            return true;
-        }
-
-        function onAddComplete(xhr, status, args) {
-            alert(status);
-            if (args.validationFailed) {
-                return false;
-            }
-            if (args.result != null) {
-                if (args.result.failed) {
-                    return false;
-                }
-            }
-            modifyDialogVar.hide();
-            return true;
-        }
-        
-        function onNewComplete(xhr, status, args) {
-
-            if (handleComplete(xhr, status, args)) {
-                modifyDialogVar.show();
-            }
-            return true;
-        }
-        </script>
     </ui:define>
 </ui:composition>

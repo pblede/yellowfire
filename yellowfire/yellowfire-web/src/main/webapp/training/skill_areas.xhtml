@@ -4,16 +4,23 @@
         xmlns:h="http://java.sun.com/jsf/html"
         xmlns:p="http://primefaces.prime.com.tr/ui"
         xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
         template="/resources/layout/training-layout.xhtml">
 
-    <ui:define name="demoSampleParameters">
-        <f:metadata>
-            <f:viewParam name="section" value="#{navigator.section}"/>
-            <f:viewParam name="item" value="#{navigator.item}"/>
-            <f:viewParam name="skin" value="#{skinBean.skin}"/>
-        </f:metadata>
-    </ui:define> 
     <ui:define name="head">
+    </ui:define>
+    <ui:define name="toolbar">
+        <h:form prependId="false">
+            <p:menubar widgetVar="t">
+                <c:forEach items="#{skillAreasController.menu.subMenus}" var="subMenu" varStatus="subMenuStatus">
+                    <p:submenu label="#{subMenu.message}">
+                        <c:forEach items="#{subMenu.menuItems}" var="menuItem" varStatus="menuItemStatus">
+                            <p:menuitem value="#{menuItem.message}"  url="#{menuItem.url}" />
+                        </c:forEach>
+                    </p:submenu>
+                </c:forEach>
+            </p:menubar>
+        </h:form>
     </ui:define>
     <ui:define name="content">
         <p:growl id="growl" showDetail="true" showSummary="true" globalOnly="true"/>
@@ -23,10 +30,10 @@
                     <p:commandButton
                             id="b10"
                             value="#{msgs['btn.add']}"
+                            immediate="true"
+                            action="#{coursesController.onStartConversation}"
                             actionListener="#{skillAreasController.dataModel.onAdd}"
-                            ajax="true"
-                            update="modify_display modify_messages modify_buttons growl"
-                            onsuccess="modifyDialogVar.show()"/>
+                            ajax="false"/>
                     <p:commandButton
                             id="b11"
                             value="#{msgs['btn.refresh']}"
@@ -48,130 +55,25 @@
                     height="500"
                     paginator="true"
                     paginatorAlwaysVisible="true"
-                    style="vertical-align:text-top;"
-                    selectionMode="single"
-                    selection="#{skillAreasController.dataModel.selected}"
-                    onRowSelectUpdate="h3"
-                    onRowSelectComplete="modifyDialogVar.show()">
+                    style="vertical-align:text-top;">
 	
-                <p:column sortBy="#{row.object.id}" filterBy="#{row.object.id}" filterStyle="width:100%"  style="width:15px" headerText="#">
+                <p:column sortBy="#{row.object.id}" style="width:15px" headerText="#">
                     <h:outputText value="#{row.object.id}"/>
                 </p:column>
-                <p:column sortBy="#{row.object.name}" filterBy="#{row.object.description}" filterStyle="width:100%" style="width:100%" headerText="#{msgs['fld.description']}">
+                <p:column sortBy="#{row.object.name}" style="width:100%" headerText="#{msgs['fld.description']}">
                     <h:outputText value="#{row.object.description}" />
+                </p:column>
+                <p:column style="width:80px" headerText="Options">
+                    <h:commandLink action="#{skillAreasController.onStartConversation}" immediate="true" value="Edit" rendered="#{row.editable}">
+                        <f:setPropertyActionListener value="#{row}" target="#{skillAreasController.dataModel.selected}"/>
+                        <f:setPropertyActionListener value="false" target="#{skillAreasController.dataModel.selected.readonly}"/>
+                    </h:commandLink>#{" "}#{" "}
+                    <h:commandLink action="#{skillAreasController.onStartConversation}" immediate="true" value="View">
+                        <f:setPropertyActionListener value="#{row}" target="#{skillAreasController.dataModel.selected}"/>
+                        <f:setPropertyActionListener value="true" target="#{skillAreasController.dataModel.selected.readonly}"/>
+                    </h:commandLink>
                 </p:column>
             </p:dataTable>
         </h:form>
-        <h:form id="h3" prependId="false">
-            <p:dialog
-                    id="modifyDialog"
-                    header="#{msgs['dlg.skill.areas']}"
-                    widgetVar="modifyDialogVar"
-                    resizable="false"
-                    width="500"
-                    modal="true"
-                    showEffect="explode"
-                    hideEffect="explode">
-                <p:fieldset legend="#{msgs['pnl.fields']}">
-                    <h:panelGrid id="modify_display" columns="2" cellpadding="4">
-
-                        <h:outputText value="#{msgs['fld.id']}:"/>
-                        <h:panelGroup style="width:100%">
-                            <h:outputText value="#{skillAreasController.dataModel.selected.object.id}" style="width:100%"/>
-                        </h:panelGroup>
-
-                        <h:outputLabel value="#{msgs['fld.description']}:" for="a01"/>
-                        <h:panelGroup>
-                            <h:panelGrid columns="2">
-                                <h:inputText
-                                        id="a01"
-                                        size="50"
-                                        required="true"
-                                        label="#{msgs['fld.description']}"
-                                        value="#{skillAreasController.dataModel.selected.object.description}"/>
-                                <p:message for="a01" showSummary="false" showDetail="false" display="icon" />
-                            </h:panelGrid>
-                        </h:panelGroup>
-                    </h:panelGrid>
-                </p:fieldset>
-                <p:fieldset legend="#{msgs['pnl.messages']}">
-                    <h:panelGrid id="modify_messages" columns="1">
-                        <p:messages id="m1" showDetail="true" showSummary="false" globalOnly="false"  />
-                    </h:panelGrid>
-                </p:fieldset>
-                <h:panelGrid id="modify_buttons" columns="3" cellpadding="4">
-                    <p:commandButton
-                            id="b1"
-                            value="#{msgs['btn.save']}"
-                            image="ui-icon ui-icon-disk"
-                            actionListener="#{skillAreasController.dataModel.onSave}"
-                            ajax="true"
-                            oncomplete="onSaveComplete(xhr, status, args)"
-                            update="dt1 modify_display modify_messages"
-                            />
-                    
-                    <p:commandButton
-                            id="b4"
-                            value="#{msgs['btn.delete']}"
-                            image="ui-icon ui-icon-minus"
-                            actionListener="#{skillAreasController.dataModel.onDelete}"
-                            ajax="true"
-                            rendered="#{skillAreasController.dataModel.selected.object.id ne null}"
-                            oncomplete="onDeleteComplete(xhr, status, args)"
-                            update="dt1 modify_display modify_messages"
-                            />
-                    
-                    <p:commandButton
-                            id="b3"
-                            image="ui-icon ui-icon-close"
-                            value="#{msgs['btn.close']}"
-                            onclick="modifyDialogVar.hide()"
-                            update="dt1 modify_display modify_messages"
-                            />
-                </h:panelGrid>
-            </p:dialog>
-        </h:form>
-
-        <script type="text/javascript">
-
-        function onDeleteComplete(xhr, status, args) {
-            if (args.validationFailed) {
-                return false;
-            }
-            if (args.result != null) {
-                if (args.result.failed) {
-                    return false;
-                }
-            }
-            modifyDialogVar.hide();
-            return true;
-        }
-
-        function onSaveComplete(xhr, status, args) {
-            if (args.validationFailed) {
-                return false;
-            }
-            if (args.result != null) {
-                if (args.result.failed) {
-                    return false;
-                }
-            }
-            modifyDialogVar.hide();
-            return true;
-        }
-
-        function onAddComplete(xhr, status, args) {
-            if (args.validationFailed) {
-                return false;
-            }
-            if (args.result != null) {
-                if (args.result.failed) {
-                    return false;
-                }
-            }
-            modifyDialogVar.hide();
-            return true;
-        }
-        </script>
     </ui:define>
 </ui:composition>

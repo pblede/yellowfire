@@ -51,8 +51,8 @@
     <orderEntry type="library" name="Maven: org.jboss.seam.solder:seam-solder-api:3.0.0.Final" level="project" />
     <orderEntry type="library" name="Maven: org.jboss.seam.solder:seam-solder:3.0.0.Final" level="project" />
     <orderEntry type="library" name="Maven: org.jboss.seam.international:seam-international:3.0.0.Final" level="project" />
-    <orderEntry type="library" name="Maven: org.jboss.seam.faces:seam-faces-api:3.0.0.Final" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Maven: org.jboss.seam.faces:seam-faces-impl:3.0.0.Final" level="project" />
+    <orderEntry type="library" name="Maven: org.jboss.seam.faces:seam-faces-api:3.0.2.Final" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Maven: org.jboss.seam.faces:seam-faces-impl:3.0.2.Final" level="project" />
     <orderEntry type="module" module-name="yellowfire-web" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.glassfish.extras:glassfish-embedded-all:3.1" level="project" />
   </component>

@@ -13,7 +13,7 @@ import javax.xml.bind.annotation.XmlAttribute;
  */
 @Entity(name = "Outcome")
 @Access(AccessType.FIELD)
-@Table(name = "outcome", schema = "trn")
+@Table(name = "outcome", schema = "cde")
 @NamedQueries({
         @NamedQuery(
             name="qry.outcomes",

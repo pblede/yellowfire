@@ -167,7 +167,7 @@
 
     <properties>
         <junit.version>4.8.2</junit.version>
-        <primefaces.version>3.0.M2-SNAPSHOT</primefaces.version>
+        <primefaces.version>3.0.M3-SNAPSHOT</primefaces.version>
         <faces.version>2.1.0</faces.version>
         <javaee.version>1.0.0.Final</javaee.version>
         <facelets.version>1.1.15.B1</facelets.version>

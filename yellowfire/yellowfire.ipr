@@ -70,7 +70,7 @@
           <element id="directory" name="lib">
             <element id="library" level="project" name="Maven: org.slf4j:log4j-over-slf4j:1.6.1" />
             <element id="library" level="project" name="Maven: org.slf4j:jcl-over-slf4j:1.6.1" />
-            <element id="library" level="project" name="Maven: org.primefaces:primefaces:3.0.M2-SNAPSHOT" />
+            <element id="library" level="project" name="Maven: org.primefaces:primefaces:3.0.M3-SNAPSHOT" />
             <element id="library" level="project" name="Maven: org.primefaces.themes:aristo:1.0.0" />
           </element>
         </element>
@@ -970,6 +970,17 @@
         <root url="jar://$MAVEN_REPOSITORY$/org/jboss/seam/faces/seam-faces-api/3.0.0.Final/seam-faces-api-3.0.0.Final-sources.jar!/" />
       </SOURCES>
     </library>
+    <library name="Maven: org.jboss.seam.faces:seam-faces-api:3.0.2.Final">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/jboss/seam/faces/seam-faces-api/3.0.2.Final/seam-faces-api-3.0.2.Final.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/org/jboss/seam/faces/seam-faces-api/3.0.2.Final/seam-faces-api-3.0.2.Final-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/jboss/seam/faces/seam-faces-api/3.0.2.Final/seam-faces-api-3.0.2.Final-sources.jar!/" />
+      </SOURCES>
+    </library>
     <library name="Maven: org.jboss.seam.faces:seam-faces-impl:3.0.0.Final">
       <CLASSES>
         <root url="jar://$MAVEN_REPOSITORY$/org/jboss/seam/faces/seam-faces-impl/3.0.0.Final/seam-faces-impl-3.0.0.Final.jar!/" />
@@ -979,6 +990,17 @@
       </JAVADOC>
       <SOURCES>
         <root url="jar://$MAVEN_REPOSITORY$/org/jboss/seam/faces/seam-faces-impl/3.0.0.Final/seam-faces-impl-3.0.0.Final-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: org.jboss.seam.faces:seam-faces-impl:3.0.2.Final">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/jboss/seam/faces/seam-faces-impl/3.0.2.Final/seam-faces-impl-3.0.2.Final.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/org/jboss/seam/faces/seam-faces-impl/3.0.2.Final/seam-faces-impl-3.0.2.Final-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/jboss/seam/faces/seam-faces-impl/3.0.2.Final/seam-faces-impl-3.0.2.Final-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Maven: org.jboss.seam.international:seam-international:3.0.0.Final">
@@ -1025,15 +1047,15 @@
         <root url="jar://$MAVEN_REPOSITORY$/org/primefaces/themes/aristo/1.0.0/aristo-1.0.0-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Maven: org.primefaces:primefaces:3.0.M2-SNAPSHOT">
+    <library name="Maven: org.primefaces:primefaces:3.0.M3-SNAPSHOT">
       <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/primefaces/primefaces/3.0.M2-SNAPSHOT/primefaces-3.0.M2-SNAPSHOT.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/primefaces/primefaces/3.0.M3-SNAPSHOT/primefaces-3.0.M3-SNAPSHOT.jar!/" />
       </CLASSES>
       <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/org/primefaces/primefaces/3.0.M2-SNAPSHOT/primefaces-3.0.M2-SNAPSHOT-javadoc.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/primefaces/primefaces/3.0.M3-SNAPSHOT/primefaces-3.0.M3-SNAPSHOT-javadoc.jar!/" />
       </JAVADOC>
       <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/primefaces/primefaces/3.0.M2-SNAPSHOT/primefaces-3.0.M2-SNAPSHOT-sources.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/primefaces/primefaces/3.0.M3-SNAPSHOT/primefaces-3.0.M3-SNAPSHOT-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Maven: org.slf4j:jcl-over-slf4j:1.6.1">
