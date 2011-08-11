@@ -3,21 +3,24 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
    xmlns:ui="http://java.sun.com/jsf/facelets"
    xmlns:h="http://java.sun.com/jsf/html"
-   xmlns:c="http://java.sun.com/jsp/jstl/core"
+   xmlns:p="http://primefaces.prime.com.tr/ui"
    xmlns:cc="http://java.sun.com/jsf/composite/cc"
    xmlns:comp="http://java.sun.com/jsf/composite">
 
    <comp:interface>
-      <comp:attribute name="idValue" required="true" shortDescription="The id value for the lookup field form"/>
-      <comp:attribute name="descriptionValue" required="false" shortDescription="The description value for the lookup field form"/>
+       <comp:attribute name="bean" required="true" shortDescription="The bean for the form" />
+       <comp:attribute name="readonly" required="false" default="true" type="java.lang.Boolean" shortDescription="Whether the data is editable" />
    </comp:interface>
 
     <comp:implementation>
         <h:panelGrid columns="2" columnClasses="width25pc,width75pc">
             <h:outputText value="#{msgs['fld.id']}:"/>
-            <cc:output id="id" label="#{msgs['fld.id']}" value="#{cc.attrs.idValue}" verbatim="false" />
-            <h:outputLabel value="#{msgs['fld.description']}:" for="desc"/>
-            <cc:inputText id="desc" label="#{msgs['fld.description']}" value="#{cc.attrs.descriptionValue}" required="true" size="50" />
+            <cc:output id="id" label="#{msgs['fld.id']}" value="#{cc.attrs.bean.id}" verbatim="false" />
+
+            <h:outputLabel for="desc" value="#{msgs['fld.description']}:" styleClass="label">
+                <h:panelGroup styleClass="required" rendered="true">*</h:panelGroup>
+            </h:outputLabel>
+            <cc:inputText id="desc" label="#{msgs['fld.description']}" value="#{cc.attrs.bean.description}" required="true" readonly="#{cc.attrs.readonly}" size="50" />
         </h:panelGrid>
     </comp:implementation>
 </ui:composition>

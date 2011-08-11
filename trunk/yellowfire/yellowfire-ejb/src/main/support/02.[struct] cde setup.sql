@@ -269,6 +269,68 @@ create table cde.notification (
 	archived bit null,
 	
 )
-
 alter table cde.notification add constraint pk_notification_id primary key clustered ([notification_id]);
 alter table cde.notification add constraint df_property_archived default(0) FOR [archived];
+
+go
+create table cde.goal (
+	goal_id bigint not null identity(1, 1),
+	goal_name varchar(64) not null,
+	goal_description varchar(512) null,
+	goal_measurement varchar(512) not null,
+	goal_defined date not null,
+	goal_start date not null,
+	goal_deadline date not null,
+	create_ts datetime null,
+	update_ts datetime null,
+	version int null
+)
+alter table cde.goal add constraint pk_goal_id primary key clustered ([goal_id]);
+go
+create table cde.objective (
+	objective_id bigint not null identity(1, 1),
+	objective_name varchar(64) not null,
+	objective_deadline datetime not null,
+	create_ts datetime null,
+	update_ts datetime null,
+	version int null
+)
+alter table cde.objective add constraint pk_objective_id primary key clustered ([objective_id]);
+go
+create table cde.objective_goals (
+	objective_id bigint not null,
+	goal_id bigint not null,
+	create_ts datetime null,
+	update_ts datetime null,
+	version int null
+)
+alter table cde.objective_goals add constraint fk_objective_goals_goal_id foreign key (goal_id) references cde.goal (goal_id);
+alter table cde.objective_goals add constraint fk_objective_goals_objective_id foreign key (objective_id) references cde.objective (objective_id);
+alter table cde.objective_goals add constraint pk_objective_goals_id primary key clustered ([objective_id], [goal_id]);
+go
+create table cde.appraisal (
+	appraisal_id bigint not null identity(1, 1),
+	appraisal_date date not null,
+	appraisal_completed date null,
+	appraised_person_id bigint not null,
+	appraisal_signoff_date date null,
+	appraisal_signoff_person_id bigint null,
+	create_ts datetime null,
+	update_ts datetime null,
+	version int null
+)
+alter table cde.appraisal add constraint pk_appraisal_id primary key clustered ([appraisal_id]);
+alter table cde.appraisal add constraint fk_appraisal_appraised_person_id foreign key (appraised_person_id) references cde.person (person_id);
+alter table cde.appraisal add constraint fk_appraisal_signoff_person_id foreign key (appraisal_signoff_person_id) references cde.person (person_id);
+go
+
+create table cde.appraisal_goals (
+	appraisal_id bigint not null,
+	goal_id bigint not null,
+	create_ts datetime null,
+	update_ts datetime null,
+	version int null
+)
+alter table cde.appraisal_goals add constraint fk_appraisal_goals_goal_id foreign key (goal_id) references cde.goal (goal_id);
+alter table cde.appraisal_goals add constraint fk_appraisal_goals_objective_id foreign key (objective_id) references cde.objective (objective_id);
+alter table cde.appraisal_goals add constraint pk_appraisal_goals_id primary key clustered ([appraisal_id], [goal_id]);

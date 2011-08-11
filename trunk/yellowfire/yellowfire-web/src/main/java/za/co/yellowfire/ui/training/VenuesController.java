@@ -2,6 +2,7 @@ package za.co.yellowfire.ui.training;
 
 import org.primefaces.component.datatable.DataTable;
 import org.primefaces.context.RequestContext;
+import org.primefaces.event.SelectEvent;
 import org.primefaces.model.map.DefaultMapModel;
 import org.primefaces.model.map.LatLng;
 import org.primefaces.model.map.MapModel;
@@ -348,4 +349,9 @@ public class VenuesController extends AbstractTrainingUIController {
         }
     }
 
+    public void onLocationSelect(SelectEvent event) {
+        DataTableRow<GeocodeResult> result = (DataTableRow<GeocodeResult>) event.getObject();
+        FacesMessage msg = new FacesMessage("Location Selected", result.getObject().getFormattedAddress());
+        FacesContext.getCurrentInstance().addMessage(null, msg);  
+    }
 }

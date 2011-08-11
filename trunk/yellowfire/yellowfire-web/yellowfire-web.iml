@@ -72,12 +72,12 @@
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.jboss.seam.solder:seam-solder-api:3.0.0.Final" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.jboss.seam.solder:seam-solder:3.0.0.Final" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.jboss.seam.international:seam-international:3.0.0.Final" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.jboss.seam.faces:seam-faces-api:3.0.0.Final" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.jboss.seam.faces:seam-faces-impl:3.0.0.Final" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.jboss.seam.faces:seam-faces-api:3.0.2.Final" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.jboss.seam.faces:seam-faces-impl:3.0.2.Final" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.sun.faces:jsf-api:2.1.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.sun.faces:jsf-impl:2.1.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.sun.facelets:jsf-facelets:1.1.15.B1" level="project" />
-    <orderEntry type="library" name="Maven: org.primefaces:primefaces:3.0.M2-SNAPSHOT" level="project" />
+    <orderEntry type="library" name="Maven: org.primefaces:primefaces:3.0.M3-SNAPSHOT" level="project" />
     <orderEntry type="library" name="Maven: org.primefaces.themes:aristo:1.0.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: com.sun.jersey.jersey-test-framework:jersey-test-framework-grizzly:1.6" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: com.sun.grizzly:grizzly-servlet-webserver:1.9.31" level="project" />

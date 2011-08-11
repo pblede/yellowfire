@@ -54,7 +54,6 @@ public class CoursesController extends AbstractTrainingUIController {
 
     @PostConstruct
     private void init() {
-        logger.logTest("CourseController");
         dataModel =
                 new DataTableModel<TrainingCourse>(
                         /* DataTableListener*/

@@ -4,16 +4,23 @@
         xmlns:h="http://java.sun.com/jsf/html"
         xmlns:p="http://primefaces.prime.com.tr/ui"
         xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
         template="/resources/layout/training-layout.xhtml">
 
-    <ui:define name="demoSampleParameters">
-        <f:metadata>
-            <f:viewParam name="section" value="#{navigator.section}"/>
-            <f:viewParam name="item" value="#{navigator.item}"/>
-            <f:viewParam name="skin" value="#{skinBean.skin}"/>
-        </f:metadata>
-    </ui:define> 
     <ui:define name="head">
+    </ui:define>
+    <ui:define name="toolbar">
+        <h:form prependId="false">
+            <p:menubar widgetVar="t">
+                <c:forEach items="#{courseDatesController.menu.subMenus}" var="subMenu" varStatus="subMenuStatus">
+                    <p:submenu label="#{subMenu.message}">
+                        <c:forEach items="#{subMenu.menuItems}" var="menuItem" varStatus="menuItemStatus">
+                            <p:menuitem value="#{menuItem.message}"  url="#{menuItem.url}" />
+                        </c:forEach>
+                    </p:submenu>
+                </c:forEach>
+            </p:menubar>
+        </h:form>
     </ui:define>
     <ui:define name="content">
         <p:growl id="growl" showDetail="true" showSummary="true" globalOnly="true"/>
@@ -23,10 +30,10 @@
                     <p:commandButton
                             id="b10"
                             value="#{msgs['btn.add']}"
+                            immediate="true"
+                            action="#{courseDatesController.onStartConversation}"
                             actionListener="#{courseDatesController.onAddRow}"
-                            ajax="true"
-                            update="modify_display modify_messages modify_buttons growl"
-                            onsuccess="modifyDialogVar.show()"/>
+                            ajax="true"/>
                     <p:commandButton
                             id="b11"
                             value="#{msgs['btn.refresh']}"
@@ -43,55 +50,61 @@
                     widgetVar="dt1Var"
                     binding="#{courseDatesController.dataTable}"
                     var="row"
-                    value="#{courseDatesController.rows}"
+                    value="#{courseDatesController.dataModel.rows}"
                     rows="10"
                     height="500"
                     paginator="true"
                     paginatorAlwaysVisible="true"
-                    style="vertical-align:text-top;"
-                    selectionMode="single"
-                    selection="#{courseDatesController.selectedRow}"
-                    onRowSelectUpdate="modify_display modify_messages modify_buttons growl"
-                    onRowSelectComplete="modifyDialogVar.show()">
+                    style="vertical-align:text-top;">
 
-                <p:column sortBy="#{row.object.id}" filterBy="#{row.object.id}" filterStyle="width:100%"  style="width:5px" headerText="#">
+                <p:column sortBy="#{row.object.id}" style="width:5px" headerText="#">
                     <h:outputText value="#{row.object.id}"/>
                 </p:column>
-                <p:column sortBy="#{row.object.course.title}" filterBy="#{row.object.course.title}" filterStyle="width:100%" style="width:200px" headerText="#{msgs['fld.course.title']}">
+                <p:column sortBy="#{row.object.course.title}" style="width:200px" headerText="#{msgs['fld.course.title']}">
                     <p:cellEditor>
                         <f:facet name="output"><h:outputText value="#{row.object.course.title}"/></f:facet>
                         <f:facet name="input"><h:inputText value="#{row.object.course.title}"/></f:facet>
                     </p:cellEditor>
                 </p:column>
-                <p:column sortBy="#{row.object.venue.name}" filterBy="#{row.object.venue.name}" filterStyle="width:100%" style="width:200px" headerText="#{msgs['fld.venue']}">
+                <p:column sortBy="#{row.object.venue.name}" style="width:200px" headerText="#{msgs['fld.venue']}">
                     <p:cellEditor>
                         <f:facet name="output"><h:outputText value="#{row.object.venue.name}"/></f:facet>
                         <f:facet name="input"><h:inputText value="#{row.object.venue.name}"/></f:facet>
                     </p:cellEditor>
                 </p:column>
-                <p:column sortBy="#{row.object.startDate}" filterBy="#{row.object.startDate}" filterStyle="width:100%" style="width:200px" headerText="#{msgs['fld.start.date']}">
+                <p:column sortBy="#{row.object.startDate}" style="width:200px" headerText="#{msgs['fld.start.date']}">
                     <p:cellEditor>
                         <f:facet name="output"><h:outputText value="#{row.object.startDate}"><f:convertDateTime pattern="yyyy-MM-dd" timeZone="#{courseDatesController.timezone}" type="date" /></h:outputText></f:facet>
                         <f:facet name="input"><h:inputText value="#{row.object.startDate}"><f:convertDateTime pattern="yyyy-MM-dd" timeZone="#{courseDatesController.timezone}" type="date" /></h:inputText></f:facet>
                     </p:cellEditor>
                 </p:column>
-                <p:column sortBy="#{row.object.endDate}" filterBy="#{row.object.endDate}" filterStyle="width:100%" style="width:200px" headerText="#{msgs['fld.end.date']}">
+                <p:column sortBy="#{row.object.endDate}" style="width:200px" headerText="#{msgs['fld.end.date']}">
                     <p:cellEditor>
                         <f:facet name="output"><h:outputText value="#{row.object.endDate}"><f:convertDateTime pattern="yyyy-MM-dd" timeZone="#{courseDatesController.timezone}" type="date" /></h:outputText></f:facet>
                         <f:facet name="input"><h:inputText value="#{row.object.endDate}"><f:convertDateTime pattern="yyyy-MM-dd" timeZone="#{courseDatesController.timezone}" type="date" /></h:inputText></f:facet>
                     </p:cellEditor>
                 </p:column>
-                <p:column sortBy="#{row.object.startTime}" filterBy="#{row.object.startTime}" filterStyle="width:100%" style="width:200px" headerText="#{msgs['fld.start.time']}">
+                <p:column sortBy="#{row.object.startTime}" style="width:200px" headerText="#{msgs['fld.start.time']}">
                     <p:cellEditor>
                         <f:facet name="output"><h:outputText value="#{row.object.startTime}" ><f:convertDateTime pattern="hh:mm" timeZone="#{courseDatesController.timezone}" type="time" /></h:outputText></f:facet>
                         <f:facet name="input"><h:inputText value="#{row.object.startTime}"><f:convertDateTime pattern="hh:mm" timeZone="#{courseDatesController.timezone}" type="time" /></h:inputText></f:facet>
                     </p:cellEditor>
                 </p:column>
-                <p:column sortBy="#{row.object.endTime}" filterBy="#{row.object.endTime}" filterStyle="width:100%" style="width:200px" headerText="#{msgs['fld.end.time']}">
+                <p:column sortBy="#{row.object.endTime}" style="width:200px" headerText="#{msgs['fld.end.time']}">
                     <p:cellEditor>
                         <f:facet name="output"><h:outputText value="#{row.object.endTime}" ><f:convertDateTime pattern="hh:mm" timeZone="#{courseDatesController.timezone}" type="time" /></h:outputText></f:facet>
                         <f:facet name="input"><h:inputText value="#{row.object.endTime}"><f:convertDateTime pattern="hh:mm" timeZone="#{courseDatesController.timezone}" type="time" /></h:inputText></f:facet>
                     </p:cellEditor>
+                </p:column>
+                <p:column style="width:80px" headerText="Options">
+                    <h:commandLink action="#{courseDatesController.onStartConversation}" immediate="true" value="Edit" rendered="#{row.editable}">
+                        <f:setPropertyActionListener value="#{row}" target="#{courseDatesController.dataModel.selected}"/>
+                        <f:setPropertyActionListener value="false" target="#{courseDatesController.dataModel.selected.readonly}"/>
+                    </h:commandLink>#{" "}#{" "}
+                    <h:commandLink action="#{courseDatesController.onStartConversation}" immediate="true" value="View">
+                        <f:setPropertyActionListener value="#{row}" target="#{courseDatesController.dataModel.selected}"/>
+                        <f:setPropertyActionListener value="true" target="#{courseDatesController.dataModel.selected.readonly}"/>
+                    </h:commandLink>
                 </p:column>
             </p:dataTable>
 
@@ -109,7 +122,7 @@
 
                         <h:outputText value="#{msgs['fld.id']}:"/>
                         <h:panelGroup style="width:100%">
-                            <h:outputText value="#{courseDatesController.selectedRow.object.id}" style="width:100%"/>
+                            <h:outputText value="#{courseDatesController.dataModel.selected.object.id}" style="width:100%"/>
                         </h:panelGroup>
 
                         <h:outputLabel value="#{msgs['fld.title']}:" for="a03"/>
@@ -119,7 +132,7 @@
                                         id="a03"
                                         label="#{msgs['fld.course']}"
                                         converter="TrainingCourseConverter"
-                                        value="#{courseDatesController.selectedRow.object.course}" >
+                                        value="#{courseDatesController.dataModel.selected.object.course}" >
                                     
                                     <f:selectItems value="#{courseDatesController.courses}" var="course" itemLabel="#{course.title}" itemDescription="#{course.title}" itemValue="#{course}"  />
                                 </h:selectOneMenu>
@@ -134,7 +147,7 @@
                                         id="a04"
                                         label="#{msgs['fld.venue']}"
                                         converter="VenueConverter"
-                                        value="#{courseDatesController.selectedRow.object.venue}" >
+                                        value="#{courseDatesController.dataModel.selected.object.venue}" >
                                     <f:selectItem itemLabel="Select one" itemValue="" />
                                     <f:selectItems value="#{courseDatesController.venues}" var="venue" itemLabel="#{venue.name}" itemDescription="#{venue.name}" itemValue="#{venue}"  />
                                 </h:selectOneMenu>
@@ -155,7 +168,7 @@
                                         onSelectUpdate="a05"
                                         selectListener="#{courseDatesController.onStartDateSelected}"
                                         label="#{msgs['fld.start.date']}"
-                                        value="#{courseDatesController.selectedRow.object.startDate}"/>
+                                        value="#{courseDatesController.dataModel.selected.object.startDate}"/>
                                 <p:message for="a01" showSummary="false" showDetail="false" display="icon" />
                             </h:panelGrid>
                         </h:panelGroup>
@@ -171,7 +184,7 @@
                                         pattern="yyyy-MM-dd"
                                         widgetVar="endDateVar"
                                         label="#{msgs['fld.end.date']}"
-                                        value="#{courseDatesController.selectedRow.object.endDate}"/>
+                                        value="#{courseDatesController.dataModel.selected.object.endDate}"/>
                                 <p:message for="a05" showSummary="false" showDetail="false" display="icon" />
                             </h:panelGrid>
                         </h:panelGroup>
@@ -184,7 +197,7 @@
                                         size="55"
                                         required="true"
                                         label="#{msgs['fld.start.time']}"
-                                        value="#{courseDatesController.selectedRow.object.startTime}">
+                                        value="#{courseDatesController.dataModel.selected.object.startTime}">
                                     <f:convertDateTime pattern="hh:mm" timeZone="#{courseDatesController.timezone}" />
                                 </h:inputText>
                                 <p:message for="a02" showSummary="false" showDetail="false" display="icon" />
@@ -199,7 +212,7 @@
                                         size="55"
                                         required="true"
                                         label="#{msgs['fld.end.time']}"
-                                        value="#{courseDatesController.selectedRow.object.endTime}">
+                                        value="#{courseDatesController.dataModel.selected.object.endTime}">
                                     <f:convertDateTime pattern="hh:mm" timeZone="#{courseDatesController.timezone}" />
                                 </h:inputText>
                                 <p:message for="a06" showSummary="false" showDetail="false" display="icon" />
@@ -217,7 +230,7 @@
                             id="b1"
                             value="#{msgs['btn.save']}"
                             image="ui-icon ui-icon-disk"
-                            actionListener="#{courseDatesController.onSaveRow}"
+                            actionListener="#{courseDatesController.dataModel.onSave}"
                             ajax="true"
                             oncomplete="onSaveComplete(xhr, status, args)"
                             update="dt1 modify_display modify_messages"
@@ -227,9 +240,9 @@
                             id="b4"
                             value="#{msgs['btn.delete']}"
                             image="ui-icon ui-icon-minus"
-                            actionListener="#{courseDatesController.onDeleteRow}"
+                            actionListener="#{courseDatesController.dataModel.onDeleteRow}"
                             ajax="true"
-                            rendered="#{courseDatesController.selectedRow.object.id ne null}"
+                            rendered="#{courseDatesController.dataModel.selected.object.id ne null}"
                             oncomplete="onDeleteComplete(xhr, status, args)"
                             update="dt1 modify_display modify_messages"
                             />

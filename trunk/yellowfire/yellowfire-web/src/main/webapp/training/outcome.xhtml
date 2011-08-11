@@ -3,24 +3,16 @@
         xmlns:ui="http://java.sun.com/jsf/facelets"
         xmlns:h="http://java.sun.com/jsf/html"
         xmlns:p="http://primefaces.prime.com.tr/ui"
-        xmlns:f="http://java.sun.com/jsf/core"
         xmlns:cc="http://java.sun.com/jsf/composite/cc"
         xmlns:c="http://java.sun.com/jsp/jstl/core"
         template="/resources/layout/training-layout.xhtml">
 
-    <ui:define name="demoSampleParameters">
-        <f:metadata>
-            <f:viewParam name="section" value="#{navigator.section}"/>
-            <f:viewParam name="item" value="#{navigator.item}"/>
-            <f:viewParam name="skin" value="#{skinBean.skin}"/>
-        </f:metadata>
-    </ui:define> 
     <ui:define name="head">
     </ui:define>
     <ui:define name="toolbar">
         <h:form prependId="false">
             <p:menubar widgetVar="t">
-                <c:forEach items="#{coursesController.menu.subMenus}" var="subMenu" varStatus="subMenuStatus">
+                <c:forEach items="#{outcomesController.menu.subMenus}" var="subMenu" varStatus="subMenuStatus">
                     <p:submenu label="#{subMenu.message}">
                         <c:forEach items="#{subMenu.menuItems}" var="menuItem" varStatus="menuItemStatus">
                             <p:menuitem value="#{menuItem.message}"  url="#{menuItem.url}" />
@@ -33,40 +25,38 @@
     <ui:define name="content">
         <p:growl id="growl" showDetail="true" showSummary="true" globalOnly="true"/>
         <h:form id="h2" prependId="false">
-            <p:panel>
+            <p:panel styleClass="center width60pc">
                 <h:panelGrid columns="1" style="width:100%">
-                <cc:courseForm
-                        bean="#{coursesController.dataModel.selected.object}"
-                        readonly="#{!coursesController.dataModel.selected.editable}"
-                        durationTypes="#{coursesController.durationTypes}"
-                        trainingProviders="#{coursesController.trainingProviders}"
-                        contentTypes="#{coursesController.contentTypes}"
-                        categories="#{coursesController.categories}"
-                />
+                <p:fieldset legend="#{msgs['pnl.outcome']}">
+                    <cc:lookupFieldForm
+                        bean="#{outcomesController.dataModel.selected.object}"
+                        readonly="#{!outcomesController.dataModel.selected.editable}"
+                    />
+                </p:fieldset>
                 <p:fieldset legend="#{msgs['pnl.messages']}">
                     <h:panelGrid id="modify_messages" columns="1">
                         <p:messages id="m1" showDetail="true" showSummary="false" globalOnly="false"  />
                     </h:panelGrid>
                 </p:fieldset>
-                <h:panelGrid id="modify_buttons" columns="3" cellpadding="4" rendered="#{coursesController.inConversation}">
+                <h:panelGrid id="modify_buttons" columns="3" cellpadding="4" rendered="#{outcomesController.inConversation}">
                     <p:commandButton
                             id="b1"
                             value="#{msgs['btn.save']}"
                             image="ui-icon ui-icon-disk"
-                            actionListener="#{coursesController.dataModel.onSave}"
+                            actionListener="#{outcomesController.dataModel.onSave}"
                             ajax="true"
                             oncomplete="onSaveComplete(xhr, status, args, modifyDialogVar, 1)"
                             update="modify_messages display_messages"
-                            rendered="#{coursesController.dataModel.selected.editable}"
+                            rendered="#{outcomesController.dataModel.selected.editable}"
                             />
 
                     <p:commandButton
                             id="b4"
                             value="#{msgs['btn.delete']}"
                             image="ui-icon ui-icon-minus"
-                            actionListener="#{coursesController.dataModel.onDelete}"
+                            actionListener="#{outcomesController.dataModel.onDelete}"
                             ajax="true"
-                            rendered="#{coursesController.dataModel.selected.object.id ne null and coursesController.dataModel.selected.editable}"
+                            rendered="#{outcomesController.dataModel.selected.object.id ne null and outcomesController.dataModel.selected.editable}"
                             oncomplete="onDeleteComplete(xhr, status, args, modifyDialogVar, 1)"
                             update="modify_messages display_messages"
                             />
@@ -75,7 +65,7 @@
                             id="b3"
                             image="ui-icon ui-icon-close"
                             value="#{msgs['btn.back']}"
-                            action="#{coursesController.onCompleteConversation}"
+                            action="#{outcomesController.onCompleteConversation}"
                             ajax="false"
                             immediate="true"
                             update="modify_messages"
@@ -87,7 +77,7 @@
         <h:form id="h3" prependId="false">
             <p:dialog
                     id="messageDialog"
-                    header="#{msgs['dlg.training.course']}"
+                    header="#{msgs['dlg.outcome']}"
                     widgetVar="modifyDialogVar"
                     resizable="false"
                     width="400"
@@ -96,7 +86,7 @@
                     hideEffect="explode">
                 <p:fieldset legend="#{msgs['pnl.messages']}">
                     <h:panelGrid id="display_messages" columns="1">
-                        <h:outputText value="#{msgs['msg.training.course.saved']}" />
+                        <h:outputText value="#{msgs['msg.outcome.saved']}" />
                     </h:panelGrid>
                 </p:fieldset>
                 <h:panelGrid id="display_buttons" columns="3" cellpadding="4">
@@ -104,7 +94,7 @@
                             id="b10"
                             image="ui-icon ui-icon-close"
                             value="#{msgs['btn.ok']}"
-                            action="#{coursesController.onCompleteConversation}"
+                            action="#{outcomesController.onCompleteConversation}"
                             ajax="false"
                             immediate="true"
                             />

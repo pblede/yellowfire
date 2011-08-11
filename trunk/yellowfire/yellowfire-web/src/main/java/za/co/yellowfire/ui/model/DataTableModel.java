@@ -168,7 +168,8 @@ public class DataTableModel<T> implements Serializable {
         }
 
         RequestContext context = RequestContext.getCurrentInstance();
-        context.addCallbackParam("result", result);
+        if (context != null)
+            context.addCallbackParam("result", result);
     }
 
     /**
@@ -197,7 +198,8 @@ public class DataTableModel<T> implements Serializable {
         }
 
         RequestContext context = RequestContext.getCurrentInstance();
-        context.addCallbackParam("result", result);
+        if (context != null)
+            context.addCallbackParam("result", result);
     }
 
     /**
@@ -233,7 +235,8 @@ public class DataTableModel<T> implements Serializable {
         }
 
         RequestContext context = RequestContext.getCurrentInstance();
-        context.addCallbackParam("result", this.selected.getResult());
+        if (context != null)
+            context.addCallbackParam("result", this.selected.getResult());
     }
 
     /**
@@ -268,7 +271,8 @@ public class DataTableModel<T> implements Serializable {
         }
 
         RequestContext context = RequestContext.getCurrentInstance();
-        context.addCallbackParam("result", this.result);
+        if (context != null)
+            context.addCallbackParam("result", this.result);
     }
 
     /**
@@ -323,7 +327,8 @@ public class DataTableModel<T> implements Serializable {
         }
 
         RequestContext context = RequestContext.getCurrentInstance();
-        context.addCallbackParam("result", this.selected.getResult());
+        if (context != null)
+            context.addCallbackParam("result", this.selected.getResult());
     }
 
     private static class SaveActionListener implements ActionListener {

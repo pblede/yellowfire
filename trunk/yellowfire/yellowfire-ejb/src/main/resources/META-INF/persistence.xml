@@ -5,7 +5,7 @@
         <!--<provider>org.hibernate.ejb.HibernatePersistence</provider>-->
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
         <!--Note: Use the following for global scoped data sources -->
-        <jta-data-source>yellowfire.training.online.ds</jta-data-source>
+        <jta-data-source>yellowfire.ds</jta-data-source>
         <mapping-file>META-INF/eclipselink-orm.xml</mapping-file>
         <class>za.co.yellowfire.domain.profile.UserProperty</class>
         <class>za.co.yellowfire.domain.profile.User</class>
@@ -36,7 +36,7 @@
         <!--
             Note: Use the following for Weblogic 10.3.2+ -->
         <!--property name="eclipselink.target-server" value="WebLogic_10" /-->
-        <property name="eclipselink.target-server" value="JBoss"/>
+        <!--property name="eclipselink.target-server" value="JBoss"/-->
         <property name="eclipselink.target-database" value="SQLServer"/>
         <!--
             Note: Use this with application-scoped data sources
@@ -131,7 +131,7 @@
         <!--property name="eclipselink.connection-pool.default.jtaDataSource" value="yellowfire.training.online.ds" /-->
 
         <!-- EclipseLink Connection Pool *ARCHIVE* -->
-        <property name="eclipselink.connection-pool.archive.jtaDataSource" value="yellowfire.training.archive.ds" />
+        <!--property name="eclipselink.connection-pool.archive.jtaDataSource" value="yellowfire.training.archive.ds" /-->
     </properties>
   </persistence-unit>
 </persistence>
