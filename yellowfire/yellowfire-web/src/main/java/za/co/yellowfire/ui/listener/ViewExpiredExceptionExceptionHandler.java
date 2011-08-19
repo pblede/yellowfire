@@ -64,7 +64,7 @@ public class ViewExpiredExceptionExceptionHandler extends ExceptionHandlerWrappe
                         nav.handleNavigation(fc, null, "error");
                         //Skip to rendering the response
                         fc.renderResponse();
-                    } catch (Throwable e) {
+                    } catch (Exception e) {
                         LOGGER.error("ViewExpiredExceptionExceptionHandler.handle() error {}", e);
                     } finally {
                         //Remove this unhandled exception
@@ -86,7 +86,7 @@ public class ViewExpiredExceptionExceptionHandler extends ExceptionHandlerWrappe
                     nav.handleNavigation(fc, null, "view_expired");
                     //Skip to rendering the response
                     fc.renderResponse();
-                } catch (Throwable e) {
+                } catch (Exception e) {
                     LOGGER.error("ViewExpiredExceptionExceptionHandler.handle() error {}", e);
                 } finally {
                     //Remove this unhandled exception
@@ -109,7 +109,7 @@ public class ViewExpiredExceptionExceptionHandler extends ExceptionHandlerWrappe
                     nav.handleNavigation(fc, null, "view_expired");
                     //Skip to rendering the response
                     fc.renderResponse();
-                } catch (Throwable e) {
+                } catch (Exception e) {
                     LOGGER.error("ViewExpiredExceptionExceptionHandler.handle() error {}", e);
                 } finally {
                     //Remove this unhandled exception

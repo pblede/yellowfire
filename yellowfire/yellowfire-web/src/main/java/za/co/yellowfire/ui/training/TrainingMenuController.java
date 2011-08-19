@@ -2,7 +2,6 @@ package za.co.yellowfire.ui.training;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
-import java.io.Serializable;
 
 /**
  * @author Mark P Ashworth

@@ -43,7 +43,7 @@ public class TrainingCourseConverter extends AbstractConverter implements Conver
 			LOGGER.error("Unable to lookup club because RaceManager could not be resolved", e);
 			FacesUtil.addErrorMessage(context, component.getClientId(), "Converter Error", e);
 			throw new ConverterException("Unable to lookup club because RaceManager could not be resolved", e);
-		} catch (Throwable e) {
+		} catch (Exception e) {
 			LOGGER.error("Unable to lookup club", e);
 			FacesUtil.addErrorMessage(context, component.getClientId(), "Converter Error", e);
 			throw new ConverterException("Unable to lookup club", e);

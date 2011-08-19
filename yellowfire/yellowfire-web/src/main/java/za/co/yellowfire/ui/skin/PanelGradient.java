@@ -3,6 +3,10 @@ package za.co.yellowfire.ui.skin;
 //import org.richfaces.renderkit.html.BaseGradient;
 //import org.richfaces.skin.Skin;
 
+/**
+ * @author RichFaces
+ * @deprecated Not used
+ */
 public class PanelGradient /*extends BaseGradient*/ {
     //public PanelGradient() {
     //    super(30, 50, 20, Skin.HEADER_GRADIENT_COLOR, Skin.HEADER_BACKGROUND_COLOR);

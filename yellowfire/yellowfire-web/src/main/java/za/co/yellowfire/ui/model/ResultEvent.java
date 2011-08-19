@@ -1,11 +1,10 @@
 package za.co.yellowfire.ui.model;
 
+import org.primefaces.model.ScheduleEvent;
+import za.co.yellowfire.domain.result.Result;
+
 import java.io.Serializable;
 import java.util.Date;
-
-import org.primefaces.model.ScheduleEvent;
-
-import za.co.yellowfire.domain.result.Result;
 
 /**
  * 

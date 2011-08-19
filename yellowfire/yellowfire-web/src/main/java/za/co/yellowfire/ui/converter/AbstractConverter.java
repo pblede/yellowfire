@@ -1,15 +1,14 @@
 package za.co.yellowfire.ui.converter;
 
-import javax.faces.convert.Converter;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import za.co.yellowfire.Naming;
 import za.co.yellowfire.log.LogType;
 import za.co.yellowfire.manager.DomainManager;
+
+import javax.faces.convert.Converter;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 
 /**
  * Abstract converter that uses the DomainManager to lookup entities.

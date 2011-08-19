@@ -3,14 +3,10 @@ import com.sun.jersey.test.framework.JerseyTest;
 import com.sun.jersey.test.framework.LowLevelAppDescriptor;
 import com.sun.jersey.test.framework.spi.container.TestContainerFactory;
 import com.sun.jersey.test.framework.spi.container.grizzly.GrizzlyTestContainerFactory;
-import junit.framework.Assert;
 import org.junit.Test;
 import za.co.yellowfire.domain.Venue;
 import za.co.yellowfire.domain.training.Venues;
 import za.co.yellowfire.service.training.VenueResource;
-
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
 
 /**
  * @author Mark P Ashworth

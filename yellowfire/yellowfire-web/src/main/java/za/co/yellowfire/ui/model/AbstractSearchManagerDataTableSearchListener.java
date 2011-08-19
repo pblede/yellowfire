@@ -1,6 +1,5 @@
 package za.co.yellowfire.ui.model;
 
-import za.co.yellowfire.domain.Venue;
 import za.co.yellowfire.solarflare.SearchManager;
 
 import javax.faces.event.ActionEvent;

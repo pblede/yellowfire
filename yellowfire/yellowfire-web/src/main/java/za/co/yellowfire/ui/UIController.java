@@ -13,5 +13,5 @@ public interface UIController extends Serializable {
      * Returns the menu that is used by the controller
      * @return MenuModel
      */
-    public MenuModel getMenu();
+    MenuModel getMenu();
 }

@@ -3,7 +3,6 @@ package za.co.yellowfire.ui.racing;
 import org.joda.time.DateMidnight;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import za.co.yellowfire.controller.AbstractController;
 import za.co.yellowfire.domain.racing.Race;
 import za.co.yellowfire.log.LogType;
 import za.co.yellowfire.manager.DomainManager;
@@ -16,7 +15,6 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
 import javax.inject.Named;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @ViewScoped

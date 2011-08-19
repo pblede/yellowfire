@@ -4,7 +4,6 @@ import za.co.yellowfire.domain.DomainEntity;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.*;
-import java.io.Serializable;
 
 /**
  * @author Mark P Ashworth

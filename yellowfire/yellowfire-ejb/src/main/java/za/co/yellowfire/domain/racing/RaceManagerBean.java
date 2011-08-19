@@ -1,13 +1,7 @@
 package za.co.yellowfire.domain.racing;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import za.co.yellowfire.DateUtil;
-import za.co.yellowfire.domain.profile.User;
-import za.co.yellowfire.domain.result.Result;
-import za.co.yellowfire.log.LogType;
 import za.co.yellowfire.manager.DomainManager;
-import za.co.yellowfire.manager.DomainManagerBean;
 
 import javax.ejb.EJB;
 import javax.ejb.Local;

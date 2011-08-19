@@ -1,37 +1,27 @@
 package za.co.yellowfire.ui.training;
 
 import org.primefaces.component.datatable.DataTable;
-import org.primefaces.context.RequestContext;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.model.map.DefaultMapModel;
-import org.primefaces.model.map.LatLng;
 import org.primefaces.model.map.MapModel;
-import org.primefaces.model.map.Marker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import za.co.yellowfire.domain.Venue;
-import za.co.yellowfire.domain.geocode.GeocodeGeometry;
-import za.co.yellowfire.domain.geocode.GeocodeLocation;
 import za.co.yellowfire.domain.geocode.GeocodeManager;
 import za.co.yellowfire.domain.geocode.GeocodeResult;
 import za.co.yellowfire.log.LogType;
 import za.co.yellowfire.manager.DomainManager;
 import za.co.yellowfire.manager.DomainQueryHint;
 import za.co.yellowfire.solarflare.SearchManager;
+import za.co.yellowfire.ui.FacesUtil;
 import za.co.yellowfire.ui.model.*;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.ejb.EJBException;
-import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.persistence.OptimisticLockException;
-import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -65,39 +55,13 @@ public class VenuesController extends AbstractTrainingUIController {
 
     private String searchText;
 
-    private static final Venue EMPTY_VENUE() {
-        return new Venue();
-    }
-
     @PostConstruct
     private void init() {
         searchMapModel = new DefaultMapModel();
         searchModel =
                 new DataTableModel<GeocodeResult>(
                         /* DataTableListener*/
-                        new AbstractDomainManagerDataTableListener<GeocodeResult>() {
-                            @Override
-                            public DomainManager getManager() {
-                                return manager;
-                            }
-
-                            @Override
-                            public String getLoadQuery() {
-                                return null;
-                            }
-
-                            @Override
-                            public void onSelection(DataTableRow<GeocodeResult> row) throws DataTableException {
-                                loadProximityVenues(row);
-                            }
-
-                            @Override
-                            public GeocodeResult createEmpty() {
-                                GeocodeResult result = new GeocodeResult();
-                                result.setGeometry(new GeocodeGeometry(new GeocodeLocation("0", "0")));
-                                return result;
-                            }
-                        },
+                        new GeocodeResultDataTableModelListener(manager, searchMapModel),
                         /* DataTableSearchListener*/
                         new GeocodeManagerDataTableSearchListener() {
                             @Override
@@ -110,27 +74,7 @@ public class VenuesController extends AbstractTrainingUIController {
         dataModel =
                 new DataTableModel<Venue>(
                         /* DataTableListener*/
-                        new AbstractDomainManagerDataTableListener<Venue>() {
-                            @Override
-                            public DomainManager getManager() {
-                                return manager;
-                            }
-
-                            @Override
-                            public String getLoadQuery() {
-                                return Venue.QRY_VENUES;
-                            }
-
-                            @Override
-                            public void onSelection(DataTableRow<Venue> row) throws DataTableException {
-                                //
-                            }
-
-                            @Override
-                            public Venue createEmpty() {
-                                return new Venue();
-                            }
-                        },
+                        new VenueDataTableModelListener(manager),
                         /* DataTableSearchListener*/
                         new AbstractSearchManagerDataTableSearchListener<Venue>() {
                             @Override public SearchManager getManager() { return searchManager; }
@@ -139,32 +83,7 @@ public class VenuesController extends AbstractTrainingUIController {
                 );
     }
 
-    private void loadProximityVenues(DataTableRow<GeocodeResult> row) {
 
-        if (row != null && row.getObject() != null) {
-
-            GeocodeResult result = row.getObject();
-            double lat = Double.parseDouble(result.getGeometry().getLocation().getLatitude());
-            double lng = Double.parseDouble(result.getGeometry().getLocation().getLongitude());
-
-            List<Venue> venues = (List<Venue>) manager.query(
-                    Venue.QRY_VENUES_IN_PROXIMITY,
-                    Venue.getProximityQueryParams(
-                            lat,
-                            lng,
-                            0.000050));
-
-            if (venues != null && venues.size() > 0) {
-                for (Venue v : venues) {
-                    searchMapModel.getMarkers().add(
-                            new Marker(
-                                    new LatLng(v.getGpsLatitude(), v.getGpsLongitude()),
-                                    v.getName(),
-                                    v));
-                }
-            }
-        }
-    }
 
     public DataTableModel<Venue> getDataModel() {
         return dataModel;
@@ -187,7 +106,7 @@ public class VenuesController extends AbstractTrainingUIController {
 
     public DataTableRow<Venue> getSelectedRow() {
         if (selectedRow == null) {
-            this.selectedRow = new DataTableRow<Venue>(EMPTY_VENUE());
+            this.selectedRow = new DataTableRow<Venue>(new Venue());
         }
         return selectedRow;
     }
@@ -227,83 +146,80 @@ public class VenuesController extends AbstractTrainingUIController {
     }
 
 
-    public void onSaveRow(ActionEvent event) throws Exception {
-        LOGGER.debug("onSaveRow() : " + event);
-
-        try {
-            Venue o = this.selectedRow.getObject();
-            if (o.getId() != null && o.getId() > 0) {
-                manager.merge(o);
-            } else {
-                manager.persist(o);
-                if (this.rows != null) {
-                    this.rows.add(new DataTableRow<Venue>(o));
-                }
-            }
-            
-            this.selectedRow.getResult().reset();
-
-            //Set the rows to null so it'll be refreshed on the next get
-            this.rows = null;
-
-            //Reset selection
-            if (dataTable != null) {
-                LOGGER.info("dataTable.rowIndex = " + dataTable.getRowIndex());
-                this.dataTable.setSelection(null);
-                this.dataTable.setRowIndex(-1);
-                this.dataTable.reset();
-            }
-        } catch (Throwable e) {
-            if (!(e instanceof EJBException)) LOGGER.error(e.getMessage());
-
-            String error = e.getMessage();
-            if (e.getCause() != null & e.getCause() instanceof OptimisticLockException) {
-                error = "Cannot save the value because it has changed or been deleted since it was last read.";
-            }
-            this.selectedRow.getResult().failed(error);
-
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", error);
-            FacesContext.getCurrentInstance().addMessage(event.getComponent().getId(), msg);
-        }
-
-        RequestContext context = RequestContext.getCurrentInstance();
-        context.addCallbackParam("result", this.selectedRow.getResult());
-    }
-
-    public void onAddRow(ActionEvent event) {
-        LOGGER.info("onAddRow() : " + event);
-        //this.action = DataTableAction.Add;
-        Venue o = new Venue();
-        setSelectedRow(new DataTableRow<Venue>(o));
-
-        FacesMessage msg = new FacesMessage("Info", "Enter the venue details and press Save");
-        FacesContext.getCurrentInstance().addMessage(event.getComponent().getId(), msg);
-    }
-
-    public void onDeleteRow(ActionEvent event) {
-        LOGGER.debug("onDeleteRow() : " + event);
-
-        try {
-            DataTableRow<Venue> row = getSelectedRow();
-            if (row != null && row.getObject() != null) {
-                manager.remove(row.getObject());    
-
-                this.rows.remove(row);
-                
-                FacesMessage msg = new FacesMessage("Venue Deleted", row.getObject().getName());
-                FacesContext.getCurrentInstance().addMessage(null, msg);
-            }
-        } catch (Exception e) {
-            LOGGER.error(e.getMessage());
-            this.selectedRow.getResult().failed(e.getMessage());
-
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", e.getMessage());
-            FacesContext.getCurrentInstance().addMessage(event.getComponent().getId(), msg);
-        }
-
-        RequestContext context = RequestContext.getCurrentInstance();
-        context.addCallbackParam("result", this.selectedRow.getResult());
-    }
+//    public void onSaveRow(ActionEvent event) throws Exception {
+//        LOGGER.debug("onSaveRow() : " + event);
+//
+//        try {
+//            Venue o = this.selectedRow.getObject();
+//            if (o.getId() != null && o.getId() > 0) {
+//                manager.merge(o);
+//            } else {
+//                manager.persist(o);
+//                if (this.rows != null) {
+//                    this.rows.add(new DataTableRow<Venue>(o));
+//                }
+//            }
+//
+//            this.selectedRow.getResult().reset();
+//
+//            //Set the rows to null so it'll be refreshed on the next get
+//            this.rows = null;
+//
+//            //Reset selection
+//            if (dataTable != null) {
+//                LOGGER.info("dataTable.rowIndex = " + dataTable.getRowIndex());
+//                this.dataTable.setSelection(null);
+//                this.dataTable.setRowIndex(-1);
+//                this.dataTable.reset();
+//            }
+//        } catch (Throwable e) {
+//            if (!(e instanceof EJBException)) LOGGER.error(e.getMessage());
+//
+//            String error = e.getMessage();
+//            if (e.getCause() != null & e.getCause() instanceof OptimisticLockException) {
+//                error = "Cannot save the value because it has changed or been deleted since it was last read.";
+//            }
+//            this.selectedRow.getResult().failed(error);
+//
+//            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", error);
+//            FacesContext.getCurrentInstance().addMessage(event.getComponent().getId(), msg);
+//        }
+//
+//        RequestContext context = RequestContext.getCurrentInstance();
+//        context.addCallbackParam("result", this.selectedRow.getResult());
+//    }
+//
+//    public void onAddRow(ActionEvent event) {
+//        LOGGER.info("onAddRow() : " + event);
+//        //this.action = DataTableAction.Add;
+//        Venue o = new Venue();
+//        setSelectedRow(new DataTableRow<Venue>(o));
+//
+//        FacesUtil.addInfoMessage(event.getComponent().getId(), MessageResources.MESSAGE(MessageKey.dialogInfo), "Enter the venue details and press Save");
+//    }
+//
+//    public void onDeleteRow(ActionEvent event) {
+//        LOGGER.debug("onDeleteRow() : " + event);
+//
+//        try {
+//            DataTableRow<Venue> row = getSelectedRow();
+//            if (row != null && row.getObject() != null) {
+//                manager.remove(row.getObject());
+//
+//                this.rows.remove(row);
+//
+//                FacesMessage msg = new FacesMessage("Venue Deleted", row.getObject().getName());
+//                FacesContext.getCurrentInstance().addMessage(null, msg);
+//            }
+//        } catch (Exception e) {
+//            LOGGER.error(e.getMessage());
+//            this.selectedRow.getResult().failed(e.getMessage());
+//            FacesUtil.addErrorMessage(e.getMessage());
+//        }
+//        PrimeFacesUtil.addCallbackParam();
+//        RequestContext context = RequestContext.getCurrentInstance();
+//        context.addCallbackParam("result", this.selectedRow.getResult());
+//    }
 
     public void onRefreshRows(ActionEvent event) {
         /* Deselected row */
@@ -342,7 +258,7 @@ public class VenuesController extends AbstractTrainingUIController {
 
                 this.selectedRow = new DataTableRow<Venue>(venue);
             } else {
-                this.selectedRow = new DataTableRow<Venue>(EMPTY_VENUE());
+                this.selectedRow = new DataTableRow<Venue>(new Venue());
             }
         } catch (ParseException e) {
             throw new DataTableException("Unable to create venue because GPS coordinates could not be parsed", e);
@@ -351,7 +267,6 @@ public class VenuesController extends AbstractTrainingUIController {
 
     public void onLocationSelect(SelectEvent event) {
         DataTableRow<GeocodeResult> result = (DataTableRow<GeocodeResult>) event.getObject();
-        FacesMessage msg = new FacesMessage("Location Selected", result.getObject().getFormattedAddress());
-        FacesContext.getCurrentInstance().addMessage(null, msg);  
+        FacesUtil.addInfoMessage("Location Selected", result.getObject().getFormattedAddress());
     }
 }

@@ -1,21 +1,13 @@
 package za.co.yellowfire.ui.model;
 
-import java.util.Date;
-import java.util.List;
-
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-
 import org.primefaces.model.LazyScheduleModel;
 import org.primefaces.model.ScheduleEvent;
 import org.slf4j.Logger;
-
 import org.slf4j.LoggerFactory;
-import za.co.yellowfire.Naming;
-import za.co.yellowfire.domain.profile.User;
-import za.co.yellowfire.domain.result.Result;
-import za.co.yellowfire.domain.result.ResultManager;
 import za.co.yellowfire.log.LogType;
+
+import java.util.Date;
+import java.util.List;
 
 
 /**

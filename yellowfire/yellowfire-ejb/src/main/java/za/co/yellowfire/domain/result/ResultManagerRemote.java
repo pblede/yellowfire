@@ -1,7 +1,5 @@
 package za.co.yellowfire.domain.result;
 
-import javax.ejb.Remote;
-
 /**
  * 
  * @author Mark Ashowrth

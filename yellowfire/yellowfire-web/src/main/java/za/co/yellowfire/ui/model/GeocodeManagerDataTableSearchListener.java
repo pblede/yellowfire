@@ -48,7 +48,7 @@ public abstract class GeocodeManagerDataTableSearchListener implements DataTable
                     break;
             }
             return rows;
-        } catch (Throwable e) {
+        } catch (Exception e) {
             throw new DataTableException("Search failed", e);
         }
     }

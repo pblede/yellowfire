@@ -7,8 +7,6 @@ import za.co.yellowfire.domain.DomainObject;
 import za.co.yellowfire.log.LogType;
 
 import javax.ejb.*;
-import javax.enterprise.event.Event;
-import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.LockModeType;
 import javax.persistence.PersistenceContext;

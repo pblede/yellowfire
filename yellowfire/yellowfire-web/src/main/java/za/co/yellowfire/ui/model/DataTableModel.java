@@ -1,13 +1,12 @@
 package za.co.yellowfire.ui.model;
 
 import org.primefaces.component.datatable.DataTable;
-import org.primefaces.context.RequestContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import za.co.yellowfire.log.LogType;
+import za.co.yellowfire.ui.FacesUtil;
+import za.co.yellowfire.ui.PrimeFacesUtil;
 
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 import javax.faces.event.AbortProcessingException;
 import javax.faces.event.ActionEvent;
 import javax.faces.event.ActionListener;
@@ -27,17 +26,20 @@ public class DataTableModel<T> implements Serializable {
     private static final Logger LOGGER = LoggerFactory.getLogger(LogType.MODEL.getCategory());
 
     private String searchText;
-    
     private List<DataTableRow<T>> rows;
     private DataTableRow<T> selected;
     private transient DataTable table;
     private DataTableSearchListener<T> searchListener;
     private DataTableListener<T> listener;
-    private RequestResult result = new RequestResult();
 
     private transient ActionListener saveActionListener;
     private transient ActionListener deleteActionListener;
 
+    /**
+     * Constructs the data table model
+     * @param listener The listener for events initiated by the user
+     * @param searchListener The listener for search events
+     */
     public DataTableModel(DataTableListener<T> listener, DataTableSearchListener<T> searchListener) {
         this.searchListener = searchListener;
         this.listener = listener;
@@ -52,22 +54,42 @@ public class DataTableModel<T> implements Serializable {
         this.deleteActionListener = new DeleteActionListener(this);
     }
 
+    /**
+     * The search text
+     * @return String
+     */
     public String getSearchText() {
         return searchText;
     }
 
+    /**
+     * Search text
+     * @param searchText The new search text
+     */
     public void setSearchText(String searchText) {
         this.searchText = searchText;
     }
 
+    /**
+     * Returns the PrimeFaces DataTable if it is bound on the page
+     * @return DataTable
+     */
     public DataTable getTable() {
         return table;
     }
 
+    /**
+     * Sets the PrimeFaces DataTable
+     * @param table The new value
+     */
     public void setTable(DataTable table) {
         this.table = table;
     }
-    
+
+    /**
+     * Returns the rows in the data table
+     * @return A list of DataTableRow objects that wrap the actual objects
+     */
     public List<DataTableRow<T>> getRows() {
 
         if (this.rows == null && this.listener != null) {
@@ -77,26 +99,39 @@ public class DataTableModel<T> implements Serializable {
                     Collections.sort(rows);
                 }
             } catch (DataTableException e) {
-                e.printStackTrace();
+                LOGGER.error("Unable to load the rows from the listener into the data table", e);
             }
         }
 
         if (this.rows == null) {
+            LOGGER.debug("The rows returned from the listener is null, defaulting to an empty list");
             this.rows = new ArrayList<DataTableRow<T>>(0);
         }
         
         return rows;
     }
 
+    /**
+     * Sets the rows of the data table
+     * @param rows The new list of DataTableRow
+     */
     public void setRows(List<DataTableRow<T>> rows) {
         this.rows = rows;
     }
 
+    /**
+     * Returns the selected DataTableRow
+     * @return DataTableRow
+     */
     public DataTableRow<T> getSelected() {
         LOGGER.debug("getSelected() : {}", selected);
         return selected;
     }
 
+    /**
+     * Sets the selected DataTableRow
+     * @param selected The new selected DataTableRow
+     */
     public void setSelected(DataTableRow<T> selected) {
         LOGGER.debug("setSelected() : {}", selected);
         if (selected == null) {
@@ -129,18 +164,11 @@ public class DataTableModel<T> implements Serializable {
         RequestResult result = new RequestResult();
         try {
             this.listener.onSelection(getSelected());
-        } catch (Throwable e) {
+        } catch (Exception e) {
             result.failed(e.getMessage());
-
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", e.getMessage());
-            FacesContext.getCurrentInstance().addMessage(null, msg);
+            FacesUtil.addErrorMessage(e.getMessage());
         }
-        RequestContext context = RequestContext.getCurrentInstance();
-        if (context != null) {
-            context.addCallbackParam("result", result);
-        } else {
-            LOGGER.warn("Cannot set PrimeFaces result because context is null");
-        }
+        PrimeFacesUtil.addCallbackParam(result);
     }
 
     /**
@@ -160,16 +188,11 @@ public class DataTableModel<T> implements Serializable {
         try {
             T o = this.listener.onAdd(event);
             setSelected(new DataTableRow<T>(o));
-        } catch (Throwable e) {
+        } catch (Exception e) {
             result.failed(e.getMessage());
-
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", e.getMessage());
-            FacesContext.getCurrentInstance().addMessage(event.getComponent().getId(), msg);
+            FacesUtil.addErrorMessage(e.getMessage());
         }
-
-        RequestContext context = RequestContext.getCurrentInstance();
-        if (context != null)
-            context.addCallbackParam("result", result);
+        PrimeFacesUtil.addCallbackParam(result);
     }
 
     /**
@@ -190,16 +213,11 @@ public class DataTableModel<T> implements Serializable {
             T o = this.selected.getObject();
             this.listener.onModify(event, o);
             this.selected.setObject(o);
-        } catch (Throwable e) {
+        } catch (Exception e) {
             result.failed(e.getMessage());
-
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", e.getMessage());
-            FacesContext.getCurrentInstance().addMessage(event.getComponent().getId(), msg);
+            FacesUtil.addErrorMessage(e.getMessage());
         }
-
-        RequestContext context = RequestContext.getCurrentInstance();
-        if (context != null)
-            context.addCallbackParam("result", result);
+        PrimeFacesUtil.addCallbackParam(result);
     }
 
     /**
@@ -227,16 +245,11 @@ public class DataTableModel<T> implements Serializable {
             this.table.setSelection(null);
             this.table.setRowIndex(-1);
             this.table.reset();
-        } catch (Throwable e) {
+        } catch (Exception e) {
             this.selected.getResult().failed(e.getMessage());
-
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", e.getMessage());
-            FacesContext.getCurrentInstance().addMessage(event.getComponent().getId(), msg);
+            FacesUtil.addErrorMessage(e.getMessage());
         }
-
-        RequestContext context = RequestContext.getCurrentInstance();
-        if (context != null)
-            context.addCallbackParam("result", this.selected.getResult());
+        PrimeFacesUtil.addCallbackParam(this.selected.getResult());
     }
 
     /**
@@ -259,20 +272,15 @@ public class DataTableModel<T> implements Serializable {
             return;
         }
 
-        this.result.reset();
+        RequestResult result = new RequestResult();
         try {
             this.rows = this.searchListener.onSearch(event, getSearchText());
-        } catch (Throwable e) {
+        } catch (Exception e) {
             LOGGER.error(e.getMessage());
-            this.result.failed(e.getMessage());
-
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", e.getMessage());
-            FacesContext.getCurrentInstance().addMessage(event.getComponent().getId(), msg);
+            result.failed(e.getMessage());
+            FacesUtil.addErrorMessage(e.getMessage());
         }
-
-        RequestContext context = RequestContext.getCurrentInstance();
-        if (context != null)
-            context.addCallbackParam("result", this.result);
+        PrimeFacesUtil.addCallbackParam(result);
     }
 
     /**
@@ -299,11 +307,14 @@ public class DataTableModel<T> implements Serializable {
         try {
             this.rows = this.listener.onLoad(event);
         } catch (Exception e) {
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", e.getMessage());
-            FacesContext.getCurrentInstance().addMessage(event.getComponent().getId(), msg);
+            FacesUtil.addErrorMessage(e.getMessage());
         }
     }
 
+    /**
+     * Triggered when the user requests the entity to be deleted.
+     * @param event The JSF action event
+     */
     public void onDelete(ActionEvent event) {
         LOGGER.debug("onDelete() : {}", event);
 
@@ -321,14 +332,9 @@ public class DataTableModel<T> implements Serializable {
         } catch (Exception e) {
             LOGGER.error(e.getMessage());
             this.selected.getResult().failed(e.getMessage());
-
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", e.getMessage());
-            FacesContext.getCurrentInstance().addMessage(event.getComponent().getId(), msg);
+            FacesUtil.addErrorMessage(e.getMessage());
         }
-
-        RequestContext context = RequestContext.getCurrentInstance();
-        if (context != null)
-            context.addCallbackParam("result", this.selected.getResult());
+        PrimeFacesUtil.addCallbackParam(this.selected.getResult());
     }
 
     private static class SaveActionListener implements ActionListener {

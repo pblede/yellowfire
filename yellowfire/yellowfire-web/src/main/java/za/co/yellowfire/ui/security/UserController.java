@@ -1,6 +1,11 @@
 package za.co.yellowfire.ui.security;
 
-import java.util.Map;
+import org.primefaces.context.RequestContext;
+import za.co.yellowfire.controller.AbstractController;
+import za.co.yellowfire.domain.profile.Credential;
+import za.co.yellowfire.domain.profile.User;
+import za.co.yellowfire.domain.profile.UserManager;
+import za.co.yellowfire.domain.racing.Race;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
@@ -9,19 +14,14 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.inject.Named;
+import java.util.Map;
 
 //import org.openfaces.event.AjaxActionEvent;
-import org.primefaces.context.RequestContext;
-
-import za.co.yellowfire.controller.AbstractController;
-import za.co.yellowfire.domain.racing.Race;
-import za.co.yellowfire.domain.profile.Credential;
-import za.co.yellowfire.domain.profile.User;
-import za.co.yellowfire.domain.profile.UserManager;
 
 /**
  * @author Mark P Ashworth
  * @version 0.0.1
+ * @deprecated Using LoginController login which authenticates using JAAS via the servler container
  */
 @SessionScoped
 @Named("userController")

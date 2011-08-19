@@ -1,7 +1,5 @@
 package za.co.yellowfire.ui.model.menu;
 
-import za.co.yellowfire.ui.model.menu.MenuItem;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;

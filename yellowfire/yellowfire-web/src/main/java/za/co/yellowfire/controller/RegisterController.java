@@ -3,10 +3,10 @@ package za.co.yellowfire.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import za.co.yellowfire.Naming;
-import za.co.yellowfire.log.LogType;
 import za.co.yellowfire.domain.profile.User;
 import za.co.yellowfire.domain.profile.UserManager;
 import za.co.yellowfire.domain.profile.UserRegistrationException;
+import za.co.yellowfire.log.LogType;
 
 import javax.enterprise.context.RequestScoped;
 import javax.faces.component.UIComponent;

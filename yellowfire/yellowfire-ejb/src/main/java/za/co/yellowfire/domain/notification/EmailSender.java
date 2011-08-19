@@ -3,7 +3,6 @@ package za.co.yellowfire.domain.notification;
 import javax.ejb.Local;
 import javax.mail.MessagingException;
 import java.io.Serializable;
-import java.util.concurrent.Future;
 
 /**
  * @author Mark P Ashworth

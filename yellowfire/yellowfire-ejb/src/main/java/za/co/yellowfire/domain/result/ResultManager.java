@@ -1,12 +1,7 @@
 package za.co.yellowfire.domain.result;
 
-import java.io.Serializable;
-import java.util.Date;
-import java.util.List;
-
 import javax.ejb.Local;
-
-import za.co.yellowfire.domain.profile.User;
+import java.io.Serializable;
 
 /**
  * 

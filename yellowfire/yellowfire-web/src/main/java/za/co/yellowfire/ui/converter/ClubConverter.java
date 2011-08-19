@@ -1,17 +1,16 @@
 package za.co.yellowfire.ui.converter;
 
+import za.co.yellowfire.domain.racing.Club;
+import za.co.yellowfire.manager.DomainManager;
+import za.co.yellowfire.ui.FacesUtil;
+
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.ConverterException;
 import javax.inject.Named;
-import javax.inject.Scope;
 import javax.naming.NamingException;
 import javax.persistence.LockModeType;
-
-import za.co.yellowfire.domain.racing.Club;
-import za.co.yellowfire.manager.DomainManager;
-import za.co.yellowfire.ui.FacesUtil;
 
 /**
  * @author Mark P Ashworth
@@ -62,7 +61,7 @@ public class ClubConverter extends AbstractConverter implements Converter {
 			LOGGER.error("Unable to lookup club because RaceManager could not be resolved", e);
 			FacesUtil.addErrorMessage(context, component.getClientId(), "Converter Error", e);
 			throw new ConverterException("Unable to lookup club because RaceManager could not be resolved", e);
-		} catch (Throwable e) {
+		} catch (Exception e) {
 			LOGGER.error("Unable to lookup club", e);
 			FacesUtil.addErrorMessage(context, component.getClientId(), "Converter Error", e);
 			throw new ConverterException("Unable to lookup club", e);

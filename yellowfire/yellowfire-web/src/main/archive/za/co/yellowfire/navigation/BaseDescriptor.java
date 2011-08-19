@@ -1,8 +1,8 @@
 package za.co.yellowfire.navigation;
 
-import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import java.io.Serializable;
 
 public class BaseDescriptor implements Serializable {
 

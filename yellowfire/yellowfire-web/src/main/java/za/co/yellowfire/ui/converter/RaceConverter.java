@@ -1,14 +1,14 @@
 package za.co.yellowfire.ui.converter;
 
+import za.co.yellowfire.domain.racing.Race;
+import za.co.yellowfire.manager.DomainManager;
+
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.ConverterException;
 import javax.naming.NamingException;
 import javax.persistence.LockModeType;
-
-import za.co.yellowfire.domain.racing.Race;
-import za.co.yellowfire.manager.DomainManager;
 
 /**
  * 

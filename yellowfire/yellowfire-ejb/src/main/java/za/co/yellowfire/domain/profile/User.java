@@ -1,16 +1,16 @@
 package za.co.yellowfire.domain.profile;
 
-import javax.persistence.*;
-import javax.validation.constraints.*;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-
 import org.eclipse.persistence.config.QueryHints;
 import org.hibernate.validator.constraints.Email;
 import za.co.yellowfire.domain.racing.Club;
 import za.co.yellowfire.jaxb.DateTypeAdapter;
 
+import javax.persistence.*;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.UUID;
@@ -155,11 +155,12 @@ public class User implements Serializable {
     }
 
     public void setPassword(String password) {
-        if (password == null && this.password != null) {
-            this.passwordChanged = true;
-        }
-        if (this.password != null) {
+        if (password == null && this.password == null) {
+            this.passwordChanged = false;
+        } else if (this.password != null) {
             this.passwordChanged = this.password.equals(password);
+        } else if (password != null) {
+            this.passwordChanged = true;
         }
 
         this.password = password;

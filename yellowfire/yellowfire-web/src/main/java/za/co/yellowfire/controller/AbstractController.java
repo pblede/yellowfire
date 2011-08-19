@@ -1,19 +1,18 @@
 package za.co.yellowfire.controller;
 
-import java.io.Serializable;
-import java.security.Principal;
-import java.util.List;
+import za.co.yellowfire.domain.profile.RoleType;
+import za.co.yellowfire.ui.FacesUtil;
 
 import javax.faces.component.UIComponent;
 import javax.faces.component.UIParameter;
 import javax.faces.component.UIViewRoot;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+import java.io.Serializable;
+import java.security.Principal;
+import java.util.List;
 
 //import org.openfaces.event.AjaxActionEvent;
-
-import za.co.yellowfire.domain.profile.RoleType;
-import za.co.yellowfire.ui.FacesUtil;
 
 /**
  *

@@ -44,7 +44,7 @@ public class TrainingProviderConverter extends AbstractConverter implements Conv
 		//} catch (NamingException e) {
 		//	FacesUtil.addErrorMessage(context, component.getClientId(), "Converter Error", e);
 		//	throw new ConverterException("Unable to lookup training provider because DomainManager could not be resolved", e);
-		} catch (Throwable e) {
+		} catch (Exception e) {
 			FacesUtil.addErrorMessage(context, component.getClientId(), "Converter Error", e);
 			throw new ConverterException("Unable to lookup training provider", e);
 		}

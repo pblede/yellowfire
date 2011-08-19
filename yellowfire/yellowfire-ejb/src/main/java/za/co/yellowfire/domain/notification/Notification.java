@@ -2,10 +2,10 @@ package za.co.yellowfire.domain.notification;
 
 import za.co.yellowfire.domain.Archiveable;
 import za.co.yellowfire.domain.DomainEntity;
+import za.co.yellowfire.solarflare.annotation.Searchable;
 import za.co.yellowfire.solarflare.annotation.SearchableProperty;
 import za.co.yellowfire.solarflare.annotation.SearchablePropertyId;
 import za.co.yellowfire.solarflare.annotation.SearchablePropertyType;
-import za.co.yellowfire.solarflare.annotation.Searchable;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;

@@ -1,8 +1,5 @@
 package za.co.yellowfire.navigation;
 
-import java.net.URL;
-import java.util.List;
-
 import javax.faces.FacesException;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
@@ -11,6 +8,8 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.net.URL;
+import java.util.List;
 
 @ApplicationScoped
 @ManagedBean(name = "navigationParser")

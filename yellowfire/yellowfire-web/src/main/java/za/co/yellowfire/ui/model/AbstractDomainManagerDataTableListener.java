@@ -10,7 +10,6 @@ import za.co.yellowfire.manager.DomainQueryHint;
 import javax.ejb.EJBException;
 import javax.faces.event.ActionEvent;
 import javax.persistence.OptimisticLockException;
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -156,7 +155,17 @@ public abstract class AbstractDomainManagerDataTableListener<T extends DomainObj
             }
 
             return action;
-        } catch (Throwable e) {
+        } catch (RuntimeException e) {
+            if (!(e instanceof EJBException)) LOGGER.error(e.getMessage());
+
+            String error;
+            if (e.getCause() != null & e.getCause() instanceof OptimisticLockException) {
+                error = "Cannot save the value because it has changed or been deleted since it was last read.";
+                throw new DataTableException(error, e.getCause());
+            }
+
+            throw new DataTableException("Unable to save object", e);
+        } catch (Exception e) {
             if (!(e instanceof EJBException)) LOGGER.error(e.getMessage());
 
             String error;
@@ -181,7 +190,7 @@ public abstract class AbstractDomainManagerDataTableListener<T extends DomainObj
     public void onDelete(ActionEvent event, T object) throws DataTableException {
         try {
             getManager().remove(object);
-        } catch (Throwable e) {
+        } catch (Exception e) {
             if (!(e instanceof EJBException)) LOGGER.error(e.getMessage());
 
             String error;

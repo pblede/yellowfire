@@ -1,0 +1,2 @@
+@REM "Create authentication realm"
+CALL %GLASSFISH_HOME%\bin\asadmin --port 4949 create-auth-realm --classname com.sun.enterprise.security.auth.realm.jdbc.JDBCRealm --property jaas-context=jdbcRealm:password-column=person_password:assign-groups=default:datasource-jndi=yellowfire.security.ds:group-table=cde.vw_jaas_person_group:user-table=cde.vw_jaas_person:group-name-column=person_group_name:digest-algorithm=none:user-name-column=person_name jdbcRealm
