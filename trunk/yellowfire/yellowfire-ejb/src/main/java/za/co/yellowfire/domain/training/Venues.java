@@ -1,7 +1,6 @@
 package za.co.yellowfire.domain.training;
 
 import za.co.yellowfire.domain.Venue;
-import za.co.yellowfire.domain.racing.Race;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;

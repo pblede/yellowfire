@@ -1,0 +1,1 @@
+copy .\lib\*.* %GLASSFISH_HOME%\glassfish\domains\yellowfire-domain\lib

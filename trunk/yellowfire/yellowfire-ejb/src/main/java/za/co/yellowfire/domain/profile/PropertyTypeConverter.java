@@ -1,13 +1,13 @@
 package za.co.yellowfire.domain.profile;
 
+import org.eclipse.persistence.mappings.DatabaseMapping;
+import org.eclipse.persistence.mappings.converters.Converter;
+import org.eclipse.persistence.sessions.Session;
+
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.sql.Time;
 import java.util.Date;
-
-import org.eclipse.persistence.mappings.DatabaseMapping;
-import org.eclipse.persistence.mappings.converters.Converter;
-import org.eclipse.persistence.sessions.Session;
 
 /**
  * @author Mark P Ashworth

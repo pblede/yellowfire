@@ -2,14 +2,12 @@ package za.co.yellowfire.domain.racing;
 
 import za.co.yellowfire.domain.DomainEntity;
 
-import java.io.Serializable;
 import javax.persistence.*;
-
+import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import javax.xml.bind.annotation.*;
 
 /**
  * @author Mark P Ashworth

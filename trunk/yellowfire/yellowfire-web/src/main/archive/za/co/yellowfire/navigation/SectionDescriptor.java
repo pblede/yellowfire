@@ -1,8 +1,8 @@
 package za.co.yellowfire.navigation;
 
-import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
+import java.util.List;
 
 public class SectionDescriptor extends BaseDescriptor {
 

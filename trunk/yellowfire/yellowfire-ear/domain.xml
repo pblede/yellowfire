@@ -204,7 +204,7 @@
 	<jvm-options>-Djavax.net.ssl.keyStore=${com.sun.aas.instanceRoot}/config/keystore.jks</jvm-options>
         <jvm-options>-Djavax.net.ssl.trustStore=${com.sun.aas.instanceRoot}/config/cacerts.jks</jvm-options>
         <jvm-options>-Dorg.glassfish.jms.InitializeOnDemand=true</jvm-options>
-        <jvm-options>-XX:MaxPermSize=512m</jvm-options>
+        <jvm-options>-XX:MaxPermSize=1024m</jvm-options>
         <jvm-options>-client</jvm-options>
         <jvm-options>-Xmx2048m</jvm-options>
         <jvm-options>-XX:+UnlockDiagnosticVMOptions</jvm-options>

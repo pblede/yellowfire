@@ -1,0 +1,1 @@
+%GLASSFISH_HOME%\bin\asadmin start-domain yellowfire-domain

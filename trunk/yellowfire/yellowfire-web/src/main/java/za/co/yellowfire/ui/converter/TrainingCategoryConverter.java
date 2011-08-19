@@ -2,17 +2,13 @@ package za.co.yellowfire.ui.converter;
 
 import za.co.yellowfire.domain.DomainObject;
 import za.co.yellowfire.domain.training.Category;
-import za.co.yellowfire.manager.DomainManager;
 import za.co.yellowfire.ui.FacesUtil;
 
-import javax.ejb.EJB;
-import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.ConverterException;
 import javax.faces.convert.FacesConverter;
-import javax.naming.NamingException;
 import javax.persistence.LockModeType;
 import java.io.Serializable;
 
@@ -48,7 +44,7 @@ public class TrainingCategoryConverter extends AbstractConverter implements Conv
 		//} catch (NamingException e) {
 		//	FacesUtil.addErrorMessage(context, component.getClientId(), "Converter Error", e);
 		//	throw new ConverterException("Unable to lookup content type because DomainManager could not be resolved", e);
-		} catch (Throwable e) {
+		} catch (Exception e) {
 			FacesUtil.addErrorMessage(context, component.getClientId(), "Converter Error", e);
 			throw new ConverterException("Unable to lookup content type", e);
 		}

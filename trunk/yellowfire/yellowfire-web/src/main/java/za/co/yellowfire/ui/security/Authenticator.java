@@ -21,17 +21,17 @@
  */
 package za.co.yellowfire.ui.security;
 
+import za.co.yellowfire.domain.profile.Authenticated;
+import za.co.yellowfire.domain.profile.Credential;
+import za.co.yellowfire.domain.profile.User;
+import za.co.yellowfire.domain.profile.UserManager;
+
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.enterprise.event.Event;
 import javax.inject.Inject;
 
 //import org.jboss.seam.international.status.Messages;
-
-import za.co.yellowfire.domain.profile.Authenticated;
-import za.co.yellowfire.domain.profile.Credential;
-import za.co.yellowfire.domain.profile.User;
-import za.co.yellowfire.domain.profile.UserManager;
 //import za.co.yellowfire.ui.i18n.DefaultBundleKey;
 
 /**
@@ -39,6 +39,7 @@ import za.co.yellowfire.domain.profile.UserManager;
  * values of the user's credentials against the database.
  * 
  * @author Dan Allen
+ * @deprecated Using LoginController login which authenticates using JAAS via the servler container
  */
 @Stateless
 public class Authenticator {
@@ -58,6 +59,10 @@ public class Authenticator {
    @Authenticated
    private Event<User> loginEventSrc;
 
+    /**
+     * Authenticates the user
+     * @return Whether the user authentication succeeded
+     */
    public boolean authenticate()
    {
       //log.get().info("Logging in " + credentials.getUsername());

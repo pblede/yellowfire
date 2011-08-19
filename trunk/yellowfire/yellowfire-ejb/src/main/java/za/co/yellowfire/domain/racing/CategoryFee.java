@@ -2,11 +2,9 @@ package za.co.yellowfire.domain.racing;
 
 import za.co.yellowfire.domain.DomainEntity;
 
-import java.io.Serializable;
 import javax.persistence.*;
-
-import java.math.BigDecimal;
 import javax.xml.bind.annotation.XmlAttribute;
+import java.math.BigDecimal;
 //import javax.xml.bind.annotation.XmlTransient;
 
 /**

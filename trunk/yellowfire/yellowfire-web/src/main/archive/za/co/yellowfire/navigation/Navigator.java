@@ -1,8 +1,8 @@
 package za.co.yellowfire.navigation;
 
-import java.io.Serializable;
-import java.util.Iterator;
-import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import za.co.yellowfire.log.LogType;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.ConfigurableNavigationHandler;
@@ -12,11 +12,9 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-
-import org.slf4j.Logger;
-
-import org.slf4j.LoggerFactory;
-import za.co.yellowfire.log.LogType;
+import java.io.Serializable;
+import java.util.Iterator;
+import java.util.List;
 
 @SessionScoped
 @ManagedBean(name = "navigator")

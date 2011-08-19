@@ -7,7 +7,6 @@ import org.glassfish.embeddable.GlassFishRuntime;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import za.co.yellowfire.domain.Venue;
 import za.co.yellowfire.domain.notification.Notification;
 import za.co.yellowfire.solarflare.SearchManager;
 import za.co.yellowfire.solarflare.SearchManagerBean;
@@ -16,8 +15,6 @@ import javax.annotation.sql.DataSourceDefinition;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import java.io.File;
-import java.net.URI;
-import java.util.List;
 
 /**
  * @author Mark P Ashworth
@@ -48,11 +45,11 @@ public class DomainManagerTest {
         Deployer deployer = glassfish.getDeployer();
 
         /*Deploy Solr*/
-        deployer.deploy(new File("C:\\Shared\\Projects.Java\\yellowfire\\deployments\\apache-solr-3.2.0.war").toURI());
+        //deployer.deploy(new File("C:\\Shared\\Projects.Java\\yellowfire\\deployments\\apache-solr-3.2.0.war").toURI());
                 
         /*Deploy Yellowfire*/
-        URI uri = new File("target/classes").toURI();
-        deployer.deploy(uri);
+        //URI uri = new File("target/classes").toURI();
+        //deployer.deploy(uri);
     }
 
     @AfterClass

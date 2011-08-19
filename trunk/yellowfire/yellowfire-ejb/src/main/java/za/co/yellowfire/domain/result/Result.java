@@ -4,11 +4,10 @@ import org.eclipse.persistence.annotations.ConversionValue;
 import org.eclipse.persistence.annotations.Convert;
 import org.eclipse.persistence.annotations.ObjectTypeConverter;
 import za.co.yellowfire.domain.DomainEntity;
-import za.co.yellowfire.domain.racing.Race;
 import za.co.yellowfire.domain.profile.User;
+import za.co.yellowfire.domain.racing.Race;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Date;
 
 @Entity(name = "Result")

@@ -6,7 +6,6 @@ import za.co.yellowfire.domain.training.Venues;
 import za.co.yellowfire.manager.DomainManager;
 
 import javax.ejb.EJB;
-import javax.inject.Named;
 import javax.naming.InitialContext;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;

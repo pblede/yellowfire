@@ -1,0 +1,1 @@
+%GLASSFISH_HOME%\bin\asadmin create-domain --nopassword --adminport 4949 --instanceport 9081 yellowfire-domain

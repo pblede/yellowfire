@@ -1,5 +1,8 @@
 package za.co.yellowfire.ui;
 
+import za.co.yellowfire.ui.resources.MessageKey;
+import za.co.yellowfire.ui.resources.MessageResources;
+
 import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.inject.spi.BeanManager;
@@ -9,8 +12,17 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.servlet.ServletContext;
 
+/**
+ * Java Server Faces utility methods
+ * @author Mark P Ashworth
+ * @version 0.0.1
+ */
 public class FacesUtil {
 
+    /**
+     * Returns the Bean Manager
+     * @return BeanManager
+     */
 	protected BeanManager getBeanManager() {
         try{
             InitialContext initialContext = new InitialContext();
@@ -35,30 +47,97 @@ public class FacesUtil {
         }
         return null;
     }
-	
-	public static void addInfoMessage(String summary, String detail) {
-    	FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, detail);
-        FacesContext.getCurrentInstance().addMessage(null, msg);
+
+    /**
+     * Adds an global INFO message. The summary is read from the dialog.info resource key
+     * @param detail The detail of the message
+     */
+    public static void addInfoMessage(String detail) {
+        addErrorMessage(MessageResources.MESSAGE(MessageKey.dialogInfo), detail);
     }
-    
+
+    /**
+     * Adds an global INFO message.
+     * @param summary The summary of the message
+     * @param detail The detail of the message
+     */
+    public static void addInfoMessage(String summary, String detail) {
+        addInfoMessage(null, summary, detail);
+    }
+
+    /**
+     * Adds an INFO message.
+     * @param componentId The component id that the message should be bound to or null for a global message
+     * @param summary The summary of the message
+     * @param detail The detail of the message
+     */
+	public static void addInfoMessage(String componentId, String summary, String detail) {
+    	FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, detail);
+        FacesContext.getCurrentInstance().addMessage(componentId, msg);
+    }
+
+    /**
+     * Adds an global WARN message. The summary is read from the dialog.warn resource key
+     * @param detail The detail of the message
+     */
+    public static void addWarnMessage(String detail) {
+        addErrorMessage(MessageResources.MESSAGE(MessageKey.dialogWarning), detail);
+    }
+
+     /**
+     * Adds an global WARN message.
+     * @param summary The summary of the message
+     * @param detail The detail of the message
+     */
     public static void addWarnMessage(String summary, String detail) {
     	FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN, summary, detail);
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
-    
+
+    /**
+     * Adds an global ERROR message. The summary is read from the dialog.error resource key
+     * @param detail The detail of the message
+     */
+    public static void addErrorMessage(String detail) {
+        addErrorMessage(MessageResources.MESSAGE(MessageKey.dialogError), detail);
+    }
+
+     /**
+     * Adds an global ERROR message.
+     * @param summary The summary of the message
+     * @param detail The detail of the message
+     */
     public static void addErrorMessage(String summary, String detail) {
     	FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, summary, detail);
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
-    
+
+    /**
+     * Adds a global ERROR message
+     * @param summary The summary of the message
+     * @param error The exception detail for the message
+     */
     public static void addErrorMessage(String summary, Throwable error) {
     	addErrorMessage(FacesContext.getCurrentInstance(), null, summary, error);
     }
-    
+
+    /**
+     * Adds a global ERROR message
+     * @param clientId The client id of the message or null for global
+     * @param summary The summary of the message
+     * @param error The exception detail for the message
+     */
     public static void addErrorMessage(String clientId, String summary, Throwable error) {
-    	addErrorMessage(FacesContext.getCurrentInstance(), null, summary, error);
+    	addErrorMessage(FacesContext.getCurrentInstance(), clientId, summary, error);
     }
-    
+
+    /**
+     * Adds a global ERROR message
+     * @param context The Faces context
+     * @param clientId The client id of the message or null for global
+     * @param summary The summary of the message
+     * @param error The exception detail for the message
+     */
     public static void addErrorMessage(FacesContext context, String clientId, String summary, Throwable error) {
     	String e = "error";
     	if (error != null) {
@@ -71,7 +150,7 @@ public class FacesUtil {
     	}
     	
     	FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, summary, e);
-    	context.addMessage(null, msg);
+    	context.addMessage(clientId, msg);
     }
 
     /**
@@ -79,5 +158,23 @@ public class FacesUtil {
      */
     public static void invalidateSession() {
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+    }
+
+    /**
+     * Gets the view parameter from the Faces request parameter map
+     * @param name The name of the request parameter
+     * @return The string value of the parameter or null
+     */
+    public static String getViewParameter(String name) {
+        if (FacesContext.getCurrentInstance() != null && FacesContext.getCurrentInstance().getExternalContext() != null) {
+            String param = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get(name);
+            if (param != null && param.trim().length() > 0) {
+                return param;
+            } else {
+                return null;
+            }
+        } else {
+            return null;
+        }
     }
 }

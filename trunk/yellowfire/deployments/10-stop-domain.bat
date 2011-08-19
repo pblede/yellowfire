@@ -1,0 +1,1 @@
+%GLASSFISH_HOME%\bin\asadmin stop-domain yellowfire-domain

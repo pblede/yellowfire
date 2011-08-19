@@ -2,10 +2,7 @@ package za.co.yellowfire.domain.racing;
 
 import za.co.yellowfire.domain.DomainEntity;
 
-import java.io.Serializable;
-
 import javax.persistence.*;
-
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;

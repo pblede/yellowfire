@@ -7,6 +7,10 @@ package za.co.yellowfire.ui.skin;
 //import org.richfaces.renderkit.html.BaseGradient;
 //import org.richfaces.skin.Skin;
 
+/**
+ * @author RichFaces
+ * @deprecated Not used
+ */
 public class PageFooterGradient /*extends BaseGradient*/ {
     /*
     private static final int HEIGHT = 96;

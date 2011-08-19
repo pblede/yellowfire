@@ -62,9 +62,6 @@ public class Venue implements DomainObject {
     @SearchableProperty(name = "address", dynamic = true, type = SearchablePropertyType.STRING)
     private String address;
 
-    @Transient
-    private String gps;
-
     @Basic
     @Column(name = "venue_latitude", nullable = true, insertable = true, updatable = true)
     @XmlAttribute(name = "latitude", required = false)
@@ -93,7 +90,7 @@ public class Venue implements DomainObject {
     public Venue(String name, String address, String gps) {
         this.name = name;
         this.address = address;
-        setGps(gps);
+        parseGps(gps);
     }
 
     @XmlTransient
@@ -135,7 +132,7 @@ public class Venue implements DomainObject {
         parseGps(gps);
     }
 
-    protected void parseGps(String gps) {
+    private void parseGps(String gps) {
         if (gps != null) {
             String[] parts = gps.split(",");
             if (parts.length == 2) {
@@ -185,13 +182,21 @@ public class Venue implements DomainObject {
         return params;
     }
 
+    public VenueType getType() {
+        return type;
+    }
+
+    public void setType(VenueType type) {
+        this.type = type;
+    }
+
     @Override
     public String toString() {
         return "Venue{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", address='" + address + '\'' +
-                ", gps='" + gps + '\'' +
+                ", gps='" + getGps() + '\'' +
                 '}';
     }
 

@@ -6,11 +6,14 @@ import org.primefaces.model.map.MapModel;
 import org.primefaces.model.map.Marker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import za.co.yellowfire.domain.Venue;
+import za.co.yellowfire.domain.profile.Guest;
+import za.co.yellowfire.domain.profile.User;
+import za.co.yellowfire.domain.profile.UserManager;
+import za.co.yellowfire.domain.profile.UserRegistrationException;
 import za.co.yellowfire.domain.racing.Club;
 import za.co.yellowfire.domain.racing.Race;
 import za.co.yellowfire.domain.racing.RaceManager;
-import za.co.yellowfire.domain.Venue;
-import za.co.yellowfire.domain.profile.*;
 import za.co.yellowfire.domain.result.ResultManager;
 import za.co.yellowfire.log.LogType;
 
@@ -34,12 +37,12 @@ public class SessionController extends AbstractController {
 	private static final Logger LOGGER = LoggerFactory.getLogger(LogType.CONTROLLER.getCategory());
 
 	public static final String NAME = "sessionController";
-	private static final String ERROR_USER_LOGIN = "controller.user.login.error";
+	//private static final String ERROR_USER_LOGIN = "controller.user.login.error";
 	private static final String ERROR_USER_PERSIST = "controller.user.persist.error";
 	private static final String ERROR_USER_REGISTER = "controller.user.register.error";
 
-	private static final String WARNING_USER_NOT_FOUND = "controller.user.not.found";
-	private static final String WARNING_USER_NOT_VERIFIED = "controller.user.not.verified";
+	//private static final String WARNING_USER_NOT_FOUND = "controller.user.not.found";
+	//private static final String WARNING_USER_NOT_VERIFIED = "controller.user.not.verified";
 
 	private static final String INFO_USER_PERSISTED = "controller.user.persisted";
 	
@@ -48,8 +51,8 @@ public class SessionController extends AbstractController {
 	private Date businessDate = new Date();
 
 	/* Login event */
-	@Inject @Authenticated private Event<User> loginEventSrc;
-    @Inject @AuthenticateFailure private Event<AuthenticationFailure> authenticateFailureEventSrc;
+	//@Inject @Authenticated private Event<User> loginEventSrc;
+    //@Inject @AuthenticateFailure private Event<AuthenticationFailure> authenticateFailureEventSrc;
     /* Logout event */
     @Inject @Guest private Event<User> logoutEventSrc;
 
@@ -85,14 +88,14 @@ public class SessionController extends AbstractController {
 	
 	public User getUser() {
 		if (user == null) {
-			System.out.println("getUser()");
+			LOGGER.debug("getUser()");
 			this.user = getUserManager().retrieve(getUserNameLoggedIn());
 		}
 		return user;
 	}
 
 	public void setUser(User user) {
-		System.out.println("setUser() : " + user);
+		LOGGER.debug("setUser() : " + user);
 		this.user = user;
 	}
 
@@ -204,6 +207,10 @@ public class SessionController extends AbstractController {
 //		}
 //	}
 
+    /**
+     * Persist the user
+     * @param event The JSF action event
+     */
 	public void persist(ActionEvent event) {
 		try {
 			final String c = user.getPasswordConfirmation();
@@ -229,7 +236,6 @@ public class SessionController extends AbstractController {
 	 */
 	public String register() {
 		try {
-
 			manager.register(user);
 			addInfoMessage("Welcome", user.getName());
 			return VIEW_RACES;

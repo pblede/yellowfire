@@ -1,8 +1,6 @@
 package za.co.yellowfire.domain.profile;
 
-import org.apache.catalina.Manager;
 import za.co.yellowfire.manager.DomainManager;
-import za.co.yellowfire.manager.DomainManagerBean;
 
 import javax.ejb.EJB;
 import javax.ejb.Local;

@@ -2,8 +2,11 @@ package za.co.yellowfire.ui.security;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import za.co.yellowfire.domain.profile.User;
+import za.co.yellowfire.domain.profile.UserManager;
+import za.co.yellowfire.domain.profile.UserPersistException;
+import za.co.yellowfire.domain.profile.Verified;
 import za.co.yellowfire.log.LogType;
-import za.co.yellowfire.domain.profile.*;
 
 import javax.ejb.EJB;
 import javax.enterprise.event.Event;
@@ -16,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
+ * TODO Refactor the verification into a component that can be Unit Tested
  * @author Mark P Ashworth
  * @version 0.0.1
  */
@@ -29,6 +33,13 @@ public class VerifyServlet extends HttpServlet {
     @Inject @Verified
     private Event<User> verifiedEventSrc;
 
+    /**
+     * Verifies the user using the user verification key that was sent to the user via email.
+     * @param request The HTTP request
+     * @param response The HTTP response
+     * @throws ServletException If there was an exception
+     * @throws IOException If there was an exception
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         final String key = request.getParameter("key");

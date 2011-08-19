@@ -4,7 +4,6 @@ import za.co.yellowfire.domain.DomainEntity;
 import za.co.yellowfire.jaxb.NoteTypeAdapter;
 
 import javax.persistence.*;
-
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 

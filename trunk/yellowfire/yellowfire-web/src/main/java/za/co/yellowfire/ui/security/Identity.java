@@ -21,14 +21,14 @@
  */
 package za.co.yellowfire.ui.security;
 
-import java.io.Serializable;
-
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.io.Serializable;
 
 /**
  * @author <a href="mailto:lincolnbaxter@gmail.com">Lincoln Baxter, III</a>
+ * @deprecated Using LoginController login which authenticates using JAAS via the servler container
  */
 @Named
 @SessionScoped

@@ -5,13 +5,12 @@ import za.co.yellowfire.domain.DomainEntity;
 import za.co.yellowfire.jaxb.TimeTypeAdapter;
 
 import javax.persistence.*;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.ArrayList;
-import java.util.List;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 /**
  * @author Mark P Ashworth

@@ -1,8 +1,8 @@
 package za.co.yellowfire.ui;
 
-import java.io.Serializable;
-
 import za.co.yellowfire.Format;
+
+import java.io.Serializable;
 
 public class LocaleBean implements Serializable {
 	private static final long serialVersionUID = 1L;

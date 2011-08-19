@@ -3,18 +3,11 @@ package za.co.yellowfire.domain.result;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import za.co.yellowfire.log.LogType;
-import za.co.yellowfire.domain.profile.User;
 import za.co.yellowfire.manager.DomainManager;
-import za.co.yellowfire.manager.DomainManagerBean;
 
 import javax.ejb.EJB;
 import javax.ejb.Local;
-import javax.ejb.Remote;
 import javax.ejb.Stateless;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 @Local(ResultManager.class)
 //@Remote(ResultManagerRemote.class)

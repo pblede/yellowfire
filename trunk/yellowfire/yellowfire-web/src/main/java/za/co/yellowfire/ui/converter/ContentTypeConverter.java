@@ -47,7 +47,7 @@ public class ContentTypeConverter extends AbstractConverter implements Converter
 		//} catch (NamingException e) {
 		//	FacesUtil.addErrorMessage(context, component.getClientId(), "Converter Error", e);
 		//	throw new ConverterException("Unable to lookup content type because DomainManager could not be resolved", e);
-		} catch (Throwable e) {
+		} catch (Exception e) {
 			FacesUtil.addErrorMessage(context, component.getClientId(), "Converter Error", e);
 			throw new ConverterException("Unable to lookup content type", e);
 		}

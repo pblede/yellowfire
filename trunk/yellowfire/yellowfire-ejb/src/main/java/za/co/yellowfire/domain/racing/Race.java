@@ -1,41 +1,16 @@
 package za.co.yellowfire.domain.racing;
 
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.List;
-
-import javax.persistence.Access;
-import javax.persistence.AccessType;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.OrderBy;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlTransient;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-
 import org.apache.commons.collections.Predicate;
 import org.apache.commons.collections.iterators.FilterIterator;
-import za.co.yellowfire.domain.*;
+import za.co.yellowfire.domain.DomainEntity;
+import za.co.yellowfire.domain.Venue;
 import za.co.yellowfire.jaxb.DateTypeAdapter;
+
+import javax.persistence.*;
+import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import java.net.URL;
+import java.util.*;
 
 /**
  * @author Mark P Ashworth
@@ -96,18 +71,18 @@ public class Race extends DomainEntity {
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "race_id", table = "race", nullable = false, insertable = true, updatable = true, length = 19, precision = 0)
+    @Column(name = "race_id", nullable = false, insertable = true, updatable = true, length = 19, precision = 0)
     @XmlAttribute(name = "id", required = false)
     private Long id;
     
     @Basic
-    @Column(name = "race_name", table = "race", nullable = false, insertable = true, updatable = true, length = 2147483647, precision = 0)
+    @Column(name = "race_name", nullable = false, insertable = true, updatable = true, length = 2147483647, precision = 0)
     @XmlAttribute(name = "name", required = true)
     private String name;
     
     @XmlJavaTypeAdapter(value = DateTypeAdapter.class)
     @Temporal(TemporalType.DATE)
-    @Column(name = "race_date", table = "race", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
+    @Column(name = "race_date", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     @XmlAttribute(name = "date", required = true)
     private Date date;
     
