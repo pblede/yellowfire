@@ -1,0 +1,6 @@
+<menu>
+    <submenu text-id="menu.administration">
+        <menuitem text-id="menu.common.running" url="/running/index.jsf"/>
+        <menuitem text-id="menu.common.training" url="/training/index.jsf"/>
+    </submenu>
+</menu>
