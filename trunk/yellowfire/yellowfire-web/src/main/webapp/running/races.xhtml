@@ -7,22 +7,15 @@
                 xmlns:c="http://java.sun.com/jsp/jstl/core"
                 template="/resources/layout/training-layout.xhtml">
    
-	<ui:define name="demoSampleParameters">
-		<f:metadata>
-            <f:viewParam name="section" value="#{navigator.section}" />
-			<f:viewParam name="item" value="#{navigator.item}" />
-			<f:viewParam name="skin" value="#{skinBean.skin}"/>
-		</f:metadata>
-	</ui:define>
     <ui:define name="head">
 	</ui:define>
     <ui:define name="toolbar">
         <h:form prependId="false">
             <p:menubar widgetVar="t">
                 <c:forEach items="#{racesController.menu.subMenus}" var="subMenu" varStatus="subMenuStatus">
-                    <p:submenu label="#{subMenu.message}">
+                    <p:submenu label="#{subMenu.text}">
                         <c:forEach items="#{subMenu.menuItems}" var="menuItem" varStatus="menuItemStatus">
-                            <p:menuitem value="#{menuItem.message}"  url="#{menuItem.url}" />
+                            <p:menuitem value="#{menuItem.text}"  url="#{menuItem.url}" />
                         </c:forEach>
                     </p:submenu>
                 </c:forEach>
@@ -31,9 +24,6 @@
     </ui:define>
 	<ui:define name="content">
         <p:growl showDetail="true" showSummary="true" />
-        <h:form id="f2" rendered="#{userSession.loggedIn ne true}">
-        	<cc:infoPanel text="#{msgs['prompt.login.registration']}" />
-       	</h:form>
         <h:form prependId="false" id="racesForm">
         <p:dataGrid value="#{racesController.dataModel.rows}" var="row" columns="1">
             <p:column>

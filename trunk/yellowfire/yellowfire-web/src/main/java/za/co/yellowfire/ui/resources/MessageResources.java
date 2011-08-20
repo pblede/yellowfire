@@ -1,5 +1,6 @@
 package za.co.yellowfire.ui.resources;
 
+import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 /**
@@ -11,8 +12,16 @@ public class MessageResources {
     private static ResourceBundle RB =  ResourceBundle.getBundle(MessageResources.RESOURCE_BUNDLE_MESSAGES);
 
     public static final String MESSAGE(MessageKey key) {
-        String value = RB.getString(key.getKey());
-        return value != null ? value : "??" + key.getKey() + "??";
+        return MESSAGE(key.getKey());
+    }
+
+    public static final String MESSAGE(String key) {
+        try {
+            String value = RB.getString(key);
+            return value != null ? value : "??" + key + "??";
+        } catch (MissingResourceException e) {
+            return "??" + key + "??";
+        }
     }
 
     public static final String ERROR_USER_LOGIN = "controller.user.login.error";

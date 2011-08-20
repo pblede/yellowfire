@@ -1,0 +1,10 @@
+<menu>
+    <submenu text-id="menu.administration">
+        <menuitem text-id="menu.administration.running.races" url="/running/races.jsf"/>
+        <menuitem text-id="menu.administration.running.result.calendar" url="/running/result_calendar.jsf"/>
+    </submenu>
+    <submenu text-id="menu.help" >
+        <menuitem text-id="menu.help.topics" url="/topics.jsf"/>
+        <menuitem text-id="menu.help.about" url="/about.jsf"/>
+    </submenu>
+</menu>
