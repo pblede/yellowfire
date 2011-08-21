@@ -106,6 +106,7 @@
   </servers>
  <configs>
    <config name="server-config">
+     <system-property name="yellowfire.solr.url" value="http://localhost:9081/solr"></system-property>
      <system-property name="solr.data.dir" value="C:\SDE\solr\data"></system-property>
      <system-property name="solr.solr.home" value="C:\SDE\solr"></system-property>
      <http-service>
@@ -114,11 +115,11 @@
       </http-service>
       <iiop-service>
         <orb use-thread-pool-ids="thread-pool-1" />
-        <iiop-listener address="0.0.0.0" port="3700" id="orb-listener-1" />
-        <iiop-listener security-enabled="true" address="0.0.0.0" port="3820" id="SSL">
+        <iiop-listener address="0.0.0.0" port="3701" id="orb-listener-1" />
+        <iiop-listener security-enabled="true" address="0.0.0.0" port="3821" id="SSL">
           <ssl classname="com.sun.enterprise.security.ssl.GlassfishSSLImpl" cert-nickname="s1as" />
         </iiop-listener>
-        <iiop-listener security-enabled="true" address="0.0.0.0" port="3920" id="SSL_MUTUALAUTH">
+        <iiop-listener security-enabled="true" address="0.0.0.0" port="3921" id="SSL_MUTUALAUTH">
           <ssl classname="com.sun.enterprise.security.ssl.GlassfishSSLImpl" cert-nickname="s1as" client-auth-enabled="true" />
         </iiop-listener>
       </iiop-service>
@@ -225,8 +226,8 @@
           </protocol>
         </protocols>
         <network-listeners>
-          <network-listener port="9080" protocol="http-listener" transport="tcp" name="http-listener" thread-pool="http-thread-pool" enabled="true" />
-          <network-listener port="9081" protocol="https-listener" transport="tcp" name="https-listener" thread-pool="http-thread-pool" enabled="false" />
+          <network-listener port="9081" protocol="http-listener" transport="tcp" name="http-listener" thread-pool="http-thread-pool" enabled="true" />
+          <network-listener port="9082" protocol="https-listener" transport="tcp" name="https-listener" thread-pool="http-thread-pool" enabled="false" />
         </network-listeners>
         <transports>
           <transport name="tcp"></transport>

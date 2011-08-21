@@ -242,9 +242,11 @@ public class DataTableModel<T> implements Serializable {
             this.rows = null;
 
             //Reset selection
-            this.table.setSelection(null);
-            this.table.setRowIndex(-1);
-            this.table.reset();
+            if (this.table != null) {
+                this.table.setSelection(null);
+                this.table.setRowIndex(-1);
+                this.table.reset();
+            }
         } catch (Exception e) {
             this.selected.getResult().failed(e.getMessage());
             FacesUtil.addErrorMessage(e.getMessage());

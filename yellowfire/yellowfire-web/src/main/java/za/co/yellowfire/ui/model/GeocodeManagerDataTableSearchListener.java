@@ -13,17 +13,33 @@ import java.util.List;
  * @author Mark P Ashworth
  * @version 0.0.1
  */
-public abstract class GeocodeManagerDataTableSearchListener implements DataTableSearchListener<GeocodeResult> {
+public class GeocodeManagerDataTableSearchListener implements DataTableSearchListener<GeocodeResult> {
+    private static final long serialVersionUID = 1L;
+    
+    /*Geocode manager*/
+    private GeocodeManager manager;
 
-    public abstract GeocodeManager getManager();
+    public GeocodeManagerDataTableSearchListener(GeocodeManager manager) {
+        this.manager = manager;
+    }
 
+    /**
+     * Returns the Geocode Manager
+     * @return Geocode Manager
+     */
+    public GeocodeManager getManager() { return manager; }
+
+    /**
+     * Fired when the row is searched
+     * @param result The result
+     */
     public void onSearchedRow(GeocodeResult result) {}
 
     /**
      * WARNING: Used by the DataTableModel.onSearch() method and should not be called directly
      * @param event The ActionEvent
      * @param searchText The search text
-     * @return List<DataTableRow<GeocodeResult>>
+     * @return List&lt;DataTableRow&lt;GeocodeResult&gt;&gt;
      * @throws DataTableException If there was an error searching
      */
     @Override

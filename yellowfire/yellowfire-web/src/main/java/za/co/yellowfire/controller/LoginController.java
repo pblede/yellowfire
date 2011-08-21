@@ -8,6 +8,7 @@ import za.co.yellowfire.ui.resources.MessageResources;
 import za.co.yellowfire.ui.security.CurrentUserManager;
 
 import javax.ejb.EJB;
+import javax.enterprise.context.SessionScoped;
 import javax.enterprise.event.Event;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
@@ -16,10 +17,11 @@ import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
 
 /**
+ * TODO CurrentUserManager and LoginController needs to merge
  * @author Mark Ashworth
  * @version 0.0.1
  */
-@ViewScoped
+@SessionScoped
 @Named("loginController")
 public class LoginController extends AbstractController {
 	private static final long serialVersionUID = 1L;
@@ -37,6 +39,7 @@ public class LoginController extends AbstractController {
     /* User manager*/
 	@EJB(name = "UserManager")
 	private UserManager manager;
+
     /* Current User manager*/
     @Inject
     private CurrentUserManager currentUserManager;

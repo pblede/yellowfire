@@ -1,37 +1,37 @@
 package za.co.yellowfire.ui.training;
 
 import org.primefaces.component.datatable.DataTable;
-import org.primefaces.event.SelectEvent;
+import org.primefaces.component.gmap.GMap;
 import org.primefaces.model.map.DefaultMapModel;
 import org.primefaces.model.map.MapModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import za.co.yellowfire.domain.Venue;
+import za.co.yellowfire.domain.converter.GeocodeResultConverter;
 import za.co.yellowfire.domain.geocode.GeocodeManager;
 import za.co.yellowfire.domain.geocode.GeocodeResult;
 import za.co.yellowfire.log.LogType;
 import za.co.yellowfire.manager.DomainManager;
-import za.co.yellowfire.manager.DomainQueryHint;
 import za.co.yellowfire.solarflare.SearchManager;
 import za.co.yellowfire.ui.FacesUtil;
 import za.co.yellowfire.ui.model.*;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.enterprise.context.Conversation;
 import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.text.DecimalFormat;
 import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author Mark P Ashworth
  * @version 0.0.1
  */
-@ViewScoped @Named("venuesController")
+@ViewScoped
+@Named("venuesController")
 public class VenuesController extends AbstractTrainingUIController {
     private static final Logger LOGGER = LoggerFactory.getLogger(LogType.CONTROLLER.getCategory());
 
@@ -41,8 +41,6 @@ public class VenuesController extends AbstractTrainingUIController {
     @EJB(name = "DomainManager")
     private DomainManager manager;
     private transient DataTable dataTable;
-    private List<DataTableRow<Venue>> rows;
-    private DataTableRow<Venue> selectedRow = new DataTableRow<Venue>(new Venue());
 
     /*Venue*/
     private DataTableModel<Venue> dataModel;
@@ -55,6 +53,14 @@ public class VenuesController extends AbstractTrainingUIController {
 
     private String searchText;
 
+    private GMap map;
+
+    @Inject
+    Conversation conversation;
+
+    /**
+     * Constructs the data table and search models for the controller
+     */
     @PostConstruct
     private void init() {
         searchMapModel = new DefaultMapModel();
@@ -63,12 +69,7 @@ public class VenuesController extends AbstractTrainingUIController {
                         /* DataTableListener*/
                         new GeocodeResultDataTableModelListener(manager, searchMapModel),
                         /* DataTableSearchListener*/
-                        new GeocodeManagerDataTableSearchListener() {
-                            @Override
-                            public GeocodeManager getManager() {
-                                return geocodeManager;
-                            }
-                        }
+                        new GeocodeManagerDataTableSearchListener(geocodeManager)
                 );
 
         dataModel =
@@ -76,77 +77,122 @@ public class VenuesController extends AbstractTrainingUIController {
                         /* DataTableListener*/
                         new VenueDataTableModelListener(manager),
                         /* DataTableSearchListener*/
-                        new AbstractSearchManagerDataTableSearchListener<Venue>() {
-                            @Override public SearchManager getManager() { return searchManager; }
-                            @Override public Class getModelClass() { return Venue.class; }
-                        }
+                        new SearchManagerDataTableSearchListener<Venue>(searchManager, Venue.class)
                 );
     }
 
+    /**
+     * Determines if the controller is in a conversation
+     * @return
+     */
+     public boolean isInConversation() {
+        return (conversation != null && !conversation.isTransient());
+    }
 
+    /**
+     * Starts the conversation of editing the course
+     * @return The view to proceed to
+     */
+    public String onStartConversation() {
+        if (conversation.isTransient())
+            conversation.begin();
 
+        if (searchModel.getSelected() == null || searchModel.getSelected().getObject() == null) {
+            FacesUtil.addWarnMessage("No search item selected");
+            return null;
+        }
+
+        getDataModel().setSelected(new DataTableRow<Venue>((Venue) new GeocodeResultConverter().convert(Venue.class, searchModel.getSelected().getObject())));
+        
+        return "venue";
+    }
+
+    /**
+     * Completes the conversation
+     * @return The view to redirect to
+     */
+    public String onCompleteConversation() {
+        if (!conversation.isTransient())
+            conversation.end();
+
+        return "venues?faces-redirect=true";
+    }
+
+    /**
+     * Returns the data table model
+     * @return DataTableModel
+     */
     public DataTableModel<Venue> getDataModel() {
         return dataModel;
     }
 
-
-    @SuppressWarnings("unchecked")
-    public List<DataTableRow<Venue>> getRows() {
-        if (this.rows == null) {
-            List<Venue> venues = (List<Venue>) manager.query(Venue.QRY_VENUES, null, DomainQueryHint.REFRESH);
-            if (venues != null) {
-                this.rows = new ArrayList<DataTableRow<Venue>>(venues.size());
-                for (Venue venue : venues) {
-                    rows.add(new DataTableRow<Venue>(venue));
-                }
-            }
-        }
-        return this.rows;
-    }
-
-    public DataTableRow<Venue> getSelectedRow() {
-        if (selectedRow == null) {
-            this.selectedRow = new DataTableRow<Venue>(new Venue());
-        }
-        return selectedRow;
-    }
-
-    public void setSelectedRow(DataTableRow<Venue> row) {
-        LOGGER.info("setSelectedRow() : " + row);
-
-        if (row != null) {
-            this.selectedRow = row;
-        } else {
-            this.selectedRow = new DataTableRow<Venue>(new Venue());
-        }
-    }
-
+    /**
+     * Returns the search model
+     * @return DataTableModel
+     */
     public DataTableModel<GeocodeResult> getSearchModel() {
         return searchModel;
     }
 
+    /**
+     * Returns the search map model
+     * @return MapModel
+     */
     public MapModel getSearchMapModel() {
         return searchMapModel;
     }
 
+    /**
+     * Returns the search text
+     * @return The search text
+     * @deprecated Should be using SearchDataTableModel.search or DataTableModel.search
+     */
     public String getSearchText() {
         return searchText;
     }
 
+    /**
+     * Sets the search text
+     * @param searchText The search text
+     * @deprecated Should be using SearchDataTableModel.search or DataTableModel.search
+     */
     public void setSearchText(String searchText) {
         this.searchText = searchText;
     }
 
+    /**
+     * Returns the data table model
+     * @return The data table model
+     */
     public DataTable getDataTable() {
         return dataTable;
     }
 
+    /**
+     * Sets the data table model
+     * @param dataTable The new value
+     */
     public void setDataTable(DataTable dataTable) {
         this.dataTable = dataTable;
     }
 
+    /**
+     * The Google Map component instance
+     * @return GMap
+     */
+    public GMap getMap() {
+        return map;
+    }
 
-//    public void onSaveRow(ActionEvent event) throws Exception {
+    /**
+     * The Google Map component instance
+     * @param map GMap
+     */
+    public void setMap(GMap map) {
+        this.map = map;
+    }
+
+    //    public void onSaveRow(ActionEvent event) throws Exception {
 //        LOGGER.debug("onSaveRow() : " + event);
 //
 //        try {
@@ -221,25 +267,27 @@ public class VenuesController extends AbstractTrainingUIController {
 //        context.addCallbackParam("result", this.selectedRow.getResult());
 //    }
 
-    public void onRefreshRows(ActionEvent event) {
-        /* Deselected row */
-        this.selectedRow = new DataTableRow<Venue>(new Venue());
-
-        if (this.dataTable != null) {
-            this.dataTable.setSelection(null);
-            this.dataTable.setRowIndex(-1);
-            this.dataTable.reset();
-        }
-        /* Set the cached rows to null */
-        this.rows = null;
-        /* Refresh the rows */
-        getRows();
-    }
+//    public void onRefreshRows(ActionEvent event) {
+//        /* Deselected row */
+//        this.dataModel.setSelected(new DataTableRow<Venue>(new Venue()));
+//
+//        if (this.dataTable != null) {
+//            this.dataTable.setSelection(null);
+//            this.dataTable.setRowIndex(-1);
+//            this.dataTable.reset();
+//        }
+//        /* Set the cached rows to null */
+//        this.rows = null;
+//        /* Refresh the rows */
+//        getRows();
+//    }
 
     /**
      * This method creates a Venue record from the selected address search record. This is so that an address from
      * the Google search can be converted into a Venue used by the system.
      * @param event The action event
+     * @throws DataTableException If there is a problem perform converting the GeocodeResult to a Venue
+     * @deprecated Using onStartConversation and GeocodeResultConverter
      */
     public void onCreateVenue(ActionEvent event) throws DataTableException {
 
@@ -256,17 +304,20 @@ public class VenuesController extends AbstractTrainingUIController {
                 venue.setGpsLongitude(format.parse(result.getGeometry().getLocation().getLongitude()).doubleValue());
                 venue.setName(result.getFormattedAddress());
 
-                this.selectedRow = new DataTableRow<Venue>(venue);
+                this.dataModel.setSelected(new DataTableRow<Venue>(venue));
             } else {
-                this.selectedRow = new DataTableRow<Venue>(new Venue());
+                this.dataModel.setSelected(new DataTableRow<Venue>(new Venue()));
             }
         } catch (ParseException e) {
             throw new DataTableException("Unable to create venue because GPS coordinates could not be parsed", e);
         }
     }
 
-    public void onLocationSelect(SelectEvent event) {
-        DataTableRow<GeocodeResult> result = (DataTableRow<GeocodeResult>) event.getObject();
-        FacesUtil.addInfoMessage("Location Selected", result.getObject().getFormattedAddress());
+    /**
+     * Fired when a user selects a location to show on the map
+     * @param event The action event
+     */
+    public void onLocationSelect(ActionEvent event) {
+        FacesUtil.addInfoMessage("Location Selected", searchModel.getSelected().getObject().getFormattedAddress());
     }
 }

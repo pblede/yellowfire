@@ -29,10 +29,11 @@
             <h:outputLabel value="#{cc.attrs.passwordLabel}:" for="pwd"/>
             <p:password value="#{cc.attrs.credentialBean.password}" id="pwd" autocomplete="true" feedback="false"  minLength="5" />
             <p:commandButton
-                    value="#{cc.attrs.loginLabel}"
                     id="lfcb1"
                     ajax="false"
-                    action="#{cc.attrs.actionMethod}"/>
+                    value="#{cc.attrs.loginLabel}"
+                    action="#{cc.attrs.actionMethod}"
+                    update="#{cc.attrs.update}"/>
             <h:outputLink
                     value="#{cc.attrs.registerUrl}"
                     id="lfcb2">

@@ -16,6 +16,7 @@ import java.util.Date;
 import java.util.UUID;
 
 /**
+ * TODO Refactor out Club
  * @author Mark P Ashworth
  * @version 0.0.1
  */
