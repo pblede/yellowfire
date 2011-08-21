@@ -248,11 +248,17 @@
             <version>1.5</version>
         </dependency>
         <dependency>
+            <groupId>commons-beanutils</groupId>
+            <artifactId>commons-beanutils</artifactId>
+            <version>1.8.3</version>
+        </dependency>
+        <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
             <version>${hibernate.validator.version}</version>
         </dependency>
-        <dependency>
+        <!--duplicated from yellowfire.pom.xml-->
+        <!--dependency>
             <groupId>javax.xml.bind</groupId>
             <artifactId>jaxb-api</artifactId>
             <version>${jaxb.version}</version>
@@ -261,17 +267,18 @@
             <groupId>com.sun.xml.bind</groupId>
             <artifactId>jaxb-impl</artifactId>
             <version>2.2.2</version>
-        </dependency>
-        <dependency>
+        </dependency-->
+        <!--duplicated from yellowfire.pom.xml-->
+        <!--dependency>
             <groupId>com.sun.jersey</groupId>
             <artifactId>jersey-core</artifactId>
             <version>${jersey.version}</version>
-        </dependency>
-        <dependency>
+        </dependency-->
+        <!--dependency>
             <groupId>joda-time</groupId>
             <artifactId>joda-time</artifactId>
             <version>${joda-time.version}</version>
-        </dependency>
+        </dependency-->
         <dependency>
             <groupId>org.jboss.seam.solder</groupId>
             <artifactId>seam-solder-api</artifactId>
@@ -287,17 +294,18 @@
             <artifactId>seam-international</artifactId>
             <version>${seam.solder.version}</version>
         </dependency>
-        <dependency>
+        <!--dependency>
             <groupId>org.jboss.seam.faces</groupId>
             <artifactId>seam-faces-api</artifactId>
             <version>${seam.faces.version}</version>
-        </dependency>
-        <dependency>
+        </dependency-->
+        <!--duplicated from yellowfire.pom.xml-->
+        <!--dependency>
             <groupId>org.jboss.seam.faces</groupId>
             <artifactId>seam-faces-impl</artifactId>
             <version>${seam.faces.version}</version>
             <scope>runtime</scope>
-        </dependency>
+        </dependency-->
     </dependencies>
     <dependencyManagement>
         <dependencies>

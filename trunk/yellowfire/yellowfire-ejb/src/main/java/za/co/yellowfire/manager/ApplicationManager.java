@@ -6,6 +6,8 @@ import za.co.yellowfire.domain.Venue;
 import za.co.yellowfire.domain.notification.Notification;
 import za.co.yellowfire.log.LogType;
 import za.co.yellowfire.solarflare.SearchManager;
+import za.co.yellowfire.solarflare.annotation.Solr;
+import za.co.yellowfire.solarflare.annotation.Url;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.Asynchronous;
@@ -13,6 +15,7 @@ import javax.ejb.EJB;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
@@ -40,7 +43,7 @@ public class ApplicationManager implements Serializable {
         LOGGER.info("Indexing notifications");
         index(Notification.QRY_NOTIFICATIONS);
     }
-    
+
     @Asynchronous
     public void index(String query) {
         searchManager.onSearchablesAdded ((List<Object>) domainManager.query(query, null, null));
