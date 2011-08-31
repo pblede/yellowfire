@@ -14,7 +14,16 @@ public enum MessageKey {
     dialogResultCalendar("dialog.result.calendar"),
     dialogResultDetails("dialog.result.details"),
     dialogResultRace("dialog.result.race"),
-    dialogResultTraining("dialog.result.training");
+    dialogResultTraining("dialog.result.training"),
+
+    msgUserPasswordIncorrect("msg.user.password.incorrect"),
+    
+    warningUserNotFound("controller.user.not.found"),
+	warningUserNotVerified("controller.user.not.verified"),
+
+    errorUserLogin("controller.user.login.error"),
+	errorUserPersist("controller.user.persist.error"),
+	errorUserRegister("controller.user.register.error");
 
     private String key;
 

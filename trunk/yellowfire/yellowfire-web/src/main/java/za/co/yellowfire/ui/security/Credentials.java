@@ -27,7 +27,7 @@ import java.io.Serializable;
 
 /**
  * @author <a href="mailto:lincolnbaxter@gmail.com">Lincoln Baxter, III</a>
- * @deprecated Using Credential and LoginController login which authenticates using JAAS via the servler container
+ * deprecated Using Credential and LoginController login which authenticates using JAAS via the servler container
  */
 @Named
 @SessionScoped

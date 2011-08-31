@@ -1,1 +1,1 @@
-%GLASSFISH_HOME%\bin\asadmin start-domain yellowfire-domain
+%GLASSFISH_HOME%\bin\asadmin start-domain --debug yellowfire-domain

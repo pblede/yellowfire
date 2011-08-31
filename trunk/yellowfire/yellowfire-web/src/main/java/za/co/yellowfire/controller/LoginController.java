@@ -10,14 +10,12 @@ import za.co.yellowfire.ui.security.CurrentUserManager;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.enterprise.event.Event;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * TODO CurrentUserManager and LoginController needs to merge
  * @author Mark Ashworth
  * @version 0.0.1
  */
@@ -54,6 +52,9 @@ public class LoginController extends AbstractController {
 		invalidateSession();
 	}
 
+    /**
+     * @deprecated Use the CurrentUserManager
+     */
 	public void login() {
         try {
             //Perform programmatic JAAS login
