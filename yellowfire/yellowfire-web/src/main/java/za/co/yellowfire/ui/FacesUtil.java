@@ -94,6 +94,12 @@ public class FacesUtil {
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
 
+    public static void addWarnUserNotFound() {
+        addWarnMessage(
+                MessageResources.MESSAGE(MessageKey.warningUserNotFound),
+                MessageResources.MESSAGE(MessageKey.msgUserPasswordIncorrect));
+    }
+
     /**
      * Adds an global ERROR message. The summary is read from the dialog.error resource key
      * @param detail The detail of the message

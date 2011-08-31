@@ -6,20 +6,26 @@ import za.co.yellowfire.domain.profile.*;
 import za.co.yellowfire.domain.training.TrainingCourse;
 import za.co.yellowfire.log.LogType;
 import za.co.yellowfire.manager.DomainManager;
+import za.co.yellowfire.ui.FacesUtil;
+import za.co.yellowfire.ui.resources.MessageKey;
+import za.co.yellowfire.ui.resources.MessageResources;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateful;
 import javax.enterprise.context.SessionScoped;
+import javax.enterprise.event.Event;
 import javax.enterprise.event.Observes;
 import javax.enterprise.inject.Default;
 import javax.enterprise.inject.Produces;
+import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
 
 /**
  * @author Mark P Ashworth
  * @version 0.0.1
- * @deprecated Using UserSessionController instead
  */
 @Stateful @SessionScoped
 public class CurrentUserManager implements Serializable {
@@ -27,12 +33,26 @@ public class CurrentUserManager implements Serializable {
     private static final Logger LOGGER = LoggerFactory.getLogger(LogType.MANAGER.getCategory());
 
 	private User user = new User();
+    
     private boolean loggedIn = false;
 
+    /* Authentication succeeded */
+	@Inject @Authenticated private Event<User> loginEventSrc;
+    /* Authentication failed */
+    @Inject @AuthenticateFailure private Event<AuthenticationFailure> authenticateFailureEventSrc;
+    /* Logout event */
+    @Inject @Guest private Event<User> logoutEventSrc;
+
+    /*@deprecated: The view now uses Conversion scope*/
     private TrainingCourse course;
 
+    /* Domain manager */
     @EJB(name = "DomainManager")
-	private DomainManager manager;
+	private DomainManager domainManager;
+    
+    /* User manager*/
+	@EJB(name = "UserManager")
+	private UserManager userManager;
 
     /**
      * Produces the current user
@@ -120,4 +140,38 @@ public class CurrentUserManager implements Serializable {
         LOGGER.info("onEditTrainingCourse : " + course);
         this.course = course;
     }
+
+    public void login(Credential credential) {
+        try {
+            //Perform programmatic JAAS login
+            HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+            request.login(credential.getName(), credential.getPassword());
+        } catch (Exception e) {
+            /* Fire the event that the user authentication failed because of the system */
+            FacesUtil.addWarnUserNotFound();
+            this.authenticateFailureEventSrc.fire(
+                    new AuthenticationFailure(
+                            new User(credential.getName(), credential.getPassword()),
+                            AuthenticationFailureType.Credentials));
+            return;
+        }
+
+		try {
+            //Perform a domain login
+			User u = userManager.login(credential);
+			if (u != null) {
+                /* Fire the event that the user has logged in*/
+                this.loginEventSrc.fire(u);
+			} else {
+                /* Fire the event that the user authentication failed */
+                this.authenticateFailureEventSrc.fire(new AuthenticationFailure(u, AuthenticationFailureType.Credentials));
+            }
+		} catch (Exception e) {
+            LOGGER.error("Login failure", e);
+			FacesUtil.addErrorMessage(MessageResources.MESSAGE(MessageKey.errorUserLogin), e);
+
+            /* Fire the event that the user authentication failed */
+            this.authenticateFailureEventSrc.fire(new AuthenticationFailure(new User(credential.getName(), credential.getPassword()), AuthenticationFailureType.System));
+		}
+	}
 }

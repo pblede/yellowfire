@@ -55,10 +55,22 @@
                 </p:panel>
                 <h:panelGrid columns="3" columnClasses="venue_col1,venue_col2" style="width:100%">
                     <p:panel header="#{msgs['dlg.results']}" styleClass="result_panel">
+						<p:contextMenu for="dg1">
+							<p:menuitem value="View" icon="ui-icon ui-icon-search" action="venuesController.onStartConversation">
+								<f:setPropertyActionListener value="#{row}" target="#{venuesController.searchModel.selected}"/>
+                                <f:setPropertyActionListener value="false" target="#{coursesController.dataModel.selected.readonly}"/>
+							</p:menuitem>
+							<p:menuitem value="Delete" action="#{venuesController.onStartConversation}" icon="ui-icon ui-icon-close">
+								<f:setPropertyActionListener value="#{row}" target="#{venuesController.searchModel.selected}"/>
+                                <f:setPropertyActionListener value="false" target="#{coursesController.dataModel.selected.readonly}"/>
+							</p:menuitem>
+						</p:contextMenu>
                         <p:dataTable
                             id="dg1"
                             var="row"
                             widgetVar="dg1Var"
+							selectionMode="single"
+							selection="#{venuesController.searchModel.selected}"
                             value="#{venuesController.searchModel.rows}">
                             <p:column sortBy="#{row.object.formattedAddress}" style="width:80%" headerText="#{msgs['fld.address']}">
                                 <h:outputText value="#{row.object.formattedAddress}"/>

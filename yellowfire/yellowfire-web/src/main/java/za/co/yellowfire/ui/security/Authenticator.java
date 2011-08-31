@@ -39,7 +39,7 @@ import javax.inject.Inject;
  * values of the user's credentials against the database.
  * 
  * @author Dan Allen
- * @deprecated Using LoginController login which authenticates using JAAS via the servler container
+ * deprecated Using LoginController login which authenticates using JAAS via the servler container
  */
 @Stateless
 public class Authenticator {

@@ -7,7 +7,7 @@
       xmlns:c="http://java.sun.com/jsp/jstl/core">
     <f:view>
         <h:head>
-            <title>.::Yellowfire::.</title>
+            <title>#{msgs['application.title']}</title>
             <link rel="shortcut icon" href="#{request.contextPath}/resources/images/favicon.ico" />
             <link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/style/base2.css" media="all"  />
             <link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/style/training.css" media="all"  />
@@ -26,11 +26,11 @@
                     </h1>
                     <div id="dock">
                     	<cc:quickBar
-                            loginMethod="#{loginController.login}"
+                            loginMethod="#{userSession.login}"
                             logoutMethod="#{loginController.logout}"
                             registerUrl="#{request.contextPath}/training/register.jsf"
                             registerMethod="#{loginController.createProfile}"
-                            credentialBean="#{loginController.credential}"
+                            credentialBean="#{userSession.credential}"
                             userBean="#{userSession.user}"
                             bean="#{userSession}"
                             loggedIn="#{userSession.loggedIn}"

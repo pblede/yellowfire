@@ -21,7 +21,7 @@ import java.util.Map;
 /**
  * @author Mark P Ashworth
  * @version 0.0.1
- * @deprecated Using LoginController login which authenticates using JAAS via the servler container
+ * deprecated Using LoginController login which authenticates using JAAS via the servler container
  */
 @SessionScoped
 @Named("userController")
