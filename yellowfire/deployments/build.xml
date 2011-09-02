@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<project default="test">
+<project default="form.backup" name="yellowfire">
 	<property file="properties.txt"/>
 	<property file="properties2.txt"/>
 	<property file="files.properties"/>
@@ -10,6 +10,11 @@
 	<property name="glassfish.port" value="4848" />
 	<property name="application.file" value="../yellowfire-ear/target/yellowfire-0.0.1.ear" />
 	<property name="application.context.root" value="yellowfire" />
+	<property name="mysql.home" value="${env.MYSQL_HOME}" />
+	<property name="mysql.backup.dir" value="./backup" />
+	<property name="sqlserver.home" value="${env.SQLSERVER_HOME}" />
+	
+	<tstamp><format property="DAY_TIME_NOW" pattern="yyyy-MM-dd_HH.mm.ss" /></tstamp>
 	
 	<path id="runtime.cp">
 		<pathelement location="./modules/"/>
@@ -46,6 +51,7 @@
 			<textProperty label="Server   : " property="db.server.name" />
 			<textProperty label="Port     : " property="db.server.port" />
 			<textProperty label="User     : " property="db.server.user" />
+			<textProperty label="Database : " property="db.server.database" />
 			<textProperty label="Password : " property="db.server.pwd" password="true" />
 			<multilineTextProperty label="Properties: " property="db.server.properties"/>
 			<separator/>
@@ -59,6 +65,37 @@
 		</antform>
 	</target>
 
+	<target name="form.backup" description="Yellowfire backup wizard">
+		<antform title="Yellowfire backup wizard" 
+			save="properties.txt"
+			stylesheet="modules/css/style.test"
+			image="modules/images/phoenix-100x78.png"
+			icon="modules/images/fire-icon-64x76.png"
+			lookAndFeel="com.sun.java.swing.plaf.windows.WindowsLookAndFeel"
+			loop="true"
+			>
+			<textProperty label="MySQL Home      : " property="mysql.home" />
+			<textProperty label="SQL Server Home : " property="sqlserver.home" />
+			<separator/>
+			<radioSelectionProperty 
+				label="Database server: " 
+				property="db.server.type" 
+				values="Microsoft SQL Server; MySQL; Oracle" 
+				separator=";"/>
+			<textProperty label="Server   : " property="db.server.name" />
+			<textProperty label="Port     : " property="db.server.port" />
+			<textProperty label="User     : " property="db.server.user" />
+			<textProperty label="Database : " property="db.server.database" />
+			<textProperty label="Password : " property="db.server.pwd" password="true" />
+			<separator/>
+			<buttonbar>
+				<button type="ok" label="Backup" target="db.server.backup"/>
+				<button type="reset" label="Reset" />
+				<button type="cancel" label="Cancel" loopexit="true" />
+			</buttonbar>
+		</antform>
+	</target>
+	
 	<target name="deploy">
 	
 		<antcall target="deploy.application" />
@@ -71,6 +108,52 @@
 	</target>
 		
 	
+	<target name="db.server.backup.type">
+		<condition property="db.server.type.mysql">
+		  <matches pattern="MySQL" string="${db.server.type}"/>
+		</condition>
+		<condition property="db.server.type.sqlserver">
+			<matches pattern="Microsoft SQL Server" string="${db.server.type}" />
+		</condition>
+	</target>
+	
+	<target name="db.server.backup" depends="db.server.backup.type">
+		<antcall target="db.server.backup.mysql" />
+		<antcall target="db.server.backup.sqlserver" />
+	</target>
+	
+	<target name="db.server.backup.sqlserver" if="db.server.type.sqlserver">
+		<echo>SQL Server backup</echo>
+	</target>
+	<target name="db.server.backup.mysql" if="db.server.type.mysql">
+		<echo>MySQL backup</echo>
+		<mkdir dir="${mysql.backup.dir}"/>
+ 
+		<property name="mysql.backup.dir.temp" value="${mysql.backup.dir}/${ant.project.name}_${DAY_TIME_NOW}"/>
+		<mkdir dir="${mysql.backup.dir.temp}"/>
+	 
+		<property name="mysqldump" value="${mysql.home}\bin\mysqldump" />
+		
+		<exec executable="${mysqldump}" output="${mysql.backup.dir}/${ant.project.name}_${DAY_TIME_NOW}.sql">
+		  <arg value="--hex-blob"/>
+		  <arg value="--extended-insert=false"/>
+		  <arg value="--complete-insert=true"/>
+		  <arg value="--user=${db.server.user}"/>
+		  <arg value="--password=${db.server.pwd}"/>
+		  <arg value="${db.server.database}"/>
+		</exec>
+	 
+		<!-- Compress the dumped file(*.sql) -->
+		<tar destfile="${mysql.backup.dir}/${ant.project.name}_${DAY_TIME_NOW}.sql.tar.gz" 
+			  compression="gzip">
+		  <tarfileset dir="${mysql.backup.dir}">
+			<include name="${ant.project.name}_${DAY_TIME_NOW}.sql"/>
+		  </tarfileset>
+		</tar>
+	 
+		<!-- Delete the dumped file(*.sql) -->
+		<delete file="${mysql.backup.dir}/${ant.project.name}_${DAY_TIME_NOW}.sql"/>
+	</target>
 	
 	
 	
