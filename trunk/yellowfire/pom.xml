@@ -139,7 +139,7 @@
         <repository>
 			<id>prime-repo</id>
 			<name>Prime Technology Maven Repository</name>
-			<url>http://repository.prime.com.tr</url>
+			<url>http://repository.primefaces.org</url>
 			<layout>default</layout>
             <releases>
 				<enabled>true</enabled>
@@ -214,7 +214,7 @@
          <dependency>
             <groupId>org.glassfish.extras</groupId>
             <artifactId>glassfish-embedded-all</artifactId>
-            <version>3.1</version>
+            <version>${glassfish.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -374,13 +374,14 @@
     </distributionManagement>
 
     <properties>
-        <seam.faces.version>3.0.2.Final</seam.faces.version>
+        <seam.faces.version>3.0.0.Final</seam.faces.version>
         <seam.solder.version>3.0.0.Final</seam.solder.version>
         <hibernate.validator.version>4.2.0.Beta2</hibernate.validator.version>
-        <jaxb.version>2.2.2</jaxb.version>
+        <jaxb.version>2.2.4</jaxb.version>
         <compass.version>2.3.0</compass.version>
         <jersey.version>1.6</jersey.version>
         <joda-time.version>1.6.2</joda-time.version>
         <eclipselink.version>2.3.0</eclipselink.version>
+        <glassfish.version>3.1.1</glassfish.version>
     </properties>
 </project>
