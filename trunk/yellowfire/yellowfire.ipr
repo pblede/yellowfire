@@ -68,6 +68,8 @@
             <element id="module-output" name="yellowfire-web" />
           </element>
           <element id="directory" name="lib">
+            <element id="library" level="project" name="Maven: commons-logging:commons-logging:1.1.1" />
+            <element id="library" level="project" name="Maven: commons-beanutils:commons-beanutils:1.8.3" />
             <element id="library" level="project" name="Maven: org.slf4j:log4j-over-slf4j:1.6.1" />
             <element id="library" level="project" name="Maven: org.slf4j:jcl-over-slf4j:1.6.1" />
             <element id="library" level="project" name="Maven: org.primefaces:primefaces:3.0.M3-SNAPSHOT" />
@@ -769,15 +771,15 @@
         <root url="jar://$MAVEN_REPOSITORY$/javax/validation/validation-api/1.0.0.GA/validation-api-1.0.0.GA-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Maven: javax.xml.bind:jaxb-api:2.2.2">
+    <library name="Maven: javax.xml.bind:jaxb-api:2.2.4">
       <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/javax/xml/bind/jaxb-api/2.2.2/jaxb-api-2.2.2.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/javax/xml/bind/jaxb-api/2.2.4/jaxb-api-2.2.4.jar!/" />
       </CLASSES>
       <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/javax/xml/bind/jaxb-api/2.2.2/jaxb-api-2.2.2-javadoc.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/javax/xml/bind/jaxb-api/2.2.4/jaxb-api-2.2.4-javadoc.jar!/" />
       </JAVADOC>
       <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/javax/xml/bind/jaxb-api/2.2.2/jaxb-api-2.2.2-sources.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/javax/xml/bind/jaxb-api/2.2.4/jaxb-api-2.2.4-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Maven: javax.xml.stream:stax-api:1.0-2">
@@ -868,26 +870,26 @@
         <root url="jar://$MAVEN_REPOSITORY$/org/apache/httpcomponents/httpcore/4.1/httpcore-4.1-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Maven: org.apache.lucene:lucene-core:3.2.0">
+    <library name="Maven: org.apache.lucene:lucene-core:3.3.0">
       <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/apache/lucene/lucene-core/3.2.0/lucene-core-3.2.0.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/apache/lucene/lucene-core/3.3.0/lucene-core-3.3.0.jar!/" />
       </CLASSES>
       <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/org/apache/lucene/lucene-core/3.2.0/lucene-core-3.2.0-javadoc.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/apache/lucene/lucene-core/3.3.0/lucene-core-3.3.0-javadoc.jar!/" />
       </JAVADOC>
       <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/apache/lucene/lucene-core/3.2.0/lucene-core-3.2.0-sources.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/apache/lucene/lucene-core/3.3.0/lucene-core-3.3.0-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Maven: org.apache.solr:solr-solrj:3.2.0">
+    <library name="Maven: org.apache.solr:solr-solrj:3.3.0">
       <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/apache/solr/solr-solrj/3.2.0/solr-solrj-3.2.0.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/apache/solr/solr-solrj/3.3.0/solr-solrj-3.3.0.jar!/" />
       </CLASSES>
       <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/org/apache/solr/solr-solrj/3.2.0/solr-solrj-3.2.0-javadoc.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/apache/solr/solr-solrj/3.3.0/solr-solrj-3.3.0-javadoc.jar!/" />
       </JAVADOC>
       <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/apache/solr/solr-solrj/3.2.0/solr-solrj-3.2.0-sources.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/apache/solr/solr-solrj/3.3.0/solr-solrj-3.3.0-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Maven: org.apache.zookeeper:zookeeper:3.3.1">
@@ -937,6 +939,17 @@
         <root url="jar://$MAVEN_REPOSITORY$/org/glassfish/extras/glassfish-embedded-all/3.1/glassfish-embedded-all-3.1-sources.jar!/" />
       </SOURCES>
     </library>
+    <library name="Maven: org.glassfish.extras:glassfish-embedded-all:3.1.1">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/glassfish/extras/glassfish-embedded-all/3.1.1/glassfish-embedded-all-3.1.1.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/org/glassfish/extras/glassfish-embedded-all/3.1.1/glassfish-embedded-all-3.1.1-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/glassfish/extras/glassfish-embedded-all/3.1.1/glassfish-embedded-all-3.1.1-sources.jar!/" />
+      </SOURCES>
+    </library>
     <library name="Maven: org.glassfish:javax.servlet:3.0">
       <CLASSES>
         <root url="jar://$MAVEN_REPOSITORY$/org/glassfish/javax.servlet/3.0/javax.servlet-3.0.jar!/" />
@@ -970,17 +983,6 @@
         <root url="jar://$MAVEN_REPOSITORY$/org/jboss/seam/faces/seam-faces-api/3.0.0.Final/seam-faces-api-3.0.0.Final-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Maven: org.jboss.seam.faces:seam-faces-api:3.0.2.Final">
-      <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/jboss/seam/faces/seam-faces-api/3.0.2.Final/seam-faces-api-3.0.2.Final.jar!/" />
-      </CLASSES>
-      <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/org/jboss/seam/faces/seam-faces-api/3.0.2.Final/seam-faces-api-3.0.2.Final-javadoc.jar!/" />
-      </JAVADOC>
-      <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/jboss/seam/faces/seam-faces-api/3.0.2.Final/seam-faces-api-3.0.2.Final-sources.jar!/" />
-      </SOURCES>
-    </library>
     <library name="Maven: org.jboss.seam.faces:seam-faces-impl:3.0.0.Final">
       <CLASSES>
         <root url="jar://$MAVEN_REPOSITORY$/org/jboss/seam/faces/seam-faces-impl/3.0.0.Final/seam-faces-impl-3.0.0.Final.jar!/" />
@@ -990,17 +992,6 @@
       </JAVADOC>
       <SOURCES>
         <root url="jar://$MAVEN_REPOSITORY$/org/jboss/seam/faces/seam-faces-impl/3.0.0.Final/seam-faces-impl-3.0.0.Final-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="Maven: org.jboss.seam.faces:seam-faces-impl:3.0.2.Final">
-      <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/jboss/seam/faces/seam-faces-impl/3.0.2.Final/seam-faces-impl-3.0.2.Final.jar!/" />
-      </CLASSES>
-      <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/org/jboss/seam/faces/seam-faces-impl/3.0.2.Final/seam-faces-impl-3.0.2.Final-javadoc.jar!/" />
-      </JAVADOC>
-      <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/jboss/seam/faces/seam-faces-impl/3.0.2.Final/seam-faces-impl-3.0.2.Final-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Maven: org.jboss.seam.international:seam-international:3.0.0.Final">

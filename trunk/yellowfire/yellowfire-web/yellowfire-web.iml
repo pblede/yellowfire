@@ -38,13 +38,13 @@
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.eclipse.persistence:eclipselink:2.3.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.httpcomponents:httpclient:4.1.1" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.httpcomponents:httpcore:4.1" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: commons-logging:commons-logging:1.1.1" level="project" />
+    <orderEntry type="library" name="Maven: commons-logging:commons-logging:1.1.1" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: commons-codec:commons-codec:1.5" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: za.co.yellowfire:yellowfire-solarflare:0.1-SNAPSHOT" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.slf4j:slf4j-jdk14:1.6.1" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.slf4j:slf4j-api:1.6.1" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.solr:solr-solrj:3.2.0" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.lucene:lucene-core:3.2.0" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.solr:solr-solrj:3.3.0" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.lucene:lucene-core:3.3.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: commons-httpclient:commons-httpclient:3.1" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: commons-io:commons-io:1.4" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.geronimo.specs:geronimo-stax-api_1.0_spec:1.0.1" level="project" />
@@ -58,27 +58,27 @@
     <orderEntry type="library" scope="PROVIDED" name="Maven: stax:stax-api:1.0.1" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: cglib:cglib:2.2.2" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: asm:asm:3.3.1" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: commons-beanutils:commons-beanutils:1.8.3" level="project" />
+    <orderEntry type="library" name="Maven: commons-beanutils:commons-beanutils:1.8.3" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:log4j-over-slf4j:1.6.1" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:jcl-over-slf4j:1.6.1" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: commons-collections:commons-collections:3.2.1" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.hibernate:hibernate-validator:4.2.0.Beta2" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: javax.validation:validation-api:1.0.0.GA" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: javax.xml.bind:jaxb-api:2.2.2" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: javax.xml.stream:stax-api:1.0-2" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: com.sun.xml.bind:jaxb-impl:2.2.2" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: com.sun.jersey:jersey-core:1.6" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: joda-time:joda-time:1.6.2" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.jboss.seam.solder:seam-solder-api:3.0.0.Final" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.jboss.seam.solder:seam-solder:3.0.0.Final" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.jboss.seam.international:seam-international:3.0.0.Final" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.jboss.seam.faces:seam-faces-api:3.0.2.Final" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.jboss.seam.faces:seam-faces-impl:3.0.2.Final" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: javax.xml.bind:jaxb-api:2.2.4" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: javax.xml.stream:stax-api:1.0-2" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: com.sun.xml.bind:jaxb-impl:2.2.2" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: com.sun.jersey:jersey-core:1.6" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.sun.faces:jsf-api:2.1.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.sun.faces:jsf-impl:2.1.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.sun.facelets:jsf-facelets:1.1.15.B1" level="project" />
     <orderEntry type="library" name="Maven: org.primefaces:primefaces:3.0.M3-SNAPSHOT" level="project" />
     <orderEntry type="library" name="Maven: org.primefaces.themes:aristo:1.0.0" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: joda-time:joda-time:1.6.2" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.jboss.seam.faces:seam-faces-api:3.0.0.Final" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.jboss.seam.faces:seam-faces-impl:3.0.0.Final" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: com.sun.jersey.jersey-test-framework:jersey-test-framework-grizzly:1.6" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: com.sun.grizzly:grizzly-servlet-webserver:1.9.31" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: com.sun.grizzly:grizzly-http:1.9.31" level="project" />
@@ -94,7 +94,7 @@
     <orderEntry type="library" scope="TEST" name="Maven: com.sun.jersey:jersey-server:1.6" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: com.sun.jersey:jersey-client:1.6" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: com.sun.jersey:jersey-grizzly:1.6" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.glassfish.extras:glassfish-embedded-all:3.1" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.glassfish.extras:glassfish-embedded-all:3.1.1" level="project" />
   </component>
 </module>
 

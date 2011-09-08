@@ -50,8 +50,8 @@
     <orderEntry type="library" name="Maven: za.co.yellowfire:yellowfire-solarflare:0.1-SNAPSHOT" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-jdk14:1.6.1" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.6.1" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.solr:solr-solrj:3.2.0" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.lucene:lucene-core:3.2.0" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.solr:solr-solrj:3.3.0" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.lucene:lucene-core:3.3.0" level="project" />
     <orderEntry type="library" name="Maven: commons-httpclient:commons-httpclient:3.1" level="project" />
     <orderEntry type="library" name="Maven: commons-io:commons-io:1.4" level="project" />
     <orderEntry type="library" name="Maven: org.apache.geronimo.specs:geronimo-stax-api_1.0_spec:1.0.1" level="project" />
@@ -66,22 +66,15 @@
     <orderEntry type="library" name="Maven: cglib:cglib:2.2.2" level="project" />
     <orderEntry type="library" name="Maven: asm:asm:3.3.1" level="project" />
     <orderEntry type="library" name="Maven: commons-beanutils:commons-beanutils:1.8.3" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.glassfish.extras:glassfish-embedded-all:3.1" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.glassfish.extras:glassfish-embedded-all:3.1.1" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:log4j-over-slf4j:1.6.1" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:jcl-over-slf4j:1.6.1" level="project" />
     <orderEntry type="library" name="Maven: commons-collections:commons-collections:3.2.1" level="project" />
     <orderEntry type="library" name="Maven: org.hibernate:hibernate-validator:4.2.0.Beta2" level="project" />
     <orderEntry type="library" name="Maven: javax.validation:validation-api:1.0.0.GA" level="project" />
-    <orderEntry type="library" name="Maven: javax.xml.bind:jaxb-api:2.2.2" level="project" />
-    <orderEntry type="library" name="Maven: javax.xml.stream:stax-api:1.0-2" level="project" />
-    <orderEntry type="library" name="Maven: com.sun.xml.bind:jaxb-impl:2.2.2" level="project" />
-    <orderEntry type="library" name="Maven: com.sun.jersey:jersey-core:1.6" level="project" />
-    <orderEntry type="library" name="Maven: joda-time:joda-time:1.6.2" level="project" />
     <orderEntry type="library" name="Maven: org.jboss.seam.solder:seam-solder-api:3.0.0.Final" level="project" />
     <orderEntry type="library" name="Maven: org.jboss.seam.solder:seam-solder:3.0.0.Final" level="project" />
     <orderEntry type="library" name="Maven: org.jboss.seam.international:seam-international:3.0.0.Final" level="project" />
-    <orderEntry type="library" name="Maven: org.jboss.seam.faces:seam-faces-api:3.0.0.Final" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Maven: org.jboss.seam.faces:seam-faces-impl:3.0.0.Final" level="project" />
   </component>
 </module>
 
