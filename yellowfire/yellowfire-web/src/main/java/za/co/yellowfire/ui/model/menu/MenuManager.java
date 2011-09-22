@@ -1,8 +1,7 @@
-package za.co.yellowfire.ui.model.menu;
+package za.co.yellowfire.solarflare.web.model.menu;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import za.co.yellowfire.log.LogType;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -19,7 +18,7 @@ import java.net.URL;
  */
 public class MenuManager implements Serializable {
     private static final long serialVersionUID = 1L;
-    private static final Logger LOGGER = LoggerFactory.getLogger(LogType.MANAGER.getCategory());
+    private static final Logger LOGGER = LoggerFactory.getLogger("MenuManager");
 
     /**
      * Reads the menu from a XML file as a resource from the current archive

@@ -1,8 +1,7 @@
-package za.co.yellowfire.ui.model.menu;
+package za.co.yellowfire.solarflare.web.model.menu;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import za.co.yellowfire.log.LogType;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -17,7 +16,7 @@ import java.util.List;
 @XmlRootElement(name="menu")
 public class MenuModel implements Serializable {
     private static final long serialVersionUID = 1L;
-    private static final Logger LOGGER = LoggerFactory.getLogger(LogType.MODEL.getCategory());
+    private static final Logger LOGGER = LoggerFactory.getLogger("MenuModel");
 
     /*The sub menus*/
     @XmlElement(name= "submenu")
