@@ -1,7 +1,6 @@
-package za.co.yellowfire.ui.model.menu;
+package za.co.yellowfire.solarflare.web.model.menu;
 
-import za.co.yellowfire.domain.geocode.GeocodeResult;
-import za.co.yellowfire.ui.resources.MessageResources;
+import za.co.yellowfire.solarflare.web.resources.MessageResources;
 
 import javax.xml.bind.annotation.*;
 import java.io.Serializable;
