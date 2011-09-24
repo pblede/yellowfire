@@ -1,6 +1,6 @@
-package za.co.yellowfire.solarflare.web.model.menu;
+package za.co.yellowfire.ui.model.menu;
 
-import za.co.yellowfire.solarflare.web.resources.MessageResources;
+import za.co.yellowfire.ui.resources.MessageResources;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;

@@ -1,4 +1,4 @@
-package za.co.yellowfire.solarflare.web.model.menu;
+package za.co.yellowfire.ui.model.menu;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

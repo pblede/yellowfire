@@ -29,11 +29,25 @@ import java.net.URL;
   mappedName = "bluefire/session/GeocodeManager",
   description = "Manages the geocode related queries")
 public class GeocodeManagerBean implements GeocodeManager {
+
+    /**
+     * Find the address
+     * @param search The search text representing the address
+     * @return The Geocode response. If an null search text is given then GeocodeStatus.INVALID_REQUEST will be returned.
+     * @throws GeocodeException If there was an exception
+     */
     @Override
-    public GeocodeResponse findAddress(String search) throws Exception {
+    public GeocodeResponse findAddress(String search) throws GeocodeException {
+        if (search == null) return new GeocodeResponse(GeocodeStatus.INVALID_REQUEST);
         return loadRemote(search);
     }
 
+    /**
+     * Loads the Goecode response from the remote server
+     * @param search The search text representing the address
+     * @return The Geocode response. If an null search text is given then GeocodeStatus.INVALID_REQUEST will be returned.
+     * @throws GeocodeException If there was an exception
+     */
     private GeocodeResponse loadRemote(String search) throws GeocodeException {
 
         DefaultHttpClient client = new DefaultHttpClient();

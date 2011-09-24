@@ -19,6 +19,7 @@ import za.co.yellowfire.ui.model.*;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.Conversation;
+import javax.enterprise.context.ConversationScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
@@ -30,7 +31,7 @@ import java.text.ParseException;
  * @author Mark P Ashworth
  * @version 0.0.1
  */
-@ViewScoped
+@ConversationScoped
 @Named("venuesController")
 public class VenuesController extends AbstractTrainingUIController {
     private static final Logger LOGGER = LoggerFactory.getLogger(LogType.CONTROLLER.getCategory());

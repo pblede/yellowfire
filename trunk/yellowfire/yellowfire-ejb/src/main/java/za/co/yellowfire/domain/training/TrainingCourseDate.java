@@ -18,7 +18,7 @@ import java.util.Date;
  */
 @Entity(name = "TrainingCourseDate")
 @Access(AccessType.FIELD)
-@Table(name = "course_date", schema = "trn")
+@Table(name = "course_date", schema = "cde")
 @NamedQueries({
         @NamedQuery(
             name="qry.training.course_dates",
