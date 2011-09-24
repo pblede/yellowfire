@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlAttribute;
  */
 @Entity(name = "SkillArea")
 @Access(AccessType.FIELD)
-@Table(name = "skill_area", schema = "trn")
+@Table(name = "skill_area", schema = "cde")
 @Cacheable(true)
 @NamedQueries({
         @NamedQuery(

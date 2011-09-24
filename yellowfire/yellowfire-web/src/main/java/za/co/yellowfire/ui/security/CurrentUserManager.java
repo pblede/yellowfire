@@ -105,7 +105,7 @@ public class CurrentUserManager implements Serializable {
      * Triggered when the user authenticates
      * @param user The user authentication detail
      */
-	public void onLogin(@Observes @Authenticated User user) {
+	public void onLogin(User user) {
 		LOGGER.info("onLogin : " + user);
 		this.user = user;
         this.loggedIn = true;
@@ -115,7 +115,7 @@ public class CurrentUserManager implements Serializable {
      * Triggered when the user logs out
      * @param user The user authentication detail
      */
-    public void onLogout(@Observes @Guest User user) {
+    protected void onLogout(User user) {
 		LOGGER.info("onLogout : " + user);
 		this.user = new User();
         this.loggedIn = false;
@@ -125,7 +125,7 @@ public class CurrentUserManager implements Serializable {
      * Triggered when the user authentication fails
      * @param failure The user authentication failure detail
      */
-    public void onAuthenticationFailure(@Observes @AuthenticateFailure AuthenticationFailure failure) {
+    protected void onAuthenticationFailure(AuthenticationFailure failure) {
         LOGGER.info("onAuthenticationFailure : " + failure.getType() + ":" + failure.getUser());
         this.user = new User();
         this.loggedIn = false;
@@ -162,9 +162,13 @@ public class CurrentUserManager implements Serializable {
 			if (u != null) {
                 /* Fire the event that the user has logged in*/
                 this.loginEventSrc.fire(u);
+                /* Manually register that the user has logged in*/
+                onLogin(u);
 			} else {
                 /* Fire the event that the user authentication failed */
                 this.authenticateFailureEventSrc.fire(new AuthenticationFailure(u, AuthenticationFailureType.Credentials));
+                /* Manually register that the user authentication failed */
+                this.onAuthenticationFailure(new AuthenticationFailure(u, AuthenticationFailureType.Credentials));
             }
 		} catch (Exception e) {
             LOGGER.error("Login failure", e);
@@ -172,6 +176,8 @@ public class CurrentUserManager implements Serializable {
 
             /* Fire the event that the user authentication failed */
             this.authenticateFailureEventSrc.fire(new AuthenticationFailure(new User(credential.getName(), credential.getPassword()), AuthenticationFailureType.System));
+            /* Manually regsiter that the user authentication failed */
+            this.onAuthenticationFailure(new AuthenticationFailure(new User(credential.getName(), credential.getPassword()), AuthenticationFailureType.System));
 		}
 	}
 }
