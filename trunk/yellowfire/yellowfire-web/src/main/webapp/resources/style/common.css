@@ -37,3 +37,5 @@ h1.logo a { background: url('../images/logo.png') no-repeat 10%; }
 .width5pc {width:5%}
 
 .archived {color: #fefefe; }
+
+.search { font-size: 3em; }
