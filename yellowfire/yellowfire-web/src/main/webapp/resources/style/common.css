@@ -38,4 +38,8 @@ h1.logo a { background: url('../images/logo.png') no-repeat 10%; }
 
 .archived {color: #fefefe; }
 
-.search { font-size: 3em; }
+.search { font-size: 2em; }
+
+.ui-button-text-only .ui-button-text {
+    padding: 0.1em 0.4em;
+}
