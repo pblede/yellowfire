@@ -348,7 +348,9 @@
  *
  * http://docs.jquery.com/UI/Autocomplete#theming
  */
-.ui-autocomplete { position: absolute; cursor: default; }	
+/** 2011-11-08 : MarkA : Removed because it is causing an issue with 3.0RC1
+.ui-autocomplete { position: absolute; cursor: default; }
+**/
 
 /* workarounds */
 * html .ui-autocomplete { width:1px; } /* without this, the menu expands to 100% in IE6 */
