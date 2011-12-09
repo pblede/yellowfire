@@ -23,7 +23,7 @@
 <composite:implementation>
 	<table>
 	<tr><td>
-		<form id="sec" method="post" action="j_security_check" >
+		<h:form id="sec" method="post" action="j_security_check" >
 	        <h:panelGrid columns="6">
 	            <h:outputLabel value="#{cc.attrs.userLabel}:" />
 	            <input type="text" name="j_username" id="userid" />
@@ -32,7 +32,7 @@
 	            <input type="submit" value="#{cc.attrs.loginLabel}" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" />
 	            <input type="button" value="#{cc.attrs.registerLabel}" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" onclick="window.location = '#{facesContext.externalContext.requestContextPath}/pages/register.jsf';" />
 	        </h:panelGrid>
-	    </form>
+	    </h:form>
 	</td></tr>
 	</table>
 </composite:implementation>
