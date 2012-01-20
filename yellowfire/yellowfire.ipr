@@ -32,7 +32,7 @@
     </artifact>
     <artifact type="war" name="yellowfire-web:war">
       <output-path>$PROJECT_DIR$/yellowfire-web/target</output-path>
-      <root id="archive" name="yellowfire-web.war">
+      <root id="archive" name="yellowfire.war">
         <element id="artifact" artifact-name="yellowfire-web:war exploded" />
       </root>
     </artifact>
@@ -68,12 +68,40 @@
             <element id="module-output" name="yellowfire-web" />
           </element>
           <element id="directory" name="lib">
+            <element id="library" level="project" name="Maven: javax.activation:activation:1.1" />
+            <element id="library" level="project" name="Maven: za.co.yellowfire:yellowfire-solarflare:0.1-SNAPSHOT" />
+            <element id="library" level="project" name="Maven: org.slf4j:slf4j-jdk14:1.6.1" />
+            <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.6.1" />
+            <element id="library" level="project" name="Maven: org.apache.solr:solr-solrj:3.4.0" />
+            <element id="library" level="project" name="Maven: org.apache.lucene:lucene-core:3.4.0" />
+            <element id="library" level="project" name="Maven: commons-httpclient:commons-httpclient:3.1" />
             <element id="library" level="project" name="Maven: commons-logging:commons-logging:1.1.1" />
+            <element id="library" level="project" name="Maven: commons-codec:commons-codec:1.5" />
+            <element id="library" level="project" name="Maven: commons-io:commons-io:1.4" />
+            <element id="library" level="project" name="Maven: org.apache.geronimo.specs:geronimo-stax-api_1.0_spec:1.0.1" />
+            <element id="library" level="project" name="Maven: org.apache.zookeeper:zookeeper:3.3.1" />
+            <element id="library" level="project" name="Maven: log4j:log4j:1.2.15" />
+            <element id="library" level="project" name="Maven: javax.mail:mail:1.4.4" />
+            <element id="library" level="project" name="Maven: jline:jline:0.9.94" />
+            <element id="library" level="project" name="Maven: org.codehaus.woodstox:wstx-asl:3.2.7" />
+            <element id="library" level="project" name="Maven: stax:stax-api:1.0.1" />
+            <element id="library" level="project" name="Maven: cglib:cglib:2.2.2" />
+            <element id="library" level="project" name="Maven: asm:asm:3.3.1" />
             <element id="library" level="project" name="Maven: commons-beanutils:commons-beanutils:1.8.3" />
+            <element id="library" level="project" name="Maven: org.primefaces:primefaces:3.0" />
+            <element id="library" level="project" name="Maven: org.primefaces.themes:smoothness:1.0.2" />
+            <element id="library" level="project" name="Maven: joda-time:joda-time:1.6.2" />
+            <element id="library" level="project" name="Maven: org.apache.httpcomponents:httpclient:4.1.1" />
+            <element id="library" level="project" name="Maven: org.apache.httpcomponents:httpcore:4.1" />
             <element id="library" level="project" name="Maven: org.slf4j:log4j-over-slf4j:1.6.1" />
             <element id="library" level="project" name="Maven: org.slf4j:jcl-over-slf4j:1.6.1" />
-            <element id="library" level="project" name="Maven: org.primefaces:primefaces:3.0.M3-SNAPSHOT" />
-            <element id="library" level="project" name="Maven: org.primefaces.themes:aristo:1.0.0" />
+            <element id="library" level="project" name="Maven: commons-collections:commons-collections:3.2.1" />
+            <element id="library" level="project" name="Maven: org.hibernate:hibernate-validator:4.2.0.Beta2" />
+            <element id="library" level="project" name="Maven: javax.validation:validation-api:1.0.0.GA" />
+            <element id="library" level="project" name="Maven: org.jboss.solder:solder-impl:3.1.0.Final" />
+            <element id="library" level="project" name="Maven: org.jboss.solder:solder-api:3.1.0.Final" />
+            <element id="library" level="project" name="Maven: org.jboss.solder:solder-logging:3.1.0.Final" />
+            <element id="library" level="project" name="Maven: org.jboss.logging:jboss-logging:3.0.1.GA" />
           </element>
         </element>
       </root>
@@ -120,16 +148,43 @@
   </component>
   <component name="FacetAutodetectingManager">
     <autodetection-disabled>
+      <facet-type id="ejb">
+        <modules>
+          <module name="yellowfire-ejb">
+            <files>
+              <file url="file://$PROJECT_DIR$/yellowfire-ejb/src/main/resources/META-INF/ejb-jar.xml" />
+            </files>
+          </module>
+        </modules>
+      </facet-type>
       <facet-type id="javaeeApplication">
         <modules>
           <module name="ear" />
           <module name="yellowfire-ear" />
         </modules>
       </facet-type>
+      <facet-type id="jpa">
+        <modules>
+          <module name="yellowfire-ejb">
+            <files>
+              <file url="file://$PROJECT_DIR$/yellowfire-ejb/src/main/resources/META-INF/persistence.xml" />
+            </files>
+          </module>
+        </modules>
+      </facet-type>
       <facet-type id="web">
         <modules>
           <module name="yellowfire-web" />
           <module name="yellowfire4" />
+        </modules>
+      </facet-type>
+      <facet-type id="WebBeans">
+        <modules>
+          <module name="yellowfire-ejb">
+            <files>
+              <file url="file://$PROJECT_DIR$/yellowfire-ejb/src/main/resources/META-INF/beans.xml" />
+            </files>
+          </module>
         </modules>
       </facet-type>
     </autodetection-disabled>
@@ -330,7 +385,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/yellowfire.iml" filepath="$PROJECT_DIR$/yellowfire.iml" />
-      <module fileurl="file://$PROJECT_DIR$/yellowfire-ear/yellowfire-ear.iml" filepath="$PROJECT_DIR$/yellowfire-ear/yellowfire-ear.iml" />
       <module fileurl="file://$PROJECT_DIR$/yellowfire-ejb/yellowfire-ejb.iml" filepath="$PROJECT_DIR$/yellowfire-ejb/yellowfire-ejb.iml" />
       <module fileurl="file://$PROJECT_DIR$/yellowfire-web/yellowfire-web.iml" filepath="$PROJECT_DIR$/yellowfire-web/yellowfire-web.iml" />
     </modules>
@@ -439,17 +493,6 @@
       </JAVADOC>
       <SOURCES>
         <root url="jar://$MAVEN_REPOSITORY$/cglib/cglib/2.2.2/cglib-2.2.2-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="Maven: com.microsoft.sqlserver:sqljdbc4:3.0">
-      <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/com/microsoft/sqlserver/sqljdbc4/3.0/sqljdbc4-3.0.jar!/" />
-      </CLASSES>
-      <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/com/microsoft/sqlserver/sqljdbc4/3.0/sqljdbc4-3.0-javadoc.jar!/" />
-      </JAVADOC>
-      <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/com/microsoft/sqlserver/sqljdbc4/3.0/sqljdbc4-3.0-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Maven: com.sun.facelets:jsf-facelets:1.1.15.B1">
@@ -727,26 +770,15 @@
         <root url="jar://$MAVEN_REPOSITORY$/javax/activation/activation/1.1/activation-1.1-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Maven: javax.activation:activation:1.1.1">
+    <library name="Maven: javax.mail:mail:1.4.4">
       <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/javax/activation/activation/1.1.1/activation-1.1.1.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/javax/mail/mail/1.4.4/mail-1.4.4.jar!/" />
       </CLASSES>
       <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/javax/activation/activation/1.1.1/activation-1.1.1-javadoc.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/javax/mail/mail/1.4.4/mail-1.4.4-javadoc.jar!/" />
       </JAVADOC>
       <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/javax/activation/activation/1.1.1/activation-1.1.1-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="Maven: javax.mail:mail:1.4">
-      <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/javax/mail/mail/1.4/mail-1.4.jar!/" />
-      </CLASSES>
-      <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/javax/mail/mail/1.4/mail-1.4-javadoc.jar!/" />
-      </JAVADOC>
-      <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/javax/mail/mail/1.4/mail-1.4-sources.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/javax/mail/mail/1.4.4/mail-1.4.4-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Maven: javax.servlet:servlet-api:2.5">
@@ -870,26 +902,26 @@
         <root url="jar://$MAVEN_REPOSITORY$/org/apache/httpcomponents/httpcore/4.1/httpcore-4.1-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Maven: org.apache.lucene:lucene-core:3.3.0">
+    <library name="Maven: org.apache.lucene:lucene-core:3.4.0">
       <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/apache/lucene/lucene-core/3.3.0/lucene-core-3.3.0.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/apache/lucene/lucene-core/3.4.0/lucene-core-3.4.0.jar!/" />
       </CLASSES>
       <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/org/apache/lucene/lucene-core/3.3.0/lucene-core-3.3.0-javadoc.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/apache/lucene/lucene-core/3.4.0/lucene-core-3.4.0-javadoc.jar!/" />
       </JAVADOC>
       <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/apache/lucene/lucene-core/3.3.0/lucene-core-3.3.0-sources.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/apache/lucene/lucene-core/3.4.0/lucene-core-3.4.0-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Maven: org.apache.solr:solr-solrj:3.3.0">
+    <library name="Maven: org.apache.solr:solr-solrj:3.4.0">
       <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/apache/solr/solr-solrj/3.3.0/solr-solrj-3.3.0.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/apache/solr/solr-solrj/3.4.0/solr-solrj-3.4.0.jar!/" />
       </CLASSES>
       <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/org/apache/solr/solr-solrj/3.3.0/solr-solrj-3.3.0-javadoc.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/apache/solr/solr-solrj/3.4.0/solr-solrj-3.4.0-javadoc.jar!/" />
       </JAVADOC>
       <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/apache/solr/solr-solrj/3.3.0/solr-solrj-3.3.0-sources.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/apache/solr/solr-solrj/3.4.0/solr-solrj-3.4.0-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Maven: org.apache.zookeeper:zookeeper:3.3.1">
@@ -912,17 +944,6 @@
       </JAVADOC>
       <SOURCES>
         <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/woodstox/wstx-asl/3.2.7/wstx-asl-3.2.7-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="Maven: org.eclipse.persistence:eclipselink:2.3.0">
-      <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/eclipse/persistence/eclipselink/2.3.0/eclipselink-2.3.0.jar!/" />
-      </CLASSES>
-      <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/org/eclipse/persistence/eclipselink/2.3.0/eclipselink-2.3.0-javadoc.jar!/" />
-      </JAVADOC>
-      <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/eclipse/persistence/eclipselink/2.3.0/eclipselink-2.3.0-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Maven: org.glassfish.extras:glassfish-embedded-all:3.1">
@@ -972,81 +993,70 @@
         <root url="jar://$MAVEN_REPOSITORY$/org/hibernate/hibernate-validator/4.2.0.Beta2/hibernate-validator-4.2.0.Beta2-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Maven: org.jboss.seam.faces:seam-faces-api:3.0.0.Final">
+    <library name="Maven: org.jboss.logging:jboss-logging:3.0.1.GA">
       <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/jboss/seam/faces/seam-faces-api/3.0.0.Final/seam-faces-api-3.0.0.Final.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/jboss/logging/jboss-logging/3.0.1.GA/jboss-logging-3.0.1.GA.jar!/" />
       </CLASSES>
       <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/org/jboss/seam/faces/seam-faces-api/3.0.0.Final/seam-faces-api-3.0.0.Final-javadoc.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/jboss/logging/jboss-logging/3.0.1.GA/jboss-logging-3.0.1.GA-javadoc.jar!/" />
       </JAVADOC>
       <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/jboss/seam/faces/seam-faces-api/3.0.0.Final/seam-faces-api-3.0.0.Final-sources.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/jboss/logging/jboss-logging/3.0.1.GA/jboss-logging-3.0.1.GA-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Maven: org.jboss.seam.faces:seam-faces-impl:3.0.0.Final">
+    <library name="Maven: org.jboss.solder:solder-api:3.1.0.Final">
       <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/jboss/seam/faces/seam-faces-impl/3.0.0.Final/seam-faces-impl-3.0.0.Final.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/jboss/solder/solder-api/3.1.0.Final/solder-api-3.1.0.Final.jar!/" />
       </CLASSES>
       <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/org/jboss/seam/faces/seam-faces-impl/3.0.0.Final/seam-faces-impl-3.0.0.Final-javadoc.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/jboss/solder/solder-api/3.1.0.Final/solder-api-3.1.0.Final-javadoc.jar!/" />
       </JAVADOC>
       <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/jboss/seam/faces/seam-faces-impl/3.0.0.Final/seam-faces-impl-3.0.0.Final-sources.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/jboss/solder/solder-api/3.1.0.Final/solder-api-3.1.0.Final-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Maven: org.jboss.seam.international:seam-international:3.0.0.Final">
+    <library name="Maven: org.jboss.solder:solder-impl:3.1.0.Final">
       <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/jboss/seam/international/seam-international/3.0.0.Final/seam-international-3.0.0.Final.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/jboss/solder/solder-impl/3.1.0.Final/solder-impl-3.1.0.Final.jar!/" />
       </CLASSES>
       <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/org/jboss/seam/international/seam-international/3.0.0.Final/seam-international-3.0.0.Final-javadoc.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/jboss/solder/solder-impl/3.1.0.Final/solder-impl-3.1.0.Final-javadoc.jar!/" />
       </JAVADOC>
       <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/jboss/seam/international/seam-international/3.0.0.Final/seam-international-3.0.0.Final-sources.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/jboss/solder/solder-impl/3.1.0.Final/solder-impl-3.1.0.Final-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Maven: org.jboss.seam.solder:seam-solder-api:3.0.0.Final">
+    <library name="Maven: org.jboss.solder:solder-logging:3.1.0.Final">
       <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/jboss/seam/solder/seam-solder-api/3.0.0.Final/seam-solder-api-3.0.0.Final.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/jboss/solder/solder-logging/3.1.0.Final/solder-logging-3.1.0.Final.jar!/" />
       </CLASSES>
       <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/org/jboss/seam/solder/seam-solder-api/3.0.0.Final/seam-solder-api-3.0.0.Final-javadoc.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/jboss/solder/solder-logging/3.1.0.Final/solder-logging-3.1.0.Final-javadoc.jar!/" />
       </JAVADOC>
       <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/jboss/seam/solder/seam-solder-api/3.0.0.Final/seam-solder-api-3.0.0.Final-sources.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/jboss/solder/solder-logging/3.1.0.Final/solder-logging-3.1.0.Final-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Maven: org.jboss.seam.solder:seam-solder:3.0.0.Final">
+    <library name="Maven: org.primefaces.themes:smoothness:1.0.2">
       <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/jboss/seam/solder/seam-solder/3.0.0.Final/seam-solder-3.0.0.Final.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/primefaces/themes/smoothness/1.0.2/smoothness-1.0.2.jar!/" />
       </CLASSES>
       <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/org/jboss/seam/solder/seam-solder/3.0.0.Final/seam-solder-3.0.0.Final-javadoc.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/primefaces/themes/smoothness/1.0.2/smoothness-1.0.2-javadoc.jar!/" />
       </JAVADOC>
       <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/jboss/seam/solder/seam-solder/3.0.0.Final/seam-solder-3.0.0.Final-sources.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/primefaces/themes/smoothness/1.0.2/smoothness-1.0.2-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Maven: org.primefaces.themes:aristo:1.0.0">
+    <library name="Maven: org.primefaces:primefaces:3.0">
       <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/primefaces/themes/aristo/1.0.0/aristo-1.0.0.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/primefaces/primefaces/3.0/primefaces-3.0.jar!/" />
       </CLASSES>
       <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/org/primefaces/themes/aristo/1.0.0/aristo-1.0.0-javadoc.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/primefaces/primefaces/3.0/primefaces-3.0-javadoc.jar!/" />
       </JAVADOC>
       <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/primefaces/themes/aristo/1.0.0/aristo-1.0.0-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="Maven: org.primefaces:primefaces:3.0.M3-SNAPSHOT">
-      <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/primefaces/primefaces/3.0.M3-SNAPSHOT/primefaces-3.0.M3-SNAPSHOT.jar!/" />
-      </CLASSES>
-      <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/org/primefaces/primefaces/3.0.M3-SNAPSHOT/primefaces-3.0.M3-SNAPSHOT-javadoc.jar!/" />
-      </JAVADOC>
-      <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/primefaces/primefaces/3.0.M3-SNAPSHOT/primefaces-3.0.M3-SNAPSHOT-sources.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/primefaces/primefaces/3.0/primefaces-3.0-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Maven: org.slf4j:jcl-over-slf4j:1.6.1">
@@ -1102,6 +1112,19 @@
       </JAVADOC>
       <SOURCES>
         <root url="jar://$MAVEN_REPOSITORY$/stax/stax-api/1.0.1/stax-api-1.0.1-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: yellowfire:yellowfire-ejb:0.0.1">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/yellowfire/yellowfire-ejb/0.0.1/yellowfire-ejb-0.0.1.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$PROJECT_DIR$/yellowfire-ejb/pom-javadoc.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/yellowfire/yellowfire-ejb/0.0.1/yellowfire-ejb-0.0.1-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$PROJECT_DIR$/yellowfire-ejb/pom-sources.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/yellowfire/yellowfire-ejb/0.0.1/yellowfire-ejb-0.0.1-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Maven: za.co.yellowfire:yellowfire-solarflare:0.1-SNAPSHOT">
