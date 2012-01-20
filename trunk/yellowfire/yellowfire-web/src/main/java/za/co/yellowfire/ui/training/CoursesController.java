@@ -8,7 +8,6 @@ import za.co.yellowfire.domain.profile.SystemManager;
 import za.co.yellowfire.domain.training.*;
 import za.co.yellowfire.log.LogType;
 import za.co.yellowfire.manager.DomainManager;
-import za.co.yellowfire.ui.UILogger;
 import za.co.yellowfire.ui.model.AbstractDomainManagerDataTableListener;
 import za.co.yellowfire.ui.model.DataTableModel;
 
@@ -38,9 +37,9 @@ public class CoursesController extends AbstractTrainingUIController {
     private DomainManager manager;
     private DataTableModel<TrainingCourse> dataModel;
 
-    @Inject
-    @org.jboss.seam.solder.logging.Category("courses")
-    private UILogger logger;
+    //@Inject
+    //@org.jboss.seam.solder.logging.Category("courses")
+    //private UILogger logger;
 
     private String timezone;
     private List<DurationType> durationTypes = Arrays.asList(DurationType.Days, DurationType.Hours);
