@@ -5,237 +5,30 @@
     <version>0.0.1</version>
     <packaging>pom</packaging>
     <name>yellowfire</name>
+
     <modules>
-        <module>yellowfire-ear</module>
-        <module>yellowfire-ejb</module>
+        <!--<module>yellowfire-ear</module>-->
+        <!--<module>yellowfire-ejb</module>-->
         <module>yellowfire-web</module>
     </modules>
-    <build>
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-site-plugin</artifactId>
-                    <!--configuration>
-                       <unzipCommand>/usr/bin/unzip -o > err.txt</unzipCommand>
-                    </configuration-->
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <version>2.0.2</version>
-                    <configuration>
-                        <source>1.6</source>
-                        <target>1.6</target>
-                    </configuration>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-war-plugin</artifactId>
-                    <version>2.1.1</version>
-                    <!--configuration>
-                        <failOnMissingWebXml>false</failOnMissingWebXml>
-                        <webXml>src/main/webapp/WEB-INF/web.xml</webXml>
-                    </configuration-->
-                </plugin>
-                <plugin>
-                    <groupId>org.codehaus.cargo</groupId>
-                    <artifactId>cargo-maven2-plugin</artifactId>
-                    <version>1.0.6</version>
-                    <configuration>
-
-                        <!-- Container configuration -->
-                        <container>
-                            <containerId>glassfish3x</containerId>
-                            <home>C:\SDE\glassfish31rc1\glassfish</home>
-                        </container>
-
-                        <!-- Configuration to use with the container -->
-                        <configuration>
-                            <type>standalone</type>
-                            <properties>
-                                <cargo.remote.username>admin</cargo.remote.username>
-                                <cargo.remote.password>adminadmin</cargo.remote.password>
-                                <cargo.glassfish.domain.name>domain1</cargo.glassfish.domain.name>
-                            </properties>
-                        </configuration>
-
-                        <!-- Deployer configuration -->
-                        <deployer>
-                            <type>installed</type>
-                            <deployables>
-                                <deployable>
-                                    <groupId>yellowfire</groupId>
-                                    <artifactId>yellowfire-ear</artifactId>
-                                    <type>ear</type>
-                                    <!--properties>
-                                        <context>/vms</context>
-                                    </properties-->
-                                </deployable>
-                            </deployables>
-                        </deployer>
-                    </configuration>
-                </plugin>
-                <!--plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>exec-maven-plugin</artifactId>
-                    <executions>
-                        <execution>
-                            <goals>
-                                <goal>exec</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                    <configuration>
-                        <executable>C:/SDE/glassfish31rc1/bin/asadmin</executable>
-                        <arguments>
-                            <argument>deploy</argument>
-                            <argument>user=admin</argument>
-                            <argumentd>password=admiadmin</argument>
-                            <argument>host=localhost</argument>
-                            <argument>port=4848</argument>
-                            <argument>yellowfire-ear/target/${project.artifactId}-${project.version}.${project.packaging}</argument>
-                        </arguments>
-                    </configuration>
-                </plugin-->
-				<plugin>
-					<artifactId>maven-remote-resources-plugin</artifactId>
-					<version>1.1</version>
-					<executions>
-					   <execution>
-						  <id>attach-license</id>
-						  <goals>
-							 <goal>process</goal>
-						  </goals>
-						  <inherited>true</inherited>
-						  <configuration>
-							 <resourceBundles>
-								<resourceBundle>za.co.yellowfire:yellowfire-license:1</resourceBundle>
-							 </resourceBundles>
-						  </configuration>
-					   </execution>
-					</executions>
-				 </plugin>
-            </plugins>
-        </pluginManagement>
-    </build>
-
-<repositories>
-		<repository>
-			<id>jboss-public-repository-group</id>
-			<name>JBoss Public Repository Group</name>
-			<url>http://repository.jboss.org/nexus/content/groups/public/</url>
-			<layout>default</layout>
-            <releases>
-				<enabled>true</enabled>
-				<updatePolicy>never</updatePolicy>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-				<updatePolicy>never</updatePolicy>
-			</snapshots>
-		</repository>
-
-        <repository>
-			<id>prime-repo</id>
-			<name>Prime Technology Maven Repository</name>
-			<url>http://repository.primefaces.org</url>
-			<layout>default</layout>
-            <releases>
-				<enabled>true</enabled>
-				<updatePolicy>never</updatePolicy>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-				<updatePolicy>never</updatePolicy>
-			</snapshots>
-		</repository>
-
-        <repository>
-            <id>EclipseLink Repo</id>
-            <url>http://ftp.saix.net/Eclipse/rt/eclipselink/maven.repo/</url>
-           <snapshots>
-              <enabled>true</enabled>
-           </snapshots>
-        </repository>
-
-        <repository>
-			<id>codehaus-snapshots</id>
-			<url>http://ci.repository.codehaus.org/</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository>
-	</repositories>
-
-    <pluginRepositories>
-        <pluginRepository>
-            <id>glassfish-repo-archive</id>
-            <name>Glassfish Repository</name>
-            <url>http://download.java.net/maven/glassfish/</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </pluginRepository>
-        <pluginRepository>
-            <id>codehaus snapshot repository</id>
-            <url>http://snapshots.repository.codehaus.org/</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-        </pluginRepository>
-        <pluginRepository>
-            <id>jboss-public-repository-group</id>
-            <name>JBoss Public Repository Group</name>
-            <url>http://repository.jboss.org/nexus/content/groups/public/</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </pluginRepository>
-        
-    </pluginRepositories>
 
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.8.2</version>
             <scope>test</scope>
-        </dependency>
-         <dependency>
-            <groupId>org.glassfish.extras</groupId>
-            <artifactId>glassfish-embedded-all</artifactId>
-            <version>${glassfish.version}</version>
-            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>1.6.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-jdk14</artifactId>
-            <version>1.6.1</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>log4j-over-slf4j</artifactId>
-            <version>1.6.1</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>jcl-over-slf4j</artifactId>
-            <version>1.6.1</version>
         </dependency>
         <dependency>
             <groupId>commons-collections</groupId>
@@ -280,19 +73,8 @@
             <version>${joda-time.version}</version>
         </dependency-->
         <dependency>
-            <groupId>org.jboss.seam.solder</groupId>
-            <artifactId>seam-solder-api</artifactId>
-            <version>${seam.solder.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.jboss.seam.solder</groupId>
-            <artifactId>seam-solder</artifactId>
-            <version>${seam.solder.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.jboss.seam.international</groupId>
-            <artifactId>seam-international</artifactId>
-            <version>${seam.solder.version}</version>
+            <groupId>org.jboss.solder</groupId>
+            <artifactId>solder-impl</artifactId>
         </dependency>
         <!--dependency>
             <groupId>org.jboss.seam.faces</groupId>
@@ -309,17 +91,22 @@
     </dependencies>
     <dependencyManagement>
         <dependencies>
+            <!--<dependency>-->
+                <!--<groupId>yellowfire</groupId>-->
+                <!--<artifactId>yellowfire-ear</artifactId>-->
+                <!--<version>0.0.1</version>-->
+                <!--<type>ear</type>-->
+            <!--</dependency>-->
+            <!--<dependency>-->
+                <!--<groupId>yellowfire</groupId>-->
+                <!--<artifactId>yellowfire-ejb</artifactId>-->
+                <!--<version>0.0.1</version>-->
+                <!--<type>ejb</type>-->
+            <!--</dependency>-->
             <dependency>
-                <groupId>yellowfire</groupId>
-                <artifactId>yellowfire-ear</artifactId>
-                <version>0.0.1</version>
-                <type>ear</type>
-            </dependency>
-            <dependency>
-                <groupId>yellowfire</groupId>
-                <artifactId>yellowfire-ejb</artifactId>
-                <version>0.0.1</version>
-                <type>ejb</type>
+                <groupId>za.co.yellowfire</groupId>
+                <artifactId>yellowfire-solarflare</artifactId>
+                <version>0.1-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>yellowfire</groupId>
@@ -335,12 +122,57 @@
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-api</artifactId>
-                <version>1.6.1</version>
+                <version>${slf4j.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-jdk14</artifactId>
-                <version>1.6.1</version>
+                <version>${slf4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>log4j-over-slf4j</artifactId>
+                <version>${slf4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>jcl-over-slf4j</artifactId>
+                <version>${slf4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>joda-time</groupId>
+                <artifactId>joda-time</artifactId>
+                <version>${joda-time.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-collections</groupId>
+                <artifactId>commons-collections</artifactId>
+                <version>${commons.collections.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-codec</groupId>
+                <artifactId>commons-codec</artifactId>
+                <version>${commons.codec.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-beanutils</groupId>
+                <artifactId>commons-beanutils</artifactId>
+                <version>${commons.beanutils.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpclient</artifactId>
+                <version>${httpcomponents.httpclient.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpcore</artifactId>
+                <version>${httpcomponents.httpcore.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-validator</artifactId>
+                <version>${hibernate.validator.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.sun.xml.bind</groupId>
@@ -348,23 +180,326 @@
                 <version>${jaxb.version}</version>
             </dependency>
             <dependency>
-                <groupId>commons-codec</groupId>
-                <artifactId>commons-codec</artifactId>
-                <version>1.5</version>
+                <groupId>org.jboss.seam</groupId>
+                <artifactId>seam-bom</artifactId>
+                <version>${seam.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
             </dependency>
             <dependency>
-                <groupId>org.apache.httpcomponents</groupId>
-                <artifactId>httpclient</artifactId>
-                <version>4.1.1</version>
+                <groupId>org.glassfish.extras</groupId>
+                <artifactId>glassfish-embedded-all</artifactId>
+                <version>${glassfish.version}</version>
+                <scope>provided</scope>
             </dependency>
+            <!-- TEST -->
             <dependency>
-                <groupId>org.apache.httpcomponents</groupId>
-                <artifactId>httpcore</artifactId>
-                <version>4.1</version>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.version}</version>
+                <scope>test</scope>
             </dependency>
-            
         </dependencies>
     </dependencyManagement>
+
+    <profiles>
+        <profile>
+            <id>glassfish-3.1.1</id>
+            <activation>
+                <!--<activeByDefault>true</activeByDefault>-->
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>org.glassfish.extras</groupId>
+                    <artifactId>glassfish-embedded-all</artifactId>
+                    <version>${glassfish.version}</version>
+                    <scope>provided</scope>
+                </dependency>
+                <dependency>
+                    <groupId>org.jboss.logging</groupId>
+                    <artifactId>jboss-logging</artifactId>
+                </dependency>
+                <dependency>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-jdk14</artifactId>
+                    <!--<version>1.6.1</version>-->
+                </dependency>
+            </dependencies>
+            <dependencyManagement>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.jboss.logging</groupId>
+                        <artifactId>jboss-logging</artifactId>
+                        <version>3.0.1.GA</version>
+                    </dependency>
+                </dependencies>
+            </dependencyManagement>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-war-plugin</artifactId>
+                        <configuration>
+                            <webResources>
+                                <resource>
+                                    <directory>src/main/resources-glassfish</directory>
+                                </resource>
+                            </webResources>
+                            <filteringDeploymentDescriptors>true</filteringDeploymentDescriptors>
+                            <filters>
+                                <filter>${basedir}/src/main/filter/${webapp.filter}.properties</filter>
+                            </filters>
+                            <warName>yellowfire</warName>
+                         </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>jboss-7.1</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>org.glassfish.extras</groupId>
+                    <artifactId>glassfish-embedded-all</artifactId>
+                </dependency>
+                <!--<dependency>-->
+                    <!--<groupId>org.hibernate</groupId>-->
+                    <!--<artifactId>hibernate-core</artifactId>-->
+                <!--</dependency>-->
+                <!--<dependency>-->
+                    <!--<groupId>org.hibernate.javax.persistence</groupId>-->
+                    <!--<artifactId>hibernate-jpa-2.0-api</artifactId>-->
+                <!--</dependency>-->
+                <dependency>
+                    <groupId>org.jboss.logging</groupId>
+                    <artifactId>jboss-logging</artifactId>
+                </dependency>
+                <dependency>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-jdk14</artifactId>
+                </dependency>
+            </dependencies>
+            <dependencyManagement>
+                <dependencies>
+                    <!--<dependency>-->
+                        <!--<groupId>org.hibernate</groupId>-->
+                        <!--<artifactId>hibernate-core</artifactId>-->
+                        <!--<version>4.0.1.Final</version>-->
+                    <!--</dependency>-->
+                    <!--<dependency>-->
+                        <!--<groupId>org.hibernate.javax.persistence</groupId>-->
+                        <!--<artifactId>hibernate-jpa-2.0-api</artifactId>-->
+                        <!--<version>1.0.1.Final</version>-->
+                    <!--</dependency>-->
+                    <dependency>
+                        <groupId>org.jboss.logging</groupId>
+                        <artifactId>jboss-logging</artifactId>
+                        <version>3.0.1.GA</version>
+                    </dependency>
+                </dependencies>
+            </dependencyManagement>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-war-plugin</artifactId>
+                        <configuration>
+                            <webResources>
+                                <resource>
+                                    <directory>src/main/resources-jboss</directory>
+                                </resource>
+                            </webResources>
+                            <filteringDeploymentDescriptors>true</filteringDeploymentDescriptors>
+                            <filters>
+                                <filter>${basedir}/src/main/filter/${webapp.filter}.properties</filter>
+                            </filters>
+                            <warName>yellowfire</warName>
+                         </configuration>
+                    </plugin>
+                    <!--<plugin>-->
+                        <!--<groupId>org.apache.maven.plugins</groupId>-->
+                        <!--<artifactId>maven-jar-plugin</artifactId>-->
+                        <!--<version>${maven.jar.version}</version>-->
+                        <!--<configuration>-->
+                            <!--<archive>-->
+                                <!--<index>true</index>-->
+                                <!--<manifest>-->
+                                    <!--<addClasspath>true</addClasspath>-->
+                                <!--</manifest>-->
+                                <!--<manifestEntries>-->
+                                    <!--<mode>development</mode>-->
+                                    <!--<url>${project.url}</url>-->
+                                    <!--<key>value</key>-->
+                                <!--</manifestEntries>-->
+                            <!--</archive>-->
+                        <!--</configuration>-->
+                    <!--</plugin>-->
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>weblogic-12.1.1</id>
+            <activation>
+                <!--<activeByDefault>true</activeByDefault>-->
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>org.glassfish.extras</groupId>
+                    <artifactId>glassfish-embedded-all</artifactId>
+                    <version>${glassfish.version}</version>
+                    <scope>provided</scope>
+                </dependency>
+                <dependency>
+                    <groupId>org.jboss.logging</groupId>
+                    <artifactId>jboss-logging</artifactId>
+                </dependency>
+            </dependencies>
+            <dependencyManagement>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.jboss.logging</groupId>
+                        <artifactId>jboss-logging</artifactId>
+                        <version>3.0.1.GA</version>
+                    </dependency>
+                </dependencies>
+            </dependencyManagement>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-war-plugin</artifactId>
+                        <configuration>
+                            <webResources>
+                                <resource>
+                                    <directory>src/main/resources-weblogic</directory>
+                                </resource>
+                            </webResources>
+                            <filteringDeploymentDescriptors>true</filteringDeploymentDescriptors>
+                            <filters>
+                                <filter>${basedir}/src/main/filter/${webapp.filter}.properties</filter>
+                            </filters>
+                            <warName>yellowfire</warName>
+                         </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+    <build>
+            <pluginManagement>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-site-plugin</artifactId>
+                        <!--configuration>
+                           <unzipCommand>/usr/bin/unzip -o > err.txt</unzipCommand>
+                        </configuration-->
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-compiler-plugin</artifactId>
+                        <version>2.0.2</version>
+                        <configuration>
+                            <source>1.6</source>
+                            <target>1.6</target>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-war-plugin</artifactId>
+                        <version>2.1.1</version>
+                        <!--configuration>
+                            <failOnMissingWebXml>false</failOnMissingWebXml>
+                            <webXml>src/main/webapp/WEB-INF/web.xml</webXml>
+                        </configuration-->
+                    </plugin>
+                    <plugin>
+                        <groupId>org.codehaus.cargo</groupId>
+                        <artifactId>cargo-maven2-plugin</artifactId>
+                        <version>1.0.6</version>
+                        <configuration>
+
+                            <!-- Container configuration -->
+                            <container>
+                                <containerId>glassfish3x</containerId>
+                                <home>C:\SDE\glassfish31rc1\glassfish</home>
+                            </container>
+
+                            <!-- Configuration to use with the container -->
+                            <configuration>
+                                <type>standalone</type>
+                                <properties>
+                                    <cargo.remote.username>admin</cargo.remote.username>
+                                    <cargo.remote.password>adminadmin</cargo.remote.password>
+                                    <cargo.glassfish.domain.name>domain1</cargo.glassfish.domain.name>
+                                </properties>
+                            </configuration>
+
+                            <!-- Deployer configuration -->
+                            <deployer>
+                                <type>installed</type>
+                                <deployables>
+                                    <deployable>
+                                        <groupId>yellowfire</groupId>
+                                        <artifactId>yellowfire-ear</artifactId>
+                                        <type>ear</type>
+                                        <!--properties>
+                                            <context>/vms</context>
+                                        </properties-->
+                                    </deployable>
+                                </deployables>
+                            </deployer>
+                        </configuration>
+                    </plugin>
+                    <!--plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <executable>C:/SDE/glassfish31rc1/bin/asadmin</executable>
+                            <arguments>
+                                <argument>deploy</argument>
+                                <argument>user=admin</argument>
+                                <argumentd>password=admiadmin</argument>
+                                <argument>host=localhost</argument>
+                                <argument>port=4848</argument>
+                                <argument>yellowfire-ear/target/${project.artifactId}-${project.version}.${project.packaging}</argument>
+                            </arguments>
+                        </configuration>
+                    </plugin-->
+                    <plugin>
+                        <artifactId>maven-remote-resources-plugin</artifactId>
+                        <version>1.1</version>
+                        <executions>
+                           <execution>
+                              <id>attach-license</id>
+                              <goals>
+                                 <goal>process</goal>
+                              </goals>
+                              <inherited>true</inherited>
+                              <configuration>
+                                 <resourceBundles>
+                                    <resourceBundle>za.co.yellowfire:yellowfire-license:1</resourceBundle>
+                                 </resourceBundles>
+                              </configuration>
+                           </execution>
+                        </executions>
+                     </plugin>
+                </plugins>
+            </pluginManagement>
+        </build>
+
+
+
     <distributionManagement>
         <site>
             <id>site</id>
@@ -374,14 +509,30 @@
     </distributionManagement>
 
     <properties>
-        <seam.faces.version>3.0.0.Final</seam.faces.version>
-        <seam.solder.version>3.0.0.Final</seam.solder.version>
-        <hibernate.validator.version>4.2.0.Beta2</hibernate.validator.version>
+        <webapp.filter>development</webapp.filter>
+
+        <seam.version>3.1.0.Final</seam.version>
+
         <jaxb.version>2.2.4</jaxb.version>
         <compass.version>2.3.0</compass.version>
         <jersey.version>1.6</jersey.version>
         <joda-time.version>1.6.2</joda-time.version>
+
         <eclipselink.version>2.3.0</eclipselink.version>
+        <hibernate.version>4.0.1.Final</hibernate.version>
+        <hibernate.validator.version>4.2.0.Beta2</hibernate.validator.version>
+
+        <slf4j.version>1.6.1</slf4j.version>
+        <junit.version>4.8.2</junit.version>
+        <commons.codec.version>1.5</commons.codec.version>
+        <commons.collections.version>3.2.1</commons.collections.version>
+        <commons.beanutils.version>1.8.3</commons.beanutils.version>
+        <httpcomponents.httpclient.version>4.1.1</httpcomponents.httpclient.version>
+        <httpcomponents.httpcore.version>4.1</httpcomponents.httpcore.version>
+
+
         <glassfish.version>3.1.1</glassfish.version>
+
+        <maven.jar.version>2.3.2</maven.jar.version>
     </properties>
 </project>
