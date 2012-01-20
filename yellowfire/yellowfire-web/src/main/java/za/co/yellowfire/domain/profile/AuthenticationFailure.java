@@ -9,16 +9,16 @@ import java.io.Serializable;
 public class AuthenticationFailure implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private User user;
+    private Credential credential;
     private AuthenticationFailureType type;
 
-    public AuthenticationFailure(User user, AuthenticationFailureType type) {
-        this.user = user;
+    public AuthenticationFailure(Credential credential, AuthenticationFailureType type) {
+        this.credential = credential;
         this.type = type;
     }
 
-    public User getUser() {
-        return user;
+    public Credential getCredential() {
+        return credential;
     }
 
     public AuthenticationFailureType getType() {

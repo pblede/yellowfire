@@ -126,7 +126,7 @@ public class CurrentUserManager implements Serializable {
      * @param failure The user authentication failure detail
      */
     protected void onAuthenticationFailure(AuthenticationFailure failure) {
-        LOGGER.info("onAuthenticationFailure : " + failure.getType() + ":" + failure.getUser());
+        LOGGER.info("onAuthenticationFailure : " + failure.getType() + ":" + failure.getCredential());
         this.user = new User();
         this.loggedIn = false;
     }
@@ -166,18 +166,18 @@ public class CurrentUserManager implements Serializable {
                 onLogin(u);
 			} else {
                 /* Fire the event that the user authentication failed */
-                this.authenticateFailureEventSrc.fire(new AuthenticationFailure(u, AuthenticationFailureType.Credentials));
+                this.authenticateFailureEventSrc.fire(new AuthenticationFailure(credential, AuthenticationFailureType.Credentials));
                 /* Manually register that the user authentication failed */
-                this.onAuthenticationFailure(new AuthenticationFailure(u, AuthenticationFailureType.Credentials));
+                this.onAuthenticationFailure(new AuthenticationFailure(credential, AuthenticationFailureType.Credentials));
             }
 		} catch (Exception e) {
             LOGGER.error("Login failure", e);
 			FacesUtil.addErrorMessage(MessageResources.MESSAGE(MessageKey.errorUserLogin), e);
 
             /* Fire the event that the user authentication failed */
-            this.authenticateFailureEventSrc.fire(new AuthenticationFailure(new User(credential.getName(), credential.getPassword()), AuthenticationFailureType.System));
+            this.authenticateFailureEventSrc.fire(new AuthenticationFailure(credential, AuthenticationFailureType.System));
             /* Manually regsiter that the user authentication failed */
-            this.onAuthenticationFailure(new AuthenticationFailure(new User(credential.getName(), credential.getPassword()), AuthenticationFailureType.System));
+            this.onAuthenticationFailure(new AuthenticationFailure(credential, AuthenticationFailureType.System));
 		}
 	}
 }

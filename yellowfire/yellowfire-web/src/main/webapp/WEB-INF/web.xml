@@ -77,9 +77,9 @@
 		<param-value>_</param-value>
 	</context-param>
 	-->
-	<listener>
-		<listener-class>com.sun.faces.config.ConfigureListener</listener-class>
-	</listener>
+	<!--<listener>-->
+		<!--<listener-class>com.sun.faces.config.ConfigureListener</listener-class>-->
+	<!--</listener>-->
 	<welcome-file-list>
 		<welcome-file>index.jsf</welcome-file>
 	</welcome-file-list>
@@ -173,6 +173,7 @@
         <res-ref-name>yellowfire/queue/solr</res-ref-name>
         <mapped-name>java:/yellowfire/queue/solr</mapped-name>
     </resource-ref>
+    
     <login-config>
         <auth-method>BASIC</auth-method>
         <realm-name>jdbcRealm</realm-name>

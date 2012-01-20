@@ -22,11 +22,11 @@ import javax.jms.*;
 public class BackgroundEventSender {
     private static final Logger LOGGER = LoggerFactory.getLogger(LogType.MANAGER.getCategory());
 
-    @Resource(mappedName= Naming.CF_JNDI)
+    @Resource(mappedName= Naming.CF_JNDI_ENC)
     private ConnectionFactory connectionFactory;
     @Resource(mappedName=Naming.QUEUE_NOTIFICATION_JNDI)
     private Queue notifyEventQueue;
-    @Resource(mappedName=Naming.QUEUE_SOLR_JNDI)
+    @Resource(mappedName=Naming.QUEUE_SOLR_JNDI_ENC)
     private Queue solrEventQueue;
 
     private Connection connection;
