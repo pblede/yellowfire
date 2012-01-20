@@ -142,19 +142,19 @@ public class CurrentUserManager implements Serializable {
     }
 
     public void login(Credential credential) {
-        try {
-            //Perform programmatic JAAS login
-            HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
-            request.login(credential.getName(), credential.getPassword());
-        } catch (Exception e) {
-            /* Fire the event that the user authentication failed because of the system */
-            FacesUtil.addWarnUserNotFound();
-            this.authenticateFailureEventSrc.fire(
-                    new AuthenticationFailure(
-                            new User(credential.getName(), credential.getPassword()),
-                            AuthenticationFailureType.Credentials));
-            return;
-        }
+//        try {
+//            //Perform programmatic JAAS login
+//            HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+//            request.login(credential.getName(), credential.getPassword());
+//        } catch (Exception e) {
+//            /* Fire the event that the user authentication failed because of the system */
+//            FacesUtil.addWarnUserNotFound();
+//            this.authenticateFailureEventSrc.fire(
+//                    new AuthenticationFailure(
+//                            new User(credential.getName(), credential.getPassword()),
+//                            AuthenticationFailureType.Credentials));
+//            return;
+//        }
 
 		try {
             //Perform a domain login
