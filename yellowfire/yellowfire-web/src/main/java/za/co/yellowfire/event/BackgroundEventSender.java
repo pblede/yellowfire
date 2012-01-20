@@ -2,6 +2,7 @@ package za.co.yellowfire.event;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import za.co.yellowfire.Naming;
 import za.co.yellowfire.domain.DomainEntity;
 import za.co.yellowfire.domain.notification.Notification;
 import za.co.yellowfire.log.LogType;
@@ -21,11 +22,11 @@ import javax.jms.*;
 public class BackgroundEventSender {
     private static final Logger LOGGER = LoggerFactory.getLogger(LogType.MANAGER.getCategory());
 
-    @Resource(mappedName="yellowfire.jms.cf")
+    @Resource(mappedName= Naming.CF_JNDI)
     private ConnectionFactory connectionFactory;
-    @Resource(mappedName="yellowfire.jms.queue.notification")
+    @Resource(mappedName=Naming.QUEUE_NOTIFICATION_JNDI)
     private Queue notifyEventQueue;
-    @Resource(mappedName="yellowfire.jms.queue.solr")
+    @Resource(mappedName=Naming.QUEUE_SOLR_JNDI)
     private Queue solrEventQueue;
 
     private Connection connection;
