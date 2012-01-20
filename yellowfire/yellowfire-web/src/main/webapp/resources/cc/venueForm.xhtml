@@ -1,0 +1,61 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:comp="http://java.sun.com/jsf/composite"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xml:lang="en" lang="en">
+<comp:interface>
+    <comp:attribute name="bean" required="true" shortDescription="The bean for the form" />
+    <comp:attribute name="readonly" required="false" default="true" type="java.lang.Boolean" shortDescription="Whether the data is editable" />
+</comp:interface>
+<comp:implementation>
+    <h:panelGrid columns="2">
+        <h:outputText value="#{msgs['fld.id']}:"/>
+        <h:panelGroup style="width:100%">
+            <h:outputText value="#{cc.attrs.bean.id}" style="width:100%"/>
+        </h:panelGroup>
+
+        <h:outputLabel value="#{msgs['fld.name']}:" for="a01"/>
+        <h:panelGroup>
+            <h:panelGrid columns="2">
+                <h:inputText
+                        id="a01"
+                        size="55"
+                        required="true"
+                        label="#{msgs['fld.name']}"
+                        value="#{cc.attrs.bean.name}"/>
+                <p:message for="a01" showSummary="false" showDetail="false" display="icon" />
+            </h:panelGrid>
+        </h:panelGroup>
+
+        <h:outputLabel value="#{msgs['fld.gps']}:" for="a02"/>
+        <h:panelGroup>
+            <h:panelGrid columns="2">
+                <h:inputText
+                        id="a02"
+                        size="22"
+                        required="false"
+                        label="#{msgs['fld.longitude']}"
+                        value="#{cc.attrs.bean.gpsLongitude}"/>
+                <h:inputText
+                        id="a03"
+                        size="22"
+                        required="false"
+                        label="#{msgs['fld.latitude']}"
+                        value="#{cc.attrs.bean.gpsLatitude}"/>
+            </h:panelGrid>
+        </h:panelGroup>
+
+        <h:outputLabel value="#{msgs['fld.address']}:" for="a04"/>
+        <h:panelGroup>
+            <h:inputTextarea
+                    id="a04"
+                    rows="6" cols="50"
+                    required="false"
+                    label="#{msgs['fld.address']}"
+                    value="#{cc.attrs.bean.address}"/>
+        </h:panelGroup>
+    </h:panelGrid>
+</comp:implementation>
+</html>
