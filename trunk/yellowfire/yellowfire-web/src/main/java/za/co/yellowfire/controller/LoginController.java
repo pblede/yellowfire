@@ -63,7 +63,7 @@ public class LoginController extends AbstractController {
         } catch (Exception e) {
             /* Fire the event that the user authentication failed because of the system */
 			addWarnMessage(MessageResources.WARNING_USER_NOT_FOUND, "The username or password is incorrect.");
-            this.authenticateFailureEventSrc.fire(new AuthenticationFailure(new User(getCredential().getName(), getCredential().getPassword()), AuthenticationFailureType.Credentials));
+            this.authenticateFailureEventSrc.fire(new AuthenticationFailure(credential, AuthenticationFailureType.Credentials));
             return;
         }
 
@@ -75,14 +75,14 @@ public class LoginController extends AbstractController {
                 this.loginEventSrc.fire(u);
 			} else {
                 /* Fire the event that the user authentication failed */
-                this.authenticateFailureEventSrc.fire(new AuthenticationFailure(u, AuthenticationFailureType.Credentials));
+                this.authenticateFailureEventSrc.fire(new AuthenticationFailure(credential, AuthenticationFailureType.Credentials));
             }
 		} catch (Exception e) {
             LOGGER.error(NAME + ".login() : ", e);
 			addErrorMessage(MessageResources.ERROR_USER_LOGIN, e);
 
             /* Fire the event that the user authentication failed */
-            this.authenticateFailureEventSrc.fire(new AuthenticationFailure(new User(getCredential().getName(), getCredential().getPassword()), AuthenticationFailureType.System));
+            this.authenticateFailureEventSrc.fire(new AuthenticationFailure(credential, AuthenticationFailureType.System));
 		}
 	}
 
