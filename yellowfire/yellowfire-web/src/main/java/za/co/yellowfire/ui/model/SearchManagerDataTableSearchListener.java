@@ -1,9 +1,10 @@
 package za.co.yellowfire.ui.model;
 
 import za.co.yellowfire.solarflare.SearchManager;
+import za.co.yellowfire.solarflare.SearchQuery;
+import za.co.yellowfire.solarflare.SearchResult;
 
 import javax.faces.event.ActionEvent;
-import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,9 +58,11 @@ public class SearchManagerDataTableSearchListener<T> implements DataTableSearchL
 
         List<DataTableRow<T>> rows = new ArrayList<DataTableRow<T>>(0);
 
-        List<Object> results = getManager().search(getModelClass(), searchText);
-        for (Object result : results) {
-            rows.add(new DataTableRow<T>((T) result, 1.0f));
+        SearchResult results = getManager().search(new SearchQuery(getModelClass(), searchText));
+        if (results != null) {
+            for (Object result : results.getResults()) {
+                rows.add(new DataTableRow<T>((T) result, 1.0f));
+            }
         }
         return rows;
     }
