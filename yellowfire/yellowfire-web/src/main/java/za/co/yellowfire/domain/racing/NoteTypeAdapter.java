@@ -1,4 +1,4 @@
-package za.co.yellowfire.jaxb;
+package za.co.yellowfire.domain.racing;
 
 import za.co.yellowfire.domain.racing.NoteType;
 
