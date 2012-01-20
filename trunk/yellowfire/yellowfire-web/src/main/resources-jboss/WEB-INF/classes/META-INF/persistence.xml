@@ -5,8 +5,7 @@
         <!--<provider>org.hibernate.ejb.HibernatePersistence</provider>-->
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
         <!--Note: Use the following for global scoped data sources -->
-        <jta-data-source>yellowfire.ds</jta-data-source>
-        <mapping-file>META-INF/eclipselink-orm.xml</mapping-file>
+        <jta-data-source>java:/yellowfire/ds</jta-data-source>
         <class>za.co.yellowfire.domain.profile.UserProperty</class>
         <class>za.co.yellowfire.domain.profile.User</class>
         <class>za.co.yellowfire.domain.result.Result</class>

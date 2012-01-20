@@ -1,23 +1,20 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <parent>
         <groupId>za.co.yellowfire</groupId>
         <artifactId>yellowfire</artifactId>
         <version>0.0.1</version>
     </parent>
+
     <groupId>yellowfire</groupId>
     <artifactId>yellowfire-web</artifactId>
     <packaging>war</packaging>
     <name>yellowfire-web</name>
     <url>http://maven.apache.org</url>
+
     <dependencies>
-        <dependency>
-            <groupId>yellowfire</groupId>
-            <artifactId>yellowfire-ejb</artifactId>
-            <version>0.0.1</version>
-            <scope>provided</scope>
-        </dependency>
         <dependency>
             <groupId>javax.xml.bind</groupId>
             <artifactId>jaxb-api</artifactId>
@@ -55,39 +52,38 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>org.primefaces</groupId>
-            <artifactId>primefaces</artifactId>
-            <version>${primefaces.version}</version>
+            <groupId>za.co.yellowfire</groupId>
+            <artifactId>yellowfire-solarflare</artifactId>
         </dependency>
         <dependency>
-            <!-- For primefaces theme http://www.primefaces.org/themes.html -->
-            <groupId>org.primefaces.themes</groupId>
-            <artifactId>aristo</artifactId>
-            <version>1.0.0</version>
+            <groupId>org.primefaces</groupId>
+            <artifactId>primefaces</artifactId>
         </dependency>
-        <!--dependency>
-            <groupId>org.glassfish.deployment</groupId>
-            <artifactId>deployment-client</artifactId>
-            <version>3.0.1</version>
-            <scope>provided</scope>
-        </dependency-->
+        <dependency>
+            <groupId>org.primefaces.themes</groupId>
+            <artifactId>${primefaces.theme}</artifactId>
+        </dependency>
         <dependency>
             <groupId>joda-time</groupId>
             <artifactId>joda-time</artifactId>
-            <version>${joda-time.version}</version>
-            <scope>provided</scope>
         </dependency>
+        <!-- Still linking to old JBoss Solder which is causing an ObservationException
         <dependency>
             <groupId>org.jboss.seam.faces</groupId>
             <artifactId>seam-faces-api</artifactId>
-            <version>${seam.faces.version}</version>
-            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.jboss.seam.faces</groupId>
             <artifactId>seam-faces-impl</artifactId>
-            <version>${seam.faces.version}</version>
-            <scope>provided</scope>
+        </dependency>
+        -->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpcore</artifactId>
         </dependency>
         <dependency>
             <groupId>com.sun.jersey.jersey-test-framework</groupId>
@@ -99,59 +95,70 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-api</artifactId>
-                <version>1.6.1</version>
-                <scope>provided</scope>
+                <groupId>org.primefaces</groupId>
+                <artifactId>primefaces</artifactId>
+                <version>${primefaces.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-jdk14</artifactId>
-                <version>1.6.1</version>
-                <scope>provided</scope>
+                <groupId>org.primefaces.themes</groupId>
+                <artifactId>${primefaces.theme}</artifactId>
+                <version>${primefaces.theme.version}</version>
             </dependency>
-            <dependency>
-                <groupId>commons-collections</groupId>
-                <artifactId>commons-collections</artifactId>
-                <version>3.2.1</version>
-                <scope>provided</scope>
-            </dependency>
-            <dependency>
-                <groupId>commons-codec</groupId>
-                <artifactId>commons-codec</artifactId>
-                <version>1.5</version>
-                <scope>provided</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.hibernate</groupId>
-                <artifactId>hibernate-validator</artifactId>
-                <version>${hibernate.validator.version}</version>
-                <scope>provided</scope>
-            </dependency>
-            <dependency>
-                <groupId>javax.activation</groupId>
-                <artifactId>activation</artifactId>
-                <version>1.1.1</version>
-                <scope>provided</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.jboss.seam.solder</groupId>
-                <artifactId>seam-solder-api</artifactId>
-                <version>${seam.faces.version}</version>
-                <scope>provided</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.jboss.seam.solder</groupId>
-                <artifactId>seam-solder</artifactId>
-                <version>${seam.faces.version}</version>
-                <scope>provided</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.jboss.seam.international</groupId>
-                <artifactId>seam-international</artifactId>
-                <version>${seam.faces.version}</version>
-                <scope>provided</scope>
-            </dependency>
+
+            <!--<dependency>-->
+                <!--<groupId>org.slf4j</groupId>-->
+                <!--<artifactId>slf4j-api</artifactId>-->
+                <!--<version>1.6.1</version>-->
+                <!--<scope>provided</scope>-->
+            <!--</dependency>-->
+            <!--<dependency>-->
+                <!--<groupId>org.slf4j</groupId>-->
+                <!--<artifactId>slf4j-jdk14</artifactId>-->
+                <!--<version>1.6.1</version>-->
+                <!--<scope>provided</scope>-->
+            <!--</dependency>-->
+            <!--<dependency>-->
+                <!--<groupId>commons-collections</groupId>-->
+                <!--<artifactId>commons-collections</artifactId>-->
+                <!--<version>3.2.1</version>-->
+                <!--<scope>provided</scope>-->
+            <!--</dependency>-->
+            <!--<dependency>-->
+                <!--<groupId>commons-codec</groupId>-->
+                <!--<artifactId>commons-codec</artifactId>-->
+                <!--<version>1.5</version>-->
+                <!--<scope>provided</scope>-->
+            <!--</dependency>-->
+            <!--<dependency>-->
+                <!--<groupId>org.hibernate</groupId>-->
+                <!--<artifactId>hibernate-validator</artifactId>-->
+                <!--<version>${hibernate.validator.version}</version>-->
+                <!--<scope>provided</scope>-->
+            <!--</dependency>-->
+            <!--<dependency>-->
+                <!--<groupId>javax.activation</groupId>-->
+                <!--<artifactId>activation</artifactId>-->
+                <!--<version>1.1.1</version>-->
+                <!--<scope>provided</scope>-->
+            <!--</dependency>-->
+            <!--<dependency>-->
+                <!--<groupId>org.jboss.seam.solder</groupId>-->
+                <!--<artifactId>seam-solder-api</artifactId>-->
+                <!--<version>${seam.faces.version}</version>-->
+                <!--<scope>provided</scope>-->
+            <!--</dependency>-->
+            <!--<dependency>-->
+                <!--<groupId>org.jboss.seam.solder</groupId>-->
+                <!--<artifactId>seam-solder</artifactId>-->
+                <!--<version>${seam.faces.version}</version>-->
+                <!--<scope>provided</scope>-->
+            <!--</dependency>-->
+            <!--<dependency>-->
+                <!--<groupId>org.jboss.seam.international</groupId>-->
+                <!--<artifactId>seam-international</artifactId>-->
+                <!--<version>${seam.faces.version}</version>-->
+                <!--<scope>provided</scope>-->
+            <!--</dependency>-->
             <!--<dependency>-->
                 <!--<groupId>org.compass-project</groupId>-->
                 <!--<artifactId>compass</artifactId>-->
@@ -166,11 +173,11 @@
     </build>
 
     <properties>
-        <junit.version>4.8.2</junit.version>
-        <primefaces.version>3.0.M3-SNAPSHOT</primefaces.version>
+        <primefaces.version>3.0</primefaces.version>
+        <primefaces.theme>smoothness</primefaces.theme>
+        <primefaces.theme.version>1.0.2</primefaces.theme.version>
         <faces.version>2.1.0</faces.version>
         <javaee.version>1.0.0.Final</javaee.version>
         <facelets.version>1.1.15.B1</facelets.version>
     </properties>
-
 </project>

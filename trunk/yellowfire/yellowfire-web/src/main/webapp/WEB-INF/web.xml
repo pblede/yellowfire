@@ -13,6 +13,15 @@
 		<param-name>facelets.DEVELOPMENT</param-name>
 		<param-value>false</param-value>
 	</context-param>
+    <!--
+    Interpret empty strings as null values.
+    If the application is running in Weblogic, JBoss, Websphere then remember to add -Dorg.apache.el.parser.COERCE_TO_ZERO=false
+    so that empty strings are not defaulted the numeric default for Long, Integer, Double andf false for BOOLEAN
+    -->
+    <context-param>
+        <param-name>javax.faces.INTERPRET_EMPTY_STRING_SUBMITTED_VALUES_AS_NULL</param-name>
+        <param-value>true</param-value>
+    </context-param>
 	<context-param>
 		<param-name>org.richfaces.LoadScriptStrategy</param-name>
 		<param-value>ALL</param-value>
@@ -152,6 +161,18 @@
 	</login-config>
 	 -->
 
+    <resource-ref>
+        <res-ref-name>ConnectionFactory</res-ref-name>
+        <mapped-name>java:/ConnectionFactory</mapped-name>
+    </resource-ref>
+    <resource-ref>
+        <res-ref-name>yellowfire/queue/notification</res-ref-name>
+        <mapped-name>java:/yellowfire/queue/notification</mapped-name>
+    </resource-ref>
+    <resource-ref>
+        <res-ref-name>yellowfire/queue/solr</res-ref-name>
+        <mapped-name>java:/yellowfire/queue/solr</mapped-name>
+    </resource-ref>
     <login-config>
         <auth-method>BASIC</auth-method>
         <realm-name>jdbcRealm</realm-name>

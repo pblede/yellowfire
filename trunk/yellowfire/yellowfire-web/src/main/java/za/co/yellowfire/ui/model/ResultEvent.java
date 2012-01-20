@@ -77,8 +77,13 @@ public class ResultEvent implements ScheduleEvent, Serializable {
 	@Override public void setId(String id) {
 		/* Ignore */
 	}
-	
-	public Result getResult() {
+
+    @Override
+    public boolean isEditable() {
+        return false;
+    }
+
+    public Result getResult() {
 		return this.result;
 	}
 	
