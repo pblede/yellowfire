@@ -10,6 +10,7 @@ import org.junit.Test;
 import za.co.yellowfire.domain.notification.Notification;
 import za.co.yellowfire.solarflare.SearchManager;
 import za.co.yellowfire.solarflare.SearchManagerBean;
+import za.co.yellowfire.solarflare.SearchQuery;
 
 import javax.annotation.sql.DataSourceDefinition;
 import javax.naming.InitialContext;
@@ -123,7 +124,7 @@ public class DomainManagerTest {
 //        domain.remove(venue);
 
         //manager = resolveSearchManager();
-        Object object = manager.search(Notification.class, "to:mark");
+        Object object = manager.search(new SearchQuery(Notification.class, "to:mark"));
         System.out.println("object = " + object);
 
 //        for (CompassHit hit : hits) {
