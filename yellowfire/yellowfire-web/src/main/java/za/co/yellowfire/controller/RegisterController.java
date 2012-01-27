@@ -3,7 +3,7 @@ package za.co.yellowfire.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import za.co.yellowfire.Naming;
-import za.co.yellowfire.domain.profile.User;
+import za.co.yellowfire.domain.profile.Profile;
 import za.co.yellowfire.domain.profile.UserManager;
 import za.co.yellowfire.domain.profile.UserRegistrationException;
 import za.co.yellowfire.log.LogType;
@@ -25,10 +25,10 @@ public class RegisterController extends AbstractController {
     /** Error code: User registration failed */
     private static final String ERROR_USER_REGISTER = "controller.register.error";
 
-    private User user = new User();
+    private Profile user = new Profile();
     
     
-	public User getUser() {
+	public Profile getUser() {
 		return user;
 	}
 

@@ -12,6 +12,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -19,17 +20,18 @@ import javax.inject.Named;
  * @author Mark P Ashworth
  * @version 0.0.1
  */
-@ConversationScoped
+@SessionScoped
 @Named("outcomesController")
 public class OutcomesController extends AbstractTrainingUIController {
+    private static final long serialVersionUID = 1L;
     private static final Logger LOGGER = LoggerFactory.getLogger(LogType.CONTROLLER.getCategory());
 
     @EJB(name = "DomainManager")
     private DomainManager manager;
     private DataTableModel<Outcome> dataModel;
 
-    @Inject
-    Conversation conversation;
+    //@Inject
+    //Conversation conversation;
 
     @PostConstruct
     private void init() {
@@ -64,7 +66,8 @@ public class OutcomesController extends AbstractTrainingUIController {
     }
 
     public boolean isInConversation() {
-        return (conversation != null && !conversation.isTransient());
+        //return (conversation != null && !conversation.isTransient());
+        return true;
     }
 
     /**
@@ -74,8 +77,8 @@ public class OutcomesController extends AbstractTrainingUIController {
      */
     public String onStartConversation() {
         LOGGER.debug("Starting conversation: outcome");
-        if (conversation.isTransient())
-            conversation.begin();
+//        if (conversation.isTransient())
+//            conversation.begin();
 
         return "outcome";
     }
@@ -87,8 +90,8 @@ public class OutcomesController extends AbstractTrainingUIController {
      */
     public String onCompleteConversation() {
         LOGGER.debug("Completing conversation: outcome");
-        if (!conversation.isTransient())
-            conversation.end();
+//        if (!conversation.isTransient())
+//            conversation.end();
 
         return "outcomes?faces-redirect=true";
     }

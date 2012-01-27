@@ -8,7 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import za.co.yellowfire.domain.Venue;
 import za.co.yellowfire.domain.profile.Guest;
-import za.co.yellowfire.domain.profile.User;
+import za.co.yellowfire.domain.profile.Profile;
 import za.co.yellowfire.domain.profile.UserManager;
 import za.co.yellowfire.domain.profile.UserRegistrationException;
 import za.co.yellowfire.domain.racing.Club;
@@ -46,7 +46,7 @@ public class SessionController extends AbstractController {
 
 	private static final String INFO_USER_PERSISTED = "controller.user.persisted";
 	
-	private User user = new User();
+	private Profile user = new Profile();
 	private boolean loggedIn;
 	private Date businessDate = new Date();
 
@@ -54,7 +54,7 @@ public class SessionController extends AbstractController {
 	//@Inject @Authenticated private Event<User> loginEventSrc;
     //@Inject @AuthenticateFailure private Event<AuthenticationFailure> authenticateFailureEventSrc;
     /* Logout event */
-    @Inject @Guest private Event<User> logoutEventSrc;
+    @Inject @Guest private Event<Profile> logoutEventSrc;
 
 
 	/* Race */
@@ -86,7 +86,7 @@ public class SessionController extends AbstractController {
 		return getRaceManager().retrieveClubs();
 	}
 	
-	public User getUser() {
+	public Profile getUser() {
 		if (user == null) {
 			LOGGER.debug("getUser()");
 			this.user = getUserManager().retrieve(getUserNameLoggedIn());
@@ -94,7 +94,7 @@ public class SessionController extends AbstractController {
 		return user;
 	}
 
-	public void setUser(User user) {
+	public void setUser(Profile user) {
 		LOGGER.debug("setUser() : " + user);
 		this.user = user;
 	}

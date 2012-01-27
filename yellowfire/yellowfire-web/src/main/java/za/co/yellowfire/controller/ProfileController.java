@@ -1,17 +1,21 @@
 package za.co.yellowfire.controller;
 
+import org.jboss.seam.security.Identity;
 import org.primefaces.context.RequestContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import za.co.yellowfire.domain.profile.Registered;
-import za.co.yellowfire.domain.profile.User;
+import za.co.yellowfire.domain.profile.Profile;
 import za.co.yellowfire.domain.profile.UserManager;
 import za.co.yellowfire.domain.profile.UserRegistrationException;
 import za.co.yellowfire.domain.racing.Club;
 import za.co.yellowfire.log.LogType;
 import za.co.yellowfire.manager.DomainManager;
+import za.co.yellowfire.ui.FacesUtil;
+import za.co.yellowfire.ui.common.AbstractCommonUIController;
 import za.co.yellowfire.ui.model.RequestResult;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.event.Event;
@@ -30,9 +34,9 @@ import java.util.List;
  */
 @RequestScoped
 @Named("profileController")
-public class ProfileController extends AbstractController {
+public class ProfileController extends AbstractCommonUIController {
 	private static final long serialVersionUID = 1L;
-	private static final Logger LOGGER = LoggerFactory.getLogger(LogType.CONTROLLER.getCategory());
+	private static final Logger LOGGER = LoggerFactory.getLogger(LogType.PROFILE.getCategory());
 
     private static final String ERROR_USER_PERSIST = "controller.user.persist.error";
     private static final String INFO_USER_PERSISTED = "controller.user.persisted";
@@ -40,10 +44,11 @@ public class ProfileController extends AbstractController {
     private static final String ERROR_USER_REGISTER = "controller.register.error";
 
     @Inject @Registered
-    private Event<User> registrationEventSrc;
+    private Event<Profile> registrationEventSrc;
 
-    @Inject @Named("currentUser")
-    private User user;
+    @Inject
+    private Identity identity;
+    private Profile profile;
 
     @EJB(name = "UserManager")
 	private UserManager manager;
@@ -53,8 +58,12 @@ public class ProfileController extends AbstractController {
 
     private List<Club> clubs;
     
-    public User getUser() {
-        return user;
+    public Profile getProfile() {
+        return profile;
+    }
+    
+    public void setProfile(Profile profile) {
+        this.profile = profile;
     }
 
     public List<Club> getClubs() {
@@ -74,43 +83,55 @@ public class ProfileController extends AbstractController {
     	try {
         	return getUserNameAvailable((String) value);
 	    } catch (NamingException e) {
-			addErrorMessage("Error", e);
+			FacesUtil.addErrorMessage("Error", e);
 			return false;
 		}
     }
 
-    public void persist(ActionEvent event) {
+    @PostConstruct 
+    public void init() {
+        if (this.identity != null) {
+            this.profile = (Profile) identity.getUser();
+            if (this.profile != null) {
+                this.profile.setPasswordConfirmation(this.profile.getPassword());
+            }
+        } else {
+            this.profile = new Profile();
+        }
+    }
+    
+    public void onPersist(ActionEvent event) {
 		try {
-			final String c = user.getPasswordConfirmation();
-			this.user = manager.persist(user);
-			this.user.setPasswordConfirmation(c);
-			addInfoMessage(INFO_USER_PERSISTED, "Update to profile saved");
+			final String c = profile.getPasswordConfirmation();
+			this.profile = manager.persist(profile);
+			this.profile.setPasswordConfirmation(c);
+			FacesUtil.addInfoMessage(INFO_USER_PERSISTED, "Update to profile saved");
 		} catch (Exception e) {
-			addErrorMessage(ERROR_USER_PERSIST, e);
+			FacesUtil.addErrorMessage(ERROR_USER_PERSIST, e);
 		}
 	}
 
-    public void onRegister() {
+    public String onRegister() {
     	LOGGER.info("register() called");
 
         RequestResult result = new RequestResult();
     	try {
     		/* Register the user */
-    		manager.register(user);
+    		manager.register(profile);
 
             /* Send a registration event */
-            registrationEventSrc.fire(user);
+            registrationEventSrc.fire(profile);
 
     		/* Welcome and forward to races */
-    		addInfoMessage("Welcome " + user.getFirstName() + user.getLastName(), "An email will be sent to " + user.getEmail() + " for verification.");
+    		FacesUtil.addInfoMessage("Welcome " + profile.getFirstName() + profile.getLastName(), "An email will be sent to " + profile.getEmail() + " for verification.");
     	} catch (UserRegistrationException e) {
             result.failed(e.getMessage());
     		LOGGER.error("Registration error", e);
-    		addErrorMessage(ERROR_USER_REGISTER, e.getMessage());
+    		FacesUtil.addErrorMessage(ERROR_USER_REGISTER, e.getMessage());
     	} catch (Exception e) {
             result.failed(e.getMessage());
     		LOGGER.error(ERROR_USER_REGISTER, e);
-    		addErrorMessage("Error", e);
+    		FacesUtil.addErrorMessage("Error", e);
     	}
 
         RequestContext context = RequestContext.getCurrentInstance();
@@ -120,8 +141,14 @@ public class ProfileController extends AbstractController {
         } else {
             LOGGER.warn("Cannot set PrimeFaces result because context is null");
         }
+
+        return "register";
     }
 
+    public void onDelete() {
+        LOGGER.info("register() called");
+    }
+    
     public String onCompleteConversation() {
         return "index";
     }

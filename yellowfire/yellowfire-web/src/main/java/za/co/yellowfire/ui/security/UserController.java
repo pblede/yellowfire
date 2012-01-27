@@ -2,8 +2,7 @@ package za.co.yellowfire.ui.security;
 
 import org.primefaces.context.RequestContext;
 import za.co.yellowfire.controller.AbstractController;
-import za.co.yellowfire.domain.profile.Credential;
-import za.co.yellowfire.domain.profile.User;
+import za.co.yellowfire.domain.profile.Profile;
 import za.co.yellowfire.domain.profile.UserManager;
 import za.co.yellowfire.domain.racing.Race;
 
@@ -32,18 +31,18 @@ public class UserController extends AbstractController {
 	@EJB(name="UserManager")
 	private UserManager manager;
 	
-    private User user = new User();
+    private Profile user = new Profile();
     private String passwordConfirmation;
     
     private Race selectedRace;
     private boolean registered;
     private boolean loggedIn;
     
-    public User getUser() {
+    public Profile getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(Profile user) {
         this.user = user;
     }
 
@@ -146,7 +145,7 @@ public class UserController extends AbstractController {
      */
     public void login() {
     	try {
-	    	User u = manager.login(new Credential(getUser().getName(), getUser().getPassword()));
+	    	Profile u = manager.login(getUser().getName(), getUser().getPassword());
 	    	if (u != null) {
 	    		this.loggedIn = true;
 	    		this.user = u;

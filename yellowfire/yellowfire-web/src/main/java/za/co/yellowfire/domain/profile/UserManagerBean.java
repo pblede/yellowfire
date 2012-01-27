@@ -27,11 +27,11 @@ public class UserManagerBean implements UserManager/*, UserManagerRemote*/ {
      * @return String
      */
 	@SuppressWarnings("unchecked")
-    @Override public User retrieve(String name) {    	
+    @Override public Profile retrieve(String name) {
     	Map<String, Object> params = new HashMap<String, Object>(1);
-        params.put(User.FIELD_NAME, name);
+        params.put(Profile.FIELD_NAME, name);
      
-        List<User> users = (List<User>) manager.query(User.QRY_USER_NAME, params);
+        List<Profile> users = (List<Profile>) manager.query(Profile.QRY_USER_NAME, params);
         if (users != null && users.size() > 0) {
         	return users.get(0);
         }
@@ -40,17 +40,18 @@ public class UserManagerBean implements UserManager/*, UserManagerRemote*/ {
     
 	/**
      * Performs a login for the supplied user
-     * @param credential The credential to login
+     * @param userName The user name to login
+     * @param password The password to login
      * @return Whether the login was successful
      */
     @SuppressWarnings("unchecked")
-    @Override public User login(Credential credential) {
+    @Override public Profile login(String userName, String password) {
     	
         Map<String, Object> params = new HashMap<String, Object>(1);
-        params.put(User.FIELD_NAME, credential.getName());
-        params.put(User.FIELD_PASSWORD, credential.getPassword());
+        params.put(Profile.FIELD_NAME, userName);
+        params.put(Profile.FIELD_PASSWORD, password);
         
-        List<User> users = (List<User>) manager.query(User.QRY_USER_LOGIN, params);
+        List<Profile> users = (List<Profile>) manager.query(Profile.QRY_USER_LOGIN, params);
         if (users != null && users.size() > 0) {
         	return users.get(0);
         }
@@ -65,9 +66,9 @@ public class UserManagerBean implements UserManager/*, UserManagerRemote*/ {
     @SuppressWarnings("unchecked")
     @Override public boolean isUsernameAvailable(String userName) {	
         Map<String, Object> params = new HashMap<String, Object>(1);
-        params.put(User.FIELD_NAME, userName);
+        params.put(Profile.FIELD_NAME, userName);
         
-        List<User> users = (List<User>) manager.query(User.QRY_USER_NAME, params);
+        List<Profile> users = (List<Profile>) manager.query(Profile.QRY_USER_NAME, params);
         return users != null && users.size() == 0;
     }
     
@@ -76,7 +77,7 @@ public class UserManagerBean implements UserManager/*, UserManagerRemote*/ {
      * @param user The user to register
      * @return The registered user
      */
-    @Override public User register(User user) throws UserRegistrationException {
+    @Override public Profile register(Profile user) throws UserRegistrationException {
     	
     	if (!isUsernameAvailable(user.getName())) {
     		throw new UserRegistrationException(String.format("The username %s is not available", user.getName()));
@@ -99,7 +100,7 @@ public class UserManagerBean implements UserManager/*, UserManagerRemote*/ {
      * @return The persisted user
      */
     @Override
-    public User persist(User user) throws UserPersistException {
+    public Profile persist(Profile user) throws UserPersistException {
     	
     	
     	//User u = em.find(User.class, user.getId());
@@ -129,7 +130,7 @@ public class UserManagerBean implements UserManager/*, UserManagerRemote*/ {
     	user.setEntityUpdated();
 
         LOGGER.info("Persisting user");
-        return (User) manager.merge(user);
+        return (Profile) manager.merge(user);
 
         //return user;
     }
@@ -142,13 +143,13 @@ public class UserManagerBean implements UserManager/*, UserManagerRemote*/ {
      */
     @Override
     @SuppressWarnings("unchecked")
-    public User verify(String verificationKey) throws UserPersistException {
+    public Profile verify(String verificationKey) throws UserPersistException {
         Map<String, Object> params = new HashMap<String, Object>(1);
-        params.put(User.FIELD_VERIFICATION_KEY, verificationKey);
+        params.put(Profile.FIELD_VERIFICATION_KEY, verificationKey);
 
-        List<User> users = (List<User>) manager.query(User.QRY_USER_VERIFICATION_KEY, params);
+        List<Profile> users = (List<Profile>) manager.query(Profile.QRY_USER_VERIFICATION_KEY, params);
         if (users != null && users.size() != 0) {
-            User user = users.get(0);
+            Profile user = users.get(0);
             user.setVerified(true);
             return persist(user);
         }

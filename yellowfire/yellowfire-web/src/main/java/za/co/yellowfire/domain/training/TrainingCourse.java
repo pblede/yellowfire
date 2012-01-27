@@ -28,11 +28,6 @@ import javax.xml.bind.annotation.XmlAttribute;
             query="select c from TrainingCourse c"
         )
 })
-@UnionPartitioning(
-        name="UnionPartitioningAllNodes",
-        /*Do not replicate changes to all data sources*/
-        replicateWrites=false)
-@Partitioned("UnionPartitioningAllNodes")
 public class TrainingCourse extends DomainEntity implements Archiveable, Comparable<TrainingCourse> {
     private static final long serialVersionUID = 1L;
 

@@ -17,10 +17,8 @@ import javax.enterprise.event.Event;
 import javax.enterprise.event.Observes;
 import javax.enterprise.inject.Default;
 import javax.enterprise.inject.Produces;
-import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
 
 /**
@@ -32,16 +30,16 @@ public class CurrentUserManager implements Serializable {
     private static final long serialVersionUID = 1L;
     private static final Logger LOGGER = LoggerFactory.getLogger(LogType.MANAGER.getCategory());
 
-	private User user = new User();
+	private Profile user = new Profile();
     
     private boolean loggedIn = false;
 
     /* Authentication succeeded */
-	@Inject @Authenticated private Event<User> loginEventSrc;
+	@Inject @Authenticated private Event<Profile> loginEventSrc;
     /* Authentication failed */
     @Inject @AuthenticateFailure private Event<AuthenticationFailure> authenticateFailureEventSrc;
     /* Logout event */
-    @Inject @Guest private Event<User> logoutEventSrc;
+    @Inject @Guest private Event<Profile> logoutEventSrc;
 
     /*@deprecated: The view now uses Conversion scope*/
     private TrainingCourse course;
@@ -59,7 +57,7 @@ public class CurrentUserManager implements Serializable {
      * @return The current user
      */
 	@Produces @Authenticated @Named("currentUser")
-	public User getCurrentUser() {
+	public Profile getCurrentUser() {
 		return user;
 	}
 
@@ -97,15 +95,15 @@ public class CurrentUserManager implements Serializable {
      */
     @Produces @Guest
     @Named("guestUser")
-	public User getGuestUser() {
-		return new User();
+	public Profile getGuestUser() {
+		return new Profile();
 	}
 
     /**
      * Triggered when the user authenticates
      * @param user The user authentication detail
      */
-	public void onLogin(User user) {
+	public void onLogin(Profile user) {
 		LOGGER.info("onLogin : " + user);
 		this.user = user;
         this.loggedIn = true;
@@ -115,9 +113,9 @@ public class CurrentUserManager implements Serializable {
      * Triggered when the user logs out
      * @param user The user authentication detail
      */
-    protected void onLogout(User user) {
+    protected void onLogout(Profile user) {
 		LOGGER.info("onLogout : " + user);
-		this.user = new User();
+		this.user = new Profile();
         this.loggedIn = false;
 	}
 
@@ -127,7 +125,7 @@ public class CurrentUserManager implements Serializable {
      */
     protected void onAuthenticationFailure(AuthenticationFailure failure) {
         LOGGER.info("onAuthenticationFailure : " + failure.getType() + ":" + failure.getCredential());
-        this.user = new User();
+        this.user = new Profile();
         this.loggedIn = false;
     }
 
@@ -141,7 +139,7 @@ public class CurrentUserManager implements Serializable {
         this.course = course;
     }
 
-    public void login(Credential credential) {
+    public void login(Credentials credential) {
 //        try {
 //            //Perform programmatic JAAS login
 //            HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
@@ -158,7 +156,7 @@ public class CurrentUserManager implements Serializable {
 
 		try {
             //Perform a domain login
-			User u = userManager.login(credential);
+			Profile u = userManager.login(credential.getUsername(), credential.getPassword());
 			if (u != null) {
                 /* Fire the event that the user has logged in*/
                 this.loginEventSrc.fire(u);

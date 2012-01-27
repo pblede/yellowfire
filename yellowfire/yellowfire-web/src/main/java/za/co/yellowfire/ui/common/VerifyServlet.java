@@ -2,7 +2,7 @@ package za.co.yellowfire.ui.common;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import za.co.yellowfire.domain.profile.User;
+import za.co.yellowfire.domain.profile.Profile;
 import za.co.yellowfire.domain.profile.UserManager;
 import za.co.yellowfire.domain.profile.UserPersistException;
 import za.co.yellowfire.domain.profile.Verified;
@@ -31,7 +31,7 @@ public class VerifyServlet extends HttpServlet {
     private UserManager manager;
 
     @Inject @Verified
-    private Event<User> verifiedEventSrc;
+    private Event<Profile> verifiedEventSrc;
 
     /**
      * Verifies the user using the user verification key that was sent to the user via email.
@@ -45,7 +45,7 @@ public class VerifyServlet extends HttpServlet {
         final String key = request.getParameter("key");
         if (key != null && !key.equals("")) {
             try {
-                User user = manager.verify(key);
+                Profile user = manager.verify(key);
                 if (user != null) {
                     verifiedEventSrc.fire(user);
                     response.sendRedirect("./index.jsf");

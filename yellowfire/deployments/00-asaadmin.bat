@@ -6,10 +6,8 @@ CALL 05-create-mail-resource.bat
 CALL 07-create-jms-resource.bat
 CALL 06-create-auth-realm.bat
 
-CALL 08-deploy-hornetq-2.bat
 CALL 10-stop-domain.bat
 CALL 03-start-domain.bat
-CALL 08-deploy-hornetq-3.bat
 
 CALL 08-deploy-solr.bat
 CALL 09-deploy-yellowfire.bat

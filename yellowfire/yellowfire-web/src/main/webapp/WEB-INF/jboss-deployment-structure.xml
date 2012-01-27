@@ -2,6 +2,8 @@
   <deployment>
     <dependencies>
       <module name="com.sun.xml.bind"/>
+      <module name="org.eclipse.persistence"/>
+      <module name="com.mysql"/>
     </dependencies>
   </deployment>
 </jboss-deployment-structure>

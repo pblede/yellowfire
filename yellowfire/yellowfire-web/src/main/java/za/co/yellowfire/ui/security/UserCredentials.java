@@ -22,54 +22,37 @@
 package za.co.yellowfire.ui.security;
 
 import javax.enterprise.context.SessionScoped;
-import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
 
 /**
  * @author <a href="mailto:lincolnbaxter@gmail.com">Lincoln Baxter, III</a>
- * deprecated Using LoginController login which authenticates using JAAS via the servler container
+ * deprecated Using Credential and LoginController login which authenticates using JAAS via the servler container
  */
-@Named
-@SessionScoped
-public class Identity implements Serializable
+//@Named
+//@SessionScoped
+public class UserCredentials implements Serializable
 {
-   private boolean loggedIn;
-
-   //@Inject
-   //private FacesContext facesContext;
-
-   @Inject
-   private Authenticator authenticator;
-
-   @Inject
-   private Credentials credentials;
+   private String username;
+   private String password;
 
    public String getUsername()
    {
-      return credentials.getUsername();
+      return username;
    }
 
-   public boolean isLoggedIn()
+   public void setUsername(final String username)
    {
-      return loggedIn;
+      this.username = username;
    }
 
-   public void login()
+   public String getPassword()
    {
-      if (authenticator.authenticate())
-      {
-         loggedIn = true;
-         credentials.setPassword(null);
-      }
+      return password;
    }
 
-   public String logout()
+   public void setPassword(final String password)
    {
-      loggedIn = false;
-      //HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
-      //session.invalidate();
-      return "home?faces-redirect=true";
+      this.password = password;
    }
-
 }

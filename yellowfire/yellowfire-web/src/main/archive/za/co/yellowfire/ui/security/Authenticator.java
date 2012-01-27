@@ -22,8 +22,8 @@
 package za.co.yellowfire.ui.security;
 
 import za.co.yellowfire.domain.profile.Authenticated;
-import za.co.yellowfire.domain.profile.Credential;
-import za.co.yellowfire.domain.profile.User;
+import za.co.yellowfire.domain.profile.Credentials;
+import za.co.yellowfire.domain.profile.Profile;
 import za.co.yellowfire.domain.profile.UserManager;
 
 import javax.ejb.EJB;
@@ -53,11 +53,11 @@ public class Authenticator {
    //private Messages messages;
 
    @Inject
-   private Credentials credentials;
+   private UserCredentials credentials;
 
    @Inject
    @Authenticated
-   private Event<User> loginEventSrc;
+   private Event<Profile> loginEventSrc;
 
     /**
      * Authenticates the user
@@ -72,11 +72,11 @@ public class Authenticator {
          return false;
       }
 
-      User u = new User();
+      Profile u = new Profile();
       u.setName(credentials.getUsername());
       u.setPassword(credentials.getPassword());
       u.setPasswordConfirmation(credentials.getPassword());
-      User user = userManager.login(new Credential(u.getName(), u.getPassword()));
+      Profile user = userManager.login(new Credentials(u.getName(), u.getPassword()));
       
       //User user = em.find(User.class, credentials.getUsername());
       if ((user != null) && user.getPassword().equals(credentials.getPassword()))

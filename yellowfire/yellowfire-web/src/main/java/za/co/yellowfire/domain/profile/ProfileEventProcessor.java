@@ -35,7 +35,7 @@ public class ProfileEventProcessor implements Serializable {
      * @param user The user that has registered
      */
     @SuppressWarnings("unused")
-    public void onRegistration(@Observes @Registered User user) {
+    public void onRegistration(@Observes @Registered Profile user) {
         /* The user has registered, send out a email verification email*/
         if (user == null) {
             LOGGER.warn("Profile is null");
@@ -60,7 +60,7 @@ public class ProfileEventProcessor implements Serializable {
      * @param user The user profile that was verified
      */
     @SuppressWarnings("unused")
-    public void onVerification(@Observes @Verified User user) {
+    public void onVerification(@Observes @Verified Profile user) {
         /* The user's email has been verified, enable the profile */
 
     }
@@ -70,7 +70,7 @@ public class ProfileEventProcessor implements Serializable {
      * @param user The user that has logged on
      */
     @SuppressWarnings("unused")
-    public void onLogin(@Observes @Authenticated User user) {
+    public void onLogin(@Observes @Authenticated Profile user) {
 
 	}
 
@@ -79,7 +79,7 @@ public class ProfileEventProcessor implements Serializable {
      * @param user The user that has logged on
      */
     @SuppressWarnings("unused")
-    public void onLogout(@Observes @Guest User user) {
+    public void onLogout(@Observes @Guest Profile user) {
 
 	}
 
@@ -87,8 +87,8 @@ public class ProfileEventProcessor implements Serializable {
      * Event sink for user profile authentication failure
      * @param failure The authentication failure
      */
-    @SuppressWarnings("unused")
-    public void onAuthenticationFailure(@Observes @AuthenticateFailure AuthenticationFailure failure) {
-
-    }
+    //@SuppressWarnings("unused")
+    //public void onAuthenticationFailure(@Observes @AuthenticateFailure AuthenticationFailure failure) {
+    //
+    //}
 }

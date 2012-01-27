@@ -1,16 +1,529 @@
 <?xml version="1.0" encoding="UTF-8"?><component name="dataSourceStorage">
-  <data-source source="LOCAL" name="yellowfire" product="Microsoft SQL Server" version="10.50.1600" jdbc-version="4.0" driver-version="3.0.1301.101" uuid="2692f999-eccf-44a9-a22c-d15afead0925">
-    <extra-name-characters>$#@</extra-name-characters>
-    <identifier-quote-string>"</identifier-quote-string>
-    <jdbc-driver>com.microsoft.sqlserver.jdbc.SQLServerDriver</jdbc-driver>
-    <jdbc-url>jdbc:sqlserver://L01MarkA\SQLSERVER2008R2;DatabaseName=race</jdbc-url>
+  <data-source source="LOCAL" name="yellowfire" product="MySQL" version="5.5.10" jdbc-version="4.0" driver-version="mysql-connector-java-5.1.18 ( Revision: tonci.grgin@oracle.com-20110930151701-jfj14ddfq48ifkfq )" uuid="2692f999-eccf-44a9-a22c-d15afead0925">
+    <extra-name-characters>#@</extra-name-characters>
+    <identifier-quote-string>`</identifier-quote-string>
+    <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
+    <jdbc-url>jdbc:mysql://localhost</jdbc-url>
     <user-name>race</user-name>
     <user-password>dfd8dfcbdfc9dfcf</user-password>
-    <schema-pattern>RACE.CDE RACE.HRE RACE.RCE RACE.TRN</schema-pattern>
+    <schema-pattern>cde.* rce.*</schema-pattern>
     <default-dialect>GenericSQL</default-dialect>
     <libraries>
       <library>
-        <url>file://$PROJECT_DIR$/yellowfire-ear/lib/sqljdbc4.jar</url>
+        <url>jar://$MAVEN_REPOSITORY$/mysql/mysql-connector-java/5.1.18/mysql-connector-java-5.1.18.jar!/</url>
+      </library>
+    </libraries>
+    <table name="answer" schema="" catalog="cde" type="TABLE">
+      <column name="answer_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="questionaire_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="question_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="person_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="create_ts" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
+      <column name="TRIAL_COLUMN6" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
+      <column name="TRIAL_COLUMN7" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4" />
+      <primary-key name="PRIMARY" columns="answer_id" />
+    </table>
+    <table name="answer_boolean" schema="" catalog="cde" type="TABLE">
+      <column name="answer_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="answer_value" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4" />
+      <column name="create_ts" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
+      <column name="update_ts" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
+      <column name="version" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4" />
+    </table>
+    <table name="answer_number" schema="" catalog="cde" type="TABLE">
+      <column name="answer_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="answer_value" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4" />
+      <column name="create_ts" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
+      <column name="update_ts" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
+      <column name="version" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4" />
+    </table>
+    <table name="answer_text" schema="" catalog="cde" type="TABLE">
+      <column name="answer_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="answer_value" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4" />
+      <column name="create_ts" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
+      <column name="update_ts" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
+      <column name="version" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4" />
+    </table>
+    <table name="club" schema="" catalog="cde" type="TABLE">
+      <column name="club_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="district_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="club_name" sqlType="VARCHAR" length="1024" precision="0" nullable="true" jdbcType="12" />
+      <column name="create_ts" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
+      <column name="update_ts" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
+      <column name="TRIAL_COLUMN6" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4" />
+      <primary-key name="PRIMARY" columns="club_id" />
+    </table>
+    <table name="content_type" schema="" catalog="cde" type="TABLE">
+      <column name="content_type_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="content_type_description" sqlType="VARCHAR" length="64" precision="0" nullable="false" jdbcType="12" />
+      <column name="create_ts" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
+      <column name="update_ts" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
+      <column name="version" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4" />
+      <primary-key name="PRIMARY" columns="content_type_id" />
+    </table>
+    <table name="course_category" schema="" catalog="cde" type="TABLE">
+      <column name="course_category_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="course_category_description" sqlType="VARCHAR" length="64" precision="0" nullable="false" jdbcType="12" />
+      <column name="create_ts" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
+      <column name="update_ts" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
+      <column name="version" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4" />
+      <primary-key name="PRIMARY" columns="course_category_id" />
+    </table>
+    <table name="course_charge_type" schema="" catalog="cde" type="TABLE">
+      <column name="course_charge_type_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="course_charge_type_description" sqlType="VARCHAR" length="64" precision="0" nullable="false" jdbcType="12" />
+      <column name="create_ts" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
+      <column name="update_ts" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
+      <column name="version" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4" />
+      <primary-key name="PRIMARY" columns="course_charge_type_id" />
+    </table>
+    <table name="course_date" schema="" catalog="cde" type="TABLE">
+      <column name="course_date_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="course_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="venue_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="course_start_date" sqlType="DATE" length="10" precision="0" nullable="false" jdbcType="91" />
+      <column name="course_end_date" sqlType="DATE" length="10" precision="0" nullable="false" jdbcType="91" />
+      <column name="TRIAL_COLUMN6" sqlType="TIME" length="8" precision="0" nullable="false" jdbcType="92" />
+      <column name="TRIAL_COLUMN7" sqlType="TIME" length="8" precision="0" nullable="false" jdbcType="92" />
+      <column name="TRIAL_COLUMN8" sqlType="DECIMAL" length="12" precision="2" nullable="true" jdbcType="3" />
+      <column name="TRIAL_COLUMN9" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5" def="Mg==" />
+      <column name="TRIAL_COLUMN10" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
+      <column name="TRIAL_COLUMN11" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
+      <column name="TRIAL_COLUMN12" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4" />
+      <primary-key name="PRIMARY" columns="course_date_id" />
+    </table>
+    <table name="course_goal" schema="" catalog="cde" type="TABLE">
+      <column name="course_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="goal_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" />
+    </table>
+    <table name="department" schema="" catalog="cde" type="TABLE">
+      <column name="department_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true" />
+      <column name="department_name" sqlType="VARCHAR" length="32" precision="0" nullable="true" jdbcType="12" />
+      <column name="create_ts" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
+      <column name="update_ts" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
+      <column name="version" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4" />
+      <primary-key name="PRIMARY" columns="department_id" />
+      <index name="ix_department_name_unique" unique="true" columns="department_name" />
+    </table>
+    <table name="duration_type" schema="" catalog="cde" type="TABLE">
+      <column name="duration_type_id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" />
+      <column name="duration_type_description" sqlType="VARCHAR" length="64" precision="0" nullable="false" jdbcType="12" />
+      <column name="create_ts" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
+      <column name="update_ts" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
+      <column name="version" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4" />
+      <primary-key name="PRIMARY" columns="duration_type_id" />
+    </table>
+    <table name="employee" schema="" catalog="cde" type="TABLE">
+      <column name="employee_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true" />
+      <column name="person_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="department_id" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5" />
+      <column name="employee_code" sqlType="VARCHAR" length="32" precision="0" nullable="true" jdbcType="12" />
+      <column name="create_ts" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
+      <column name="update_ts" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
+      <column name="version" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4" />
+      <primary-key name="PRIMARY" columns="employee_id" />
+      <foreign-key name="fk_employee_department_id" columns="department_id" ref-table="department" ref-schema="" ref-catalog="cde" ref-columns="department_id" />
+      <foreign-key name="fk_employee_person_id" columns="person_id" ref-table="person" ref-schema="" ref-catalog="cde" ref-columns="person_id" />
+      <index name="ix_employee_id_unique" unique="true" columns="employee_id" />
+    </table>
+    <table name="employment_contract" schema="" catalog="cde" type="TABLE">
+      <column name="employment_contract_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true" />
+      <column name="employee_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="contract_type_id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" />
+      <column name="start_date" sqlType="DATE" length="10" precision="0" nullable="true" jdbcType="91" />
+      <column name="terminate_date" sqlType="DATE" length="10" precision="0" nullable="true" jdbcType="91" />
+      <column name="create_ts" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
+      <column name="update_ts" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
+      <column name="version" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4" />
+      <primary-key name="PRIMARY" columns="employment_contract_id" />
+      <foreign-key name="fk_employment_contract_contract_type_id" columns="contract_type_id" ref-table="employment_contract_type" ref-schema="" ref-catalog="cde" ref-columns="employment_contract_type_id" />
+      <foreign-key name="fk_employment_contract_employee_id" columns="employee_id" ref-table="employee" ref-schema="" ref-catalog="cde" ref-columns="employee_id" />
+    </table>
+    <table name="employment_contract_type" schema="" catalog="cde" type="TABLE">
+      <column name="employment_contract_type_id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" />
+      <column name="employment_contract_description" sqlType="VARCHAR" length="32" precision="0" nullable="true" jdbcType="12" />
+      <column name="create_ts" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
+      <column name="update_ts" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
+      <column name="version" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4" />
+      <primary-key name="PRIMARY" columns="employment_contract_type_id" />
+      <index name="ix_employment_contract_description_unique" unique="true" columns="employment_contract_description" />
+    </table>
+    <table name="entity" schema="" catalog="cde" type="TABLE">
+      <column name="entity_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="entity_type_id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" />
+      <primary-key name="PRIMARY" columns="entity_id" />
+    </table>
+    <table name="graphic_link" schema="" catalog="cde" type="TABLE">
+      <column name="graphic_link_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="graphic_link_url" sqlType="VARCHAR" length="512" precision="0" nullable="false" jdbcType="12" />
+      <column name="graphic_link_image_url" sqlType="VARCHAR" length="512" precision="0" nullable="true" jdbcType="12" />
+      <column name="graphic_link_scale_percentage" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4" def="MTAw" />
+      <column name="graphic_link_alt_text" sqlType="VARCHAR" length="128" precision="0" nullable="true" jdbcType="12" />
+      <column name="TRIAL_COLUMN6" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
+      <column name="TRIAL_COLUMN7" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4" />
+      <primary-key name="PRIMARY" columns="graphic_link_id" />
+    </table>
+    <table name="note" schema="" catalog="cde" type="TABLE">
+      <column name="note_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="note_type" sqlType="VARCHAR" length="32" precision="0" nullable="false" jdbcType="12" />
+      <column name="note_text" sqlType="LONGTEXT" length="2147483647" precision="0" nullable="true" jdbcType="-1" />
+      <column name="race_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="create_ts" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
+      <column name="TRIAL_COLUMN6" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4" />
+      <primary-key name="PRIMARY" columns="note_id" />
+    </table>
+    <table name="notification" schema="" catalog="cde" type="TABLE">
+      <column name="notification_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="notification_type" sqlType="VARCHAR" length="32" precision="0" nullable="false" jdbcType="12" />
+      <column name="notification_from" sqlType="VARCHAR" length="128" precision="0" nullable="false" jdbcType="12" />
+      <column name="notification_to" sqlType="VARCHAR" length="256" precision="0" nullable="false" jdbcType="12" />
+      <column name="notification_cc" sqlType="VARCHAR" length="256" precision="0" nullable="true" jdbcType="12" />
+      <column name="notification_bcc" sqlType="VARCHAR" length="256" precision="0" nullable="true" jdbcType="12" />
+      <column name="notification_subject" sqlType="VARCHAR" length="256" precision="0" nullable="true" jdbcType="12" />
+      <column name="notification_body" sqlType="LONGTEXT" length="2147483647" precision="0" nullable="true" jdbcType="-1" />
+      <column name="notification_sent" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
+      <column name="create_ts" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
+      <column name="update_ts" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
+      <column name="version" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4" />
+      <column name="archived" sqlType="BIT" length="0" precision="0" nullable="true" jdbcType="-7" def="MA==" />
+      <primary-key name="PRIMARY" columns="notification_id" />
+    </table>
+    <table name="outcome" schema="" catalog="cde" type="TABLE">
+      <column name="outcome_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="outcome_description" sqlType="VARCHAR" length="64" precision="0" nullable="false" jdbcType="12" />
+      <column name="create_ts" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
+      <column name="update_ts" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
+      <column name="version" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4" />
+    </table>
+    <table name="person" schema="" catalog="cde" type="TABLE">
+      <column name="person_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true" />
+      <column name="person_name" sqlType="VARCHAR" length="32" precision="0" nullable="false" jdbcType="12" />
+      <column name="person_firstname" sqlType="VARCHAR" length="64" precision="0" nullable="true" jdbcType="12" />
+      <column name="person_lastname" sqlType="VARCHAR" length="64" precision="0" nullable="true" jdbcType="12" />
+      <column name="person_password" sqlType="VARCHAR" length="512" precision="0" nullable="false" jdbcType="12" />
+      <column name="person_email" sqlType="VARCHAR" length="512" precision="0" nullable="false" jdbcType="12" />
+      <column name="person_dob" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
+      <column name="person_group_name" sqlType="VARCHAR" length="32" precision="0" nullable="true" jdbcType="12" />
+      <column name="person_verification_key" sqlType="VARCHAR" length="128" precision="0" nullable="true" jdbcType="12" />
+      <column name="person_verified" sqlType="BIT" length="0" precision="0" nullable="true" jdbcType="-7" />
+      <column name="club_id" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5" />
+      <column name="create_ts" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
+      <column name="update_ts" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
+      <column name="verified_ts" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
+      <column name="version" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4" />
+      <primary-key name="PRIMARY" columns="person_id" />
+      <foreign-key name="fk_person_person_group" columns="person_group_name" ref-table="person_group" ref-schema="" ref-catalog="cde" ref-columns="person_group_name" />
+      <index name="ix_person_unique" unique="true" columns="person_name" />
+    </table>
+    <table name="person_group" schema="" catalog="cde" type="TABLE">
+      <column name="person_group_name" sqlType="VARCHAR" length="32" precision="0" nullable="false" jdbcType="12" />
+      <column name="version" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4" />
+      <primary-key name="PRIMARY" columns="person_group_name" />
+    </table>
+    <table name="price" schema="" catalog="cde" type="TABLE">
+      <column name="ticker" sqlType="VARCHAR" length="15" precision="0" nullable="true" jdbcType="12" />
+      <column name="price_date" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
+      <column name="closing" sqlType="DECIMAL" length="18" precision="7" nullable="true" jdbcType="3" />
+      <column name="high" sqlType="DECIMAL" length="18" precision="7" nullable="true" jdbcType="3" />
+      <column name="low" sqlType="DECIMAL" length="18" precision="7" nullable="true" jdbcType="3" />
+      <column name="TRIAL_COLUMN6" sqlType="DECIMAL" length="18" precision="7" nullable="true" jdbcType="3" />
+      <column name="TRIAL_COLUMN7" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4" />
+      <column name="TRIAL_COLUMN8" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4" />
+      <column name="TRIAL_COLUMN9" sqlType="DECIMAL" length="18" precision="2" nullable="true" jdbcType="3" />
+      <column name="TRIAL_COLUMN10" sqlType="DECIMAL" length="8" precision="4" nullable="true" jdbcType="3" />
+      <column name="TRIAL_COLUMN11" sqlType="DECIMAL" length="8" precision="4" nullable="true" jdbcType="3" />
+      <column name="TRIAL_COLUMN12" sqlType="DECIMAL" length="8" precision="4" nullable="true" jdbcType="3" />
+    </table>
+    <table name="property" schema="" catalog="cde" type="TABLE">
+      <column name="property_name" sqlType="VARCHAR" length="256" precision="0" nullable="false" jdbcType="12" />
+      <column name="property_value" sqlType="VARCHAR" length="1024" precision="0" nullable="true" jdbcType="12" />
+      <column name="property_type" sqlType="VARCHAR" length="1024" precision="0" nullable="true" jdbcType="12" def="J2phdmEubGFuZy5TdHJpbmcn" />
+      <column name="create_ts" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
+      <column name="update_ts" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
+      <column name="TRIAL_COLUMN6" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4" />
+      <primary-key name="PRIMARY" columns="property_name" />
+    </table>
+    <table name="question" schema="" catalog="cde" type="TABLE">
+      <column name="question_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="question_type_id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" />
+      <column name="question_text" sqlType="VARCHAR" length="1024" precision="0" nullable="false" jdbcType="12" />
+      <column name="create_ts" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
+      <column name="update_ts" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
+      <column name="TRIAL_COLUMN6" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4" />
+      <primary-key name="PRIMARY" columns="question_id" />
+    </table>
+    <table name="question_type" schema="" catalog="cde" type="TABLE">
+      <column name="question_type_id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" />
+      <column name="question_type_description" sqlType="VARCHAR" length="32" precision="0" nullable="false" jdbcType="12" />
+      <column name="create_ts" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
+      <column name="update_ts" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
+      <column name="version" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4" />
+      <primary-key name="PRIMARY" columns="question_type_id" />
+    </table>
+    <table name="questionaire" schema="" catalog="cde" type="TABLE">
+      <column name="questionaire_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="questionaire_name" sqlType="VARCHAR" length="64" precision="0" nullable="false" jdbcType="12" />
+      <column name="create_ts" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
+      <column name="update_ts" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
+      <column name="version" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4" />
+      <primary-key name="PRIMARY" columns="questionaire_id" />
+    </table>
+    <table name="questionaire_question" schema="" catalog="cde" type="TABLE">
+      <column name="questionaire_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="question_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="create_ts" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
+      <column name="update_ts" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
+      <column name="version" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4" />
+      <primary-key name="PRIMARY" columns="questionaire_id,question_id" />
+    </table>
+    <table name="result" schema="" catalog="cde" type="TABLE">
+      <column name="result_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="person_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="result_name" sqlType="VARCHAR" length="1024" precision="0" nullable="false" jdbcType="12" def="J1RyYWluaW5nJw==" />
+      <column name="result_type_id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" />
+      <column name="result_start" sqlType="DATETIME" length="19" precision="0" nullable="false" jdbcType="93" />
+      <column name="TRIAL_COLUMN6" sqlType="DATETIME" length="19" precision="0" nullable="false" jdbcType="93" />
+      <column name="TRIAL_COLUMN7" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4" />
+      <column name="TRIAL_COLUMN8" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4" />
+      <column name="TRIAL_COLUMN9" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4" />
+      <column name="TRIAL_COLUMN10" sqlType="DECIMAL" length="10" precision="2" nullable="true" jdbcType="3" />
+      <column name="TRIAL_COLUMN11" sqlType="DECIMAL" length="10" precision="2" nullable="true" jdbcType="3" />
+      <column name="TRIAL_COLUMN12" sqlType="VARCHAR" length="256" precision="0" nullable="true" jdbcType="12" />
+      <column name="TRIAL_COLUMN13" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5" />
+      <column name="TRIAL_COLUMN14" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
+      <column name="TRIAL_COLUMN15" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
+      <column name="TRIAL_COLUMN16" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4" />
+      <primary-key name="PRIMARY" columns="result_id" />
+    </table>
+    <table name="skill_area" schema="" catalog="cde" type="TABLE">
+      <column name="skill_area_id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" />
+      <column name="skill_area_description" sqlType="VARCHAR" length="64" precision="0" nullable="false" jdbcType="12" />
+      <column name="create_ts" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
+      <column name="update_ts" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
+      <column name="version" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4" />
+      <primary-key name="PRIMARY" columns="skill_area_id" />
+    </table>
+    <table name="training_provider" schema="" catalog="cde" type="TABLE">
+      <column name="training_provider_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="training_provider_description" sqlType="VARCHAR" length="64" precision="0" nullable="false" jdbcType="12" />
+      <column name="training_provider_code" sqlType="VARCHAR" length="25" precision="0" nullable="true" jdbcType="12" />
+      <column name="create_ts" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
+      <column name="update_ts" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
+      <column name="TRIAL_COLUMN6" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4" />
+      <primary-key name="PRIMARY" columns="training_provider_id" />
+    </table>
+    <table name="venue" schema="" catalog="cde" type="TABLE">
+      <column name="venue_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="venue_name" sqlType="VARCHAR" length="128" precision="0" nullable="true" jdbcType="12" />
+      <column name="venue_address" sqlType="VARCHAR" length="512" precision="0" nullable="true" jdbcType="12" />
+      <column name="venue_gps" sqlType="VARCHAR" length="128" precision="0" nullable="true" jdbcType="12" />
+      <column name="venue_longitude" sqlType="DECIMAL" length="10" precision="7" nullable="true" jdbcType="3" />
+      <column name="venue_latitude" sqlType="DECIMAL" length="10" precision="7" nullable="true" jdbcType="3" />
+      <column name="venue_type" sqlType="SMALLINT" length="5" precision="0" nullable="true" jdbcType="5" def="MA==" />
+      <column name="create_ts" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
+      <column name="update_ts" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
+      <column name="version" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4" />
+      <primary-key name="PRIMARY" columns="venue_id" />
+      <foreign-key name="fk_venue_venue_type" columns="venue_type" ref-table="venue_type" ref-schema="" ref-catalog="cde" ref-columns="venue_type_id" />
+      <index name="venue_id_UNIQUE" unique="true" columns="venue_id" />
+    </table>
+    <table name="venue_type" schema="" catalog="cde" type="TABLE">
+      <column name="venue_type_id" sqlType="SMALLINT" length="5" precision="0" nullable="false" jdbcType="5" />
+      <column name="venue_type_description" sqlType="VARCHAR" length="45" precision="0" nullable="true" jdbcType="12" />
+      <column name="create_ts" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
+      <column name="update_ts" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
+      <column name="version" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4" />
+      <primary-key name="PRIMARY" columns="venue_type_id" />
+      <index name="venue_type_id_UNIQUE" unique="true" columns="venue_type_id" />
+      <index name="venue_type_description_UNIQUE" unique="true" columns="venue_type_description" />
+    </table>
+    <table name="vw_jaas_person" schema="" catalog="cde" type="VIEW">
+      <column name="person_name" sqlType="VARCHAR" length="32" precision="0" nullable="false" jdbcType="12" />
+      <column name="person_password" sqlType="VARCHAR" length="512" precision="0" nullable="false" jdbcType="12" />
+    </table>
+    <table name="vw_jaas_person_group" schema="" catalog="cde" type="VIEW">
+      <column name="person_name" sqlType="VARCHAR" length="32" precision="0" nullable="false" jdbcType="12" />
+      <column name="person_group_name" sqlType="VARCHAR" length="32" precision="0" nullable="true" jdbcType="12" />
+    </table>
+    <table name="category_fee" schema="" catalog="rce" type="TABLE">
+      <column name="category_fee_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true" />
+      <column name="category_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="course_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="race_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="fee_description" sqlType="VARCHAR" length="24" precision="0" nullable="true" jdbcType="12" />
+      <column name="fee_value" sqlType="DECIMAL" length="10" precision="2" nullable="false" jdbcType="3" />
+      <column name="create_ts" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
+      <column name="version" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4" />
+      <column name="update_ts" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
+      <primary-key name="PRIMARY" columns="category_fee_id" />
+      <foreign-key name="fk_category_fee_category_id" columns="category_id" ref-table="course_category" ref-schema="" ref-catalog="rce" ref-columns="category_id" />
+      <foreign-key name="fk_category_fee_course_id" columns="course_id" ref-table="course" ref-schema="" ref-catalog="rce" ref-columns="course_id" />
+      <foreign-key name="fk_category_fee_race_id" columns="race_id" ref-table="race" ref-schema="" ref-catalog="rce" ref-columns="race_id" />
+    </table>
+    <table name="category_prize" schema="" catalog="rce" type="TABLE">
+      <column name="category_prize_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true" />
+      <column name="category_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="course_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="race_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="prize_description" sqlType="VARCHAR" length="1024" precision="0" nullable="true" jdbcType="12" />
+      <column name="prize_value" sqlType="VARCHAR" length="1024" precision="0" nullable="false" jdbcType="12" />
+      <column name="create_ts" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
+      <column name="update_ts" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
+      <column name="version" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4" />
+      <primary-key name="PRIMARY" columns="category_prize_id" />
+      <foreign-key name="fk_category_prize_category_id" columns="category_id" ref-table="course_category" ref-schema="" ref-catalog="rce" ref-columns="category_id" />
+      <foreign-key name="fk_category_prize_course_id" columns="course_id" ref-table="course" ref-schema="" ref-catalog="rce" ref-columns="course_id" />
+      <foreign-key name="fk_category_prize_race_id" columns="race_id" ref-table="race" ref-schema="" ref-catalog="rce" ref-columns="race_id" />
+    </table>
+    <table name="club" schema="" catalog="rce" type="TABLE">
+      <column name="club_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true" />
+      <column name="district_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="club_name" sqlType="VARCHAR" length="1024" precision="0" nullable="true" jdbcType="12" />
+      <column name="create_ts" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
+      <column name="update_ts" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
+      <column name="version" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4" />
+      <primary-key name="PRIMARY" columns="club_id" />
+    </table>
+    <table name="course" schema="" catalog="rce" type="TABLE">
+      <column name="course_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true" />
+      <column name="race_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="course_starttime" sqlType="TIME" length="8" precision="0" nullable="false" jdbcType="92" />
+      <column name="course_distance" sqlType="VARCHAR" length="32" precision="0" nullable="false" jdbcType="12" />
+      <column name="course_description" sqlType="LONGTEXT" length="2147483647" precision="0" nullable="true" jdbcType="-1" />
+      <column name="create_ts" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
+      <column name="update_ts" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
+      <column name="version" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4" />
+      <primary-key name="PRIMARY" columns="course_id" />
+      <foreign-key name="fk_course_race_id" columns="race_id" ref-table="race" ref-schema="" ref-catalog="rce" ref-columns="race_id" />
+    </table>
+    <table name="course_category" schema="" catalog="rce" type="TABLE">
+      <column name="category_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true" />
+      <column name="course_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="race_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="category_name" sqlType="VARCHAR" length="32" precision="0" nullable="false" jdbcType="12" />
+      <column name="create_ts" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
+      <column name="version" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4" />
+      <column name="update_ts" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
+      <primary-key name="PRIMARY" columns="category_id" />
+    </table>
+    <table name="district" schema="" catalog="rce" type="TABLE">
+      <column name="district_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true" />
+      <column name="district_code" sqlType="VARCHAR" length="12" precision="0" nullable="true" jdbcType="12" />
+      <column name="district_name" sqlType="VARCHAR" length="1024" precision="0" nullable="true" jdbcType="12" />
+      <column name="create_ts" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
+      <column name="update_ts" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
+      <column name="version" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4" />
+      <primary-key name="PRIMARY" columns="district_id" />
+    </table>
+    <table name="graphic_link" schema="" catalog="rce" type="TABLE">
+      <column name="graphic_link_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true" />
+      <column name="graphic_link_url" sqlType="VARCHAR" length="512" precision="0" nullable="false" jdbcType="12" />
+      <column name="graphic_link_image_url" sqlType="VARCHAR" length="512" precision="0" nullable="true" jdbcType="12" />
+      <column name="graphic_link_scale_percentage" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4" def="MTAw" />
+      <column name="graphic_link_alt_text" sqlType="VARCHAR" length="128" precision="0" nullable="true" jdbcType="12" />
+      <column name="create_ts" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
+      <column name="update_ts" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
+      <column name="version" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4" />
+      <primary-key name="PRIMARY" columns="graphic_link_id" />
+    </table>
+    <table name="note" schema="" catalog="rce" type="TABLE">
+      <column name="note_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true" />
+      <column name="note_type" sqlType="VARCHAR" length="32" precision="0" nullable="false" jdbcType="12" />
+      <column name="note_text" sqlType="LONGTEXT" length="2147483647" precision="0" nullable="true" jdbcType="-1" />
+      <column name="race_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="create_ts" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
+      <column name="update_ts" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
+      <column name="version" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4" />
+      <primary-key name="PRIMARY" columns="note_id" />
+      <foreign-key name="fk_node_race_id" columns="race_id" ref-table="race" ref-schema="" ref-catalog="rce" ref-columns="race_id" />
+    </table>
+    <table name="race" schema="" catalog="rce" type="TABLE">
+      <column name="race_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true" />
+      <column name="race_name" sqlType="VARCHAR" length="256" precision="0" nullable="false" jdbcType="12" />
+      <column name="race_date" sqlType="DATE" length="10" precision="0" nullable="false" jdbcType="91" />
+      <column name="venue_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="district_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="club_id" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5" />
+      <column name="graphic_link_id" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5" />
+      <column name="create_ts" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
+      <column name="update_ts" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
+      <column name="version" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4" />
+      <primary-key name="PRIMARY" columns="race_id" />
+      <foreign-key name="fk_race_club_id" columns="club_id" ref-table="club" ref-schema="" ref-catalog="rce" ref-columns="club_id" />
+      <foreign-key name="fk_race_district_id" columns="district_id" ref-table="district" ref-schema="" ref-catalog="rce" ref-columns="district_id" />
+      <foreign-key name="fk_race_graphic_link_id" columns="graphic_link_id" ref-table="graphic_link" ref-schema="" ref-catalog="rce" ref-columns="graphic_link_id" />
+      <foreign-key name="fk_race_venue_id" columns="venue_id" ref-table="venue" ref-schema="" ref-catalog="cde" ref-columns="venue_id" />
+      <index name="ix_race_unique" unique="true" columns="race_name,race_date" />
+    </table>
+    <table name="race_registration" schema="" catalog="rce" type="TABLE">
+      <column name="race_registration_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="race_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="person_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="course_id" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5" />
+      <column name="category_id" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5" />
+      <column name="category_fee_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="create_ts" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
+      <column name="update_ts" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
+      <column name="version" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4" />
+      <primary-key name="PRIMARY" columns="race_registration_id" />
+      <foreign-key name="fk_race_registration_category_fee_id" columns="category_fee_id" ref-table="category_fee" ref-schema="" ref-catalog="rce" ref-columns="category_fee_id" />
+      <foreign-key name="fk_race_registration_category_id" columns="category_id" ref-table="course_category" ref-schema="" ref-catalog="rce" ref-columns="category_id" />
+      <foreign-key name="fk_race_registration_course_id" columns="course_id" ref-table="course" ref-schema="" ref-catalog="rce" ref-columns="course_id" />
+      <foreign-key name="fk_race_registration_race_id" columns="race_id" ref-table="race" ref-schema="" ref-catalog="rce" ref-columns="race_id" />
+    </table>
+    <table name="race_sponsor" schema="" catalog="rce" type="TABLE">
+      <column name="race_sponsor_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true" />
+      <column name="race_sponsor_name" sqlType="VARCHAR" length="256" precision="0" nullable="false" jdbcType="12" />
+      <column name="race_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="graphic_link_id" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5" />
+      <column name="create_ts" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
+      <column name="update_ts" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
+      <column name="version" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4" />
+      <primary-key name="PRIMARY" columns="race_sponsor_id" />
+      <foreign-key name="fk_race_sponsor_graphic_link_id" columns="graphic_link_id" ref-table="graphic_link" ref-schema="" ref-catalog="rce" ref-columns="graphic_link_id" />
+      <foreign-key name="fk_race_sponsor_race_id" columns="race_id" ref-table="race" ref-schema="" ref-catalog="rce" ref-columns="race_id" />
+    </table>
+    <table name="result" schema="" catalog="rce" type="TABLE">
+      <column name="result_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="person_id" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="result_name" sqlType="VARCHAR" length="1024" precision="0" nullable="false" jdbcType="12" def="J1RyYWluaW5nJw==" />
+      <column name="result_type_id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" />
+      <column name="result_start" sqlType="DATETIME" length="19" precision="0" nullable="false" jdbcType="93" />
+      <column name="result_end" sqlType="DATETIME" length="19" precision="0" nullable="false" jdbcType="93" />
+      <column name="result_time_hours" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4" />
+      <column name="result_time_minutes" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4" />
+      <column name="result_time_seconds" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4" />
+      <column name="result_pace" sqlType="DECIMAL" length="10" precision="2" nullable="true" jdbcType="3" />
+      <column name="result_distance" sqlType="DECIMAL" length="10" precision="2" nullable="true" jdbcType="3" />
+      <column name="result_notes" sqlType="VARCHAR" length="256" precision="0" nullable="true" jdbcType="12" />
+      <column name="race_id" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5" />
+      <column name="create_ts" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
+      <column name="update_ts" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
+      <column name="version" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4" />
+      <primary-key name="PRIMARY" columns="result_id" />
+      <foreign-key name="fk_result_race_id" columns="race_id" ref-table="race" ref-schema="" ref-catalog="rce" ref-columns="race_id" />
+      <foreign-key name="fk_result_result_type_id" columns="result_type_id" ref-table="result_type" ref-schema="" ref-catalog="rce" ref-columns="result_type_id" />
+    </table>
+    <table name="result_type" schema="" catalog="rce" type="TABLE">
+      <column name="result_type_id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" />
+      <column name="result_type_description" sqlType="VARCHAR" length="32" precision="0" nullable="false" jdbcType="12" />
+      <column name="create_ts" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
+      <column name="update_ts" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
+      <column name="version" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4" />
+      <primary-key name="PRIMARY" columns="result_type_id" />
+    </table>
+  </data-source>
+  <data-source source="LOCAL" name="yellowfire-sqlserver" product="Microsoft SQL Server" version="10.50.2500" jdbc-version="4.0" driver-version="3.0.1301.101" uuid="4b9d5ac6-f6ba-4165-9db3-918bc1b96919">
+    <extra-name-characters>$#@</extra-name-characters>
+    <identifier-quote-string>"</identifier-quote-string>
+    <jdbc-driver>com.microsoft.sqlserver.jdbc.SQLServerDriver</jdbc-driver>
+    <jdbc-url>jdbc:sqlserver://localhost\SQLSERVER2008R2;DatabaseName=race</jdbc-url>
+    <user-name>race</user-name>
+    <user-password>dfd8dfcbdfc9dfcf</user-password>
+    <schema-pattern>race.*</schema-pattern>
+    <libraries>
+      <library>
+        <url>file://$MAVEN_REPOSITORY$/com/microsoft/sqlserver/sqljdbc4/3.0/sqljdbc4-3.0.jar</url>
       </library>
     </libraries>
     <table name="answer" schema="cde" catalog="race" type="TABLE">
@@ -18,7 +531,7 @@
       <column name="questionaire_id" sqlType="bigint" length="19" precision="0" nullable="false" jdbcType="-5" />
       <column name="question_id" sqlType="bigint" length="19" precision="0" nullable="false" jdbcType="-5" />
       <column name="person_id" sqlType="bigint" length="19" precision="0" nullable="false" jdbcType="-5" />
-      <column name="create_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" default="'(getdate())'" />
+      <column name="create_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" def="JyhnZXRkYXRlKCkpJw==" />
       <column name="update_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" />
       <column name="version" sqlType="int" length="10" precision="0" nullable="true" jdbcType="4" />
       <primary-key name="pk_answer_id" columns="answer_id" />
@@ -29,7 +542,7 @@
     <table name="answer_boolean" schema="cde" catalog="race" type="TABLE">
       <column name="answer_id" sqlType="bigint" length="19" precision="0" nullable="false" jdbcType="-5" />
       <column name="answer_value" sqlType="int" length="10" precision="0" nullable="true" jdbcType="4" />
-      <column name="create_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" default="'(getdate())'" />
+      <column name="create_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" def="JyhnZXRkYXRlKCkpJw==" />
       <column name="update_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" />
       <column name="version" sqlType="int" length="10" precision="0" nullable="true" jdbcType="4" />
       <foreign-key name="fk_answer_boolean_answer_id" columns="answer_id" ref-table="answer" ref-schema="cde" ref-catalog="race" ref-columns="answer_id" />
@@ -37,7 +550,7 @@
     <table name="answer_number" schema="cde" catalog="race" type="TABLE">
       <column name="answer_id" sqlType="bigint" length="19" precision="0" nullable="false" jdbcType="-5" />
       <column name="answer_value" sqlType="int" length="10" precision="0" nullable="true" jdbcType="4" />
-      <column name="create_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" default="'(getdate())'" />
+      <column name="create_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" def="JyhnZXRkYXRlKCkpJw==" />
       <column name="update_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" />
       <column name="version" sqlType="int" length="10" precision="0" nullable="true" jdbcType="4" />
       <foreign-key name="fk_answer_number_answer_id" columns="answer_id" ref-table="answer" ref-schema="cde" ref-catalog="race" ref-columns="answer_id" />
@@ -45,7 +558,7 @@
     <table name="answer_text" schema="cde" catalog="race" type="TABLE">
       <column name="answer_id" sqlType="bigint" length="19" precision="0" nullable="false" jdbcType="-5" />
       <column name="answer_value" sqlType="int" length="10" precision="0" nullable="true" jdbcType="4" />
-      <column name="create_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" default="'(getdate())'" />
+      <column name="create_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" def="JyhnZXRkYXRlKCkpJw==" />
       <column name="update_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" />
       <column name="version" sqlType="int" length="10" precision="0" nullable="true" jdbcType="4" />
       <foreign-key name="fk_answer_text_answer_id" columns="answer_id" ref-table="answer" ref-schema="cde" ref-catalog="race" ref-columns="answer_id" />
@@ -63,8 +576,16 @@
       <column name="create_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" />
       <column name="update_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" />
       <column name="version" sqlType="int" length="10" precision="0" nullable="true" jdbcType="4" />
-      <column name="archived" sqlType="bit" length="1" precision="0" nullable="true" jdbcType="-7" default="((0))" />
+      <column name="archived" sqlType="bit" length="1" precision="0" nullable="true" jdbcType="-7" def="KCgwKSk=" />
       <primary-key name="pk_notification_id" columns="notification_id" />
+    </table>
+    <table name="outcome" schema="cde" catalog="race" type="TABLE">
+      <column name="outcome_id" sqlType="bigint identity" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true" />
+      <column name="outcome_description" sqlType="varchar" length="64" precision="0" nullable="false" jdbcType="12" />
+      <column name="create_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" />
+      <column name="update_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" />
+      <column name="version" sqlType="int" length="10" precision="0" nullable="true" jdbcType="4" />
+      <primary-key name="pk_outcome_id" columns="outcome_id" />
     </table>
     <table name="person" schema="cde" catalog="race" type="TABLE">
       <column name="person_id" sqlType="bigint identity" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true" />
@@ -74,9 +595,9 @@
       <column name="person_password" sqlType="varchar" length="512" precision="0" nullable="false" jdbcType="12" />
       <column name="person_email" sqlType="varchar" length="512" precision="0" nullable="false" jdbcType="12" />
       <column name="person_dob" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" />
-      <column name="person_group_name" sqlType="varchar" length="32" precision="0" nullable="true" jdbcType="12" default="'('Blue')'" />
+      <column name="person_group_name" sqlType="varchar" length="32" precision="0" nullable="true" jdbcType="12" def="JygnQmx1ZScpJw==" />
       <column name="person_verification_key" sqlType="varchar" length="128" precision="0" nullable="true" jdbcType="12" />
-      <column name="person_verified" sqlType="bit" length="1" precision="0" nullable="true" jdbcType="-7" default="((0))" />
+      <column name="person_verified" sqlType="bit" length="1" precision="0" nullable="true" jdbcType="-7" def="KCgwKSk=" />
       <column name="club_id" sqlType="bigint" length="19" precision="0" nullable="true" jdbcType="-5" />
       <column name="create_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" />
       <column name="update_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" />
@@ -94,8 +615,8 @@
     <table name="property" schema="cde" catalog="race" type="TABLE">
       <column name="property_name" sqlType="varchar" length="256" precision="0" nullable="false" jdbcType="12" />
       <column name="property_value" sqlType="varchar" length="1024" precision="0" nullable="true" jdbcType="12" />
-      <column name="property_type" sqlType="varchar" length="1024" precision="0" nullable="true" jdbcType="12" default="'('java.lang.String')'" />
-      <column name="create_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" default="'(getdate())'" />
+      <column name="property_type" sqlType="varchar" length="1024" precision="0" nullable="true" jdbcType="12" def="JygnamF2YS5sYW5nLlN0cmluZycpJw==" />
+      <column name="create_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" def="JyhnZXRkYXRlKCkpJw==" />
       <column name="update_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" />
       <column name="version" sqlType="int" length="10" precision="0" nullable="true" jdbcType="4" />
       <primary-key name="pk_property_name" columns="property_name" />
@@ -104,7 +625,7 @@
       <column name="question_id" sqlType="bigint identity" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true" />
       <column name="question_type_id" sqlType="int" length="10" precision="0" nullable="false" jdbcType="4" />
       <column name="question_text" sqlType="varchar" length="1024" precision="0" nullable="false" jdbcType="12" />
-      <column name="create_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" default="'(getdate())'" />
+      <column name="create_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" def="JyhnZXRkYXRlKCkpJw==" />
       <column name="update_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" />
       <column name="version" sqlType="int" length="10" precision="0" nullable="true" jdbcType="4" />
       <primary-key name="pk_question_id" columns="question_id" />
@@ -113,7 +634,7 @@
     <table name="question_type" schema="cde" catalog="race" type="TABLE">
       <column name="question_type_id" sqlType="int" length="10" precision="0" nullable="false" jdbcType="4" />
       <column name="question_type_description" sqlType="varchar" length="32" precision="0" nullable="false" jdbcType="12" />
-      <column name="create_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" default="'(getdate())'" />
+      <column name="create_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" def="JyhnZXRkYXRlKCkpJw==" />
       <column name="update_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" />
       <column name="version" sqlType="int" length="10" precision="0" nullable="true" jdbcType="4" />
       <primary-key name="pk_question_type_id" columns="question_type_id" />
@@ -121,7 +642,7 @@
     <table name="questionaire" schema="cde" catalog="race" type="TABLE">
       <column name="questionaire_id" sqlType="bigint identity" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true" />
       <column name="questionaire_name" sqlType="varchar" length="64" precision="0" nullable="false" jdbcType="12" />
-      <column name="create_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" default="'(getdate())'" />
+      <column name="create_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" def="JyhnZXRkYXRlKCkpJw==" />
       <column name="update_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" />
       <column name="version" sqlType="int" length="10" precision="0" nullable="true" jdbcType="4" />
       <primary-key name="pk_questionaire_id" columns="questionaire_id" />
@@ -129,7 +650,7 @@
     <table name="questionaire_question" schema="cde" catalog="race" type="TABLE">
       <column name="questionaire_id" sqlType="bigint" length="19" precision="0" nullable="false" jdbcType="-5" />
       <column name="question_id" sqlType="bigint" length="19" precision="0" nullable="false" jdbcType="-5" />
-      <column name="create_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" default="'(getdate())'" />
+      <column name="create_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" def="JyhnZXRkYXRlKCkpJw==" />
       <column name="update_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" />
       <column name="version" sqlType="int" length="10" precision="0" nullable="true" jdbcType="4" />
       <primary-key name="pk_questionaire_question_id" columns="questionaire_id,question_id" />
@@ -143,8 +664,8 @@
       <column name="venue_gps" sqlType="varchar" length="128" precision="0" nullable="true" jdbcType="12" />
       <column name="venue_longitude" sqlType="decimal" length="10" precision="7" nullable="true" jdbcType="3" />
       <column name="venue_latitude" sqlType="decimal" length="10" precision="7" nullable="true" jdbcType="3" />
-      <column name="venue_type" sqlType="smallint" length="5" precision="0" nullable="true" jdbcType="5" default="((0))" />
-      <column name="create_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" default="'(getdate())'" />
+      <column name="venue_type" sqlType="smallint" length="5" precision="0" nullable="true" jdbcType="5" def="KCgwKSk=" />
+      <column name="create_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" def="JyhnZXRkYXRlKCkpJw==" />
       <column name="update_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" />
       <column name="version" sqlType="int" length="10" precision="0" nullable="true" jdbcType="4" />
       <primary-key name="pk_venue_id" columns="venue_id" />
@@ -173,6 +694,20 @@
       <column name="update_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" />
       <column name="version" sqlType="int" length="10" precision="0" nullable="true" jdbcType="4" />
     </table>
+    <table name="price" schema="fin" catalog="race" type="TABLE">
+      <column name="ticker" sqlType="varchar" length="15" precision="0" nullable="true" jdbcType="12" />
+      <column name="price_date" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" />
+      <column name="closing" sqlType="decimal" length="18" precision="7" nullable="true" jdbcType="3" />
+      <column name="high" sqlType="decimal" length="18" precision="7" nullable="true" jdbcType="3" />
+      <column name="low" sqlType="decimal" length="18" precision="7" nullable="true" jdbcType="3" />
+      <column name="band" sqlType="decimal" length="18" precision="7" nullable="true" jdbcType="3" />
+      <column name="volume" sqlType="int" length="10" precision="0" nullable="true" jdbcType="4" />
+      <column name="deals" sqlType="int" length="10" precision="0" nullable="true" jdbcType="4" />
+      <column name="trade_value" sqlType="decimal" length="18" precision="2" nullable="true" jdbcType="3" />
+      <column name="dy" sqlType="decimal" length="8" precision="4" nullable="true" jdbcType="3" />
+      <column name="ey" sqlType="decimal" length="8" precision="4" nullable="true" jdbcType="3" />
+      <column name="pe" sqlType="decimal" length="8" precision="4" nullable="true" jdbcType="3" />
+    </table>
     <table name="category_fee" schema="rce" catalog="race" type="TABLE">
       <column name="category_fee_id" sqlType="bigint identity" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true" />
       <column name="category_id" sqlType="bigint" length="19" precision="0" nullable="false" jdbcType="-5" />
@@ -180,7 +715,7 @@
       <column name="race_id" sqlType="bigint" length="19" precision="0" nullable="false" jdbcType="-5" />
       <column name="fee_description" sqlType="varchar" length="24" precision="0" nullable="true" jdbcType="12" />
       <column name="fee_value" sqlType="decimal" length="10" precision="2" nullable="false" jdbcType="3" />
-      <column name="create_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" default="'(getdate())'" />
+      <column name="create_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" def="JyhnZXRkYXRlKCkpJw==" />
       <column name="version" sqlType="int" length="10" precision="0" nullable="true" jdbcType="4" />
       <primary-key name="pk_category_fee_id" columns="category_fee_id" />
       <foreign-key name="fk_category_fee_category_id" columns="category_id" ref-table="course_category" ref-schema="rce" ref-catalog="race" ref-columns="category_id" />
@@ -192,7 +727,7 @@
       <column name="race_id" sqlType="bigint" length="19" precision="0" nullable="false" jdbcType="-5" />
       <column name="prize_description" sqlType="varchar" length="1024" precision="0" nullable="true" jdbcType="12" />
       <column name="prize_value" sqlType="varchar" length="1024" precision="0" nullable="false" jdbcType="12" />
-      <column name="create_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" default="'(getdate())'" />
+      <column name="create_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" def="JyhnZXRkYXRlKCkpJw==" />
       <column name="version" sqlType="int" length="10" precision="0" nullable="true" jdbcType="4" />
       <primary-key name="pk_category_prize_id" columns="category_prize_id" />
       <foreign-key name="fk_category_prize_category_id" columns="category_id" ref-table="course_category" ref-schema="rce" ref-catalog="race" ref-columns="category_id" />
@@ -201,7 +736,7 @@
       <column name="club_id" sqlType="bigint identity" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true" />
       <column name="district_id" sqlType="bigint" length="19" precision="0" nullable="false" jdbcType="-5" />
       <column name="club_name" sqlType="varchar" length="1024" precision="0" nullable="true" jdbcType="12" />
-      <column name="create_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" default="'(getdate())'" />
+      <column name="create_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" def="JyhnZXRkYXRlKCkpJw==" />
       <column name="update_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" />
       <column name="version" sqlType="int" length="10" precision="0" nullable="true" jdbcType="4" />
       <primary-key name="pk_club_id" columns="club_id" />
@@ -213,7 +748,7 @@
       <column name="course_starttime" sqlType="time" length="16" precision="7" nullable="false" jdbcType="92" />
       <column name="course_distance" sqlType="varchar" length="32" precision="0" nullable="false" jdbcType="12" />
       <column name="course_description" sqlType="varchar" length="2147483647" precision="0" nullable="true" jdbcType="12" />
-      <column name="create_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" default="'(getdate())'" />
+      <column name="create_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" def="JyhnZXRkYXRlKCkpJw==" />
       <column name="version" sqlType="int" length="10" precision="0" nullable="true" jdbcType="4" />
       <primary-key name="pk_course_id" columns="course_id" />
       <foreign-key name="fk_course_race_id" columns="race_id" ref-table="race" ref-schema="rce" ref-catalog="race" ref-columns="race_id" />
@@ -223,7 +758,7 @@
       <column name="course_id" sqlType="bigint" length="19" precision="0" nullable="false" jdbcType="-5" />
       <column name="race_id" sqlType="bigint" length="19" precision="0" nullable="false" jdbcType="-5" />
       <column name="category_name" sqlType="varchar" length="32" precision="0" nullable="false" jdbcType="12" />
-      <column name="create_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" default="'(getdate())'" />
+      <column name="create_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" def="JyhnZXRkYXRlKCkpJw==" />
       <column name="version" sqlType="int" length="10" precision="0" nullable="true" jdbcType="4" />
       <primary-key name="pk_category_id" columns="category_id" />
       <foreign-key name="fk_category_course_id" columns="race_id" ref-table="race" ref-schema="rce" ref-catalog="race" ref-columns="race_id" />
@@ -232,7 +767,7 @@
       <column name="district_id" sqlType="bigint identity" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true" />
       <column name="district_code" sqlType="varchar" length="12" precision="0" nullable="true" jdbcType="12" />
       <column name="district_name" sqlType="varchar" length="1024" precision="0" nullable="true" jdbcType="12" />
-      <column name="create_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" default="'(getdate())'" />
+      <column name="create_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" def="JyhnZXRkYXRlKCkpJw==" />
       <column name="update_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" />
       <column name="version" sqlType="int" length="10" precision="0" nullable="true" jdbcType="4" />
       <primary-key name="pk_district_id" columns="district_id" />
@@ -241,9 +776,9 @@
       <column name="graphic_link_id" sqlType="bigint identity" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true" />
       <column name="graphic_link_url" sqlType="varchar" length="512" precision="0" nullable="false" jdbcType="12" />
       <column name="graphic_link_image_url" sqlType="varchar" length="512" precision="0" nullable="true" jdbcType="12" />
-      <column name="graphic_link_scale_percentage" sqlType="int" length="10" precision="0" nullable="true" jdbcType="4" default="((100))" />
+      <column name="graphic_link_scale_percentage" sqlType="int" length="10" precision="0" nullable="true" jdbcType="4" def="KCgxMDApKQ==" />
       <column name="graphic_link_alt_text" sqlType="varchar" length="128" precision="0" nullable="true" jdbcType="12" />
-      <column name="create_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" default="'(getdate())'" />
+      <column name="create_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" def="JyhnZXRkYXRlKCkpJw==" />
       <column name="version" sqlType="int" length="10" precision="0" nullable="true" jdbcType="4" />
       <primary-key name="pk_graphic_link_id" columns="graphic_link_id" />
     </table>
@@ -252,7 +787,7 @@
       <column name="note_type" sqlType="varchar" length="32" precision="0" nullable="false" jdbcType="12" />
       <column name="note_text" sqlType="varchar" length="2147483647" precision="0" nullable="true" jdbcType="12" />
       <column name="race_id" sqlType="bigint" length="19" precision="0" nullable="false" jdbcType="-5" />
-      <column name="create_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" default="'(getdate())'" />
+      <column name="create_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" def="JyhnZXRkYXRlKCkpJw==" />
       <column name="version" sqlType="int" length="10" precision="0" nullable="true" jdbcType="4" />
       <primary-key name="pk_note_id" columns="note_id" />
       <foreign-key name="fk_note_race_id" columns="race_id" ref-table="race" ref-schema="rce" ref-catalog="race" ref-columns="race_id" />
@@ -260,8 +795,8 @@
     <table name="property" schema="rce" catalog="race" type="TABLE">
       <column name="property_name" sqlType="varchar" length="256" precision="0" nullable="false" jdbcType="12" />
       <column name="property_value" sqlType="varchar" length="1024" precision="0" nullable="true" jdbcType="12" />
-      <column name="property_type" sqlType="varchar" length="1024" precision="0" nullable="true" jdbcType="12" default="'('java.lang.String')'" />
-      <column name="create_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" default="'(getdate())'" />
+      <column name="property_type" sqlType="varchar" length="1024" precision="0" nullable="true" jdbcType="12" def="JygnamF2YS5sYW5nLlN0cmluZycpJw==" />
+      <column name="create_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" def="JyhnZXRkYXRlKCkpJw==" />
       <column name="update_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" />
       <column name="version" sqlType="int" length="10" precision="0" nullable="true" jdbcType="4" />
       <primary-key name="pk_property_name" columns="property_name" />
@@ -274,7 +809,7 @@
       <column name="district_id" sqlType="bigint" length="19" precision="0" nullable="false" jdbcType="-5" />
       <column name="club_id" sqlType="bigint" length="19" precision="0" nullable="true" jdbcType="-5" />
       <column name="graphic_link_id" sqlType="bigint" length="19" precision="0" nullable="true" jdbcType="-5" />
-      <column name="create_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" default="'(getdate())'" />
+      <column name="create_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" def="JyhnZXRkYXRlKCkpJw==" />
       <column name="version" sqlType="int" length="10" precision="0" nullable="true" jdbcType="4" />
       <primary-key name="pk_race_id" columns="race_id" />
       <foreign-key name="fk_race_venue_id" columns="venue_id" ref-table="venue" ref-schema="cde" ref-catalog="race" ref-columns="venue_id" />
@@ -290,7 +825,7 @@
       <column name="course_id" sqlType="bigint" length="19" precision="0" nullable="true" jdbcType="-5" />
       <column name="category_id" sqlType="bigint" length="19" precision="0" nullable="true" jdbcType="-5" />
       <column name="category_fee_id" sqlType="bigint" length="19" precision="0" nullable="false" jdbcType="-5" />
-      <column name="create_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" default="'(getdate())'" />
+      <column name="create_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" def="JyhnZXRkYXRlKCkpJw==" />
       <column name="update_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" />
       <column name="version" sqlType="int" length="10" precision="0" nullable="true" jdbcType="4" />
       <primary-key name="pk_race_registration_id" columns="race_registration_id" />
@@ -305,7 +840,7 @@
       <column name="race_sponsor_name" sqlType="varchar" length="256" precision="0" nullable="false" jdbcType="12" />
       <column name="race_id" sqlType="bigint" length="19" precision="0" nullable="false" jdbcType="-5" />
       <column name="graphic_link_id" sqlType="bigint" length="19" precision="0" nullable="true" jdbcType="-5" />
-      <column name="create_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" default="'(getdate())'" />
+      <column name="create_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" def="JyhnZXRkYXRlKCkpJw==" />
       <column name="version" sqlType="int" length="10" precision="0" nullable="true" jdbcType="4" />
       <primary-key name="pk_race_sponsor_id" columns="race_sponsor_id" />
       <foreign-key name="fk_race_sponsor_graphic_link_id" columns="graphic_link_id" ref-table="graphic_link" ref-schema="rce" ref-catalog="race" ref-columns="graphic_link_id" />
@@ -314,7 +849,7 @@
     <table name="result" schema="rce" catalog="race" type="TABLE">
       <column name="result_id" sqlType="bigint identity" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true" />
       <column name="person_id" sqlType="bigint" length="19" precision="0" nullable="false" jdbcType="-5" />
-      <column name="result_name" sqlType="varchar" length="1024" precision="0" nullable="false" jdbcType="12" default="'('Training')'" />
+      <column name="result_name" sqlType="varchar" length="1024" precision="0" nullable="false" jdbcType="12" def="JygnVHJhaW5pbmcnKSc=" />
       <column name="result_type_id" sqlType="int" length="10" precision="0" nullable="false" jdbcType="4" />
       <column name="result_start" sqlType="datetime" length="23" precision="3" nullable="false" jdbcType="93" />
       <column name="result_end" sqlType="datetime" length="23" precision="3" nullable="false" jdbcType="93" />
@@ -325,7 +860,7 @@
       <column name="result_distance" sqlType="decimal" length="10" precision="2" nullable="true" jdbcType="3" />
       <column name="result_notes" sqlType="varchar" length="256" precision="0" nullable="true" jdbcType="12" />
       <column name="race_id" sqlType="bigint" length="19" precision="0" nullable="true" jdbcType="-5" />
-      <column name="create_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" default="'(getdate())'" />
+      <column name="create_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" def="JyhnZXRkYXRlKCkpJw==" />
       <column name="update_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" />
       <column name="version" sqlType="int" length="10" precision="0" nullable="true" jdbcType="4" />
       <primary-key name="pk_result_id" columns="result_id" />
@@ -336,15 +871,78 @@
     <table name="result_type" schema="rce" catalog="race" type="TABLE">
       <column name="result_type_id" sqlType="int" length="10" precision="0" nullable="false" jdbcType="4" />
       <column name="result_type_description" sqlType="varchar" length="32" precision="0" nullable="false" jdbcType="12" />
-      <column name="create_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" default="'(getdate())'" />
+      <column name="create_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" def="JyhnZXRkYXRlKCkpJw==" />
       <column name="update_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" />
       <column name="version" sqlType="int" length="10" precision="0" nullable="true" jdbcType="4" />
       <primary-key name="pk_result_type_id" columns="result_type_id" />
     </table>
+    <table name="course" schema="rkv" catalog="race" type="TABLE">
+      <column name="course_id" sqlType="bigint identity" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true" />
+      <column name="course_duration" sqlType="int" length="10" precision="0" nullable="false" jdbcType="4" />
+      <column name="course_duration_type_id" sqlType="int" length="10" precision="0" nullable="false" jdbcType="4" />
+      <column name="training_provider_id" sqlType="bigint" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="course_accrediting_body" sqlType="varchar" length="64" precision="0" nullable="true" jdbcType="12" />
+      <column name="course_title" sqlType="varchar" length="64" precision="0" nullable="false" jdbcType="12" />
+      <column name="course_overview" sqlType="varchar" length="256" precision="0" nullable="true" jdbcType="12" />
+      <column name="course_contact_person" sqlType="varchar" length="64" precision="0" nullable="true" jdbcType="12" />
+      <column name="course_contact_no" sqlType="varchar" length="24" precision="0" nullable="true" jdbcType="12" />
+      <column name="course_internal" sqlType="bit" length="1" precision="0" nullable="true" jdbcType="-7" />
+      <column name="course_core" sqlType="bit" length="1" precision="0" nullable="true" jdbcType="-7" />
+      <column name="skill_area_id" sqlType="int" length="10" precision="0" nullable="true" jdbcType="4" />
+      <column name="content_type_id" sqlType="bigint" length="19" precision="0" nullable="true" jdbcType="-5" />
+      <column name="course_category_id" sqlType="bigint" length="19" precision="0" nullable="true" jdbcType="-5" />
+      <column name="create_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" />
+      <column name="update_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" />
+      <column name="version" sqlType="int" length="10" precision="0" nullable="true" jdbcType="4" />
+      <column name="archived" sqlType="bit" length="1" precision="0" nullable="true" jdbcType="-7" def="KCgxKSk=" />
+      <primary-key name="pk_course_id" columns="course_id" />
+      <foreign-key name="fk_course_content_type_id" columns="content_type_id" ref-table="content_type" ref-schema="trn" ref-catalog="race" ref-columns="content_type_id" />
+      <foreign-key name="fk_course_course_category_id" columns="course_category_id" ref-table="course_category" ref-schema="trn" ref-catalog="race" ref-columns="course_category_id" />
+      <foreign-key name="fk_course_course_duration_type_id" columns="course_duration_type_id" ref-table="duration_type" ref-schema="trn" ref-catalog="race" ref-columns="duration_type_id" />
+      <foreign-key name="fk_course_skill_area_id" columns="skill_area_id" ref-table="skill_area" ref-schema="trn" ref-catalog="race" ref-columns="skill_area_id" />
+      <foreign-key name="fk_course_training_provider_id" columns="training_provider_id" ref-table="training_provider" ref-schema="trn" ref-catalog="race" ref-columns="training_provider_id" />
+    </table>
+    <table name="course_date" schema="rkv" catalog="race" type="TABLE">
+      <column name="course_date_id" sqlType="bigint" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="course_id" sqlType="bigint" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="venue_id" sqlType="bigint" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="course_start_date" sqlType="date" length="10" precision="0" nullable="false" jdbcType="91" />
+      <column name="course_end_date" sqlType="date" length="10" precision="0" nullable="false" jdbcType="91" />
+      <column name="course_start_time" sqlType="time" length="16" precision="7" nullable="false" jdbcType="92" />
+      <column name="course_end_time" sqlType="time" length="16" precision="7" nullable="false" jdbcType="92" />
+      <column name="course_charge" sqlType="decimal" length="12" precision="2" nullable="true" jdbcType="3" />
+      <column name="course_charge_type_id" sqlType="bigint" length="19" precision="0" nullable="true" jdbcType="-5" />
+      <column name="create_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" />
+      <column name="update_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" />
+      <column name="version" sqlType="int" length="10" precision="0" nullable="true" jdbcType="4" />
+      <foreign-key name="fk_course_date_venue_id" columns="venue_id" ref-table="venue" ref-schema="cde" ref-catalog="race" ref-columns="venue_id" />
+      <foreign-key name="fk_course_date_course_id" columns="course_id" ref-table="course" ref-schema="rkv" ref-catalog="race" ref-columns="course_id" />
+      <foreign-key name="fk_course_date_course_charge_type_id" columns="course_charge_type_id" ref-table="course_charge_type" ref-schema="trn" ref-catalog="race" ref-columns="course_charge_type_id" />
+    </table>
+    <table name="vw_course" schema="rkv" catalog="race" type="VIEW">
+      <column name="course_id" sqlType="bigint identity" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true" />
+      <column name="course_duration" sqlType="int" length="10" precision="0" nullable="false" jdbcType="4" />
+      <column name="course_duration_type_id" sqlType="int" length="10" precision="0" nullable="false" jdbcType="4" />
+      <column name="training_provider_id" sqlType="bigint" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="course_accrediting_body" sqlType="varchar" length="64" precision="0" nullable="true" jdbcType="12" />
+      <column name="course_title" sqlType="varchar" length="64" precision="0" nullable="false" jdbcType="12" />
+      <column name="course_overview" sqlType="varchar" length="256" precision="0" nullable="true" jdbcType="12" />
+      <column name="course_contact_person" sqlType="varchar" length="64" precision="0" nullable="true" jdbcType="12" />
+      <column name="course_contact_no" sqlType="varchar" length="24" precision="0" nullable="true" jdbcType="12" />
+      <column name="course_internal" sqlType="bit" length="1" precision="0" nullable="true" jdbcType="-7" />
+      <column name="course_core" sqlType="bit" length="1" precision="0" nullable="true" jdbcType="-7" />
+      <column name="skill_area_id" sqlType="int" length="10" precision="0" nullable="true" jdbcType="4" />
+      <column name="content_type_id" sqlType="bigint" length="19" precision="0" nullable="true" jdbcType="-5" />
+      <column name="course_category_id" sqlType="bigint" length="19" precision="0" nullable="true" jdbcType="-5" />
+      <column name="create_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" />
+      <column name="update_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" />
+      <column name="version" sqlType="int" length="10" precision="0" nullable="true" jdbcType="4" />
+      <column name="archived" sqlType="int" length="10" precision="0" nullable="false" jdbcType="4" />
+    </table>
     <table name="content_type" schema="trn" catalog="race" type="TABLE">
       <column name="content_type_id" sqlType="bigint identity" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true" />
       <column name="content_type_description" sqlType="varchar" length="64" precision="0" nullable="false" jdbcType="12" />
-      <column name="create_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" default="'(getdate())'" />
+      <column name="create_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" def="JyhnZXRkYXRlKCkpJw==" />
       <column name="update_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" />
       <column name="version" sqlType="int" length="10" precision="0" nullable="true" jdbcType="4" />
       <primary-key name="pk_content_type_id" columns="content_type_id" />
@@ -359,15 +957,15 @@
       <column name="course_overview" sqlType="varchar" length="256" precision="0" nullable="true" jdbcType="12" />
       <column name="course_contact_person" sqlType="varchar" length="64" precision="0" nullable="true" jdbcType="12" />
       <column name="course_contact_no" sqlType="varchar" length="24" precision="0" nullable="true" jdbcType="12" />
-      <column name="course_internal" sqlType="bit" length="1" precision="0" nullable="true" jdbcType="-7" default="((1))" />
-      <column name="course_core" sqlType="bit" length="1" precision="0" nullable="true" jdbcType="-7" default="((1))" />
+      <column name="course_internal" sqlType="bit" length="1" precision="0" nullable="true" jdbcType="-7" def="KCgxKSk=" />
+      <column name="course_core" sqlType="bit" length="1" precision="0" nullable="true" jdbcType="-7" def="KCgxKSk=" />
       <column name="skill_area_id" sqlType="int" length="10" precision="0" nullable="true" jdbcType="4" />
       <column name="content_type_id" sqlType="bigint" length="19" precision="0" nullable="true" jdbcType="-5" />
       <column name="course_category_id" sqlType="bigint" length="19" precision="0" nullable="true" jdbcType="-5" />
       <column name="create_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" />
       <column name="update_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" />
       <column name="version" sqlType="int" length="10" precision="0" nullable="true" jdbcType="4" />
-      <column name="archived" sqlType="bit" length="1" precision="0" nullable="true" jdbcType="-7" default="((0))" />
+      <column name="archived" sqlType="bit" length="1" precision="0" nullable="true" jdbcType="-7" def="KCgwKSk=" />
       <primary-key name="pk_course_id" columns="course_id" />
       <foreign-key name="fk_course_content_type_id" columns="content_type_id" ref-table="content_type" ref-schema="trn" ref-catalog="race" ref-columns="content_type_id" />
       <foreign-key name="fk_course_course_category_id" columns="course_category_id" ref-table="course_category" ref-schema="trn" ref-catalog="race" ref-columns="course_category_id" />
@@ -378,7 +976,7 @@
     <table name="course_category" schema="trn" catalog="race" type="TABLE">
       <column name="course_category_id" sqlType="bigint identity" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true" />
       <column name="course_category_description" sqlType="varchar" length="64" precision="0" nullable="false" jdbcType="12" />
-      <column name="create_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" default="'(getdate())'" />
+      <column name="create_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" def="JyhnZXRkYXRlKCkpJw==" />
       <column name="update_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" />
       <column name="version" sqlType="int" length="10" precision="0" nullable="true" jdbcType="4" />
       <primary-key name="pk_course_category_id" columns="course_category_id" />
@@ -386,7 +984,7 @@
     <table name="course_charge_type" schema="trn" catalog="race" type="TABLE">
       <column name="course_charge_type_id" sqlType="bigint identity" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true" />
       <column name="course_charge_type_description" sqlType="varchar" length="64" precision="0" nullable="false" jdbcType="12" />
-      <column name="create_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" default="'(getdate())'" />
+      <column name="create_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" def="JyhnZXRkYXRlKCkpJw==" />
       <column name="update_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" />
       <column name="version" sqlType="int" length="10" precision="0" nullable="true" jdbcType="4" />
       <primary-key name="pk_course_charge_type_id" columns="course_charge_type_id" />
@@ -400,8 +998,8 @@
       <column name="course_start_time" sqlType="time" length="16" precision="7" nullable="false" jdbcType="92" />
       <column name="course_end_time" sqlType="time" length="16" precision="7" nullable="false" jdbcType="92" />
       <column name="course_charge" sqlType="decimal" length="12" precision="2" nullable="true" jdbcType="3" />
-      <column name="course_charge_type_id" sqlType="bigint" length="19" precision="0" nullable="true" jdbcType="-5" default="((2))" />
-      <column name="create_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" default="'(getdate())'" />
+      <column name="course_charge_type_id" sqlType="bigint" length="19" precision="0" nullable="true" jdbcType="-5" def="KCgyKSk=" />
+      <column name="create_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" def="JyhnZXRkYXRlKCkpJw==" />
       <column name="update_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" />
       <column name="version" sqlType="int" length="10" precision="0" nullable="true" jdbcType="4" />
       <primary-key name="pk_course_date_id" columns="course_date_id" />
@@ -417,7 +1015,7 @@
     <table name="duration_type" schema="trn" catalog="race" type="TABLE">
       <column name="duration_type_id" sqlType="int identity" length="10" precision="0" nullable="false" jdbcType="4" autoIncrement="true" />
       <column name="duration_type_description" sqlType="varchar" length="64" precision="0" nullable="false" jdbcType="12" />
-      <column name="create_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" default="'(getdate())'" />
+      <column name="create_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" def="JyhnZXRkYXRlKCkpJw==" />
       <column name="update_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" />
       <column name="version" sqlType="int" length="10" precision="0" nullable="true" jdbcType="4" />
       <primary-key name="pk_duration_type_id" columns="duration_type_id" />
@@ -425,7 +1023,7 @@
     <table name="outcome" schema="trn" catalog="race" type="TABLE">
       <column name="outcome_id" sqlType="bigint identity" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true" />
       <column name="outcome_description" sqlType="varchar" length="64" precision="0" nullable="false" jdbcType="12" />
-      <column name="create_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" default="'(getdate())'" />
+      <column name="create_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" def="JyhnZXRkYXRlKCkpJw==" />
       <column name="update_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" />
       <column name="version" sqlType="int" length="10" precision="0" nullable="true" jdbcType="4" />
       <primary-key name="pk_outcome_id" columns="outcome_id" />
@@ -442,7 +1040,7 @@
       <column name="training_provider_id" sqlType="bigint identity" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true" />
       <column name="training_provider_description" sqlType="varchar" length="64" precision="0" nullable="false" jdbcType="12" />
       <column name="training_provider_code" sqlType="varchar" length="25" precision="0" nullable="true" jdbcType="12" />
-      <column name="create_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" default="'(getdate())'" />
+      <column name="create_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" def="JyhnZXRkYXRlKCkpJw==" />
       <column name="update_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" />
       <column name="version" sqlType="int" length="10" precision="0" nullable="true" jdbcType="4" />
       <primary-key name="pk_training_provider_id" columns="training_provider_id" />
@@ -466,6 +1064,17 @@
       <column name="update_ts" sqlType="datetime" length="23" precision="3" nullable="true" jdbcType="93" />
       <column name="version" sqlType="int" length="10" precision="0" nullable="true" jdbcType="4" />
       <column name="archived" sqlType="int" length="10" precision="0" nullable="false" jdbcType="4" />
+    </table>
+    <table name="entity" schema="tst" catalog="race" type="TABLE">
+      <column name="entity_id" sqlType="bigint identity" length="19" precision="0" nullable="false" jdbcType="-5" autoIncrement="true" />
+      <column name="entity_type_id" sqlType="int" length="10" precision="0" nullable="false" jdbcType="4" />
+      <primary-key name="pk_entity_id" columns="entity_id" />
+    </table>
+    <table name="person" schema="tst" catalog="race" type="TABLE">
+      <column name="person_id" sqlType="bigint" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="name" sqlType="varchar" length="256" precision="0" nullable="false" jdbcType="12" />
+      <primary-key name="pk_person_id" columns="person_id" />
+      <foreign-key name="fk_person_entity" columns="person_id" ref-table="entity" ref-schema="tst" ref-catalog="race" ref-columns="entity_id" />
     </table>
   </data-source>
 </component>
