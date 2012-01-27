@@ -7,8 +7,6 @@
     <name>yellowfire</name>
 
     <modules>
-        <!--<module>yellowfire-ear</module>-->
-        <!--<module>yellowfire-ejb</module>-->
         <module>yellowfire-web</module>
     </modules>
 
@@ -50,59 +48,9 @@
             <artifactId>hibernate-validator</artifactId>
             <version>${hibernate.validator.version}</version>
         </dependency>
-        <!--duplicated from yellowfire.pom.xml-->
-        <!--dependency>
-            <groupId>javax.xml.bind</groupId>
-            <artifactId>jaxb-api</artifactId>
-            <version>${jaxb.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.sun.xml.bind</groupId>
-            <artifactId>jaxb-impl</artifactId>
-            <version>2.2.2</version>
-        </dependency-->
-        <!--duplicated from yellowfire.pom.xml-->
-        <!--dependency>
-            <groupId>com.sun.jersey</groupId>
-            <artifactId>jersey-core</artifactId>
-            <version>${jersey.version}</version>
-        </dependency-->
-        <!--dependency>
-            <groupId>joda-time</groupId>
-            <artifactId>joda-time</artifactId>
-            <version>${joda-time.version}</version>
-        </dependency-->
-        <dependency>
-            <groupId>org.jboss.solder</groupId>
-            <artifactId>solder-impl</artifactId>
-        </dependency>
-        <!--dependency>
-            <groupId>org.jboss.seam.faces</groupId>
-            <artifactId>seam-faces-api</artifactId>
-            <version>${seam.faces.version}</version>
-        </dependency-->
-        <!--duplicated from yellowfire.pom.xml-->
-        <!--dependency>
-            <groupId>org.jboss.seam.faces</groupId>
-            <artifactId>seam-faces-impl</artifactId>
-            <version>${seam.faces.version}</version>
-            <scope>runtime</scope>
-        </dependency-->
     </dependencies>
     <dependencyManagement>
         <dependencies>
-            <!--<dependency>-->
-                <!--<groupId>yellowfire</groupId>-->
-                <!--<artifactId>yellowfire-ear</artifactId>-->
-                <!--<version>0.0.1</version>-->
-                <!--<type>ear</type>-->
-            <!--</dependency>-->
-            <!--<dependency>-->
-                <!--<groupId>yellowfire</groupId>-->
-                <!--<artifactId>yellowfire-ejb</artifactId>-->
-                <!--<version>0.0.1</version>-->
-                <!--<type>ejb</type>-->
-            <!--</dependency>-->
             <dependency>
                 <groupId>za.co.yellowfire</groupId>
                 <artifactId>yellowfire-solarflare</artifactId>
@@ -222,11 +170,25 @@
                 <dependency>
                     <groupId>org.slf4j</groupId>
                     <artifactId>slf4j-jdk14</artifactId>
-                    <!--<version>1.6.1</version>-->
                 </dependency>
             </dependencies>
             <dependencyManagement>
                 <dependencies>
+                    <dependency>
+                        <groupId>org.jboss.seam.security</groupId>
+                        <artifactId>seam-security</artifactId>
+                        <version>${seam.version}</version>
+                        <exclusions>
+                            <exclusion>
+                                <groupId>org.jboss.seam.persistence</groupId>
+                                <artifactId>seam-persistence</artifactId>
+                            </exclusion>
+                            <exclusion>
+                                <groupId>org.jboss.seam.persistence</groupId>
+                                <artifactId>seam-persistence-api</artifactId>
+                            </exclusion>
+                        </exclusions>
+                    </dependency>
                     <dependency>
                         <groupId>org.jboss.logging</groupId>
                         <artifactId>jboss-logging</artifactId>
@@ -284,16 +246,21 @@
             </dependencies>
             <dependencyManagement>
                 <dependencies>
-                    <!--<dependency>-->
-                        <!--<groupId>org.hibernate</groupId>-->
-                        <!--<artifactId>hibernate-core</artifactId>-->
-                        <!--<version>4.0.1.Final</version>-->
-                    <!--</dependency>-->
-                    <!--<dependency>-->
-                        <!--<groupId>org.hibernate.javax.persistence</groupId>-->
-                        <!--<artifactId>hibernate-jpa-2.0-api</artifactId>-->
-                        <!--<version>1.0.1.Final</version>-->
-                    <!--</dependency>-->
+                    <dependency>
+                        <groupId>org.jboss.seam.security</groupId>
+                        <artifactId>seam-security</artifactId>
+                        <version>${seam.version}</version>
+                        <!--<exclusions>-->
+                            <!--<exclusion>-->
+                                <!--<groupId>org.jboss.seam.persistence</groupId>-->
+                                <!--<artifactId>seam-persistence</artifactId>-->
+                            <!--</exclusion>-->
+                            <!--<exclusion>-->
+                                <!--<groupId>org.jboss.seam.persistence</groupId>-->
+                                <!--<artifactId>seam-persistence-api</artifactId>-->
+                            <!--</exclusion>-->
+                        <!--</exclusions>-->
+                    </dependency>
                     <dependency>
                         <groupId>org.jboss.logging</groupId>
                         <artifactId>jboss-logging</artifactId>
@@ -518,7 +485,7 @@
         <jersey.version>1.6</jersey.version>
         <joda-time.version>1.6.2</joda-time.version>
 
-        <eclipselink.version>2.3.0</eclipselink.version>
+        <eclipselink.version>2.3.1</eclipselink.version>
         <hibernate.version>4.0.1.Final</hibernate.version>
         <hibernate.validator.version>4.2.0.Beta2</hibernate.validator.version>
 

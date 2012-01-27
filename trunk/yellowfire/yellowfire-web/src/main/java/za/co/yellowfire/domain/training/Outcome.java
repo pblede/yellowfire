@@ -21,10 +21,7 @@ import javax.xml.bind.annotation.XmlAttribute;
         ),
         @NamedQuery(
             name="qry.outcomes.refresh.cache",
-            query="select o from Outcome o",
-            hints = {
-                @QueryHint(name= QueryHints.REFRESH, value="true")
-            }
+            query="select o from Outcome o"
         )
 })
 public class Outcome extends DomainEntity {

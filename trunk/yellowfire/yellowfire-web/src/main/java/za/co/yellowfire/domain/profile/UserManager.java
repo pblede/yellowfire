@@ -6,10 +6,11 @@ import javax.ejb.Local;
 public interface UserManager {
 	/**
      * Performs a login for the supplied user
-     * @param credential The credential to login
+     * @param userName The user name to login
+     * @param password The password to login
      * @return Whether the login was successful
      */
-    User login(Credential credential);
+    Profile login(String userName, String password);
     
     /**
      * Determines whether a username is available
@@ -23,21 +24,21 @@ public interface UserManager {
      * @param user The user to register
      * @return The registered user
      */
-    User register(User user) throws UserRegistrationException;
+    Profile register(Profile user) throws UserRegistrationException;
     
     /**
      * Persists the user in the system
      * @param user The user to persist
      * @return The persisted user
      */
-    User persist(User user) throws UserPersistException;
+    Profile persist(Profile user) throws UserPersistException;
     
     /**
      * Retrieves the user by name
      * @param name The name of the person
      * @return String
      */
-    User retrieve(String name);
+    Profile retrieve(String name);
 
     /**
      * Verifies the user's profile
@@ -45,5 +46,5 @@ public interface UserManager {
      * @returns The verified user
      * @throws UserPersistException If the user/s belonging to the key cannot be verified
      */
-    User verify(String verificationKey) throws UserPersistException;
+    Profile verify(String verificationKey) throws UserPersistException;
 }

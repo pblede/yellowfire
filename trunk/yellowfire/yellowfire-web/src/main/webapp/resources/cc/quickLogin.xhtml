@@ -14,7 +14,7 @@
     <composite:attribute name="loginImage" default="#{resource['img:key.png']}" />
     <composite:actionSource name="loginActionListener" targets="sec:lfcb1"/>
     <!--<composite:attribute name="rendered" default="true" displayName="Rendered" shortDescription="Whether the component is rendered"/>-->
-    <composite:attribute name="credentialBean" required="true" shortDescription="The bean that quickLogin should use to get the userName and password"/>
+    <composite:attribute name="credentialBean" type="org.jboss.seam.security.Credentials" required="true" shortDescription="The bean that quickLogin should use to get the userName and password"/>
     <composite:attribute name="actionMethod" method-signature="java.lang.String action()"/>
     <composite:attribute name="registerMethod" method-signature="java.lang.String action()"/>
     <composite:attribute name="update" default="sec" required="false" shortDescription="The component ids to update"/>
@@ -25,7 +25,7 @@
     <h:form id="sec" prependId="true">
         <h:panelGrid columns="6">
             <h:outputLabel value="#{cc.attrs.userLabel}:" for="userid"/>
-            <h:inputText value="#{cc.attrs.credentialBean.name}" id="userid"/>
+            <h:inputText value="#{cc.attrs.credentialBean.username}" id="userid"/>
             <h:outputLabel value="#{cc.attrs.passwordLabel}:" for="pwd"/>
             <p:password value="#{cc.attrs.credentialBean.password}" id="pwd" autocomplete="true" feedback="false"  minLength="5" />
             <p:commandButton

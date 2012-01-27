@@ -1,7 +1,7 @@
 package za.co.yellowfire.domain.racing;
 
 import za.co.yellowfire.domain.DomainEntity;
-import za.co.yellowfire.domain.profile.User;
+import za.co.yellowfire.domain.profile.Profile;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -36,7 +36,7 @@ public class RaceRegistration extends DomainEntity {
 	@XmlElement(name = "person")
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "person_id", nullable = false, updatable = true, referencedColumnName = "person_id")
-    private User person;
+    private Profile person;
 	
 	@XmlElement(name = "fee")
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
@@ -63,11 +63,11 @@ public class RaceRegistration extends DomainEntity {
 		this.race = race;
 	}
 
-	public User getPerson() {
+	public Profile getPerson() {
 		return person;
 	}
 
-	public void setPerson(User person) {
+	public void setPerson(Profile person) {
 		this.person = person;
 	}
 

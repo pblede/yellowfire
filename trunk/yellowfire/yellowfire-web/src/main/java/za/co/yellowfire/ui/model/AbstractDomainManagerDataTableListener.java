@@ -73,7 +73,8 @@ public abstract class AbstractDomainManagerDataTableListener<T extends DomainObj
         if (query == null) {
             rows = new ArrayList<DataTableRow<T>>(0);
         } else {
-            Collection<T> values = (List<T>) getManager().query(query, getLoadQueryParameters(), DomainQueryHint.REFRESH);
+            /*NOTE: EclipseLink 2.3.x refresh hint causing a rollback of the transaction possible 2012-01-25 */
+            Collection<T> values = (List<T>) getManager().query(query, getLoadQueryParameters()/*, DomainQueryHint.REFRESH*/);
             if (values != null) {
                 rows = new ArrayList<DataTableRow<T>>(values.size());
                 for (T value : values) {

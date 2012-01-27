@@ -4,7 +4,7 @@ import org.eclipse.persistence.annotations.ConversionValue;
 import org.eclipse.persistence.annotations.Convert;
 import org.eclipse.persistence.annotations.ObjectTypeConverter;
 import za.co.yellowfire.domain.DomainEntity;
-import za.co.yellowfire.domain.profile.User;
+import za.co.yellowfire.domain.profile.Profile;
 import za.co.yellowfire.domain.racing.Race;
 
 import javax.persistence.*;
@@ -60,9 +60,9 @@ public class Result extends DomainEntity {
     private Long id;
 	
 //	@XmlElement(name = "person")
-	@ManyToOne(fetch = FetchType.EAGER, optional = false, targetEntity = User.class)
+	@ManyToOne(fetch = FetchType.EAGER, optional = false, targetEntity = Profile.class)
     @JoinColumn(name = "person_id", nullable = false, updatable = true, referencedColumnName = "person_id")
-	private User person;
+	private Profile person;
 	
 //	@XmlElement(name = "race")
 	@ManyToOne(fetch = FetchType.EAGER, optional = true, targetEntity = Race.class)
@@ -128,11 +128,11 @@ public class Result extends DomainEntity {
 		this.id = id;
 	}
 
-	public User getPerson() {
+	public Profile getPerson() {
 		return person;
 	}
 
-	public void setPerson(User person) {
+	public void setPerson(Profile person) {
 		this.person = person;
 	}
 

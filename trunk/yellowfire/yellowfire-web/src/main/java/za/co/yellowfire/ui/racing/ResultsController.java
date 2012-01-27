@@ -1,5 +1,6 @@
 package za.co.yellowfire.ui.racing;
 
+import org.jboss.seam.security.Identity;
 import org.primefaces.event.DateSelectEvent;
 import org.primefaces.event.ScheduleEntryMoveEvent;
 import org.primefaces.event.ScheduleEntryResizeEvent;
@@ -9,7 +10,7 @@ import org.primefaces.model.ScheduleModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import za.co.yellowfire.DateUtil;
-import za.co.yellowfire.domain.profile.User;
+import za.co.yellowfire.domain.profile.Profile;
 import za.co.yellowfire.domain.racing.Race;
 import za.co.yellowfire.domain.result.Result;
 import za.co.yellowfire.domain.result.ResultType;
@@ -59,8 +60,8 @@ public class ResultsController extends AbstractRacingUIController {
     private List<Long> minutes;
     private List<Long> seconds;
 
-    @Inject @Named("currentUser")
-	private User user;
+    @Inject
+	private Identity identity;
 
     @EJB
     private DomainManager manager;
@@ -80,7 +81,7 @@ public class ResultsController extends AbstractRacingUIController {
             @Override
             public List<ResultEvent> onLoadEvents(Date start, Date end) {
                 List<ResultEvent> events = new ArrayList<ResultEvent>();
-                List<Result> results = getCalendar(user, start, end);
+                List<Result> results = getCalendar((Profile) identity.getUser(), start, end);
                 for (Result result : results) {
                     events.add(new ResultEvent(result));
                 }
@@ -151,16 +152,16 @@ public class ResultsController extends AbstractRacingUIController {
 
     /**
      * Retrieves the results for a specific person's calendar
-     * @param person The person for whom the results should be shown
+     * @param profile The profile for whom the results should be shown
      * @param start The start date of the calendar
      * @param end The end date of the calendar
      * @return List<Result>
      */
     @SuppressWarnings("unchecked")
-    public List<Result> getCalendar(User person, Date start, Date end) {
-    	LOGGER.debug("ResultsController.calendar() : {} : {} : {}", new Object[]{person, start, end});
+    public List<Result> getCalendar(Profile profile, Date start, Date end) {
+    	LOGGER.debug("ResultsController.calendar() : {} : {} : {}", new Object[]{profile, start, end});
     	Map<String, Object> params = new HashMap<String, Object>(3);
-    	params.put(Result.FIELD_PERSON, person.getId());
+    	params.put(Result.FIELD_PERSON, profile.getUserId());
     	params.put(Result.FIELD_START, start);
     	params.put(Result.FIELD_END, end);
 
@@ -287,7 +288,7 @@ public class ResultsController extends AbstractRacingUIController {
         LOGGER.info("onSave() : " + event);
 
         Result r = this.selected.getResult();
-        r.setPerson(this.user);
+        r.setPerson((Profile) this.identity.getUser());
         if (r.getType() == ResultType.Training) {
             r.setName("Training - " + new SimpleDateFormat("yyyy-MM-dd").format(r.getStart()));
         }

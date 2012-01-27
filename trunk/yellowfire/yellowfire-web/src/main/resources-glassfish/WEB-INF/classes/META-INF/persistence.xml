@@ -2,25 +2,39 @@
 <persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
   <persistence-unit name="yellowfire" transaction-type="JTA">
 
-        <!--<provider>org.hibernate.ejb.HibernatePersistence</provider>-->
-        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-        <!--Note: Use the following for global scoped data sources -->
-        <jta-data-source>yellowfire/ds</jta-data-source>
-        <class>za.co.yellowfire.domain.profile.UserProperty</class>
-        <class>za.co.yellowfire.domain.profile.User</class>
-        <class>za.co.yellowfire.domain.result.Result</class>
-        <class>za.co.yellowfire.domain.Venue</class>
-        <class>za.co.yellowfire.domain.racing.RaceSponsor</class>
-        <class>za.co.yellowfire.domain.racing.Race</class>
-        <class>za.co.yellowfire.domain.racing.Note</class>
-        <class>za.co.yellowfire.domain.racing.GraphicLink</class>
-        <class>za.co.yellowfire.domain.racing.CourseCategory</class>
-        <class>za.co.yellowfire.domain.racing.Course</class>
-        <class>za.co.yellowfire.domain.racing.CategoryPrize</class>
-        <class>za.co.yellowfire.domain.racing.CategoryFee</class>
-        <class>za.co.yellowfire.domain.racing.RaceRegistration</class>
-        <class>za.co.yellowfire.domain.racing.District</class>
-        <class>za.co.yellowfire.domain.racing.Club</class>
+      <!--<provider>org.hibernate.ejb.HibernatePersistence</provider>-->
+      <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+      <!--Note: Use the following for global scoped data sources -->
+      <jta-data-source>yellowfire/ds</jta-data-source>
+
+      <class>za.co.yellowfire.domain.Contact</class>
+      <class>za.co.yellowfire.domain.Venue</class>
+
+      <class>za.co.yellowfire.domain.profile.UserProperty</class>
+      <class>za.co.yellowfire.domain.profile.Profile</class>
+
+      <class>za.co.yellowfire.domain.result.Result</class>
+
+      <class>za.co.yellowfire.domain.racing.RaceSponsor</class>
+      <class>za.co.yellowfire.domain.racing.Race</class>
+      <class>za.co.yellowfire.domain.racing.Note</class>
+      <class>za.co.yellowfire.domain.racing.GraphicLink</class>
+      <class>za.co.yellowfire.domain.racing.CourseCategory</class>
+      <class>za.co.yellowfire.domain.racing.Course</class>
+      <class>za.co.yellowfire.domain.racing.CategoryPrize</class>
+      <class>za.co.yellowfire.domain.racing.CategoryFee</class>
+      <class>za.co.yellowfire.domain.racing.RaceRegistration</class>
+      <class>za.co.yellowfire.domain.racing.District</class>
+      <class>za.co.yellowfire.domain.racing.Club</class>
+
+      <class>za.co.yellowfire.domain.training.Category</class>
+      <class>za.co.yellowfire.domain.training.ContentType</class>
+      <class>za.co.yellowfire.domain.training.Outcome</class>
+      <class>za.co.yellowfire.domain.training.SkillArea</class>
+      <class>za.co.yellowfire.domain.training.TrainingCourse</class>
+      <class>za.co.yellowfire.domain.training.TrainingCourse</class>
+      <class>za.co.yellowfire.domain.training.TrainingCourseDate</class>
+      <class>za.co.yellowfire.domain.training.TrainingProvider</class>
 
         
       
@@ -56,7 +70,7 @@
         FINEST	This level enables logging of more debugging information than the FINER setting, such as a very detailed information about certain features (for example, sequencing). You may want to use this log level during debugging and testing, but not at production.
         ALL		This level currently logs at the same level as FINEST.
         -->
-        <property name="eclipselink.logging.level" value="INFO"/>
+        <property name="eclipselink.logging.level" value="ALL"/>
         <property name="eclipselink.logging.timestamp" value="true"/>
         <property name="eclipselink.logging.session" value="true"/>
         <property name="eclipselink.logging.thread" value="true"/>

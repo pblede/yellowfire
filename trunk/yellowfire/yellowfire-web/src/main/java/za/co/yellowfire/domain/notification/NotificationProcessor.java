@@ -19,11 +19,10 @@ import javax.naming.NamingException;
 @MessageDriven(
         name = "NotificationProcessor",
         messageListenerInterface = MessageListener.class,
-        mappedName = "java:comp/env/yellowfire/queue/notification",
         activationConfig = {
             @ActivationConfigProperty(propertyName = "acknowledgeMode", propertyValue = "Auto-acknowledge"),
             @ActivationConfigProperty(propertyName = "destinationType", propertyValue = "javax.jms.Queue"),
-            @ActivationConfigProperty(propertyName = "destination", propertyValue = "java:comp/env/yellowfire/queue/notification"),
+            @ActivationConfigProperty(propertyName = "destination", propertyValue = "yellowfire.queue.notification"),
             @ActivationConfigProperty(propertyName = "clientID", propertyValue = "notification")
         }
 )

@@ -60,7 +60,7 @@
       </root>
     </artifact>
     <artifact type="exploded-war" name="yellowfire-web:war exploded">
-      <output-path>$PROJECT_DIR$/yellowfire-web/target/yellowfire-web</output-path>
+      <output-path>$PROJECT_DIR$/yellowfire-web/target/yellowfire-web-0.0.1</output-path>
       <root id="root">
         <element id="javaee-facet-resources" facet="yellowfire-web/web/Web" />
         <element id="directory" name="WEB-INF">
@@ -91,6 +91,18 @@
             <element id="library" level="project" name="Maven: org.primefaces:primefaces:3.0" />
             <element id="library" level="project" name="Maven: org.primefaces.themes:smoothness:1.0.2" />
             <element id="library" level="project" name="Maven: joda-time:joda-time:1.6.2" />
+            <element id="library" level="project" name="Maven: org.jboss.seam.security:seam-security:3.1.0.Final" />
+            <element id="library" level="project" name="Maven: org.jboss.seam.security:seam-security-api:3.1.0.Final" />
+            <element id="library" level="project" name="Maven: org.picketlink.idm:picketlink-idm-api:1.5.0.Alpha02" />
+            <element id="library" level="project" name="Maven: org.picketlink.idm:picketlink-idm-common:1.5.0.Alpha02" />
+            <element id="library" level="project" name="Maven: org.picketlink.idm:picketlink-idm-spi:1.5.0.Alpha02" />
+            <element id="library" level="project" name="Maven: org.jboss.seam.international:seam-international:3.1.0.Final" />
+            <element id="library" level="project" name="Maven: org.jboss.seam.international:seam-international-api:3.1.0.Final" />
+            <element id="library" level="project" name="Maven: org.jboss.solder:solder-api:3.1.0.Final" />
+            <element id="library" level="project" name="Maven: org.jboss.solder:solder-logging:3.1.0.Final" />
+            <element id="library" level="project" name="Maven: org.jboss.solder:solder-impl:3.1.0.Final" />
+            <element id="library" level="project" name="Maven: org.picketlink.idm:picketlink-idm-core:1.5.0.Alpha02" />
+            <element id="library" level="project" name="Maven: org.jboss.seam.faces:seam-faces-api:3.1.0.Final" />
             <element id="library" level="project" name="Maven: org.apache.httpcomponents:httpclient:4.1.1" />
             <element id="library" level="project" name="Maven: org.apache.httpcomponents:httpcore:4.1" />
             <element id="library" level="project" name="Maven: org.slf4j:log4j-over-slf4j:1.6.1" />
@@ -98,9 +110,6 @@
             <element id="library" level="project" name="Maven: commons-collections:commons-collections:3.2.1" />
             <element id="library" level="project" name="Maven: org.hibernate:hibernate-validator:4.2.0.Beta2" />
             <element id="library" level="project" name="Maven: javax.validation:validation-api:1.0.0.GA" />
-            <element id="library" level="project" name="Maven: org.jboss.solder:solder-impl:3.1.0.Final" />
-            <element id="library" level="project" name="Maven: org.jboss.solder:solder-api:3.1.0.Final" />
-            <element id="library" level="project" name="Maven: org.jboss.solder:solder-logging:3.1.0.Final" />
             <element id="library" level="project" name="Maven: org.jboss.logging:jboss-logging:3.0.1.GA" />
           </element>
         </element>
@@ -134,7 +143,7 @@
   <component name="CopyrightManager" default="">
     <module2copyright />
   </component>
-  <component name="DataSourceManagerImpl" compressed="false" />
+  <component name="DataSourceManagerImpl" compressed="false" hash="1125584425" />
   <component name="DependencyValidationManager">
     <option name="SKIP_IMPORT_STATEMENTS" value="false" />
   </component>
@@ -146,48 +155,11 @@
     <option name="OPEN_IN_BROWSER" value="true" />
     <option name="OUTPUT_DIRECTORY" value="C:\Shared\Projects.Java\yellowfire" />
   </component>
-  <component name="FacetAutodetectingManager">
-    <autodetection-disabled>
-      <facet-type id="ejb">
-        <modules>
-          <module name="yellowfire-ejb">
-            <files>
-              <file url="file://$PROJECT_DIR$/yellowfire-ejb/src/main/resources/META-INF/ejb-jar.xml" />
-            </files>
-          </module>
-        </modules>
-      </facet-type>
-      <facet-type id="javaeeApplication">
-        <modules>
-          <module name="ear" />
-          <module name="yellowfire-ear" />
-        </modules>
-      </facet-type>
-      <facet-type id="jpa">
-        <modules>
-          <module name="yellowfire-ejb">
-            <files>
-              <file url="file://$PROJECT_DIR$/yellowfire-ejb/src/main/resources/META-INF/persistence.xml" />
-            </files>
-          </module>
-        </modules>
-      </facet-type>
-      <facet-type id="web">
-        <modules>
-          <module name="yellowfire-web" />
-          <module name="yellowfire4" />
-        </modules>
-      </facet-type>
-      <facet-type id="WebBeans">
-        <modules>
-          <module name="yellowfire-ejb">
-            <files>
-              <file url="file://$PROJECT_DIR$/yellowfire-ejb/src/main/resources/META-INF/beans.xml" />
-            </files>
-          </module>
-        </modules>
-      </facet-type>
-    </autodetection-disabled>
+  <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="ejb" url="file://$PROJECT_DIR$/yellowfire-ejb/src/main/resources/META-INF/ejb-jar.xml" />
+    <file type="jpa" url="file://$PROJECT_DIR$/yellowfire-ejb/src/main/resources/META-INF/persistence.xml" />
+    <file type="web" url="file://$PROJECT_DIR$/yellowfire-web" />
+    <file type="WebBeans" url="file://$PROJECT_DIR$/yellowfire-ejb/src/main/resources/META-INF/beans.xml" />
   </component>
   <component name="IdProvider" IDEtalkID="631CF00C852F05B5B9104E7684DE5402" />
   <component name="InspectionProjectProfileManager">
@@ -196,21 +168,11 @@
         <option name="myName" value="Project Default" />
         <option name="myLocal" value="false" />
         <inspection_tool class="CachedNumberConstructorCall" enabled="true" level="WARNING" enabled_by_default="true" />
-        <inspection_tool class="ClassWithMultipleLoggers" enabled="true" level="WARNING" enabled_by_default="true">
-          <option name="loggerNamesString" value="java.util.logging.Logger,org.slf4j.Logger,org.apache.commons.logging.Log,org.apache.log4j.Logger" />
-        </inspection_tool>
-        <inspection_tool class="ClassWithoutLogger" enabled="true" level="WARNING" enabled_by_default="true">
+        <inspection_tool class="ClassWithoutLogger" enabled="false" level="WARNING" enabled_by_default="false">
           <option name="loggerNamesString" value="java.util.logging.Logger,org.slf4j.Logger,org.apache.commons.logging.Log,org.apache.log4j.Logger,za.co.yellowfire.log.DomainLogger,za.co.yellowfire.log.ProfileLogger" />
           <option name="ignoreSuperLoggers" value="true" />
         </inspection_tool>
         <inspection_tool class="LengthOneStringInIndexOf" enabled="true" level="WARNING" enabled_by_default="true" />
-        <inspection_tool class="LoggerInitializedWithForeignClass" enabled="true" level="WARNING" enabled_by_default="true">
-          <option name="loggerClassName" value="org.apache.log4j.Logger" />
-          <option name="loggerFactoryMethodName" value="getLogger" />
-        </inspection_tool>
-        <inspection_tool class="NonStaticFinalLogger" enabled="true" level="WARNING" enabled_by_default="true">
-          <option name="loggerClassName" value="java.util.logging.Logger" />
-        </inspection_tool>
         <inspection_tool class="SerialVersionUIDNotStaticFinal" enabled="true" level="WARNING" enabled_by_default="true" />
         <inspection_tool class="SerializableHasSerialVersionUIDField" enabled="true" level="WARNING" enabled_by_default="true">
           <option name="ignoreAnonymousInnerClasses" value="false" />
@@ -258,6 +220,11 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
+      </list>
+    </option>
+    <option name="activeProfiles">
+      <list>
+        <option value="glassfish-3.1.1" />
       </list>
     </option>
   </component>
@@ -385,7 +352,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/yellowfire.iml" filepath="$PROJECT_DIR$/yellowfire.iml" />
-      <module fileurl="file://$PROJECT_DIR$/yellowfire-ejb/yellowfire-ejb.iml" filepath="$PROJECT_DIR$/yellowfire-ejb/yellowfire-ejb.iml" />
       <module fileurl="file://$PROJECT_DIR$/yellowfire-web/yellowfire-web.iml" filepath="$PROJECT_DIR$/yellowfire-web/yellowfire-web.iml" />
     </modules>
   </component>
@@ -401,25 +367,6 @@
         <entry key="$PROJECT_DIR$">
           <value>
             <SvnBranchConfiguration>
-              <option name="branchMap">
-                <map>
-                  <entry key="https://yellowfire.googlecode.com/svn/branches">
-                    <value>
-                      <list />
-                    </value>
-                  </entry>
-                  <entry key="https://yellowfire.googlecode.com/svn/tags">
-                    <value>
-                      <list />
-                    </value>
-                  </entry>
-                  <entry key="https://yellowfire.googlecode.com/svn/wiki">
-                    <value>
-                      <list />
-                    </value>
-                  </entry>
-                </map>
-              </option>
               <option name="branchUrls">
                 <list>
                   <option value="https://yellowfire.googlecode.com/svn/branches" />
@@ -434,25 +381,6 @@
         <entry key="$PROJECT_DIR$/yellowfire-ejb">
           <value>
             <SvnBranchConfiguration>
-              <option name="branchMap">
-                <map>
-                  <entry key="https://yellowfire.googlecode.com/svn/branches">
-                    <value>
-                      <list />
-                    </value>
-                  </entry>
-                  <entry key="https://yellowfire.googlecode.com/svn/tags">
-                    <value>
-                      <list />
-                    </value>
-                  </entry>
-                  <entry key="https://yellowfire.googlecode.com/svn/wiki">
-                    <value>
-                      <list />
-                    </value>
-                  </entry>
-                </map>
-              </option>
               <option name="branchUrls">
                 <list>
                   <option value="https://yellowfire.googlecode.com/svn/branches" />
@@ -946,6 +874,17 @@
         <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/woodstox/wstx-asl/3.2.7/wstx-asl-3.2.7-sources.jar!/" />
       </SOURCES>
     </library>
+    <library name="Maven: org.eclipse.persistence:eclipselink:2.3.1">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/eclipse/persistence/eclipselink/2.3.1/eclipselink-2.3.1.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/org/eclipse/persistence/eclipselink/2.3.1/eclipselink-2.3.1-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/eclipse/persistence/eclipselink/2.3.1/eclipselink-2.3.1-sources.jar!/" />
+      </SOURCES>
+    </library>
     <library name="Maven: org.glassfish.extras:glassfish-embedded-all:3.1">
       <CLASSES>
         <root url="jar://$MAVEN_REPOSITORY$/org/glassfish/extras/glassfish-embedded-all/3.1/glassfish-embedded-all-3.1.jar!/" />
@@ -1004,6 +943,61 @@
         <root url="jar://$MAVEN_REPOSITORY$/org/jboss/logging/jboss-logging/3.0.1.GA/jboss-logging-3.0.1.GA-sources.jar!/" />
       </SOURCES>
     </library>
+    <library name="Maven: org.jboss.seam.faces:seam-faces-api:3.1.0.Final">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/jboss/seam/faces/seam-faces-api/3.1.0.Final/seam-faces-api-3.1.0.Final.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/org/jboss/seam/faces/seam-faces-api/3.1.0.Final/seam-faces-api-3.1.0.Final-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/jboss/seam/faces/seam-faces-api/3.1.0.Final/seam-faces-api-3.1.0.Final-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: org.jboss.seam.international:seam-international-api:3.1.0.Final">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/jboss/seam/international/seam-international-api/3.1.0.Final/seam-international-api-3.1.0.Final.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/org/jboss/seam/international/seam-international-api/3.1.0.Final/seam-international-api-3.1.0.Final-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/jboss/seam/international/seam-international-api/3.1.0.Final/seam-international-api-3.1.0.Final-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: org.jboss.seam.international:seam-international:3.1.0.Final">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/jboss/seam/international/seam-international/3.1.0.Final/seam-international-3.1.0.Final.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/org/jboss/seam/international/seam-international/3.1.0.Final/seam-international-3.1.0.Final-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/jboss/seam/international/seam-international/3.1.0.Final/seam-international-3.1.0.Final-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: org.jboss.seam.security:seam-security-api:3.1.0.Final">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/jboss/seam/security/seam-security-api/3.1.0.Final/seam-security-api-3.1.0.Final.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/org/jboss/seam/security/seam-security-api/3.1.0.Final/seam-security-api-3.1.0.Final-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/jboss/seam/security/seam-security-api/3.1.0.Final/seam-security-api-3.1.0.Final-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: org.jboss.seam.security:seam-security:3.1.0.Final">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/jboss/seam/security/seam-security/3.1.0.Final/seam-security-3.1.0.Final.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/org/jboss/seam/security/seam-security/3.1.0.Final/seam-security-3.1.0.Final-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/jboss/seam/security/seam-security/3.1.0.Final/seam-security-3.1.0.Final-sources.jar!/" />
+      </SOURCES>
+    </library>
     <library name="Maven: org.jboss.solder:solder-api:3.1.0.Final">
       <CLASSES>
         <root url="jar://$MAVEN_REPOSITORY$/org/jboss/solder/solder-api/3.1.0.Final/solder-api-3.1.0.Final.jar!/" />
@@ -1035,6 +1029,50 @@
       </JAVADOC>
       <SOURCES>
         <root url="jar://$MAVEN_REPOSITORY$/org/jboss/solder/solder-logging/3.1.0.Final/solder-logging-3.1.0.Final-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: org.picketlink.idm:picketlink-idm-api:1.5.0.Alpha02">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/picketlink/idm/picketlink-idm-api/1.5.0.Alpha02/picketlink-idm-api-1.5.0.Alpha02.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/org/picketlink/idm/picketlink-idm-api/1.5.0.Alpha02/picketlink-idm-api-1.5.0.Alpha02-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/picketlink/idm/picketlink-idm-api/1.5.0.Alpha02/picketlink-idm-api-1.5.0.Alpha02-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: org.picketlink.idm:picketlink-idm-common:1.5.0.Alpha02">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/picketlink/idm/picketlink-idm-common/1.5.0.Alpha02/picketlink-idm-common-1.5.0.Alpha02.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/org/picketlink/idm/picketlink-idm-common/1.5.0.Alpha02/picketlink-idm-common-1.5.0.Alpha02-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/picketlink/idm/picketlink-idm-common/1.5.0.Alpha02/picketlink-idm-common-1.5.0.Alpha02-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: org.picketlink.idm:picketlink-idm-core:1.5.0.Alpha02">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/picketlink/idm/picketlink-idm-core/1.5.0.Alpha02/picketlink-idm-core-1.5.0.Alpha02.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/org/picketlink/idm/picketlink-idm-core/1.5.0.Alpha02/picketlink-idm-core-1.5.0.Alpha02-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/picketlink/idm/picketlink-idm-core/1.5.0.Alpha02/picketlink-idm-core-1.5.0.Alpha02-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: org.picketlink.idm:picketlink-idm-spi:1.5.0.Alpha02">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/picketlink/idm/picketlink-idm-spi/1.5.0.Alpha02/picketlink-idm-spi-1.5.0.Alpha02.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/org/picketlink/idm/picketlink-idm-spi/1.5.0.Alpha02/picketlink-idm-spi-1.5.0.Alpha02-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/picketlink/idm/picketlink-idm-spi/1.5.0.Alpha02/picketlink-idm-spi-1.5.0.Alpha02-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Maven: org.primefaces.themes:smoothness:1.0.2">

@@ -100,6 +100,8 @@ public class DataTableModel<T> implements Serializable {
                 }
             } catch (DataTableException e) {
                 LOGGER.error("Unable to load the rows from the listener into the data table", e);
+            } catch (Exception e) {
+                LOGGER.error("Unable to load the rows from the listener into the data table", e);
             }
         }
 
@@ -241,12 +243,13 @@ public class DataTableModel<T> implements Serializable {
             //Set the rows to null so it'll be refreshed on the next get
             this.rows = null;
 
-            //Reset selection
+            /*Reset selection
             if (this.table != null) {
                 this.table.setSelection(null);
                 this.table.setRowIndex(-1);
                 this.table.reset();
             }
+            */
         } catch (Exception e) {
             this.selected.getResult().failed(e.getMessage());
             FacesUtil.addErrorMessage(e.getMessage());

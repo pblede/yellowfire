@@ -27,13 +27,13 @@ public class LoginController extends AbstractController {
 
 	public static final String NAME = "loginController";
 
-    private Credential credential = new Credential();
+    private Credentials credential = new Credentials();
 
 	/* Login event */
-	@Inject @Authenticated private Event<User> loginEventSrc;
+	@Inject @Authenticated private Event<Profile> loginEventSrc;
     @Inject @AuthenticateFailure private Event<AuthenticationFailure> authenticateFailureEventSrc;
     /* Logout event */
-    @Inject @Guest private Event<User> logoutEventSrc;
+    @Inject @Guest private Event<Profile> logoutEventSrc;
     /* User manager*/
 	@EJB(name = "UserManager")
 	private UserManager manager;
@@ -42,7 +42,7 @@ public class LoginController extends AbstractController {
     @Inject
     private CurrentUserManager currentUserManager;
 
-    public Credential getCredential() {
+    public Credentials getCredential() {
         return credential;
     }
 
@@ -59,7 +59,7 @@ public class LoginController extends AbstractController {
         try {
             //Perform programmatic JAAS login
             HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
-            request.login(getCredential().getName(), getCredential().getPassword());
+            request.login(getCredential().getUsername(), getCredential().getPassword());
         } catch (Exception e) {
             /* Fire the event that the user authentication failed because of the system */
 			addWarnMessage(MessageResources.WARNING_USER_NOT_FOUND, "The username or password is incorrect.");
@@ -69,7 +69,7 @@ public class LoginController extends AbstractController {
 
 		try {
             //Perform a domain login
-			User u = manager.login(getCredential());
+			Profile u = manager.login(getCredential().getUsername(), getCredential().getPassword());
 			if (u != null) {
                 /* Fire the event that the user has logged in*/
                 this.loginEventSrc.fire(u);

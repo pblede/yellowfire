@@ -2,9 +2,9 @@ package za.co.yellowfire.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import za.co.yellowfire.domain.profile.Credential;
+import za.co.yellowfire.domain.profile.Credentials;
 import za.co.yellowfire.domain.profile.Guest;
-import za.co.yellowfire.domain.profile.User;
+import za.co.yellowfire.domain.profile.Profile;
 import za.co.yellowfire.log.LogType;
 import za.co.yellowfire.ui.FacesUtil;
 import za.co.yellowfire.ui.annotation.UIContext;
@@ -31,16 +31,16 @@ public class UserSessionController implements Serializable {
     private CurrentUserManager manager;
 
     @Inject @Guest
-    private Event<User> logoutEventSrc;
+    private Event<Profile> logoutEventSrc;
 
     /* User login credentials used by the quickBar*/
-    private Credential credential = new Credential();
+    private Credentials credential = new Credentials();
     
     private Date businessDate = new Date();
 
     private UIContext context = UIContext.Common;
 
-    public User getUser() {
+    public Profile getUser() {
         return manager.getCurrentUser();
     }
 
@@ -49,7 +49,7 @@ public class UserSessionController implements Serializable {
      * **NOTE** Used by the quickBar
      * @return Credential
      */
-    public Credential getCredential() {
+    public Credentials getCredential() {
         return credential;
     }
     

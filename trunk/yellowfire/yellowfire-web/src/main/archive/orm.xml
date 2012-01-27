@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<entity-mappings
+	xmlns="http://www.eclipse.org/eclipselink/xsds/persistence/orm"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.eclipse.org/eclipselink/xsds/persistence/orm http://www.eclipse.org/eclipselink/xsds/eclipselink_orm_2_3.xsd"
+	version="2.3">
+
+    <persistence-unit-metadata>
+        <persistence-unit-defaults>
+            <entity-listeners>
+                <entity-listener class="za.co.yellowfire.solarflare.jpa.SearchIndexListener">
+                    <post-persist method-name="postPersist"  />
+                    <post-remove method-name="postRemove"  />
+                </entity-listener>
+                <entity-listener class="za.co.yellowfire.jpa.DomainEntityListener">
+                    <pre-persist method-name="prePersist"  />
+                    <pre-update method-name="preUpdate"  />
+                </entity-listener>
+            </entity-listeners>
+        </persistence-unit-defaults>
+    </persistence-unit-metadata>
+</entity-mappings>

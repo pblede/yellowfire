@@ -101,7 +101,7 @@ public class DomainManagerBean implements DomainManager, DomainManagerRemote {
      * @param hints The query hints. For example QueryHints.REFRESH which refreshes the L2 cache
      * @return ScrollableCursor if the QueryHints.SCROLLABLE_CURSOR is used as a hint else a List<domainClass>
      */
-    @TransactionAttribute(TransactionAttributeType.SUPPORTS)
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
     @Override public Object query(String namedQuery, Map<String, Object> parameters, DomainQueryHint...hints) {
         LOGGER.debug("query() : namedQuery = " + namedQuery + " : parameters = " + parameters);
         

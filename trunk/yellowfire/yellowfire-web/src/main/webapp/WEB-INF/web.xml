@@ -77,9 +77,6 @@
 		<param-value>_</param-value>
 	</context-param>
 	-->
-	<!--<listener>-->
-		<!--<listener-class>com.sun.faces.config.ConfigureListener</listener-class>-->
-	<!--</listener>-->
 	<welcome-file-list>
 		<welcome-file>index.jsf</welcome-file>
 	</welcome-file-list>
@@ -163,15 +160,18 @@
 
     <resource-ref>
         <res-ref-name>ConnectionFactory</res-ref-name>
-        <mapped-name>java:/ConnectionFactory</mapped-name>
+        <res-type>javax.jms.ConnectionFactory</res-type>
+        <res-auth>Container</res-auth>
     </resource-ref>
     <resource-ref>
         <res-ref-name>yellowfire/queue/notification</res-ref-name>
-        <mapped-name>java:/yellowfire/queue/notification</mapped-name>
+        <res-type>javax.jms.Queue</res-type>
+        <res-auth>Container</res-auth>
     </resource-ref>
     <resource-ref>
         <res-ref-name>yellowfire/queue/solr</res-ref-name>
-        <mapped-name>java:/yellowfire/queue/solr</mapped-name>
+        <res-type>javax.jms.Queue</res-type>
+        <res-auth>Container</res-auth>
     </resource-ref>
     
     <login-config>

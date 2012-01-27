@@ -12,11 +12,11 @@ import java.io.Serializable;
 @Embeddable
 public class Contact implements Serializable {
 
-    @Size(min = 0, max = 24)
+    //@Size(min = 0, max = 24)
     @Column(name = "contact_name")
     private String name;
 
-    @Size(min = 0, max = 24)
+    //@Size(min = 0, max = 24)
     @Column(name = "contact_telephone_no")
     private String telephoneNo;
 

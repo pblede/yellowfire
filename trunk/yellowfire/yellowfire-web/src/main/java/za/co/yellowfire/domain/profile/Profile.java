@@ -2,6 +2,8 @@ package za.co.yellowfire.domain.profile;
 
 import org.eclipse.persistence.config.QueryHints;
 import org.hibernate.validator.constraints.Email;
+import org.picketlink.idm.api.User;
+import org.picketlink.idm.impl.api.model.SimpleUser;
 import za.co.yellowfire.domain.racing.Club;
 import za.co.yellowfire.jaxb.DateTypeAdapter;
 
@@ -32,22 +34,16 @@ import java.util.UUID;
         ),
         @NamedQuery(
             name="qry.user.name",
-            query="select u from User u where u.name = :name"/*,
-            hints={
-                @QueryHint(name=QueryHints.RESULT_SET_TYPE, value=ResultSetType.ForwardOnly),
-                @QueryHint(name=QueryHints.SCROLLABLE_CURSOR, value="true")}*/
+            query="select u from User u where u.name = :name"
         ),
         @NamedQuery(
             name="qry.user.verification.key",
-            query="select u from User u where u.verificationKey = :verificationKey"/*,
-            hints={
-                @QueryHint(name=QueryHints.RESULT_SET_TYPE, value=ResultSetType.ForwardOnly),
-                @QueryHint(name=QueryHints.SCROLLABLE_CURSOR, value="true")}*/
+            query="select u from User u where u.verificationKey = :verificationKey"
         )
 		
 })
 @Table(name = "person", schema = "cde", uniqueConstraints = {@UniqueConstraint(columnNames = {"person_name"})})
-public class User implements Serializable {
+public class Profile implements User, Serializable {
     private static final long serialVersionUID = 1L;
 
     public static final String QRY_USER_LOGIN = "qry.user.login";
@@ -132,15 +128,31 @@ public class User implements Serializable {
     @Transient private boolean passwordChanged = false;
     @Transient private String passwordConfirmation;
 
-    public User() {}
+    public Profile() {}
 
-    public User(String name, String password) {
+    public Profile(String name, String password) {
         this.name = name;
         this.password = password;
     }
 
-    public Long getId() {
+    public Long getUserId() {
         return id;
+    }
+
+    @Override
+    public String getId() {
+        return this.name;
+    }
+
+    /**
+     * @return the pointer to the IdentityType. For User this will return same value as getId(). For Group key contains
+     *         encoded group type and name imformation. In default implementation it can look as follows:
+     *         "jbpid_group_id_._._GROUP_TYPE_._._GROUP_NAME". Still prefix and format of key can change in the future so
+     *         PersistenceManager.createGroupId(String groupName, String groupType) method should be used to create it for Group.
+     */
+    @Override
+    public String getKey() {
+        return this.name;
     }
 
     public String getName() {
@@ -278,7 +290,7 @@ public class User implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        User user = (User) o;
+        Profile user = (Profile) o;
 
         if (name != null ? !name.equals(user.name) : user.name != null) return false;
 
@@ -295,6 +307,8 @@ public class User implements Serializable {
         return "User{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
                 ", password='*******\'" +
                 ", birthDate=" + birthDate +
                 ", verified=" + verified +
