@@ -11,9 +11,11 @@ public enum LogType {
 	LISTENER("listener"),
 	SEARCH("search"),
 	PROFILE("profile"),
+	SETUP("setup"),
+	TEST("test"),
 	;
 	
-	private static final String LOGGER_NAME_PREFIX = "za.co.bluefire.log.";
+	private static final String LOGGER_NAME_PREFIX = "za.co.yellowfire.log.";
     private String category;
 
     private LogType(String category) {

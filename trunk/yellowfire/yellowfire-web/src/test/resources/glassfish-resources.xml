@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE resources PUBLIC "-//GlassFish.org//DTD GlassFish Application Server 3.1 Resource Definitions //EN" "http://glassfish.org/dtds/glassfish-resources_1_5.dtd">
+<resources>
+    <jdbc-connection-pool
+            steady-pool-size="1"
+            is-isolation-level-guaranteed="false"
+            datasource-classname="com.microsoft.sqlserver.jdbc.SQLServerDataSource"
+            res-type="javax.sql.DataSource"
+            name="yellowfire.pool" max-wait-time-in-millis="0">
+        <property name="databaseName" value="race"></property>
+        <property name="serverName" value="localhost\SQLSERVER2008R2"></property>
+        <property name="user" value="race"></property>
+        <property name="password" value="race"></property>
+    </jdbc-connection-pool>
+    <jdbc-resource pool-name="yellowfire.pool" jndi-name="yellowfire/ds"></jdbc-resource>
+</resources>

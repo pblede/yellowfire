@@ -103,7 +103,7 @@ public class DomainManagerTest {
 //        }
 //    }
 
-    @Test
+    //@Test
     public void testVenueSearch() throws Exception {
 //        Venue venue = new Venue("Mark's Test", "9 Test Ave", "23.000000,24.000000");
 //
