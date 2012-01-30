@@ -9,6 +9,8 @@
 <!-- INTERFACE -->
 <composite:interface>
 	<composite:attribute name="text" required="true" shortDescription="The text to displayin the warning panel"/>
+	<composite:attribute name="action" required="false" default="" shortDescription="The command link action"/>
+	<composite:attribute name="actionLabel" required="false" shortDescription="The command link action value"/>
 </composite:interface>
 
 <!-- IMPLEMENATION -->
@@ -17,6 +19,7 @@
 	    <h:panelGrid id="lfp1" columns="2" >
 	    	<p:graphicImage value="#{requestPath}/resources/images/error.png"/>
 	        <h:outputText value="#{cc.attrs.text}" />
+            <h:commandLink action="setup" value="link"  />
 	    </h:panelGrid>
     </p:panel>
 </composite:implementation>

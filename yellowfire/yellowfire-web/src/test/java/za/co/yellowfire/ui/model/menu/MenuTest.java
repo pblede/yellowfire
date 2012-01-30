@@ -15,7 +15,7 @@ import java.io.IOException;
 public class MenuTest {
     private static final Logger LOGGER = LoggerFactory.getLogger(MenuTest.class);
 
-    @Test
+    //@Test
     public void testModel() {
         MenuModel model = new MenuModel();
         SubMenu subMenu = new SubMenu("Menu");
@@ -43,7 +43,7 @@ public class MenuTest {
         Assert.assertEquals("The loaded submenu text not equal", "mp.ashworth", subMenu.getText());
     }
 
-    @Test
+    //@Test
     public void testParse() throws JAXBException, IOException {
         MenuManager manager = new MenuManager();
         MenuModel menu = manager.read("/za/co/yellowfire/ui/model/menu/menu-training.xml");
@@ -52,7 +52,7 @@ public class MenuTest {
         Assert.assertTrue(menu.getSubMenus().get(0).getMenuItems().size() > 0);
     }
 
-    @Test
+    //@Test
     public void textProvider() {
         MenuProvider provider = new MenuProvider();
         MenuModel menu = provider.getCommonMenu();

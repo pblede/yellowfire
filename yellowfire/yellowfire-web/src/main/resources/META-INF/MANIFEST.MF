@@ -1,4 +1,7 @@
 Manifest-Version: 1.0
 Created-By: Apache Maven
+Implementation-Vendor: Yellowfire
+Implementation-Version: 0.1
+Implementation-Title: Yellowfire
 Dependencies: com.sun.xml.bind org.eclipse.persistence com.mysql
 

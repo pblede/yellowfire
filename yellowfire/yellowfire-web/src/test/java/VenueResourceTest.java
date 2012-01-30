@@ -26,7 +26,7 @@ public class VenueResourceTest extends JerseyTest {
         return new GrizzlyTestContainerFactory();
     }
 
-    @Test
+    //@Test
     public void testGet() {
         WebResource r = resource().path("venue/list");
 

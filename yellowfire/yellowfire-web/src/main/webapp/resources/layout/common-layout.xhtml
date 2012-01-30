@@ -43,7 +43,7 @@
                             <h:panelGroup>
                                 <cc:quickLogout userBean="#{identity.user}" actionMethod="#{identity.logout}" id="ql2" update="lfp1 lfp2"/>
                             </h:panelGroup>
-                            <h:outputText value="Version: "/>
+                            <h:outputText value="Version: #{applicationManager.version}"/>
                             <h:outputText value="Date: "/>
                             <!--<h:outputText value="#{cc.attrs.bean.businessDate}"><f:convertDateTime pattern="MMMM dd, yyyy"/></h:outputText>-->
                         </h:panelGrid>
