@@ -2,6 +2,7 @@ package za.co.yellowfire.setup;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import za.co.yellowfire.Naming;
 import za.co.yellowfire.log.LogType;
 
 import javax.annotation.Resource;
@@ -16,7 +17,7 @@ import java.sql.*;
 public class SetupManager {
     private static final Logger LOGGER = LoggerFactory.getLogger(LogType.SETUP.getCategory());
 
-    @Resource(mappedName = "yellowfire/ds")
+    @Resource(mappedName = Naming.DATA_SOURCE_JNDI)
     private DataSource dataSource;
 
     protected boolean hasVersion(Connection connection) throws SQLException {
