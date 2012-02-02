@@ -60,7 +60,18 @@
                                 <h:form id="f2" rendered="#{identity.loggedIn ne true}">
                                     <cc:infoPanel text="#{msgs['prompt.login']}" />
                                 </h:form>
-                                <c:if test="${identity.loggedIn}">
+                                <h:form id="frmSetup" rendered="#{identity.loggedIn and applicationManager.setupRequired and !request.servletPath.startsWith('/setup/')}">
+                                    <p:panel header="#{msgs['dialog.info']}">
+                                        <h:panelGrid id="lfp1" columns="2" >
+                                            <p:graphicImage value="/resources/images/information.png"/>
+                                            <h:outputText value="#{msgs['prompt.setup.admin']}"/>
+                                            <h:outputLink value="#{request.contextPath}/setup/index.jsf">
+                                                <h:outputText value="#{msgs['text.link']}" />
+                                            </h:outputLink>
+                                        </h:panelGrid>
+                                    </p:panel>
+                                </h:form>
+                                <c:if test="${identity.loggedIn and ((applicationManager.setupRequired and request.servletPath.startsWith('/setup/')) or (!applicationManager.setupRequired))}">
                                     <ui:insert name="content">...</ui:insert>
                                 </c:if>
                             </div>

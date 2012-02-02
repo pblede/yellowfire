@@ -42,13 +42,18 @@ public class Version implements Serializable, Comparable<Version> {
 
         String[] parts = version.split("\\.");
         int[] info = new int[3];
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 3 && i < parts.length; i++) {
             try {
                 info[i] = Integer.parseInt(parts[i]);
             } catch (NumberFormatException e) {
                 LOGGER.warn("Unable to parse version at index {} for version {}", i, version);
             }
         }
+
+        if (info == null) { return; }
+        if (info.length >= 1) { this.major = info[0]; }
+        if (info.length >= 2) { this.minor = info[1]; }
+        if (info.length >= 3) { this.revision = info[2]; }
     }
 
     public int getMajor() {
@@ -122,12 +127,7 @@ public class Version implements Serializable, Comparable<Version> {
         if (!(o instanceof Version)) return false;
 
         Version version = (Version) o;
-
-        if (major != version.major) return false;
-        if (minor != version.minor) return false;
-        if (revision != version.revision) return false;
-
-        return true;
+        return major == version.major && minor == version.minor && revision == version.revision;
     }
 
     @Override
