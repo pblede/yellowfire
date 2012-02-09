@@ -1,4 +1,4 @@
-package za.co.yellowfire.service.training;
+package za.co.yellowfire.training.service;
 
 import za.co.yellowfire.Naming;
 import za.co.yellowfire.domain.Venue;

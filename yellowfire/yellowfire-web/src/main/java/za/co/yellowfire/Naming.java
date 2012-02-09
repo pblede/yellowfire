@@ -10,7 +10,8 @@ public class Naming {
     public static final String PERSISTENCE_UNIT_BLUEFIRE = "yellowfire.persistence";
     public static final String PERSISTENCE_SESSION_BLUEFIRE = "yellowfire";
 
-    public static final String DATA_SOURCE_JNDI = "java:comp/env/yellowfire/ds";
+    public static final String APP_DATA_SOURCE_JNDI = "java:comp/env/yellowfire/app/ds";
+    public static final String SETUP_DATA_SOURCE_JNDI = "java:comp/env/yellowfire/setup/ds";
 
     public static final String MANAGER_DOMAIN = "yellowfire/session/DomainManager";
 

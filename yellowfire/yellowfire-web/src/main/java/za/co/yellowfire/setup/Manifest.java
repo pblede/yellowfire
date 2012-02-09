@@ -9,6 +9,7 @@ import javax.servlet.ServletContext;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Serializable;
 import java.net.JarURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
@@ -28,7 +29,8 @@ import java.util.jar.JarInputStream;
  * @author Mark P Ashworth
  * @version 0.1
  */
-public class Manifest {
+public class Manifest implements Serializable {
+    private static final long serialVersionUID = 1L;
     private static final Logger LOGGER = LoggerFactory.getLogger(LogType.MANAGER.getCategory());
 
     private static final String UNKNOWN = "";
@@ -143,8 +145,8 @@ public class Manifest {
                             String location = url.toExternalForm();
                             int index = location.indexOf("WEB-INF/classes");
                             if (index > -1) {
-                                location = location.substring(0, index + "WEB-INF/classes".length() + 1);
-                                location = location + "META-INF/MANIFEST.MF";
+                                location = location.substring(0, index + "WEB-INF/classes".length());
+                                location = location + "/META-INF/MANIFEST.MF";
                                 InputStream is = null;
                                 try {
                                     is = new URL(location).openStream();

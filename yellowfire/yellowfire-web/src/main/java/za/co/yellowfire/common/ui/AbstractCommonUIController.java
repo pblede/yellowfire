@@ -1,4 +1,4 @@
-package za.co.yellowfire.ui.common;
+package za.co.yellowfire.common.ui;
 
 import za.co.yellowfire.ui.UIController;
 import za.co.yellowfire.ui.annotation.Common;

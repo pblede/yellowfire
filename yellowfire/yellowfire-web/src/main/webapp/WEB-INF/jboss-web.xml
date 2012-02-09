@@ -17,7 +17,11 @@
         <jndi-name>java:/yellowfire/queue/solr</jndi-name>
     </resource-ref>
     <resource-ref>
-        <res-ref-name>yellowfire/ds</res-ref-name>
-        <jndi-name>java:/yellowfire/ds</jndi-name>
+        <res-ref-name>yellowfire/app/ds</res-ref-name>
+        <jndi-name>java:/yellowfire/app/ds</jndi-name>
+    </resource-ref>
+    <resource-ref>
+        <res-ref-name>yellowfire/setup/ds</res-ref-name>
+        <jndi-name>java:/yellowfire/setup/ds</jndi-name>
     </resource-ref>
 </jboss-web>

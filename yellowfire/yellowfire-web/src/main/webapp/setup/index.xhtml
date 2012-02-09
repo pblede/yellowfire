@@ -2,26 +2,17 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:p="http://primefaces.org/ui"
-                xmlns:f="http://java.sun.com/jsf/core"
-                xmlns:cc="http://java.sun.com/jsf/composite/cc"
                 xmlns:c="http://java.sun.com/jsp/jstl/core"
                 template="/resources/layout/common-layout.xhtml">
-   
-	<ui:define name="demoSampleParameters">
-		<f:metadata>
-            <f:viewParam name="section" value="#{navigator.section}" />
-			<f:viewParam name="item" value="#{navigator.item}" />
-			<f:viewParam name="skin" value="#{skinBean.skin}"/>
-		</f:metadata>
-	</ui:define>
+
     <ui:define name="head">
 	</ui:define>
     <ui:define name="toolbar">
         <h:form prependId="false">
             <p:menubar widgetVar="t">
-                <c:forEach items="#{trainingIndexController.menu.subMenus}" var="subMenu" varStatus="subMenuStatus">
+                <c:forEach items="${setupController.menu.subMenus}" var="subMenu" varStatus="subMenuStatus">
                     <p:submenu label="#{subMenu.text}">
-                        <c:forEach items="#{subMenu.menuItems}" var="menuItem" varStatus="menuItemStatus">
+                        <c:forEach items="${subMenu.menuItems}" var="menuItem" varStatus="menuItemStatus">
                             <p:menuitem value="#{menuItem.text}"  url="#{menuItem.url}" />
                         </c:forEach>
                     </p:submenu>
@@ -31,10 +22,20 @@
     </ui:define>
 	<ui:define name="content">
         <p:growl showDetail="true" showSummary="true" />
-        <h:form id="h1" prependId="false">
-            <p:panel header="#{msgs['dlg.training.index']}" style="width:100%">
-                <h:panelGrid>
-
+        <h:form id="frmSetup" prependId="false">
+            <p:panel header="#{msgs['dlg.setup.index']}" style="width:100%">
+                <h:panelGrid columns="1">
+                    <h:outputText value="#{msgs['prompt.setup.explanation']}" />
+                    <h:panelGrid columns="2">
+                        <h:outputLabel value="#{msgs['fld.database.version']}" id="lblDatabaseVersion" for="fldDatabaseVersion"/>
+                        <h:outputText value="#{setupController.databaseVersion}" id="fldDatabaseVersion" />
+                        <h:outputLabel value="#{msgs['fld.application.version']}" id="lblApplicationVersion" for="fldApplicationVersion"/>
+                        <h:outputText value="#{setupController.applicationVersion}" id="fldApplicationVersion" />
+                    </h:panelGrid>
+                    <h:panelGroup>
+                        <p:commandButton value="Script" actionListener="#{setupController.onScript}"  />
+                        <p:commandButton value="Upgrade" actionListener="#{setupController.onUpgrade}" />
+                    </h:panelGroup>
                 </h:panelGrid>
             </p:panel>
         </h:form>

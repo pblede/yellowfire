@@ -1,4 +1,4 @@
-package za.co.yellowfire.ui.common;
+package za.co.yellowfire.common.ui;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
