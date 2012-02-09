@@ -3,10 +3,9 @@ import com.sun.jersey.test.framework.JerseyTest;
 import com.sun.jersey.test.framework.LowLevelAppDescriptor;
 import com.sun.jersey.test.framework.spi.container.TestContainerFactory;
 import com.sun.jersey.test.framework.spi.container.grizzly.GrizzlyTestContainerFactory;
-import org.junit.Test;
 import za.co.yellowfire.domain.Venue;
 import za.co.yellowfire.domain.training.Venues;
-import za.co.yellowfire.service.training.VenueResource;
+import za.co.yellowfire.training.service.VenueResource;
 
 /**
  * @author Mark P Ashworth

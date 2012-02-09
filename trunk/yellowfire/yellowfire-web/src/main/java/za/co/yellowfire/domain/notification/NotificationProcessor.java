@@ -22,7 +22,7 @@ import javax.naming.NamingException;
         activationConfig = {
             @ActivationConfigProperty(propertyName = "acknowledgeMode", propertyValue = "Auto-acknowledge"),
             @ActivationConfigProperty(propertyName = "destinationType", propertyValue = "javax.jms.Queue"),
-            @ActivationConfigProperty(propertyName = "destination", propertyValue = "yellowfire.queue.notification"),
+            @ActivationConfigProperty(propertyName = "destination", propertyValue = Naming.QUEUE_NOTIFICATION_JNDI),
             @ActivationConfigProperty(propertyName = "clientID", propertyValue = "notification")
         }
 )

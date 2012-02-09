@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+    <changeSet author="yellowfire" id="2" runOnChange="true">
+        <sql endDelimiter=";" splitStatements="false" stripComments="true">
+            DELETE FROM [cde].[person];
+            DELETE FROM [cde].[person_group];
+
+            INSERT [cde].[person_group] ([person_group_name], [version]) VALUES (N'Administrator', NULL);
+            INSERT [cde].[person_group] ([person_group_name], [version]) VALUES (N'Blue', NULL);
+            INSERT [cde].[person_group] ([person_group_name], [version]) VALUES (N'Gold', NULL);
+            INSERT [cde].[person_group] ([person_group_name], [version]) VALUES (N'Platinum', NULL);
+            INSERT [cde].[person_group] ([person_group_name], [version]) VALUES (N'Silver', NULL);
+
+            INSERT [cde].[person] ([person_name], [person_firstname], [person_lastname], [person_password], [person_email], [person_dob], [person_group_name], [person_verification_key], [person_verified], [club_id], [create_ts], [update_ts], [verified_ts], [version]) VALUES (N'system', NULL, NULL, N'password1*', N'mp.ashworth@gmail.com', CAST(0x00006A2A00000000 AS DateTime), N'Administrator', NULL, 1, NULL, CAST(0x00009E9F00162442 AS DateTime), NULL, NULL, NULL);
+            INSERT [cde].[person] ([person_name], [person_firstname], [person_lastname], [person_password], [person_email], [person_dob], [person_group_name], [person_verification_key], [person_verified], [club_id], [create_ts], [update_ts], [verified_ts], [version]) VALUES (N'admin', NULL, NULL, N'adminadmin', N'mp.ashworth@gmail.com', CAST(0x00006A2A00000000 AS DateTime), N'Administrator', NULL, 1, NULL, CAST(0x00009E9F00162442 AS DateTime), NULL, NULL, NULL);
+            INSERT [cde].[person] ([person_name], [person_firstname], [person_lastname], [person_password], [person_email], [person_dob], [person_group_name], [person_verification_key], [person_verified], [club_id], [create_ts], [update_ts], [verified_ts], [version]) VALUES (N'marka', N'Mark', N'Ashworth', N'panda', N'mp.ashworth@gmail.com', CAST(0x00006A2A00000000 AS DateTime), NULL, N'ae69f33a-7b71-43c7-a664-12a4f2f323b4', 0, 2, NULL, CAST(0x00009FE300ED4ABF AS DateTime), NULL, NULL);
+        </sql>
+    </changeSet>
+</databaseChangeLog>

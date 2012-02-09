@@ -4,6 +4,7 @@ import org.jboss.seam.security.Identity;
 import org.primefaces.context.RequestContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import za.co.yellowfire.common.ui.AbstractCommonUIController;
 import za.co.yellowfire.domain.profile.Registered;
 import za.co.yellowfire.domain.profile.Profile;
 import za.co.yellowfire.domain.profile.UserManager;
@@ -12,7 +13,6 @@ import za.co.yellowfire.domain.racing.Club;
 import za.co.yellowfire.log.LogType;
 import za.co.yellowfire.manager.DomainManager;
 import za.co.yellowfire.ui.FacesUtil;
-import za.co.yellowfire.ui.common.AbstractCommonUIController;
 import za.co.yellowfire.ui.model.RequestResult;
 
 import javax.annotation.PostConstruct;

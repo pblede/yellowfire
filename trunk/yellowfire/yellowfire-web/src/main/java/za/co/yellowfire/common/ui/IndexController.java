@@ -1,4 +1,4 @@
-package za.co.yellowfire.ui.common;
+package za.co.yellowfire.common.ui;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;

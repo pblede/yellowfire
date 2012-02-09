@@ -6,7 +6,7 @@
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
         <!--Note: Use the following for global scoped data sources -->
       
-        <jta-data-source>java:/yellowfire/ds</jta-data-source>
+        <jta-data-source>java:/yellowfire/app/ds</jta-data-source>
 
         <class>za.co.yellowfire.domain.Contact</class>
         <class>za.co.yellowfire.domain.Venue</class>

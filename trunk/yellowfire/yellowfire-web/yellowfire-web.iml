@@ -10,6 +10,10 @@
           <root url="file://$MODULE_DIR$/src/main/webapp" relative="/" />
           <root url="file://$MODULE_DIR$/src/main/resources-jboss" relative="/" />
         </webroots>
+        <sourceRoots>
+          <root url="file://$MODULE_DIR$/src/main/java" />
+          <root url="file://$MODULE_DIR$/src/main/resources" />
+        </sourceRoots>
       </configuration>
       <facet type="jsf" name="JSF">
         <configuration />
@@ -94,6 +98,7 @@
     <orderEntry type="library" scope="RUNTIME" name="Maven: org.jboss.seam.international:seam-international:3.1.0.Final" level="project" />
     <orderEntry type="library" name="Maven: org.jboss.seam.international:seam-international-api:3.1.0.Final" level="project" />
     <orderEntry type="library" name="Maven: org.picketlink.idm:picketlink-idm-core:1.5.0.Alpha02" level="project" />
+    <orderEntry type="library" name="Maven: org.liquibase:liquibase-core:2.0.3" level="project" />
     <orderEntry type="library" name="Maven: org.jboss.seam.faces:seam-faces-api:3.1.0.Final" level="project" />
     <orderEntry type="library" name="Maven: org.jboss.logging:jboss-logging:3.1.0.CR2" level="project" />
     <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpclient:4.1.1" level="project" />

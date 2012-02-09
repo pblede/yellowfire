@@ -174,7 +174,12 @@
         <res-auth>Container</res-auth>
     </resource-ref>
     <resource-ref>
-        <res-ref-name>yellowfire/ds</res-ref-name>
+        <res-ref-name>yellowfire/app/ds</res-ref-name>
+        <res-type>javax.sql.DataSource</res-type>
+        <res-auth>Container</res-auth>
+    </resource-ref>
+    <resource-ref>
+        <res-ref-name>yellowfire/setup/ds</res-ref-name>
         <res-type>javax.sql.DataSource</res-type>
         <res-auth>Container</res-auth>
     </resource-ref>
