@@ -18,9 +18,8 @@ import java.util.Date;
 import java.util.UUID;
 
 /**
- * TODO Refactor out Club
  * @author Mark P Ashworth
- * @version 0.0.1
+ * @version 0.1.0
  */
 @Entity(name = "User")
 @Access(AccessType.FIELD)
@@ -100,11 +99,6 @@ public class Profile implements User, Serializable {
     @Enumerated(EnumType.STRING)
     private RoleType role;
 
-    @XmlElement(name = "club")
-    @ManyToOne(fetch = FetchType.EAGER, optional = true, targetEntity = Club.class)
-    @JoinColumn(name = "club_id", nullable = true, updatable = true, referencedColumnName = "club_id")
-    private Club club;
-
     @Column(name = "person_verification_key", length = 128)
     private String verificationKey;
 
@@ -172,10 +166,9 @@ public class Profile implements User, Serializable {
             this.passwordChanged = false;
         } else if (this.password != null) {
             this.passwordChanged = this.password.equals(password);
-        } else if (password != null) {
+        } else {
             this.passwordChanged = true;
         }
-
         this.password = password;
     }
 
@@ -234,14 +227,6 @@ public class Profile implements User, Serializable {
 
 	public void setRole(RoleType role) {
 		this.role = role;
-	}
-	
-	public Club getClub() {
-		return club;
-	}
-
-	public void setClub(Club club) {
-		this.club = club;
 	}
 
     public String getVerificationKey() {
@@ -314,7 +299,6 @@ public class Profile implements User, Serializable {
                 ", verified=" + verified +
                 ", verifiedDate=" + verifiedDate +
                 ", email='" + email + '\'' +
-                ", club='" + (club != null ? club : "null") + '\'' +
                 '}';
     }
 }

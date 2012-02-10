@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-    <changeSet author="MarkA (generated)" id="1323846815266-1">
+    <changeSet author="yellowfire" id="0.1.0">
         <createTable schemaName="cde" tableName="answer">
             <column autoIncrement="true" name="answer_id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_answer_id"/>
@@ -18,8 +18,6 @@
             <column name="update_ts" type="DATETIME"/>
             <column name="version" type="INT"/>
         </createTable>
-    </changeSet>
-    <changeSet author="MarkA (generated)" id="1323846815266-2">
         <createTable schemaName="cde" tableName="answer_boolean">
             <column name="answer_id" type="BIGINT">
                 <constraints nullable="false"/>
@@ -29,8 +27,6 @@
             <column name="update_ts" type="DATETIME"/>
             <column name="version" type="INT"/>
         </createTable>
-    </changeSet>
-    <changeSet author="MarkA (generated)" id="1323846815266-3">
         <createTable schemaName="cde" tableName="answer_number">
             <column name="answer_id" type="BIGINT">
                 <constraints nullable="false"/>
@@ -40,8 +36,6 @@
             <column name="update_ts" type="DATETIME"/>
             <column name="version" type="INT"/>
         </createTable>
-    </changeSet>
-    <changeSet author="MarkA (generated)" id="1323846815266-4">
         <createTable schemaName="cde" tableName="answer_text">
             <column name="answer_id" type="BIGINT">
                 <constraints nullable="false"/>
@@ -51,8 +45,6 @@
             <column name="update_ts" type="DATETIME"/>
             <column name="version" type="INT"/>
         </createTable>
-    </changeSet>
-    <changeSet author="MarkA (generated)" id="1323846815266-5">
         <createTable schemaName="cde" tableName="notification">
             <column autoIncrement="true" name="notification_id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_notification_id"/>
@@ -69,15 +61,13 @@
             <column name="notification_cc" type="VARCHAR(256)"/>
             <column name="notification_bcc" type="VARCHAR(256)"/>
             <column name="notification_subject" type="VARCHAR(256)"/>
-            <column name="notification_body" type="VARCHAR(2147483647)"/>
+            <column name="notification_body" type="VARCHAR(MAX)"/>
             <column name="notification_sent" type="DATETIME"/>
             <column name="create_ts" type="DATETIME"/>
             <column name="update_ts" type="DATETIME"/>
             <column name="version" type="INT"/>
             <column defaultValueBoolean="false" name="archived" type="bit"/>
         </createTable>
-    </changeSet>
-    <changeSet author="MarkA (generated)" id="1323846815266-6">
         <createTable schemaName="cde" tableName="outcome">
             <column autoIncrement="true" name="outcome_id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_outcome_id"/>
@@ -89,20 +79,6 @@
             <column name="update_ts" type="DATETIME"/>
             <column name="version" type="INT"/>
         </createTable>
-    </changeSet>
-    <changeSet author="MarkA (generated)" id="1323846815266-9">
-        <createTable schemaName="cde" tableName="property">
-            <column name="property_name" type="VARCHAR(256)">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_property_name"/>
-            </column>
-            <column name="property_value" type="VARCHAR(1024)"/>
-            <column defaultValue="java.lang.String" name="property_type" type="VARCHAR(1024)"/>
-            <column defaultValueComputed="CURRENT_TIMESTAMP" name="create_ts" type="DATETIME"/>
-            <column name="update_ts" type="DATETIME"/>
-            <column name="version" type="INT"/>
-        </createTable>
-    </changeSet>
-    <changeSet author="MarkA (generated)" id="1323846815266-10">
         <createTable schemaName="cde" tableName="question">
             <column autoIncrement="true" name="question_id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_question_id"/>
@@ -117,8 +93,6 @@
             <column name="update_ts" type="DATETIME"/>
             <column name="version" type="INT"/>
         </createTable>
-    </changeSet>
-    <changeSet author="MarkA (generated)" id="1323846815266-11">
         <createTable schemaName="cde" tableName="question_type">
             <column name="question_type_id" type="INT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_question_type_id"/>
@@ -130,8 +104,6 @@
             <column name="update_ts" type="DATETIME"/>
             <column name="version" type="INT"/>
         </createTable>
-    </changeSet>
-    <changeSet author="MarkA (generated)" id="1323846815266-12">
         <createTable schemaName="cde" tableName="questionaire">
             <column autoIncrement="true" name="questionaire_id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_questionaire_id"/>
@@ -143,8 +115,6 @@
             <column name="update_ts" type="DATETIME"/>
             <column name="version" type="INT"/>
         </createTable>
-    </changeSet>
-    <changeSet author="MarkA (generated)" id="1323846815266-13">
         <createTable schemaName="cde" tableName="questionaire_question">
             <column name="questionaire_id" type="BIGINT">
                 <constraints nullable="false"/>
@@ -156,8 +126,6 @@
             <column name="update_ts" type="DATETIME"/>
             <column name="version" type="INT"/>
         </createTable>
-    </changeSet>
-    <changeSet author="MarkA (generated)" id="1323846815266-14">
         <createTable schemaName="cde" tableName="venue">
             <column autoIncrement="true" name="venue_id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_venue_id"/>
@@ -172,81 +140,24 @@
             <column name="update_ts" type="DATETIME"/>
             <column name="version" type="INT"/>
         </createTable>
-    </changeSet>
-    <changeSet author="MarkA (generated)" id="1323846815266-15">
         <addPrimaryKey columnNames="questionaire_id, question_id" constraintName="pk_questionaire_question_id" schemaName="cde" tableName="questionaire_question"/>
-    </changeSet>
-    <changeSet author="MarkA (generated)" id="1323846815266-16">
         <addForeignKeyConstraint baseColumnNames="person_id" baseTableName="answer" baseTableSchemaName="cde" constraintName="fk_answer_person_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="person_id" referencedTableName="person" referencedTableSchemaName="cde" referencesUniqueColumn="false"/>
-    </changeSet>
-    <changeSet author="MarkA (generated)" id="1323846815266-17">
         <addForeignKeyConstraint baseColumnNames="question_id" baseTableName="answer" baseTableSchemaName="cde" constraintName="fk_answer_question_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="question_id" referencedTableName="question" referencedTableSchemaName="cde" referencesUniqueColumn="false"/>
-    </changeSet>
-    <changeSet author="MarkA (generated)" id="1323846815266-18">
         <addForeignKeyConstraint baseColumnNames="questionaire_id" baseTableName="answer" baseTableSchemaName="cde" constraintName="fk_answer_questionaire_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="questionaire_id" referencedTableName="questionaire" referencedTableSchemaName="cde" referencesUniqueColumn="false"/>
-    </changeSet>
-    <changeSet author="MarkA (generated)" id="1323846815266-19">
         <addForeignKeyConstraint baseColumnNames="answer_id" baseTableName="answer_boolean" baseTableSchemaName="cde" constraintName="fk_answer_boolean_answer_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="answer_id" referencedTableName="answer" referencedTableSchemaName="cde" referencesUniqueColumn="false"/>
-    </changeSet>
-    <changeSet author="MarkA (generated)" id="1323846815266-20">
         <addForeignKeyConstraint baseColumnNames="answer_id" baseTableName="answer_number" baseTableSchemaName="cde" constraintName="fk_answer_number_answer_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="answer_id" referencedTableName="answer" referencedTableSchemaName="cde" referencesUniqueColumn="false"/>
-    </changeSet>
-    <changeSet author="MarkA (generated)" id="1323846815266-21">
         <addForeignKeyConstraint baseColumnNames="answer_id" baseTableName="answer_text" baseTableSchemaName="cde" constraintName="fk_answer_text_answer_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="answer_id" referencedTableName="answer" referencedTableSchemaName="cde" referencesUniqueColumn="false"/>
-    </changeSet>
-    <changeSet author="MarkA (generated)" id="1323846815266-22">
-        <addForeignKeyConstraint baseColumnNames="person_group_name" baseTableName="person" baseTableSchemaName="cde" constraintName="fk_person_group_member" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="person_group_name" referencedTableName="person_group" referencedTableSchemaName="cde" referencesUniqueColumn="false"/>
-    </changeSet>
-    <changeSet author="MarkA (generated)" id="1323846815266-23">
         <addForeignKeyConstraint baseColumnNames="question_type_id" baseTableName="question" baseTableSchemaName="cde" constraintName="fk_question_question_type_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="question_type_id" referencedTableName="question_type" referencedTableSchemaName="cde" referencesUniqueColumn="false"/>
-    </changeSet>
-    <changeSet author="MarkA (generated)" id="1323846815266-24">
         <addForeignKeyConstraint baseColumnNames="question_id" baseTableName="questionaire_question" baseTableSchemaName="cde" constraintName="fk_questionaire_question_question_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="question_id" referencedTableName="question" referencedTableSchemaName="cde" referencesUniqueColumn="false"/>
-    </changeSet>
-    <changeSet author="MarkA (generated)" id="1323846815266-25">
         <addForeignKeyConstraint baseColumnNames="questionaire_id" baseTableName="questionaire_question" baseTableSchemaName="cde" constraintName="fk_questionaire_question_questionaire_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="questionaire_id" referencedTableName="questionaire" referencedTableSchemaName="cde" referencesUniqueColumn="false"/>
     </changeSet>
-    <changeSet author="MarkA (generated)" id="1323846815266-26">
-        <createIndex indexName="ix_person_unique" schemaName="cde" tableName="person" unique="true">
-            <column name="person_name"/>
-        </createIndex>
-    </changeSet>
-    <changeSet author="MarkA (generated)" id="1323846815266-27">
-        <createView schemaName="cde" viewName="vw_jaas_person">select &#13;
-	person_name,&#13;
-	person_password&#13;
-from cde.person&#13;
-</createView>
-    </changeSet>
-    <changeSet author="MarkA (generated)" id="1323846815266-28">
-        <createView schemaName="cde" viewName="vw_jaas_person_group">select &#13;
-	person_name,&#13;
-	person_group_name&#13;
-from cde.person&#13;
-</createView>
-    </changeSet>
-    <changeSet author="MarkA (generated)" id="1323846815266-29">
-        <createView schemaName="cde" viewName="vw_system_property">select&#13;
-	property_name,&#13;
-	property_value,&#13;
-	property_type,&#13;
-	create_ts,&#13;
-	update_ts,&#13;
-	[version]&#13;
-from rce.property&#13;
-where property_name like 'system.%'&#13;
-</createView>
-    </changeSet>
-    <changeSet author="MarkA (generated)" id="1323846815266-30">
-        <createView schemaName="cde" viewName="vw_user_property">select&#13;
-	property_name,&#13;
-	property_value,&#13;
-	property_type,&#13;
-	create_ts,&#13;
-	update_ts,&#13;
-	[version]&#13;
-from rce.property&#13;
-where property_name like 'user.%'&#13;
-</createView>
+    <changeSet author="yellowfire" id="0.1.0b">
+        <sql endDelimiter=";" splitStatements="false" stripComments="true">
+            declare @version varchar(25) = '0.1.0';
+            if exists(select db_version from cde.version)
+                update cde.version set db_version = @version, version = version + 1;
+            else
+                insert into cde.version (db_version, version) values (@version, 1);
+        </sql>
     </changeSet>
 </databaseChangeLog>

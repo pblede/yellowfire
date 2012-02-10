@@ -1,0 +1,40 @@
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:composite="http://java.sun.com/jsf/composite"
+        xmlns:p="http://primefaces.org/ui" xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<!-- INTERFACE -->
+<composite:interface>
+    <composite:attribute name="version" />
+    <composite:attribute name="date" />
+</composite:interface>
+
+<!-- IMPLEMENATION -->
+<composite:implementation>
+    <h:form id="frmVersion" >
+        <p:commandLink onclick="varDialog.show()" rendered="#{cc.attrs.version ne null and cc.attrs.version ne ''}">
+            <h:outputText value="#{msgs['fld.version']}: #{cc.attrs.version}" />
+        </p:commandLink>
+        <h:outputText value="#{msgs['fld.date']}: #{cc.attrs.date}" rendered="#{cc.attrs.date ne null and cc.attrs.date ne ''}"/>
+        <ui:remove><!--<h:outputText value="#{cc.attrs.bean.businessDate}"><f:convertDateTime pattern="MMMM dd, yyyy"/></h:outputText>--></ui:remove>
+        <p:dialog id="dlgVersion" var="varDialog" header="#{msgs['dlg.version']}" closable="true" draggable="true" dynamic="false">
+            <h:panelGrid columns="2">
+                <h:outputLabel value="#{msgs['fld.database.version']}" id="lblDatabaseVersion" for="fldDatabaseVersion"/>
+                <h:outputText value="#{setupController.databaseVersion}" id="fldDatabaseVersion" />
+                <h:outputLabel value="#{msgs['fld.application.version']}" id="lblApplicationVersion" for="fldApplicationVersion"/>
+                <h:outputText value="#{setupController.applicationVersion}" id="fldApplicationVersion" />
+            </h:panelGrid>
+            <h:panelGrid id="display_buttons" columns="3" cellpadding="4">
+                <p:commandButton
+                        id="btnClose"
+                        icon="ui-icon-close"
+                        value="#{msgs['btn.ok']}"
+                        ajax="false"
+                        immediate="true"
+                        />
+            </h:panelGrid>
+        </p:dialog>
+    </h:form>
+</composite:implementation>
+</html>

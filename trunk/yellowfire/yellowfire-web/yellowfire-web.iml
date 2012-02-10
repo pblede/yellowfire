@@ -27,7 +27,7 @@
         <setting name="validation-enabled" value="true" />
         <setting name="provider-name" value="EclipseLink" />
         <datasource-mapping>
-          <factory-entry name="yellowfire" value="2692f999-eccf-44a9-a22c-d15afead0925" />
+          <factory-entry name="yellowfire" value="4b9d5ac6-f6ba-4165-9db3-918bc1b96919" />
         </datasource-mapping>
         <deploymentDescriptor name="persistence.xml" url="file://$MODULE_DIR$/src/main/resources/META-INF/persistence.xml" />
       </configuration>

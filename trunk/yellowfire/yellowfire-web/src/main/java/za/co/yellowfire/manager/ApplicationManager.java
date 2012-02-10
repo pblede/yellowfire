@@ -67,6 +67,15 @@ public class ApplicationManager implements Serializable {
                 }
             }
         }
-        return this.manifest.getVersion();
+        return this.manifest.getImplementationVersion().toString();
+    }
+
+    public void reloadVersionInformation() {
+        try {
+            this.manifest = setupManager.getManifest();
+            this.setupRequired = setupManager.isSetupRequired(this.manifest);
+        } catch (SQLException e) {
+            LOGGER.warn("Unable to read whether setup is required", e);
+        }
     }
 }

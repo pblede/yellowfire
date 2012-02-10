@@ -53,7 +53,7 @@ public class FacesUtil {
      * @param detail The detail of the message
      */
     public static void addInfoMessage(String detail) {
-        addErrorMessage(MessageResources.MESSAGE(MessageKey.dialogInfo), detail);
+        addInfoMessage(MessageResources.MESSAGE(MessageKey.dialogInfo), detail);
     }
 
     /**

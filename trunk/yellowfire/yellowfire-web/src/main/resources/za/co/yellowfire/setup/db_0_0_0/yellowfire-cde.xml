@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-    <changeSet author="yellowfire" id="1">
+    <changeSet author="yellowfire" id="0.0.0">
         <createTable schemaName="cde" tableName="person">
             <column autoIncrement="true" name="person_id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_person_id"/>
@@ -20,7 +20,6 @@
             <column defaultValue="Blue" name="person_group_name" type="VARCHAR(32)"/>
             <column name="person_verification_key" type="VARCHAR(128)"/>
             <column defaultValueBoolean="false" name="person_verified" type="bit"/>
-            <column name="club_id" type="BIGINT"/>
             <column name="create_ts" type="DATETIME"/>
             <column name="update_ts" type="DATETIME"/>
             <column name="verified_ts" type="DATETIME"/>
@@ -32,5 +31,66 @@
             </column>
             <column name="version" type="INT"/>
         </createTable>
+        <createTable schemaName="cde" tableName="property">
+            <column name="property_name" type="VARCHAR(256)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_property_name"/>
+            </column>
+            <column name="property_value" type="VARCHAR(1024)"/>
+            <column defaultValue="java.lang.String" name="property_type" type="VARCHAR(1024)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="create_ts" type="DATETIME"/>
+            <column name="update_ts" type="DATETIME"/>
+            <column name="version" type="INT"/>
+        </createTable>
+        <createTable tableName="version" schemaName="cde">
+            <column name="db_version" type="VARCHAR(25)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_version_db"/>
+            </column>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="create_ts" type="DATETIME"/>
+            <column name="update_ts" type="DATETIME"/>
+            <column name="version" type="INT"/>
+        </createTable>
+        <addForeignKeyConstraint baseColumnNames="person_group_name" baseTableName="person" baseTableSchemaName="cde" constraintName="fk_person_group_member" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="person_group_name" referencedTableName="person_group" referencedTableSchemaName="cde" referencesUniqueColumn="false"/>
+        <createIndex indexName="ix_person_unique" schemaName="cde" tableName="person" unique="true">
+            <column name="person_name"/>
+        </createIndex>
+        <createView schemaName="cde" viewName="vw_jaas_person">select &#13;
+            person_name,&#13;
+            person_password&#13;
+            from cde.person&#13;
+        </createView>
+        <createView schemaName="cde" viewName="vw_jaas_person_group">select &#13;
+            person_name,&#13;
+            person_group_name&#13;
+            from cde.person&#13;
+        </createView>
+        <createView schemaName="cde" viewName="vw_system_property">select&#13;
+            property_name,&#13;
+            property_value,&#13;
+            property_type,&#13;
+            create_ts,&#13;
+            update_ts,&#13;
+            [version]&#13;
+            from cde.property&#13;
+            where property_name like 'system.%'&#13;
+        </createView>
+        <createView schemaName="cde" viewName="vw_user_property">select&#13;
+            property_name,&#13;
+            property_value,&#13;
+            property_type,&#13;
+            create_ts,&#13;
+            update_ts,&#13;
+            [version]&#13;
+            from cde.property&#13;
+            where property_name like 'user.%'&#13;
+        </createView>
+    </changeSet>
+    <changeSet author="yellowfire" id="0.0.0b">
+        <sql endDelimiter=";" splitStatements="false" stripComments="true">
+            declare @version varchar(25) = '0.0.0';
+            if exists(select db_version from cde.version)
+            update cde.version set db_version = @version, version = version + 1;
+            else
+            insert into cde.version (db_version, version) values (@version, 1);
+        </sql>
     </changeSet>
 </databaseChangeLog>
