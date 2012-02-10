@@ -24,18 +24,12 @@
         <h:outputLabel value="#{cc.attrs.emailLabel}" for="e"/>
         <h:inputText id="e" value="#{cc.attrs.bean.user.email}" onchange="O$.validate(this);">
             <f:attribute name="clientValidation" value="onDemand"/>
-            <ui:remove><!--o:validateEmail detail="The email address is not valid"/--></ui:remove>
         </h:inputText>
         <h:message id="em" for="e"/>
 
         <h:outputLabel value="#{cc.attrs.userNameLabel}" for="u"/>
         <h:inputText id="u" value="#{cc.attrs.bean.user.name}" onchange="O$.validate(this);">
             <f:attribute name="clientValidation" value="onDemand"/>
-            <ui:remove><!--o:validateCustom
-                    serverFunction="#{userController.userNameAvailable}"
-                    detail="The requested username is not available"
-                    summary="Username not available"
-                    /--></ui:remove>
         </h:inputText>
         <h:message id="um" for="u"/>
 
@@ -60,16 +54,6 @@
         <h:message id="dm" for="d"/>
     </h:panelGrid>
     <h:panelGrid columns="1">
-        <ui:remove>
-        <!--o:commandButton
-                id="b"
-                value="#{cc.attrs.buttonCaption}"
-                action="#{cc.attrs.actionListener}"
-                execute="e u p cp d"
-                render="e u p cp d"
-                onclick="O$.validateForm(document.getElementById('registerform'));"
-                onerror="handleRegisterRequest(xhr, status, args)"/-->
-        </ui:remove>
         <p:commandButton
               id="b2"
               value="#{cc.attrs.buttonCaption}"

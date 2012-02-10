@@ -33,10 +33,13 @@
                         <h:outputText value="#{setupController.applicationVersion}" id="fldApplicationVersion" />
                     </h:panelGrid>
                     <h:panelGroup>
-                        <p:commandButton value="Script" actionListener="#{setupController.onScript}"  />
-                        <p:commandButton value="Upgrade" actionListener="#{setupController.onUpgrade}" />
+                        <p:commandButton value="Script" actionListener="#{setupController.onScript}" update="pnlDatabaseScript growl" />
+                        <p:commandButton value="Upgrade" actionListener="#{setupController.onUpgrade}" update="frmSetup growl" />
                     </h:panelGroup>
                 </h:panelGrid>
+            </p:panel>
+            <p:panel header="Database script" id="pnlDatabaseScript">
+                <h:outputText id="fldDatabaseScript" value="#{setupController.script}" />
             </p:panel>
         </h:form>
 	</ui:define>

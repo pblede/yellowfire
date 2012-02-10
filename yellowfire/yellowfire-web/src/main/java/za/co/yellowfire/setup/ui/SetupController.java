@@ -1,6 +1,7 @@
 package za.co.yellowfire.setup.ui;
 
 import za.co.yellowfire.common.ui.AbstractCommonUIController;
+import za.co.yellowfire.manager.ApplicationManager;
 import za.co.yellowfire.setup.Manifest;
 import za.co.yellowfire.setup.SetupManager;
 import za.co.yellowfire.setup.Version;
@@ -25,6 +26,9 @@ public class SetupController extends AbstractCommonUIController {
     @Inject
     private SetupManager setupManager;
 
+    @Inject
+    private ApplicationManager applicationManager;
+
     private Manifest manifest;
     
     private String script;
@@ -36,6 +40,10 @@ public class SetupController extends AbstractCommonUIController {
             FacesUtil.addErrorMessage("Unable to retrieve application version", e);
         }
         return false;
+    }
+
+    public String getScript() {
+        return script;
     }
 
     public Manifest getManifest() {
@@ -60,7 +68,6 @@ public class SetupController extends AbstractCommonUIController {
     public void onScript(ActionEvent event) {
         try {
             this.script = setupManager.scriptUpgrade();
-            System.out.println("Script: " + script);
             FacesUtil.addInfoMessage("Database upgrade scripted!!!");
         } catch (Exception e) {
             FacesUtil.addErrorMessage("Unable to script database", e);
@@ -70,6 +77,7 @@ public class SetupController extends AbstractCommonUIController {
     public void onUpgrade(ActionEvent event) {
         try {
             setupManager.executeUpgrade();
+            applicationManager.reloadVersionInformation();
             FacesUtil.addInfoMessage("Database upgrade executed!!!");
         } catch (Exception e) {
             FacesUtil.addErrorMessage("Unable to upgrade database", e);

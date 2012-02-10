@@ -23,29 +23,21 @@
                         <a href="#{request.contextPath}/index.html" title="#{msgs['application.name']}"><span>#{msgs['application.name']}</span></a>
                     </h1>
                     <div id="dock">
-                        <h:form id="frmGrowl"><p:growl /></h:form>
-                        <h:panelGrid id="lfp1" columns="4" rendered="#{identity.loggedIn ne true}">
-                            <h:panelGroup>
-                                <cc:quickLogin
-                                    credentialBean="#{credentials}"
-                                    actionMethod="#{identity.login}"
-                                    registerUrl="#{request.contextPath}/training/register.jsf"
-                                    registerMethod="#{sessionController.createProfile}"
-                                    id="ql1"
-                                    update="lfp1 lfp2 growl">
-                                </cc:quickLogin>
-                            </h:panelGroup>
-                            <h:outputText value="Version: "/>
-                            <h:outputText value="Date: "/>
-                            <!--<h:outputText value="#{cc.attrs.bean.businessDate}"><f:convertDateTime pattern="MMMM dd, yyyy"/></h:outputText>-->
+                        <h:form id="frmGrowl"><p:growl id="growl" autoUpdate="true"/></h:form>
+                        <h:panelGrid id="lfp1" columns="1" rendered="#{identity.loggedIn ne true}">
+                            <cc:quickLogin
+                                credentialBean="#{credentials}"
+                                actionMethod="#{identity.login}"
+                                registerUrl="#{request.contextPath}/training/register.jsf"
+                                registerMethod="#{sessionController.createProfile}"
+                                id="ql1"
+                                update="lfp1 lfp2">
+                            </cc:quickLogin>
+                            <cc:version id="lfv1" />
                         </h:panelGrid>
-                        <h:panelGrid id="lfp2" columns="4" rendered="#{identity.loggedIn}">
-                            <h:panelGroup>
-                                <cc:quickLogout userBean="#{identity.user}" actionMethod="#{identity.logout}" id="ql2" update="lfp1 lfp2"/>
-                            </h:panelGroup>
-                            <h:outputText value="Version: #{applicationManager.version}"/>
-                            <h:outputText value="Date: "/>
-                            <!--<h:outputText value="#{cc.attrs.bean.businessDate}"><f:convertDateTime pattern="MMMM dd, yyyy"/></h:outputText>-->
+                        <h:panelGrid id="lfp2" columns="1" rendered="#{identity.loggedIn}">
+                            <cc:quickLogout userBean="#{identity.user}" actionMethod="#{identity.logout}" id="ql2" update="lfp1 lfp2"/>
+                            <cc:version id="lfv2" version="#{applicationManager.version}" />
                         </h:panelGrid>
                     </div>
                     <div id="toolbar">
