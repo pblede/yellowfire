@@ -73,7 +73,7 @@ public class VenuesController extends AbstractTrainingUIController {
                 );
 
         dataModel =
-                new DataTableModel<Venue>(
+                new DataTableModel<Venue> (
                         /* DataTableListener*/
                         new VenueDataTableModelListener(manager),
                         /* DataTableSearchListener*/

@@ -69,7 +69,7 @@ public class Manifest implements Serializable {
 
     private Version getVersionValueOrDefault(Attributes attributes, String name) {
         String value = getAttributeValueOrDefault(attributes, name);
-        LOGGER.info("Version retrieved from manifest is {}", value == null ? "null" : value);
+        LOGGER.debug("Version retrieved from manifest is {}", value == null ? "null" : value);
         if (value == null) {
             return UNKNOWN_VERSION;
         } else if (value.equals(UNKNOWN)) {

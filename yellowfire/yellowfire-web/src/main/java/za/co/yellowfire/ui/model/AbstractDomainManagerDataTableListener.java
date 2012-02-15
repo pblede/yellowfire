@@ -81,7 +81,7 @@ public abstract class AbstractDomainManagerDataTableListener<T extends DomainObj
                     //Initialise @Embedded classes
                     onLoadRow(value);
                     //Add the domain object to the
-                    rows.add(new DataTableRow<T>(value));
+                    rows.add(new DataTableRow<T>(value.getId(), value));
                 }
             } else {
                 rows = new ArrayList<DataTableRow<T>>(0);
