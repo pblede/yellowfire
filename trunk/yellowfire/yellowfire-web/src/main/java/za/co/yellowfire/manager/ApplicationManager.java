@@ -25,7 +25,7 @@ import java.sql.SQLException;
 @ApplicationScoped
 public class ApplicationManager implements Serializable {
     private static final long serialVersionUID = 1L;
-    private static final Logger LOGGER = LoggerFactory.getLogger(LogType.MANAGER.getCategory());
+    private static final Logger LOGGER = LoggerFactory.getLogger(LogType.APPLICATION.getCategory());
 
     @Inject
     private SetupManager setupManager;
@@ -48,6 +48,10 @@ public class ApplicationManager implements Serializable {
         } catch (SQLException e) {
             LOGGER.warn("Unable to read whether setup is required", e);
         }
+    }
+
+    public Manifest getManifest() {
+        return manifest;
     }
 
     /**

@@ -2,6 +2,7 @@ package za.co.yellowfire.log;
 
 public enum LogType {
 	INSPECT(""),
+    APPLICATION("application"),
 	MANAGER("manager"),
 	CONTROLLER("controller"),
 	CONVERTER("converter"),

@@ -48,11 +48,7 @@ public class SetupController extends AbstractCommonUIController {
 
     public Manifest getManifest() {
         if (manifest == null) {
-            try {
-                manifest = setupManager.getManifest();
-            } catch (SQLException e) {
-                FacesUtil.addErrorMessage("Unable to retrieve application version", e);
-            }
+            manifest = applicationManager.getManifest();
         }
         return manifest;
     }

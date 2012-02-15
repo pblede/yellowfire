@@ -1,6 +1,7 @@
 package za.co.yellowfire.ui.model;
 
 import org.primefaces.component.datatable.DataTable;
+import org.primefaces.model.SelectableDataModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import za.co.yellowfire.log.LogType;
@@ -14,6 +15,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 /**
  * A model of entities within a data table.
@@ -21,7 +23,7 @@ import java.util.List;
  * @author Mark P Ashworth
  * @version 0.0.1
  */
-public class DataTableModel<T> implements Serializable {
+public class DataTableModel<T> implements SelectableDataModel, Serializable {
     private static final long serialVersionUID = 1L;
     private static final Logger LOGGER = LoggerFactory.getLogger(LogType.MODEL.getCategory());
 
@@ -45,9 +47,9 @@ public class DataTableModel<T> implements Serializable {
         this.listener = listener;
 
         if (this.listener != null) {
-            this.selected = new DataTableRow<T>(this.listener.createEmpty());
+            this.selected = new DataTableRow<T>(-1, this.listener.createEmpty());
         } else {
-            this.selected = new DataTableRow<T>(null);
+            this.selected = new DataTableRow<T>(-1, null);
         }
 
         this.saveActionListener = new SaveActionListener(this);
@@ -84,6 +86,21 @@ public class DataTableModel<T> implements Serializable {
      */
     public void setTable(DataTable table) {
         this.table = table;
+    }
+
+    @Override
+    public Object getRowKey(Object object) {
+        int index = rows.indexOf(object);
+        if (index >= 0) {
+            return rows.get(index).getKey();
+        }
+        return null;
+    }
+
+    @Override
+    public Object getRowData(String rowKey) {
+        System.out.println("getRowData : " + rowKey);
+        return null;
     }
 
     /**
@@ -137,7 +154,7 @@ public class DataTableModel<T> implements Serializable {
     public void setSelected(DataTableRow<T> selected) {
         LOGGER.debug("setSelected() : {}", selected);
         if (selected == null) {
-            this.selected = new DataTableRow<T>(this.listener.createEmpty());
+            this.selected = new DataTableRow<T>(-1, this.listener.createEmpty());
         } else {
             this.selected = selected;
             onSelection();
@@ -189,7 +206,7 @@ public class DataTableModel<T> implements Serializable {
         RequestResult result = new RequestResult();
         try {
             T o = this.listener.onAdd(event);
-            setSelected(new DataTableRow<T>(o));
+            setSelected(new DataTableRow<T>(-1, o));
         } catch (Exception e) {
             result.failed(e.getMessage());
             FacesUtil.addErrorMessage(e.getMessage());
@@ -301,7 +318,7 @@ public class DataTableModel<T> implements Serializable {
         }
 
         /* Deselected row */
-        this.selected = new DataTableRow<T>(this.listener.createEmpty());
+        this.selected = new DataTableRow<T>(-1, this.listener.createEmpty());
 
         if (table != null) {
             this.table.setSelection(null);
