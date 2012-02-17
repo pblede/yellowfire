@@ -43,7 +43,7 @@ public interface UserManager {
     /**
      * Verifies the user's profile
      * @param verificationKey The verification key to verify
-     * @returns The verified user
+     * @return The verified user
      * @throws UserPersistException If the user/s belonging to the key cannot be verified
      */
     Profile verify(String verificationKey) throws UserPersistException;

@@ -83,7 +83,7 @@ public class VenuesController extends AbstractTrainingUIController {
 
     /**
      * Determines if the controller is in a conversation
-     * @return
+     * @return Whether the controller is in a conversation
      */
      public boolean isInConversation() {
         return (conversation != null && !conversation.isTransient());
