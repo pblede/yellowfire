@@ -24,7 +24,7 @@
                     </h1>
                     <div id="dock">
                         <h:form id="frmGrowl"><p:growl id="growl" autoUpdate="true"/></h:form>
-                        <h:panelGrid id="lfp1" columns="1" rendered="#{identity.loggedIn ne true}">
+                        <h:panelGrid id="lfp1" columns="2" rendered="#{identity.loggedIn ne true}">
                             <cc:quickLogin
                                 credentialBean="#{credentials}"
                                 actionMethod="#{identity.login}"
@@ -35,7 +35,7 @@
                             </cc:quickLogin>
                             <cc:version id="lfv1" />
                         </h:panelGrid>
-                        <h:panelGrid id="lfp2" columns="1" rendered="#{identity.loggedIn}">
+                        <h:panelGrid id="lfp2" columns="2" rendered="#{identity.loggedIn}">
                             <cc:quickLogout userBean="#{identity.user}" actionMethod="#{identity.logout}" id="ql2" update="lfp1 lfp2"/>
                             <cc:version id="lfv2" version="#{applicationManager.version}" />
                         </h:panelGrid>
