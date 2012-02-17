@@ -184,6 +184,11 @@
         <res-auth>Container</res-auth>
     </resource-ref>
 
+    <ejb-ref>
+        <ejb-ref-name>yellowfire/session/DomainManager</ejb-ref-name>
+        <ejb-ref-type>Session</ejb-ref-type>
+    </ejb-ref>
+
     <login-config>
         <auth-method>BASIC</auth-method>
         <realm-name>jdbcRealm</realm-name>
