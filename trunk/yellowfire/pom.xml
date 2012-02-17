@@ -477,6 +477,60 @@
                 </executions>
             </plugin>
             -->
+            <plugin>
+                <groupId>org.jboss.maven.plugins</groupId>
+                <artifactId>maven-jdocbook-plugin</artifactId>
+                <version>2.3.5</version>
+                <extensions>true</extensions>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.jboss.pressgang</groupId>
+                        <!--Non-namespaced version for DocBook 4.5 compatibility. For XSD namespaced version, use pressgang-xslt-ns-->
+                        <artifactId>pressgang-xslt</artifactId>
+                        <version>2.0.0</version>
+                    </dependency>
+                    <dependency>
+                    <groupId>org.jboss.pressgang</groupId>
+                    <artifactId>pressgang-jdocbook-style</artifactId>
+                    <type>jdocbook-style</type>
+                    <version>2.0.0</version>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <sourceDirectory>${project.basedir}/src/main/docbook</sourceDirectory>
+                    <sourceDocumentName>master.xml</sourceDocumentName>
+                    <masterTranslation>en-US</masterTranslation>
+                    <imageResource>
+                        <directory>${project.basedir}/src/main/docbook/en-US</directory>
+                        <includes>
+                            <include>images/*.png</include>
+                        </includes>
+                    </imageResource>
+                    <formats>
+                        <format>
+                            <formatName>pdf</formatName>
+                            <stylesheetResource>classpath:/xslt/org/jboss/pdf.xsl</stylesheetResource>
+                            <finalName>${pdf.name}</finalName>
+                        </format>
+                        <format>
+                            <formatName>html</formatName>
+                            <stylesheetResource>classpath:/xslt/org/jboss/xhtml.xsl</stylesheetResource>
+                            <finalName>index.html</finalName>
+                        </format>
+                        <format>
+                            <formatName>html_single</formatName>
+                            <stylesheetResource>classpath:/xslt/org/jboss/xhtml-single.xsl</stylesheetResource>
+                            <finalName>index.html</finalName>
+                        </format>
+                    </formats>
+                    <options>
+                        <xincludeSupported>true</xincludeSupported>
+                        <xmlTransformerType>saxon</xmlTransformerType>
+                        <docbookVersion>1.72.0</docbookVersion>
+                        <localeSeparator>-</localeSeparator>
+                    </options>
+                </configuration>
+            </plugin>
         </plugins>
 
             <!--<pluginManagement>-->
@@ -639,5 +693,10 @@
 
         <maven.jar.version>2.3.2</maven.jar.version>
         <maven.surefire.version>2.11</maven.surefire.version>
+
+        <weld.docbook.version>1.1.1-Beta3</weld.docbook.version>
+        <seam.docbook.version>1.1.0.GA</seam.docbook.version>
+        <jbossorg.docbook.version>1.1.1</jbossorg.docbook.version>
+        <pdf.name>yellowfire-manual.pdf</pdf.name>
     </properties>
 </project>
