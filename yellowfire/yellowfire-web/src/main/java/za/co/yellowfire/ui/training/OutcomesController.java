@@ -20,8 +20,8 @@ import javax.inject.Named;
  * @author Mark P Ashworth
  * @version 0.0.1
  */
-@SessionScoped
-@Named("outcomesController")
+@Named
+@ConversationScoped
 public class OutcomesController extends AbstractTrainingUIController {
     private static final long serialVersionUID = 1L;
     private static final Logger LOGGER = LoggerFactory.getLogger(LogType.CONTROLLER.getCategory());
@@ -30,8 +30,8 @@ public class OutcomesController extends AbstractTrainingUIController {
     private DomainManager manager;
     private DataTableModel<Outcome> dataModel;
 
-    //@Inject
-    //Conversation conversation;
+    @Inject
+    private Conversation conversation;
 
     @PostConstruct
     private void init() {
@@ -66,8 +66,7 @@ public class OutcomesController extends AbstractTrainingUIController {
     }
 
     public boolean isInConversation() {
-        //return (conversation != null && !conversation.isTransient());
-        return true;
+        return (conversation != null && !conversation.isTransient());
     }
 
     /**
@@ -77,8 +76,8 @@ public class OutcomesController extends AbstractTrainingUIController {
      */
     public String onStartConversation() {
         LOGGER.debug("Starting conversation: outcome");
-//        if (conversation.isTransient())
-//            conversation.begin();
+        if (conversation.isTransient())
+            conversation.begin();
 
         return "outcome";
     }
@@ -90,8 +89,8 @@ public class OutcomesController extends AbstractTrainingUIController {
      */
     public String onCompleteConversation() {
         LOGGER.debug("Completing conversation: outcome");
-//        if (!conversation.isTransient())
-//            conversation.end();
+        if (!conversation.isTransient())
+            conversation.end();
 
         return "outcomes?faces-redirect=true";
     }

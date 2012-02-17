@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import za.co.yellowfire.domain.Contact;
 import za.co.yellowfire.domain.NullDomainObject;
 import za.co.yellowfire.domain.profile.SystemManager;
+import za.co.yellowfire.domain.profile.SystemPropertyConfig;
 import za.co.yellowfire.domain.training.*;
 import za.co.yellowfire.log.LogType;
 import za.co.yellowfire.manager.DomainManager;
@@ -30,11 +31,13 @@ import java.util.List;
 public class CoursesController extends AbstractTrainingUIController {
     private static final Logger LOGGER = LoggerFactory.getLogger(LogType.CONTROLLER.getCategory());
 
-    @EJB(name = "SystemManager")
-    private SystemManager systemManager;
+    //TODO This should be set in an application scoped bean
+    //@EJB(name = "SystemManager")
+    //private SystemManager systemManager;
 
     @EJB(name = "DomainManager")
     private DomainManager manager;
+
     private DataTableModel<TrainingCourse> dataModel;
 
     //@Inject
@@ -106,10 +109,11 @@ public class CoursesController extends AbstractTrainingUIController {
 
     @SuppressWarnings("unused")
     public String getTimezone() {
-        if (timezone == null) {
-            timezone = systemManager.getTimezone();
-        }
-        return timezone;
+        //if (timezone == null) {
+        //    timezone = systemManager.getTimezone();
+        //}
+        //return timezone;
+        return (String) SystemPropertyConfig.Timezone.getDefaultValue();
     }
 
     /**

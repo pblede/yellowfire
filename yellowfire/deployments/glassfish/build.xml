@@ -8,16 +8,16 @@
 	<property environment="env"/>
 	<property name="glassfish.home" value="${env.GLASSFISH_HOME}" />
 	<property name="glassfish.port" value="4848" />
-	<property name="application.file" value="../yellowfire-ear/target/yellowfire-0.0.1.ear" />
+	<property name="application.file" value="../../yellowfire-ear/target/yellowfire-0.0.1.ear" />
 	<property name="application.context.root" value="yellowfire" />
 	<property name="mysql.home" value="${env.MYSQL_HOME}" />
-	<property name="mysql.backup.dir" value="./backup" />
+	<property name="mysql.backup.dir" value="../backup" />
 	<property name="sqlserver.home" value="${env.SQLSERVER_HOME}" />
 	
 	<tstamp><format property="DAY_TIME_NOW" pattern="yyyy-MM-dd_HH.mm.ss" /></tstamp>
 	
 	<path id="runtime.cp">
-		<pathelement location="./modules/"/>
+		<pathelement location="../modules/"/>
 		<fileset dir="antform" includes="antform.jar"/>
 	</path>
 	
@@ -26,17 +26,17 @@
 	<taskdef name="antmenu" classname="com.sardak.antform.AntMenu" classpathref="runtime.cp"/>
 	-->
 	<taskdef name="antform" classname="com.sardak.antform.AntForm" 
-            classpath="./modules/antform/antform.jar"/>
+            classpath="../modules/antform/antform.jar"/>
 	<taskdef name="antmenu" classname="com.sardak.antform.AntMenu" 
-            classpath="./modules/antform/antform.jar"/>
+            classpath="../modules/antform/antform.jar"/>
 					
 	<!-- test the taskdef  with a mail-like user form -->
 	<target name="test" description="Yellowfire deployment wizard">
 		<antform title="Yellowfire deployement wizard" 
 			save="properties.txt"
-			stylesheet="modules/css/style.test"
-			image="modules/images/phoenix-100x78.png"
-			icon="modules/images/fire-icon-64x76.png"
+			stylesheet="../modules/css/style.test"
+			image="../modules/images/phoenix-100x78.png"
+			icon="../modules/images/fire-icon-64x76.png"
 			lookAndFeel="com.sun.java.swing.plaf.windows.WindowsLookAndFeel"
 			loop="true"
 			>
@@ -68,9 +68,9 @@
 	<target name="form.backup" description="Yellowfire backup wizard">
 		<antform title="Yellowfire backup wizard" 
 			save="properties.txt"
-			stylesheet="modules/css/style.test"
-			image="modules/images/phoenix-100x78.png"
-			icon="modules/images/fire-icon-64x76.png"
+			stylesheet="../modules/css/style.test"
+			image="../modules/images/phoenix-100x78.png"
+			icon="../modules/images/fire-icon-64x76.png"
 			lookAndFeel="com.sun.java.swing.plaf.windows.WindowsLookAndFeel"
 			loop="true"
 			>

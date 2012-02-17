@@ -1,0 +1,1 @@
+deploy ..\..\yellowfire-web\target\yellowfire.war

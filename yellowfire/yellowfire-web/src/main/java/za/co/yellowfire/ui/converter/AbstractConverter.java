@@ -41,7 +41,7 @@ public abstract class AbstractConverter implements Converter {
      */
     protected DomainManager getDomainManager() throws NamingException {
 		if (manager == null) {
-			manager = (DomainManager) new InitialContext().lookup(Naming.MANAGER_DOMAIN);
+			manager = (DomainManager) new InitialContext().lookup(Naming.MANAGER_DOMAIN_JNDI_ENC);
 		}
 		return manager;
 	}

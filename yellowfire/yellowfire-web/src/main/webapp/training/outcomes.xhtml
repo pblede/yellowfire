@@ -23,7 +23,6 @@
         </h:form>
     </ui:define>
     <ui:define name="content">
-        <p:growl id="growl" showDetail="true" showSummary="true" globalOnly="true"/>
         <h:form id="h2" prependId="false">
             <p:panel id="commands">
                 <h:panelGrid columns="4">
@@ -61,7 +60,7 @@
                 <p:column sortBy="#{row.object.id}" style="width:10px" headerText="#">
                     <h:outputText value="#{row.object.id}"/>
                 </p:column>
-                <p:column sortBy="#{row.object.name}" style="width:100%" headerText="#{msgs['fld.description']}">
+                <p:column sortBy="#{row.object.description}" style="width:100%" headerText="#{msgs['fld.description']}">
                     <h:outputText value="#{row.object.description}" />
                 </p:column>
                 <p:column style="width:80px" headerText="Options">
