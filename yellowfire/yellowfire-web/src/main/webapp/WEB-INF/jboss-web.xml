@@ -4,6 +4,12 @@
            version="6.0">
     <context-root>yellowfire</context-root>
 
+    <ejb-ref>
+        <ejb-ref-name>yellowfire/session/DomainManager</ejb-ref-name>
+        <ejb-ref-type>Session</ejb-ref-type>
+        <jndi-name>java:global/yellowfire/DomainManager!za.co.yellowfire.manager.DomainManager</jndi-name>
+    </ejb-ref>
+
     <resource-ref>
         <res-ref-name>ConnectionFactory</res-ref-name>
         <jndi-name>java:/ConnectionFactory</jndi-name>
