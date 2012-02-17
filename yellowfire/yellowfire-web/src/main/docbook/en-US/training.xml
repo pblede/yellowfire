@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE chapter PUBLIC "-//OASIS/DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" []>
+<chapter id="training">
+    <title>Training</title>
+    <section id="training-configuration">
+        <title>Training Configuration</title>
+        <section>
+            <title>Introduction</title>
+            <para>
+                Blah blah
+                <literal>Blah</literal> isn&apos;t
+            </para>
+            <example>
+                <title>Program listing</title>
+                <programlisting role="JAVA"><![CDATA[
+                @Override
+                public void main()
+                ]]></programlisting>
+            </example>
+        </section>
+    </section>
+</chapter>
