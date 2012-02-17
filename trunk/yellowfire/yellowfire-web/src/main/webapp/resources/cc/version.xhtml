@@ -18,7 +18,7 @@
         </p:commandLink>
         <h:outputText value="#{msgs['fld.date']}: #{cc.attrs.date}" rendered="#{cc.attrs.date ne null and cc.attrs.date ne ''}"/>
         <ui:remove><!--<h:outputText value="#{cc.attrs.bean.businessDate}"><f:convertDateTime pattern="MMMM dd, yyyy"/></h:outputText>--></ui:remove>
-        <p:dialog id="dlgVersion" var="varDialog" header="#{msgs['dlg.version']}" closable="true" draggable="true" dynamic="false">
+        <p:dialog id="dlgVersion" widgetVar="varDialog" header="#{msgs['dlg.version']}" closable="true" dynamic="true">
             <h:panelGrid columns="2">
                 <h:outputLabel value="#{msgs['fld.database.version']}" id="lblDatabaseVersion" for="fldDatabaseVersion"/>
                 <h:outputText value="#{setupController.databaseVersion}" id="fldDatabaseVersion" />
