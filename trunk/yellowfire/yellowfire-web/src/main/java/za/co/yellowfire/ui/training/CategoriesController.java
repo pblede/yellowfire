@@ -2,11 +2,9 @@ package za.co.yellowfire.ui.training;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import za.co.yellowfire.domain.training.ContentType;
+import za.co.yellowfire.domain.training.Category;
 import za.co.yellowfire.log.LogType;
 import za.co.yellowfire.manager.DomainManager;
-import za.co.yellowfire.ui.UIConversationController;
-import za.co.yellowfire.ui.UIDataModelController;
 import za.co.yellowfire.ui.UILookupController;
 import za.co.yellowfire.ui.model.AbstractDomainManagerDataTableListener;
 import za.co.yellowfire.ui.model.DataTableModel;
@@ -22,9 +20,9 @@ import javax.inject.Named;
  * @author Mark P Ashworth
  * @version 0.0.1
  */
+@Named
 @ConversationScoped
-@Named("contentTypesController")
-public class ContentTypesController extends AbstractTrainingUIController implements UILookupController<ContentType> {
+public class CategoriesController extends AbstractTrainingUIController implements UILookupController<Category> {
     private static final Logger LOGGER = LoggerFactory.getLogger(LogType.CONTROLLER.getCategory());
 
     @EJB(name = "DomainManager")
@@ -33,15 +31,15 @@ public class ContentTypesController extends AbstractTrainingUIController impleme
     @Inject
     private Conversation conversation;
 
-    private DataTableModel<ContentType> dataModel;
+    private DataTableModel<Category> dataModel;
 
     @PostConstruct
     private void init() {
 
         dataModel =
-                new DataTableModel<ContentType>(
+                new DataTableModel<Category>(
                         /* DataTableListener*/
-                        new AbstractDomainManagerDataTableListener<ContentType>() {
+                        new AbstractDomainManagerDataTableListener<Category>() {
                             @Override
                             public DomainManager getManager() {
                                 return manager;
@@ -49,12 +47,12 @@ public class ContentTypesController extends AbstractTrainingUIController impleme
 
                             @Override
                             public String getLoadQuery() {
-                                return ContentType.QRY_CONTENT_TYPES;
+                                return Category.QRY_COURSE_CATEGORIES;
                             }
 
                             @Override
-                            public ContentType createEmpty() {
-                                return new ContentType();
+                            public Category createEmpty() {
+                                return new Category();
                             }
                         },
                         /* DataTableSearchListener*/
@@ -63,7 +61,7 @@ public class ContentTypesController extends AbstractTrainingUIController impleme
 
 
 
-    public DataTableModel<ContentType> getDataModel() {
+    public DataTableModel<Category> getDataModel() {
         return dataModel;
     }
 
@@ -80,7 +78,7 @@ public class ContentTypesController extends AbstractTrainingUIController impleme
         if (conversation.isTransient())
             conversation.begin();
 
-        return "content_type";
+        return "category";
     }
 
     /**
@@ -92,6 +90,6 @@ public class ContentTypesController extends AbstractTrainingUIController impleme
         if (!conversation.isTransient())
             conversation.end();
 
-        return "content_types?faces-redirect=true";
+        return "categories?faces-redirect=true";
     }
 }

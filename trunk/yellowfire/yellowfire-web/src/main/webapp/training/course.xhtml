@@ -9,26 +9,11 @@
         template="/resources/layout/common-layout.xhtml">
 
     <ui:define name="demoSampleParameters">
-        <f:metadata>
-            <f:viewParam name="section" value="#{navigator.section}"/>
-            <f:viewParam name="item" value="#{navigator.item}"/>
-            <f:viewParam name="skin" value="#{skinBean.skin}"/>
-        </f:metadata>
     </ui:define> 
     <ui:define name="head">
     </ui:define>
     <ui:define name="toolbar">
-        <h:form prependId="false">
-            <p:menubar widgetVar="t">
-                <c:forEach items="${coursesController.menu.subMenus}" var="subMenu" varStatus="subMenuStatus">
-                    <p:submenu label="#{subMenu.text}">
-                        <c:forEach items="${subMenu.menuItems}" var="menuItem" varStatus="menuItemStatus">
-                            <p:menuitem value="#{menuItem.text}"  url="#{menuItem.url}" />
-                        </c:forEach>
-                    </p:submenu>
-                </c:forEach>
-            </p:menubar>
-        </h:form>
+        <cc:toolbar bean="#{coursesController}" />
     </ui:define>
     <ui:define name="content">
         <p:growl id="growl" showDetail="true" showSummary="true" globalOnly="true"/>
@@ -52,7 +37,7 @@
                     <p:commandButton
                             id="b1"
                             value="#{msgs['btn.save']}"
-                            image="ui-icon ui-icon-disk"
+                            icon="ui-icon-disk"
                             actionListener="#{coursesController.dataModel.onSave}"
                             ajax="true"
                             oncomplete="onSaveComplete(xhr, status, args, modifyDialogVar, 1)"
@@ -63,7 +48,7 @@
                     <p:commandButton
                             id="b4"
                             value="#{msgs['btn.delete']}"
-                            image="ui-icon ui-icon-minus"
+                            icon="ui-icon-minus"
                             actionListener="#{coursesController.dataModel.onDelete}"
                             ajax="true"
                             rendered="#{coursesController.dataModel.selected.object.id ne null and coursesController.dataModel.selected.editable}"
@@ -73,7 +58,7 @@
 
                     <p:commandButton
                             id="b3"
-                            image="ui-icon ui-icon-close"
+                            icon="ui-icon-close"
                             value="#{msgs['btn.back']}"
                             action="#{coursesController.onCompleteConversation}"
                             ajax="false"
@@ -102,7 +87,7 @@
                 <h:panelGrid id="display_buttons" columns="3" cellpadding="4">
                     <p:commandButton
                             id="b10"
-                            image="ui-icon ui-icon-close"
+                            icon="ui-icon-close"
                             value="#{msgs['btn.ok']}"
                             action="#{coursesController.onCompleteConversation}"
                             ajax="false"

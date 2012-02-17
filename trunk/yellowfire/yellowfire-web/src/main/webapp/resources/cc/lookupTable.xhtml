@@ -1,0 +1,67 @@
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:composite="http://java.sun.com/jsf/composite"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:f="http://java.sun.com/jsf/core">
+
+<!-- INTERFACE -->
+<composite:interface>
+    <composite:attribute name="bean" />
+</composite:interface>
+
+<!-- IMPLEMENATION -->
+<composite:implementation>
+    <h:form id="h2" prependId="false">
+        <p:panel id="commands">
+            <h:panelGrid columns="4">
+                <p:commandButton
+                        id="b10"
+                        value="#{msgs['btn.add']}"
+                        immediate="true"
+                        action="#{cc.attrs.bean.onStartConversation}"
+                        actionListener="#{cc.attrs.bean.dataModel.onAdd}"
+                        ajax="false"/>
+                <p:commandButton
+                        id="b11"
+                        value="#{msgs['btn.refresh']}"
+                        actionListener="#{cc.attrs.bean.dataModel.onLoad}"
+                        ajax="true"
+                        update="dt1 growl"
+                        onerror="onError()"/>
+                #{" "} #{msgs['prompt.table.actions']}
+            </h:panelGrid>
+        </p:panel>
+    </h:form>
+    <h:form id="h1" prependId="false">
+    <p:dataTable
+            id="dt1"
+            widgetVar="dt1Var"
+            var="row"
+            value="#{cc.attrs.bean.dataModel.rows}"
+            rows="10"
+            height="500"
+            paginator="true"
+            paginatorAlwaysVisible="true"
+            style="vertical-align:text-top;">
+
+        <p:column sortBy="#{row.object.id}" style="width:10px" headerText="#">
+            <h:outputText value="#{row.object.id}"/>
+        </p:column>
+        <p:column sortBy="#{row.object.description}" style="width:100%" headerText="#{msgs['fld.description']}">
+            <h:outputText value="#{row.object.description}" />
+        </p:column>
+        <p:column style="width:80px" headerText="Options">
+            <h:commandLink action="#{cc.attrs.bean.onStartConversation}" immediate="true" value="Edit" rendered="#{row.editable}">
+                <f:setPropertyActionListener value="#{row}" target="#{cc.attrs.bean.dataModel.selected}"/>
+                <f:setPropertyActionListener value="false" target="#{cc.attrs.bean.dataModel.selected.readonly}"/>
+            </h:commandLink>#{" "}#{" "}
+            <h:commandLink action="#{cc.attrs.bean.onStartConversation}" immediate="true" value="View">
+                <f:setPropertyActionListener value="#{row}" target="#{cc.attrs.bean.dataModel.selected}"/>
+                <f:setPropertyActionListener value="true" target="#{cc.attrs.bean.dataModel.selected.readonly}"/>
+            </h:commandLink>
+        </p:column>
+    </p:dataTable>
+    </h:form>
+</composite:implementation>
+</html>

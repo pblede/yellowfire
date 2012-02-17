@@ -16,7 +16,7 @@
 <composite:implementation>
     <h:form prependId="false">
         <p:menubar widgetVar="t">
-            <c:forEach items="${bean.menu.subMenus}" var="subMenu" varStatus="subMenuStatus">
+            <c:forEach items="${cc.attrs.bean.menu.subMenus}" var="subMenu" varStatus="subMenuStatus">
                 <p:submenu label="#{subMenu.text}">
                     <c:forEach items="${subMenu.menuItems}" var="menuItem" varStatus="menuItemStatus">
                         <p:menuitem value="#{menuItem.text}"  url="#{menuItem.url}" />

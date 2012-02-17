@@ -10,20 +10,9 @@
     <ui:define name="head">
     </ui:define>
     <ui:define name="toolbar">
-        <h:form prependId="false">
-            <p:menubar widgetVar="t">
-                <c:forEach items="${outcomesController.menu.subMenus}" var="subMenu" varStatus="subMenuStatus">
-                    <p:submenu label="#{subMenu.text}">
-                        <c:forEach items="${subMenu.menuItems}" var="menuItem" varStatus="menuItemStatus">
-                            <p:menuitem value="#{menuItem.text}"  url="#{menuItem.url}" />
-                        </c:forEach>
-                    </p:submenu>
-                </c:forEach>
-            </p:menubar>
-        </h:form>
+        <cc:toolbar bean="#{outcomesController}" />
     </ui:define>
     <ui:define name="content">
-        <p:growl id="growl" showDetail="true" showSummary="true" globalOnly="true"/>
         <h:form id="h2" prependId="false">
             <p:panel styleClass="center width60pc">
                 <h:panelGrid columns="1" style="width:100%">

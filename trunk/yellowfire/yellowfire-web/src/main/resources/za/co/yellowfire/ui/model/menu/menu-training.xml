@@ -4,8 +4,10 @@
         <menuitem text-id="menu.administration.venue.location.search" url="/training/location_search.jsf"/>
     </submenu>
     <submenu text-id="menu.administration.training">
+        <menuitem text-id="menu.administration.training.categories" url="/training/categories.jsf"/>
         <menuitem text-id="menu.administration.training.outcomes" url="/training/outcomes.jsf"/>
         <menuitem text-id="menu.administration.skill.areas" url="/training/skill_areas.jsf"/>
+        <menuitem text-id="menu.administration.training.content.types" url="/training/content_types.jsf"/>
         <menuitem text-id="menu.administration.training.courses" url="/training/courses.jsf"/>
         <menuitem text-id="menu.administration.training.course.dates" url="/training/course_dates.jsf"/>
     </submenu>

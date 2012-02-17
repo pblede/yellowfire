@@ -14,6 +14,7 @@ public class Naming {
     public static final String SETUP_DATA_SOURCE_JNDI = "java:comp/env/yellowfire/setup/ds";
 
     public static final String MANAGER_DOMAIN = "yellowfire/session/DomainManager";
+    public static final String MANAGER_DOMAIN_JNDI_ENC = "java:comp/env/" + MANAGER_DOMAIN;
 
     public static final String EMAIL_SENDER = "yellowfire/session/EmailSender";
 

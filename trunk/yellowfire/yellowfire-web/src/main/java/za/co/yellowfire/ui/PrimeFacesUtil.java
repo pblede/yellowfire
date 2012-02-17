@@ -15,7 +15,8 @@ public class PrimeFacesUtil {
     private static final Logger LOGGER = LoggerFactory.getLogger(LogType.CONTROLLER.getCategory());
 
     /**
-     * Adds the RequestResult to the RequestContext
+     * Adds the RequestResult to the RequestContext as a callback parameter `result`. The RequestContent is only
+     * available for Ajax calls.
      * @param result The request result to add
      */
     public static void addCallbackParam(RequestResult result) {
@@ -23,7 +24,7 @@ public class PrimeFacesUtil {
         if (context != null) {
             context.addCallbackParam("result", result);
         } else {
-            LOGGER.warn("Cannot add callback parameter because request context is null");
+            LOGGER.debug("Cannot add callback parameter because request context is null. The request content is only available for Ajax calls");
         }
     }
 }

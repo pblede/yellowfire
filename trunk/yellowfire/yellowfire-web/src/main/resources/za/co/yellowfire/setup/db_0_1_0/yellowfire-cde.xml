@@ -351,6 +351,19 @@
                 insert into cde.training_provider (training_provider_id, training_provider_description, version) values (1, 'Mark', 1);
                 set identity_insert cde.training_provider off
             end
+
+            if not exists(select duration_type_id from cde.duration_type where duration_type_description= 'Hours')
+            begin
+                set identity_insert cde.duration_type on
+                insert into cde.duration_type (duration_type_id, duration_type_description, version) values (0, 'Hours', 1);
+                set identity_insert cde.duration_type off
+            end
+            if not exists(select duration_type_id from cde.duration_type where duration_type_description= 'Days')
+            begin
+                set identity_insert cde.duration_type on
+                insert into cde.duration_type (duration_type_id, duration_type_description, version) values (1, 'Days', 1);
+                set identity_insert cde.duration_type off
+            end
         </sql>
     </changeSet>
 
