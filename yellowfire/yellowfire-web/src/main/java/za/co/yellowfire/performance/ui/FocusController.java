@@ -1,12 +1,15 @@
-package za.co.yellowfire.ui.training;
+package za.co.yellowfire.performance.ui;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import za.co.yellowfire.domain.training.SkillArea;
 import za.co.yellowfire.common.log.LogType;
+import za.co.yellowfire.domain.training.Category;
 import za.co.yellowfire.manager.DomainManager;
+import za.co.yellowfire.performance.domain.Focus;
+import za.co.yellowfire.ui.UILookupController;
 import za.co.yellowfire.ui.model.AbstractDomainManagerDataTableListener;
 import za.co.yellowfire.ui.model.DataTableModel;
+import za.co.yellowfire.ui.training.AbstractTrainingUIController;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -19,25 +22,27 @@ import javax.inject.Named;
  * @author Mark P Ashworth
  * @version 0.0.1
  */
+@Named
 @ConversationScoped
-@Named("skillAreasController")
-public class SkillAreasController extends AbstractTrainingUIController {
+public class FocusController extends AbstractTrainingUIController implements UILookupController<Focus> {
+    private static final long serialVersionUID = 1L;
     private static final Logger LOGGER = LoggerFactory.getLogger(LogType.CONTROLLER.getCategory());
 
     @EJB(name = "DomainManager")
     private DomainManager manager;
-    private DataTableModel<SkillArea> dataModel;
 
     @Inject
-    Conversation conversation;
-    
+    private Conversation conversation;
+
+    private DataTableModel<Focus> dataModel;
+
     @PostConstruct
     private void init() {
 
         dataModel =
-                new DataTableModel<SkillArea>(
+                new DataTableModel<Focus>(
                         /* DataTableListener*/
-                        new AbstractDomainManagerDataTableListener<SkillArea>() {
+                        new AbstractDomainManagerDataTableListener<Focus>() {
                             @Override
                             public DomainManager getManager() {
                                 return manager;
@@ -45,12 +50,12 @@ public class SkillAreasController extends AbstractTrainingUIController {
 
                             @Override
                             public String getLoadQuery() {
-                                return SkillArea.QRY_SKILL_AREAS;
+                                return Focus.QRY_PERFORMANCE_FOCUSES;
                             }
 
                             @Override
-                            public SkillArea createEmpty() {
-                                return new SkillArea();
+                            public Focus createEmpty() {
+                                return new Focus();
                             }
                         },
                         /* DataTableSearchListener*/
@@ -59,7 +64,7 @@ public class SkillAreasController extends AbstractTrainingUIController {
 
 
 
-    public DataTableModel<SkillArea> getDataModel() {
+    public DataTableModel<Focus> getDataModel() {
         return dataModel;
     }
 
@@ -68,28 +73,26 @@ public class SkillAreasController extends AbstractTrainingUIController {
     }
 
     /**
-     * Starts the conversation of editing the course
-     *
+     * Starts the conversation of editing
      * @return The view to proceed to
      */
     public String onStartConversation() {
-        LOGGER.debug("Starting conversation: skill_area");
+        LOGGER.debug("Starting conversation: outcome");
         if (conversation.isTransient())
             conversation.begin();
 
-        return "skill_area";
+        return "focus";
     }
 
     /**
      * Completes the conversation
-     *
      * @return The view to redirect to
      */
     public String onCompleteConversation() {
-        LOGGER.debug("Completing conversation: skill_areas");
+        LOGGER.debug("Completing conversation: outcome");
         if (!conversation.isTransient())
             conversation.end();
 
-        return "skill_areas?faces-redirect=true";
+        return "focuses?faces-redirect=true";
     }
 }

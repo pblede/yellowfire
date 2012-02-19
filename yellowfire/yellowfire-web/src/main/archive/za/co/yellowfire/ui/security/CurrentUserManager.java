@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import za.co.yellowfire.domain.profile.*;
 import za.co.yellowfire.domain.training.TrainingCourse;
-import za.co.yellowfire.log.LogType;
+import za.co.yellowfire.common.log.LogType;
 import za.co.yellowfire.manager.DomainManager;
 import za.co.yellowfire.ui.FacesUtil;
 import za.co.yellowfire.ui.resources.MessageKey;

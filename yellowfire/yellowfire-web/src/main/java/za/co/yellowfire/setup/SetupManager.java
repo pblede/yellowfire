@@ -9,7 +9,7 @@ import liquibase.resource.ResourceAccessor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import za.co.yellowfire.Naming;
-import za.co.yellowfire.log.LogType;
+import za.co.yellowfire.common.log.LogType;
 
 import javax.annotation.Resource;
 import javax.enterprise.inject.Model;

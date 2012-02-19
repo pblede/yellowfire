@@ -10,7 +10,7 @@ import za.co.yellowfire.domain.profile.Profile;
 import za.co.yellowfire.domain.profile.UserManager;
 import za.co.yellowfire.domain.profile.UserRegistrationException;
 import za.co.yellowfire.domain.racing.Club;
-import za.co.yellowfire.log.LogType;
+import za.co.yellowfire.common.log.LogType;
 import za.co.yellowfire.manager.DomainManager;
 import za.co.yellowfire.ui.FacesUtil;
 import za.co.yellowfire.ui.model.RequestResult;

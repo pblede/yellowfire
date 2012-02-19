@@ -15,7 +15,7 @@ import za.co.yellowfire.domain.racing.Club;
 import za.co.yellowfire.domain.racing.Race;
 import za.co.yellowfire.domain.racing.RaceManager;
 import za.co.yellowfire.domain.result.ResultManager;
-import za.co.yellowfire.log.LogType;
+import za.co.yellowfire.common.log.LogType;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;

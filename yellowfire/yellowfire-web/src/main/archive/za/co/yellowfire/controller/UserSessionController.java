@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 import za.co.yellowfire.domain.profile.Credentials;
 import za.co.yellowfire.domain.profile.Guest;
 import za.co.yellowfire.domain.profile.Profile;
-import za.co.yellowfire.log.LogType;
+import za.co.yellowfire.common.log.LogType;
 import za.co.yellowfire.ui.FacesUtil;
 import za.co.yellowfire.ui.annotation.UIContext;
 import za.co.yellowfire.ui.security.CurrentUserManager;

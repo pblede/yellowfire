@@ -2,7 +2,7 @@ package za.co.yellowfire.setup;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import za.co.yellowfire.log.LogType;
+import za.co.yellowfire.common.log.LogType;
 
 import java.io.Serializable;
 

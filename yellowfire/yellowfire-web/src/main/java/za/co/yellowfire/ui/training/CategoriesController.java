@@ -3,7 +3,7 @@ package za.co.yellowfire.ui.training;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import za.co.yellowfire.domain.training.Category;
-import za.co.yellowfire.log.LogType;
+import za.co.yellowfire.common.log.LogType;
 import za.co.yellowfire.manager.DomainManager;
 import za.co.yellowfire.ui.UILookupController;
 import za.co.yellowfire.ui.model.AbstractDomainManagerDataTableListener;
