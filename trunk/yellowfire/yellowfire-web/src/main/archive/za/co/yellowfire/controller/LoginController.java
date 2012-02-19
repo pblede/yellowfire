@@ -3,7 +3,7 @@ package za.co.yellowfire.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import za.co.yellowfire.domain.profile.*;
-import za.co.yellowfire.log.LogType;
+import za.co.yellowfire.common.log.LogType;
 import za.co.yellowfire.ui.resources.MessageResources;
 import za.co.yellowfire.ui.security.CurrentUserManager;
 
