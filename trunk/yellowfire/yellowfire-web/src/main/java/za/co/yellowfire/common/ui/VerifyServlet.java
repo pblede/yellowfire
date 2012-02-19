@@ -6,7 +6,7 @@ import za.co.yellowfire.domain.profile.Profile;
 import za.co.yellowfire.domain.profile.UserManager;
 import za.co.yellowfire.domain.profile.UserPersistException;
 import za.co.yellowfire.domain.profile.Verified;
-import za.co.yellowfire.log.LogType;
+import za.co.yellowfire.common.log.LogType;
 
 import javax.ejb.EJB;
 import javax.enterprise.event.Event;

@@ -1,13 +1,11 @@
 package za.co.yellowfire.domain.training;
 
-import org.eclipse.persistence.annotations.Partitioned;
-import org.eclipse.persistence.annotations.UnionPartitioning;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import za.co.yellowfire.domain.Archiveable;
 import za.co.yellowfire.domain.Contact;
 import za.co.yellowfire.domain.DomainEntity;
-import za.co.yellowfire.log.LogType;
+import za.co.yellowfire.common.log.LogType;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;

@@ -273,7 +273,18 @@
             <column name="update_ts" type="DATETIME"/>
             <column name="version" type="INT"/>
         </createTable>
-        
+        <createTable schemaName="cde" tableName="performance_focus">
+            <column autoIncrement="true" name="performance_focus_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_performance_focus_id"/>
+            </column>
+            <column name="performance_focus_description" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="create_ts" type="DATETIME"/>
+            <column name="update_ts" type="DATETIME"/>
+            <column name="version" type="INT"/>
+        </createTable>
+
         <addPrimaryKey columnNames="questionaire_id, question_id" constraintName="pk_questionaire_question_id" schemaName="cde" tableName="questionaire_question"/>
         <addForeignKeyConstraint baseColumnNames="person_id" baseTableName="answer" baseTableSchemaName="cde" constraintName="fk_answer_person_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="person_id" referencedTableName="person" referencedTableSchemaName="cde" referencesUniqueColumn="false"/>
         <addForeignKeyConstraint baseColumnNames="question_id" baseTableName="answer" baseTableSchemaName="cde" constraintName="fk_answer_question_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="question_id" referencedTableName="question" referencedTableSchemaName="cde" referencesUniqueColumn="false"/>
@@ -294,7 +305,7 @@
         <addForeignKeyConstraint baseColumnNames="course_id" baseTableName="course_date" baseTableSchemaName="cde" constraintName="fk_course_date_course_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="course_id" referencedTableName="course" referencedTableSchemaName="cde" referencesUniqueColumn="false"/>
         <addForeignKeyConstraint baseColumnNames="venue_id" baseTableName="course_date" baseTableSchemaName="cde" constraintName="fk_course_date_venue_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="venue_id" referencedTableName="venue" referencedTableSchemaName="cde" referencesUniqueColumn="false"/>
         <addForeignKeyConstraint baseColumnNames="course_id" baseTableName="course_goal" baseTableSchemaName="cde" constraintName="fk_course_goal_course_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="course_id" referencedTableName="course" referencedTableSchemaName="cde" referencesUniqueColumn="false"/>
-    
+
         <createView schemaName="cde" viewName="vw_course">select&#13;
             course_id,&#13;
             course_duration,&#13;

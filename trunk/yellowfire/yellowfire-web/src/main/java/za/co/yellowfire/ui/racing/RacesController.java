@@ -4,7 +4,7 @@ import org.joda.time.DateMidnight;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import za.co.yellowfire.domain.racing.Race;
-import za.co.yellowfire.log.LogType;
+import za.co.yellowfire.common.log.LogType;
 import za.co.yellowfire.manager.DomainManager;
 import za.co.yellowfire.ui.model.AbstractDomainManagerDataTableListener;
 import za.co.yellowfire.ui.model.DataTableModel;

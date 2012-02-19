@@ -10,7 +10,7 @@ import za.co.yellowfire.domain.Venue;
 import za.co.yellowfire.domain.converter.GeocodeResultConverter;
 import za.co.yellowfire.domain.geocode.GeocodeManager;
 import za.co.yellowfire.domain.geocode.GeocodeResult;
-import za.co.yellowfire.log.LogType;
+import za.co.yellowfire.common.log.LogType;
 import za.co.yellowfire.manager.DomainManager;
 import za.co.yellowfire.solarflare.SearchManager;
 import za.co.yellowfire.ui.FacesUtil;

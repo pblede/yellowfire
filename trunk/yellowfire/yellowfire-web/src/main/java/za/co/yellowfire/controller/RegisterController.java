@@ -6,7 +6,7 @@ import za.co.yellowfire.Naming;
 import za.co.yellowfire.domain.profile.Profile;
 import za.co.yellowfire.domain.profile.UserManager;
 import za.co.yellowfire.domain.profile.UserRegistrationException;
-import za.co.yellowfire.log.LogType;
+import za.co.yellowfire.common.log.LogType;
 
 import javax.enterprise.context.RequestScoped;
 import javax.faces.component.UIComponent;

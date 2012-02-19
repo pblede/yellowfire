@@ -8,7 +8,7 @@ import za.co.yellowfire.domain.Venue;
 import za.co.yellowfire.domain.profile.SystemManager;
 import za.co.yellowfire.domain.training.TrainingCourse;
 import za.co.yellowfire.domain.training.TrainingCourseDate;
-import za.co.yellowfire.log.LogType;
+import za.co.yellowfire.common.log.LogType;
 import za.co.yellowfire.manager.DomainManager;
 import za.co.yellowfire.ui.model.AbstractDomainManagerDataTableListener;
 import za.co.yellowfire.ui.model.DataTableModel;

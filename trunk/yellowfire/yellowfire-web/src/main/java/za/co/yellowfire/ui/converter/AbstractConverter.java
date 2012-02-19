@@ -3,7 +3,7 @@ package za.co.yellowfire.ui.converter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import za.co.yellowfire.Naming;
-import za.co.yellowfire.log.LogType;
+import za.co.yellowfire.common.log.LogType;
 import za.co.yellowfire.manager.DomainManager;
 
 import javax.faces.convert.Converter;

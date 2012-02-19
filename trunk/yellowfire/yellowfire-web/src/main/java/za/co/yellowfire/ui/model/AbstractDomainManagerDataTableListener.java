@@ -3,9 +3,8 @@ package za.co.yellowfire.ui.model;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import za.co.yellowfire.domain.DomainObject;
-import za.co.yellowfire.log.LogType;
+import za.co.yellowfire.common.log.LogType;
 import za.co.yellowfire.manager.DomainManager;
-import za.co.yellowfire.manager.DomainQueryHint;
 
 import javax.ejb.EJBException;
 import javax.faces.event.ActionEvent;

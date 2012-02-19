@@ -1,25 +1,14 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html"
-                xmlns:p="http://primefaces.org/ui"
-                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                xmlns:cc="http://java.sun.com/jsf/composite/cc"
                 template="/resources/layout/common-layout.xhtml">
 
     <ui:define name="menuLeft">
-        <!--ui:include src="/sections/home/menuLeft.xhtml"/-->
-    </ui:define>
+    <!--ui:include src="/sections/home/menuLeft.xhtml"/-->
+</ui:define>
     <ui:define name="toolbar">
-        <h:form prependId="false">
-            <p:menubar widgetVar="t">
-                <c:forEach items="#{indexController.menu.subMenus}" var="subMenu" varStatus="subMenuStatus">
-                    <p:submenu label="#{subMenu.text}">
-                        <c:forEach items="#{subMenu.menuItems}" var="menuItem" varStatus="menuItemStatus">
-                            <p:menuitem value="#{menuItem.text}"  url="#{menuItem.url}" />
-                        </c:forEach>
-                    </p:submenu>
-                </c:forEach>
-            </p:menubar>
-        </h:form>
+        <cc:toolbar bean="#{indexController}" />
     </ui:define>
     <ui:define name="content">
         <h:form>

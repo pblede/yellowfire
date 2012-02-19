@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 import za.co.yellowfire.Naming;
 import za.co.yellowfire.domain.DomainEntity;
 import za.co.yellowfire.domain.notification.Notification;
-import za.co.yellowfire.log.LogType;
+import za.co.yellowfire.common.log.LogType;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;

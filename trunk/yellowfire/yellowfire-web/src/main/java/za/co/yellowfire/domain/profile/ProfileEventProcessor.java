@@ -6,7 +6,7 @@ import za.co.yellowfire.domain.notification.Notification;
 import za.co.yellowfire.domain.notification.NotificationType;
 import za.co.yellowfire.event.InForeground;
 import za.co.yellowfire.event.NotifyEvent;
-import za.co.yellowfire.log.LogType;
+import za.co.yellowfire.common.log.LogType;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.event.Event;

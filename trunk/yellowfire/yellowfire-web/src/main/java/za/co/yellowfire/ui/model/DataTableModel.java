@@ -4,7 +4,7 @@ import org.primefaces.component.datatable.DataTable;
 import org.primefaces.model.SelectableDataModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import za.co.yellowfire.log.LogType;
+import za.co.yellowfire.common.log.LogType;
 import za.co.yellowfire.ui.FacesUtil;
 import za.co.yellowfire.ui.PrimeFacesUtil;
 
@@ -15,7 +15,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 
 /**
  * A model of entities within a data table.

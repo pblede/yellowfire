@@ -2,8 +2,9 @@ package za.co.yellowfire.ui.model.menu;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import za.co.yellowfire.log.LogType;
+import za.co.yellowfire.common.log.LogType;
 import za.co.yellowfire.ui.annotation.Common;
+import za.co.yellowfire.ui.annotation.Performance;
 import za.co.yellowfire.ui.annotation.Racing;
 import za.co.yellowfire.ui.annotation.Training;
 
@@ -20,11 +21,13 @@ public class MenuProvider {
 
     private static final String MENU_COMMON = "/za/co/yellowfire/ui/model/menu/menu-common.xml";
     private static final String MENU_TRAINING = "/za/co/yellowfire/ui/model/menu/menu-training.xml";
+    private static final String MENU_PERFORMANCE = "/za/co/yellowfire/ui/model/menu/menu-performance.xml";
     private static final String MENU_RACING = "/za/co/yellowfire/ui/model/menu/menu-racing.xml";
 
     private MenuManager manager = new MenuManager();
     private MenuModel commonMenu = null;
     private MenuModel trainingMenu = null;
+    private MenuModel performanceMenu = null;
     private MenuModel racingMenu = null;
 
     /**
@@ -57,6 +60,22 @@ public class MenuProvider {
             }
         }
         return trainingMenu;
+    }
+
+    /**
+     * Provides the menu for the performance sub-web
+     * @return MenuModel
+     */
+    @Produces @Performance
+    public MenuModel getPerformanceMenu() {
+        if (performanceMenu == null) {
+            try {
+                performanceMenu = manager.read(MENU_PERFORMANCE);
+            } catch (Exception e) {
+                LOGGER.error("Unable to load menu " + MENU_PERFORMANCE, e);
+            }
+        }
+        return performanceMenu;
     }
 
     /**

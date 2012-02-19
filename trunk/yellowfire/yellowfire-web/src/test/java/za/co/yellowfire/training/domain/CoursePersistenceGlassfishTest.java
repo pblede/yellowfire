@@ -12,7 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import za.co.yellowfire.domain.DomainEntity;
 import za.co.yellowfire.domain.training.TrainingCourse;
-import za.co.yellowfire.log.LogType;
+import za.co.yellowfire.common.log.LogType;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
