@@ -1,2 +1,2 @@
 SET NOPAUSE=true
-%JBOSS_HOME%\bin\jboss-cli.bat --connect --file=undeploy.txt
+%JBOSS_HOME%\bin\jboss-admin.bat --connect --file=undeploy.txt

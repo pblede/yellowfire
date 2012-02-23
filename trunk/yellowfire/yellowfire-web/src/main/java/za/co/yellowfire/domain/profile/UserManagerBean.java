@@ -29,7 +29,7 @@ public class UserManagerBean implements UserManager/*, UserManagerRemote*/ {
 	@SuppressWarnings("unchecked")
     @Override public Profile retrieve(String name) {
     	Map<String, Object> params = new HashMap<String, Object>(1);
-        params.put(Profile.FIELD_NAME, name);
+        params.put(Profile.FIELD_USER_NAME, name);
      
         List<Profile> users = (List<Profile>) manager.query(Profile.QRY_USER_NAME, params);
         if (users != null && users.size() > 0) {
@@ -48,7 +48,7 @@ public class UserManagerBean implements UserManager/*, UserManagerRemote*/ {
     @Override public Profile login(String userName, String password) {
     	
         Map<String, Object> params = new HashMap<String, Object>(1);
-        params.put(Profile.FIELD_NAME, userName);
+        params.put(Profile.FIELD_USER_NAME, userName);
         params.put(Profile.FIELD_PASSWORD, password);
         
         List<Profile> users = (List<Profile>) manager.query(Profile.QRY_USER_LOGIN, params);
@@ -66,7 +66,7 @@ public class UserManagerBean implements UserManager/*, UserManagerRemote*/ {
     @SuppressWarnings("unchecked")
     @Override public boolean isUsernameAvailable(String userName) {	
         Map<String, Object> params = new HashMap<String, Object>(1);
-        params.put(Profile.FIELD_NAME, userName);
+        params.put(Profile.FIELD_USER_NAME, userName);
         
         List<Profile> users = (List<Profile>) manager.query(Profile.QRY_USER_NAME, params);
         return users != null && users.size() == 0;
@@ -79,7 +79,7 @@ public class UserManagerBean implements UserManager/*, UserManagerRemote*/ {
      */
     @Override public Profile register(Profile user) throws UserRegistrationException {
     	
-    	if (!isUsernameAvailable(user.getName())) {
+    	if (!isUsernameAvailable(user.getUserName())) {
     		throw new UserRegistrationException(String.format("The username %s is not available", user.getName()));
     	}
     	if (user.getPassword() == null) {

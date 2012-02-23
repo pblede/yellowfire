@@ -2,7 +2,7 @@ package za.co.yellowfire.ui.training;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import za.co.yellowfire.domain.Contact;
+import za.co.yellowfire.common.domain.Contact;
 import za.co.yellowfire.domain.NullDomainObject;
 import za.co.yellowfire.domain.profile.SystemPropertyConfig;
 import za.co.yellowfire.domain.training.*;

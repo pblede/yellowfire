@@ -1,0 +1,40 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:comp="http://java.sun.com/jsf/composite"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+    <comp:interface>
+        <comp:attribute name="label" required="true" shortDescription="The label for the output"/>
+        <comp:attribute name="value" required="false" shortDescription="The value for the output"/>
+        <comp:attribute name="size" required="false" default="50" shortDescription="The value for the output"/>
+        <comp:attribute name="required" required="false" default="false" shortDescription="The value for the output"/>
+        <comp:attribute name="readonly" required="false" default="true" shortDescription="The field is read-only"/>
+        <comp:attribute name="pattern" required="false" default="yyyy-MM-dd" shortDescription="The pattern of the date format"/>
+    </comp:interface>
+
+    <comp:implementation>
+        <h:panelGroup style="width:100%" rendered="#{cc.attrs.readonly ne true}">
+            <div class="entry" id="#{cc.clientId}">
+                <p:calendar
+                        id="input"
+                        size="#{cc.attrs.size}"
+                        required="#{cc.attrs.required}"
+                        label="#{cc.attrs.label}"
+                        pattern="#{cc.attrs.pattern}"
+                        value="#{cc.attrs.value}"
+                        styleClass="width95pc">
+                </p:calendar>
+                <p:message id="error_icon" for="input" showSummary="false" showDetail="false" display="icon"/>
+            </div>
+        </h:panelGroup>
+        <h:panelGroup rendered="#{cc.attrs.readonly}">
+            <h:outputText id="t02" value="#{cc.attrs.value}" styleClass="width100pc">
+                <f:convertDateTime pattern="#{cc.attrs.pattern}" />
+            </h:outputText>
+        </h:panelGroup>
+    </comp:implementation>
+</ui:composition>

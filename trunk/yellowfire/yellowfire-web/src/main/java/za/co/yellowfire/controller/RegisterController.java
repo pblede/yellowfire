@@ -66,7 +66,7 @@ public class RegisterController extends AbstractController {
     		//session.login();
     		
     		/* Welcome and forward to races */
-    		addInfoMessage("Welcome", user.getName());
+    		addInfoMessage("Welcome", user.getName().getName());
     		return VIEW_RACES;
     	} catch (UserRegistrationException e) {
     		LOGGER.error("Registration error", e);

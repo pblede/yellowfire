@@ -1,21 +1,22 @@
 package za.co.yellowfire.domain.profile;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.eclipse.persistence.config.QueryHints;
 import org.hibernate.validator.constraints.Email;
 import org.picketlink.idm.api.User;
-import org.picketlink.idm.impl.api.model.SimpleUser;
-import za.co.yellowfire.domain.racing.Club;
+import za.co.yellowfire.common.domain.Address;
+import za.co.yellowfire.common.domain.PersonName;
+import za.co.yellowfire.common.domain.Title;
+import za.co.yellowfire.domain.DomainEntity;
 import za.co.yellowfire.jaxb.DateTypeAdapter;
 
 import javax.persistence.*;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.Serializable;
-import java.util.Date;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * @author Mark P Ashworth
@@ -26,14 +27,14 @@ import java.util.UUID;
 @NamedQueries({
         @NamedQuery(
             name="qry.user.login",
-            query="select u from User u where u.name = :name and u.password = :password",
+            query="select u from User u where u.userName = :userName and u.password = :password",
             hints={
                 @QueryHint(name= QueryHints.REFRESH, value="true")
             }
         ),
         @NamedQuery(
             name="qry.user.name",
-            query="select u from User u where u.name = :name"
+            query="select u from User u where u.userName = :userName"
         ),
         @NamedQuery(
             name="qry.user.verification.key",
@@ -42,7 +43,7 @@ import java.util.UUID;
 		
 })
 @Table(name = "person", schema = "cde", uniqueConstraints = {@UniqueConstraint(columnNames = {"person_name"})})
-public class Profile implements User, Serializable {
+public class Profile extends DomainEntity implements User {
     private static final long serialVersionUID = 1L;
 
     public static final String QRY_USER_LOGIN = "qry.user.login";
@@ -50,9 +51,18 @@ public class Profile implements User, Serializable {
     public static final String QRY_USER_VERIFICATION_KEY = "qry.user.verification.key";
 
     public static final String FIELD_ID = "id";
-    public static final String FIELD_NAME = "name";
+    public static final String FIELD_USER_NAME = "userName";
     public static final String FIELD_PASSWORD = "password";
+    public static final String FIELD_FIRST_NAME = "name.name";
+    public static final String FIELD_LAST_NAME = "name.surname";
     public static final String FIELD_VERIFICATION_KEY = "verificationKey";
+
+    public static final String[] TRACKED = new String[] {
+            FIELD_USER_NAME,
+            FIELD_PASSWORD,
+            FIELD_FIRST_NAME,
+            FIELD_LAST_NAME
+    };
 
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -63,35 +73,53 @@ public class Profile implements User, Serializable {
     @Basic @Size(min = 1, max = 64)
     @Column(name = "person_name", nullable = false, insertable = true, updatable = true, length = 32, precision = 0)
     @XmlAttribute(name = "name", required = true)
-    private String name;
+    private String userName;
 
     @Basic @Size(min = 5, max = 64)
     @Column(name = "person_password", nullable = false, insertable = true, updatable = true, length = 512, precision = 0)
     @XmlAttribute(name = "name", required = true)
     private String password;
 
-    @Basic @Size(min = 1, max = 64)
-    @Column(name = "person_firstname", nullable = false, insertable = true, updatable = true, length = 64, precision = 0)
-    @XmlAttribute(name = "first_name", required = true)
-    private String firstName;
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "name", column = @Column(name = "first_name", nullable = false, insertable = true, updatable = true, length = 64, precision = 0)),
+            @AttributeOverride(name = "surname", column = @Column(name = "last_name", nullable = false, insertable = true, updatable = true, length = 64, precision = 0))
+    })
+    private PersonName name;
 
-    @Basic @Size(min = 1, max = 64)
-    @Column(name = "person_lastname", nullable = false, insertable = true, updatable = true, length = 64, precision = 0)
-    @XmlAttribute(name = "last_name", required = true)
-    private String lastName;
-
+    @Column(name = "id_number")
+    @XmlAttribute(name = "id_number", required = true)
+    private String idNumber;
 
     @Past(message = "The birth date must be in the past")
     @XmlJavaTypeAdapter(value=DateTypeAdapter.class)
     @Temporal(TemporalType.DATE)
-    @Column(name = "person_dob", nullable = false, insertable = true, updatable = true)
+    @Column(name = "dob", nullable = false, insertable = true, updatable = true)
     @XmlAttribute(name = "dob", required = true)
     private Date birthDate;
 
     @Basic @Email
-    @Column(name = "person_email")
+    @Column(name = "email")
     @XmlAttribute(name = "email", required = true)
     private String email;
+
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "line01", column = @Column(name = "physical_address_01")),
+            @AttributeOverride(name = "line02", column = @Column(name = "physical_address_02")),
+            @AttributeOverride(name = "line03", column = @Column(name = "physical_address_03")),
+            @AttributeOverride(name = "postalCode", column = @Column(name = "physical_address_code"))
+    })
+    private Address physicalAddress;
+
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "line01", column = @Column(name = "postal_address_01")),
+            @AttributeOverride(name = "line02", column = @Column(name = "postal_address_02")),
+            @AttributeOverride(name = "line03", column = @Column(name = "postal_address_03")),
+            @AttributeOverride(name = "postalCode", column = @Column(name = "postal_address_code"))
+    })
+    private Address postalAddress;
 
     @XmlJavaTypeAdapter(value=RoleTypeAdapter.class)
     @XmlAttribute(name = "role", required = true)
@@ -117,25 +145,45 @@ public class Profile implements User, Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date verifiedDate;
 
-
     /* Transient */
     @Transient private boolean passwordChanged = false;
     @Transient private String passwordConfirmation;
 
-    public Profile() {}
+    public Profile() {
+        this(null, null, null, null, new PersonName(), new Address(), new Address());
+    }
 
-    public Profile(String name, String password) {
-        this.name = name;
+    public Profile(String userName, String password, String idNumber, String email, String firstName, String lastName, Title title, String suffix,
+                   String physicalAddress01, String physicalAddress02, String physicalAddress03, String physicalPostalCode,
+                   String postalAddress01, String postalAddress02, String postalAddress03, String postalPostalCode) {
+        this(
+                userName,
+                password,
+                idNumber,
+                email,
+                new PersonName(firstName, lastName, title, suffix),
+                new Address(physicalAddress01, physicalAddress02, physicalAddress03, physicalPostalCode),
+                new Address(postalAddress01, postalAddress02, postalAddress03, postalPostalCode));
+    }
+    
+    public Profile(String userName, String password, String idNumber, String email, PersonName name, Address physicalAddress, Address postalAddress) {
+        this.userName = userName;
         this.password = password;
+        this.idNumber = idNumber;
+        this.email = email;
+        this.name = name;
+        this.physicalAddress = physicalAddress;
+        this.postalAddress = postalAddress;
+    }
+
+    
+    @Override
+    public String getId() {
+        return this.userName;
     }
 
     public Long getUserId() {
         return id;
-    }
-
-    @Override
-    public String getId() {
-        return this.name;
     }
 
     /**
@@ -146,15 +194,15 @@ public class Profile implements User, Serializable {
      */
     @Override
     public String getKey() {
-        return this.name;
+        return this.userName;
     }
 
-    public String getName() {
-        return name;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUserName(String name) {
+        this.userName = userName;
     }
 
     public String getPassword() {
@@ -180,20 +228,36 @@ public class Profile implements User, Serializable {
 		this.passwordConfirmation = passwordConfirmation;
 	}
 
+    public PersonName getName() {
+        return name;
+    }
+
+    public void setName(PersonName name) {
+        this.name = name;
+    }
+
     public String getFirstName() {
-        return firstName;
+        return name != null ? name.getName() : null;
     }
 
     public void setFirstName(String firstName) {
-        this.firstName = firstName;
+        if (name == null) {
+            name = new PersonName(firstName, null, null, null);
+        } else {
+            this.name.setName(firstName);;
+        }
     }
 
     public String getLastName() {
-        return lastName;
+        return name != null ? name.getSurname() : null;
     }
 
     public void setLastName(String lastName) {
-        this.lastName = lastName;
+        if (name == null) {
+            name = new PersonName(null, lastName, null, null);
+        } else {
+            this.name.setSurname(lastName);;
+        }
     }
 
     public Date getBirthDate() {
@@ -220,7 +284,30 @@ public class Profile implements User, Serializable {
         this.email = email;
     }
 
-    
+    public String getIdNumber() {
+        return idNumber;
+    }
+
+    public void setIdNumber(String idNumber) {
+        this.idNumber = idNumber;
+    }
+
+    public Address getPhysicalAddress() {
+        return physicalAddress;
+    }
+
+    public void setPhysicalAddress(Address physicalAddress) {
+        this.physicalAddress = physicalAddress;
+    }
+
+    public Address getPostalAddress() {
+        return postalAddress;
+    }
+
+    public void setPostalAddress(Address postalAddress) {
+        this.postalAddress = postalAddress;
+    }
+
 	public RoleType getRole() {
 		return role;
 	}
@@ -269,8 +356,13 @@ public class Profile implements User, Serializable {
     public void setEntityUpdated() {
 		this.updated = new Date();
 	}
-	
-	@Override
+
+    @Override
+    public String[] getTrackedProperties() {
+        return TRACKED;
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -291,9 +383,9 @@ public class Profile implements User, Serializable {
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
+                ", name='" + userName + '\'' +
+                ", firstName='" + name.getName() + '\'' +
+                ", lastName='" + name.getSurname() + '\'' +
                 ", password='*******\'" +
                 ", birthDate=" + birthDate +
                 ", verified=" + verified +

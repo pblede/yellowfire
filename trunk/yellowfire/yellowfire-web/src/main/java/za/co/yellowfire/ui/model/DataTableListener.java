@@ -33,6 +33,22 @@ public interface DataTableListener<T> extends Serializable {
     DataTableAction onSave(ActionEvent event, T object) throws DataTableException;
 
     /**
+     * Called by the onSave method when the object.id is null so that application specific logic can be applied
+     * @param event The event that initiated the action
+     * @param object The object to save
+     * @throws DataTableException If there was an error encountered
+     */
+    T onSaveNew(ActionEvent event, T object) throws DataTableException;
+
+    /**
+     * Called by the onSave method when the object.id is not null so that application specific logic can be applied
+     * @param event The event that initiated the action
+     * @param object The object to save
+     * @throws DataTableException If there was an error encountered
+     */
+    T onSaveExisting(ActionEvent event, T object) throws DataTableException;
+
+    /**
      * Deletes the object from the persistent store
      * @param event The event that initiated the action
      * @param object The object to delete

@@ -237,7 +237,7 @@ public class SessionController extends AbstractController {
 	public String register() {
 		try {
 			manager.register(user);
-			addInfoMessage("Welcome", user.getName());
+			addInfoMessage("Welcome", user.getUserName());
 			return VIEW_RACES;
 		} catch (UserRegistrationException e) {
 			addErrorMessage(ERROR_USER_REGISTER, e.getMessage());

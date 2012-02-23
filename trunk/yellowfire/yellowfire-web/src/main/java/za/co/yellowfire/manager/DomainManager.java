@@ -1,10 +1,14 @@
 package za.co.yellowfire.manager;
 
+import za.co.yellowfire.domain.ChangeItem;
 import za.co.yellowfire.domain.DomainObject;
 
 import javax.ejb.Local;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 import javax.persistence.LockModeType;
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Map;
 
 /**
@@ -25,6 +29,14 @@ public interface DomainManager extends Serializable {
      * @param object The object to merge
      */
     Object merge(Object object);
+
+    /**
+     * Merges the change items for a stored domain object to the persistent store
+     * @param domainClass   The class of the domain object to merge
+     * @param id            The id of the domain object in the persistent store
+     * @param changeItems   The list of change items to apply to the object in the persistent store
+     */
+    Object merge(Class domainClass, Serializable id, Collection<ChangeItem> changeItems);
 
     /**
      * Removes the object from the persistent store

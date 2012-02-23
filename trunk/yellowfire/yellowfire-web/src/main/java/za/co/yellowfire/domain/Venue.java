@@ -37,7 +37,7 @@ import java.util.Map;
         )
 })
 @XmlType(name = "venue", propOrder = {"id", "name", "address", "gpsLatitude", "gpsLongitude"})
-public class Venue implements DomainObject {
+public class Venue extends DomainEntity {
 	private static final long serialVersionUID = 1L;
 
     public static final String QRY_VENUES = "qry.venues";

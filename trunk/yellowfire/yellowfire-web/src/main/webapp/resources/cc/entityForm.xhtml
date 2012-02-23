@@ -1,0 +1,91 @@
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:composite="http://java.sun.com/jsf/composite"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:cc="http://java.sun.com/jsf/composite/cc">
+
+<!-- INTERFACE -->
+<composite:interface>
+    <composite:attribute name="heading" />
+    <composite:attribute name="bean" type="za.co.yellowfire.ui.UILookupController" />
+</composite:interface>
+
+<!-- IMPLEMENATION -->
+<composite:implementation>
+    <h:form id="h2" prependId="false">
+        <p:panel styleClass="center width60pc">
+            <h:panelGrid columns="1" style="width:100%">
+                <p:fieldset legend="#{cc.attrs.heading}">
+                    <composite:insertChildren />
+                </p:fieldset>
+                <p:fieldset legend="#{msgs['pnl.messages']}">
+                    <h:panelGrid id="modify_messages" columns="1">
+                        <p:messages id="m1" showDetail="true" showSummary="false" globalOnly="false"  />
+                    </h:panelGrid>
+                </p:fieldset>
+                <h:panelGrid id="modify_buttons" columns="3" cellpadding="4" rendered="#{cc.attrs.bean.inConversation}">
+                    <p:commandButton
+                            id="b1"
+                            value="#{msgs['btn.save']}"
+                            icon="ui-icon-disk"
+                            actionListener="#{cc.attrs.bean.dataModel.onSave}"
+                            ajax="true"
+                            oncomplete="onSaveComplete(xhr, status, args, modifyDialogVar, 1)"
+                            update="modify_messages display_messages"
+                            rendered="#{cc.attrs.bean.dataModel.selected.editable}"
+                            />
+
+                    <p:commandButton
+                            id="b2"
+                            value="#{msgs['btn.delete']}"
+                            icon="ui-icon-minus"
+                            actionListener="#{cc.attrs.bean.dataModel.onDelete}"
+                            ajax="true"
+                            rendered="#{cc.attrs.bean.dataModel.selected.object.id ne null and cc.attrs.bean.dataModel.selected.editable}"
+                            oncomplete="onDeleteComplete(xhr, status, args, modifyDialogVar, 1)"
+                            update="modify_messages display_messages"
+                            />
+
+                    <p:commandButton
+                            id="b3"
+                            icon="ui-icon-close"
+                            value="#{msgs['btn.back']}"
+                            action="#{cc.attrs.bean.onCompleteConversation}"
+                            ajax="false"
+                            immediate="true"
+                            update="modify_messages"
+                            />
+                </h:panelGrid>
+            </h:panelGrid>
+        </p:panel>
+    </h:form>
+    <h:form id="h3" prependId="false">
+    <p:dialog
+            id="messageDialog"
+            header="#{cc.attrs.heading}"
+            widgetVar="modifyDialogVar"
+            resizable="false"
+            width="400"
+            modal="true"
+            showEffect="explode"
+            hideEffect="explode">
+        <p:fieldset legend="#{msgs['pnl.messages']}">
+            <h:panelGrid id="display_messages" columns="1">
+                <h:outputText value="#{msgs['msg.operation.successful']}" />
+            </h:panelGrid>
+        </p:fieldset>
+        <h:panelGrid id="display_buttons" columns="3" cellpadding="4">
+            <p:commandButton
+                    id="b10"
+                    icon="ui-icon-close"
+                    value="#{msgs['btn.ok']}"
+                    action="#{cc.attrs.bean.onCompleteConversation}"
+                    ajax="false"
+                    immediate="true"
+                    />
+        </h:panelGrid>
+    </p:dialog>
+    </h:form>
+</composite:implementation>
+</html>

@@ -138,19 +138,31 @@ public abstract class AbstractDomainManagerDataTableListener<T extends DomainObj
         try {
             DataTableAction action;
             if (object.getId() == null) {
+                /* Give the application the opportunity to apply business logic and/or save nested objects*/
+                object = onSaveNew(event, object);
+                /* Persist the root object*/
                 getManager().persist(object);
                 action = DataTableAction.Add;
             } else if (object.getId() instanceof Long) {
                 Long id = (Long) object.getId();
                 if (id > 0) {
-                    getManager().merge(object);
+                    /* Give the application the opportunity to apply business logic and/or save nested objects*/
+                    object = onSaveExisting(event, object);
+                    /* Merge the root object*/
+                    object = (T) getManager().merge(object);
                     action = DataTableAction.Modify;
                 } else {
+                    /* Give the application the opportunity to apply business logic and/or save nested objects*/
+                    object = onSaveNew(event, object);
+                    /* Persist the root object*/
                     getManager().persist(object);
                     action = DataTableAction.Add;
                 }
             } else {
-                getManager().merge(object);
+                /* Give the application the opportunity to apply business logic and/or save nested objects*/
+                object = onSaveExisting(event, object);
+                /* Merge the root object*/
+                object = (T) getManager().merge(object);
                 action = DataTableAction.Modify;
             }
 
@@ -176,6 +188,30 @@ public abstract class AbstractDomainManagerDataTableListener<T extends DomainObj
 
             throw new DataTableException("Unable to save object", e);
         }
+    }
+
+    /**
+     * Called by the onSave method when the object.id is null so that application specific logic can be applied
+     * @param event  The event that initiated the action
+     * @param object The object to save
+     * @throws za.co.yellowfire.ui.model.DataTableException
+     *          If there was an error encountered
+     */
+    @Override
+    public T onSaveNew(ActionEvent event, T object) throws DataTableException {
+        return object;
+    }
+
+    /**
+     * Called by the onSave method when the object.id is not null so that application specific logic can be applied
+     * @param event  The event that initiated the action
+     * @param object The object to save
+     * @throws za.co.yellowfire.ui.model.DataTableException
+     *          If there was an error encountered
+     */
+    @Override
+    public T onSaveExisting(ActionEvent event, T object) throws DataTableException {
+        return object;
     }
 
     /**

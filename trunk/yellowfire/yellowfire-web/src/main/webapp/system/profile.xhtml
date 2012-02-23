@@ -1,0 +1,51 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:cc="http://java.sun.com/jsf/composite/cc"
+        template="/resources/layout/common-layout.xhtml">
+
+    <ui:define name="head">
+	</ui:define>
+    <ui:define name="toolbar">
+        <cc:toolbar bean="#{profileController}" />
+    </ui:define>
+	<ui:define name="content">
+        <p:growl id="g" showDetail="true" showSummary="true" />
+       	<h:form id="f1">
+        	<p:panel header="#{msgs['pnl.profile']}">
+                <cc:profileForm bean="#{profileController.profile}" titles="#{profileController.titles}" />
+        	</p:panel>
+        	<p:panel>
+        		<h:panelGrid columns="5">
+                    <p:commandButton
+                        id="b2"
+                        value="#{msgs['link.register']}"
+                        action="#{profileController.onRegister}"
+                        ajax="false"
+                        icon="ui-icon-disk"
+                        update="registerForm od3e od3u od3p od3cp od3d od3em od3um od3pm od3cpm od3dm g"
+                        rendered="#{profileController.profile.id eq null}"/>
+        			<p:commandButton 
+        				id="cb01" 
+        				value="#{msgs['btn.save']}"
+        				actionListener="#{profileController.onPersist}"
+        				ajax="true" 
+        				update="f1 g"
+                        icon="ui-icon-disk"
+                        rendered="#{profileController.profile.id ne null}"/>
+        			<p:commandButton 
+        				id="cb02" 
+        				value="#{msgs['btn.delete']}"
+        				actionListener="#{profileController.onDelete}"
+        				ajax="true" 
+        				update="f1 g"
+                        disabled="true"
+                        icon="ui-icon-close"
+                        rendered="#{profileController.profile.id ne null}"/>
+        		</h:panelGrid>
+        	</p:panel>
+        </h:form>
+	</ui:define>
+</ui:composition>
