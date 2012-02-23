@@ -1,0 +1,48 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:comp="http://java.sun.com/jsf/composite"
+      xmlns:cc="http://java.sun.com/jsf/composite/cc"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xml:lang="en" lang="en">
+<comp:interface>
+    <comp:attribute name="bean" required="true" type="za.co.yellowfire.employee.domain.Employee" shortDescription="The employee bean for the form" />
+    <comp:attribute name="readonly" required="false" default="true" type="java.lang.Boolean" shortDescription="Whether the data is editable" />
+    <comp:attribute name="titles" required="true" shortDescription="The person titles for the form" />
+    <comp:attribute name="unlinkedProfileDialog" required="true" shortDescription="The dialog variable that should be shown for the unlinked profiles" />
+</comp:interface>
+<comp:implementation>
+    <style type="text/css">
+        .course_col1 {width: 50%; vertical-align: top;}
+        .course_col2 {width: 50%; vertical-align: top;}
+    </style>
+    <h:panelGrid columns="2" columnClasses="course_col1,course_col2">
+        <p:fieldset id="pnl01" legend="#{msgs['pnl.employee']}">
+            <h:panelGrid columns="2" >
+                <h:outputText value="#{msgs['fld.id']}:"/>
+                <cc:inputText label="#{msgs['fld.id']}" value="#{cc.attrs.bean.id}" readonly="true" required="true" />
+
+                <h:outputText value="#{msgs['fld.code']}:"/>
+                <cc:inputText label="#{msgs['fld.code']}" value="#{cc.attrs.bean.code}" readonly="#{cc.attrs.readonly}" required="true" />
+
+                <h:outputLabel value="#{msgs['fld.date.joined']}:" />
+                <cc:inputDate label="#{msgs['fld.date.joined']}" value="#{cc.attrs.bean.joined}" readonly="#{cc.attrs.readonly}" />
+
+                <h:outputLabel value="#{msgs['fld.date.terminated']}:" rendered="#{cc.attrs.bean.terminated ne null}" />
+                <h:panelGroup rendered="#{cc.attrs.bean.terminated ne null}">
+                    <cc:inputDate label="#{msgs['fld.date.terminated']}" value="#{cc.attrs.bean.terminated}" readonly="#{cc.attrs.readonly}" />
+                </h:panelGroup>
+
+                <h:outputLabel value="#{msgs['fld.reason.terminated']}:" rendered="#{cc.attrs.bean.terminated ne null}" />
+                <h:panelGroup rendered="#{cc.attrs.bean.terminationReason.description ne null}">
+                    <cc:inputDate label="#{msgs['fld.reason.terminated']}" value="#{cc.attrs.bean.terminationReason.description}" readonly="#{cc.attrs.readonly}" />
+                </h:panelGroup>
+            </h:panelGrid>
+        </p:fieldset>
+        <p:fieldset id="pnl02" legend="#{msgs['pnl.personal']}">
+            <h:outputText value="#{msgs['fld.name']}:"/>
+            <cc:inputText label="#{msgs['fld.name']}" value="#{cc.attrs.bean.profile.name.name}" readonly="#{cc.attrs.readonly}" required="true" />
+        </p:fieldset>
+    </h:panelGrid>
+</comp:implementation>
+</html>

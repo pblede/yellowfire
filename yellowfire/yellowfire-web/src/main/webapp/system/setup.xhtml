@@ -1,0 +1,36 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:cc="http://java.sun.com/jsf/composite/cc"
+                template="/resources/layout/common-layout.xhtml">
+
+    <ui:define name="head">
+	</ui:define>
+    <ui:define name="toolbar">
+        <cc:toolbar bean="#{setupController}"/>
+    </ui:define>
+	<ui:define name="content">
+        <p:growl showDetail="true" showSummary="true" />
+        <h:form id="frmSetup" prependId="false">
+            <p:panel header="#{msgs['dlg.setup.index']}" style="width:100%">
+                <h:panelGrid columns="1">
+                    <h:outputText value="#{msgs['prompt.setup.explanation']}" />
+                    <h:panelGrid columns="2">
+                        <h:outputLabel value="#{msgs['fld.database.version']}" id="lblDatabaseVersion" for="fldDatabaseVersion"/>
+                        <h:outputText value="#{setupController.databaseVersion}" id="fldDatabaseVersion" />
+                        <h:outputLabel value="#{msgs['fld.application.version']}" id="lblApplicationVersion" for="fldApplicationVersion"/>
+                        <h:outputText value="#{setupController.applicationVersion}" id="fldApplicationVersion" />
+                    </h:panelGrid>
+                    <h:panelGroup>
+                        <p:commandButton value="Script" actionListener="#{setupController.onScript}" update="pnlDatabaseScript growl" />
+                        <p:commandButton value="Upgrade" actionListener="#{setupController.onUpgrade}" update="frmSetup growl" />
+                    </h:panelGroup>
+                </h:panelGrid>
+            </p:panel>
+            <p:panel header="Database script" id="pnlDatabaseScript">
+                <h:outputText id="fldDatabaseScript" value="#{setupController.script}" />
+            </p:panel>
+        </h:form>
+	</ui:define>
+</ui:composition>

@@ -1,8 +1,10 @@
 package za.co.yellowfire.manager;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.eclipse.persistence.config.QueryHints;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import za.co.yellowfire.domain.ChangeItem;
 import za.co.yellowfire.domain.DomainObject;
 import za.co.yellowfire.common.log.LogType;
 
@@ -12,6 +14,7 @@ import javax.persistence.LockModeType;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 
@@ -49,6 +52,25 @@ public class DomainManagerBean implements DomainManager, DomainManagerRemote {
         return o;
     }
 
+    /**
+     * Merges the change items for a stored domain object to the persistent store
+     * @param domainClass   The class of the domain object to merge
+     * @param id            The id of the domain object in the persistent store
+     * @param changeItems   The list of change items to apply to the object in the persistent store
+     */
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
+    @Override public Object merge(Class domainClass, Serializable id, Collection<ChangeItem> changeItems) {
+        Object object = em.find(domainClass, id);
+        for (ChangeItem changeItem : changeItems) {
+            try {
+                BeanUtils.setProperty(object, changeItem.getProperty(), changeItem.getValue());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return merge(object);
+    }
+    
     /**
      * Removes the object from the persistent store
      * @param object The object to remove

@@ -3,5 +3,6 @@
         <menuitem text-id="menu.common.running" url="/running/index.jsf"/>
         <menuitem text-id="menu.common.training" url="/training/index.jsf"/>
         <menuitem text-id="menu.common.performance" url="/performance/index.jsf"/>
+        <menuitem text-id="menu.common.employee" url="/employee/index.jsf"/>
     </submenu>
 </menu>

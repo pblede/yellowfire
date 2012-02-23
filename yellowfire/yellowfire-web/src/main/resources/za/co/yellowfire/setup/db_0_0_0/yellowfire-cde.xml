@@ -8,15 +8,30 @@
             <column name="person_name" type="VARCHAR(32)">
                 <constraints nullable="false"/>
             </column>
-            <column name="person_firstname" type="VARCHAR(64)"/>
-            <column name="person_lastname" type="VARCHAR(64)"/>
             <column name="person_password" type="VARCHAR(512)">
                 <constraints nullable="false"/>
             </column>
-            <column name="person_email" type="VARCHAR(512)">
+            <column name="title" type="VARCHAR(6)" />
+            <column name="suffix" type="VARCHAR(6)" />
+            <column name="first_name" type="VARCHAR(64)">
+                <constraints nullable="false" />
+            </column>
+            <column name="last_name" type="VARCHAR(64)">
+                <constraints nullable="false" />
+            </column>
+            <column name="email" type="VARCHAR(512)">
                 <constraints nullable="false"/>
             </column>
-            <column name="person_dob" type="DATETIME"/>
+            <column name="dob" type="DATETIME"/>
+            <column name="id_number" type="VARCHAR(13)" />
+            <column name="physical_address_01" type="VARCHAR(64)" />
+            <column name="physical_address_02" type="VARCHAR(64)" />
+            <column name="physical_address_03" type="VARCHAR(64)" />
+            <column name="physical_address_code" type="VARCHAR(6)" />
+            <column name="postal_address_01" type="VARCHAR(64)" />
+            <column name="postal_address_02" type="VARCHAR(64)" />
+            <column name="postal_address_03" type="VARCHAR(64)" />
+            <column name="postal_address_code" type="VARCHAR(6)" />
             <column defaultValue="Blue" name="person_group_name" type="VARCHAR(32)"/>
             <column name="person_verification_key" type="VARCHAR(128)"/>
             <column defaultValueBoolean="false" name="person_verified" type="bit"/>

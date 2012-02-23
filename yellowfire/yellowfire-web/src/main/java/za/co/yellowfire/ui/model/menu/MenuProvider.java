@@ -3,10 +3,7 @@ package za.co.yellowfire.ui.model.menu;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import za.co.yellowfire.common.log.LogType;
-import za.co.yellowfire.ui.annotation.Common;
-import za.co.yellowfire.ui.annotation.Performance;
-import za.co.yellowfire.ui.annotation.Racing;
-import za.co.yellowfire.ui.annotation.Training;
+import za.co.yellowfire.ui.annotation.*;
 
 import javax.enterprise.inject.Produces;
 import javax.inject.Named;
@@ -20,12 +17,14 @@ public class MenuProvider {
     private static final Logger LOGGER = LoggerFactory.getLogger(LogType.MANAGER.getCategory());
 
     private static final String MENU_COMMON = "/za/co/yellowfire/ui/model/menu/menu-common.xml";
+    private static final String MENU_EMPLOYEE = "/za/co/yellowfire/ui/model/menu/menu-employee.xml";
     private static final String MENU_TRAINING = "/za/co/yellowfire/ui/model/menu/menu-training.xml";
     private static final String MENU_PERFORMANCE = "/za/co/yellowfire/ui/model/menu/menu-performance.xml";
     private static final String MENU_RACING = "/za/co/yellowfire/ui/model/menu/menu-racing.xml";
 
     private MenuManager manager = new MenuManager();
     private MenuModel commonMenu = null;
+    private MenuModel employeeMenu = null;
     private MenuModel trainingMenu = null;
     private MenuModel performanceMenu = null;
     private MenuModel racingMenu = null;
@@ -44,6 +43,22 @@ public class MenuProvider {
             }
         }
         return commonMenu;
+    }
+
+    /**
+     * Provides the menu for the training sub-web
+     * @return MenuModel
+     */
+    @Produces @Employee
+    public MenuModel getEmployeeMenu() {
+        if (employeeMenu == null) {
+            try {
+                employeeMenu = manager.read(MENU_EMPLOYEE);
+            } catch (Exception e) {
+                LOGGER.error("Unable to load menu " + MENU_EMPLOYEE, e);
+            }
+        }
+        return employeeMenu;
     }
 
     /**

@@ -1,0 +1,55 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:cc="http://java.sun.com/jsf/composite/cc"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:p="http://primefaces.org/ui" xmlns:f="http://java.sun.com/jsf/core"
+        template="/resources/layout/common-layout.xhtml">
+
+    <ui:define name="head">
+    </ui:define>
+    <ui:define name="toolbar">
+        <cc:toolbar bean="#{employeesController}" />
+    </ui:define>
+    <ui:define name="content">
+        <cc:entityForm bean="#{employeesController}">
+            <cc:employeeForm
+                    bean="#{employeesController.dataModel.selected.object}"
+                    readonly="#{employeesController.dataModel.selected.readonly}"
+                    titles="#{employeesController.titles}"
+                    unlinkedProfileDialog="unlinkedProfilesDialogVar"/>
+        </cc:entityForm>
+        <h:form id="h4" prependId="true">
+            <p:dialog
+                    id="unlinkedProfilesDialog"
+                    header="#{cc.attrs.heading}"
+                    widgetVar="unlinkedProfilesDialogVar"
+                    resizable="false"
+                    width="400"
+                    modal="true"
+                    showEffect="explode"
+                    hideEffect="explode">
+                <p:fieldset legend="#{msgs['pnl.messages']}">
+                    <p:dataTable id="unlinkedProfiles" value="#{employeesController.unlinkedProfiles}" var="profile">
+                        <p:column headerText="#{msgs['fld.username']}">#{profile.userName}</p:column>
+                        <p:column headerText="#{msgs['fld.email']}">#{profile.email}</p:column>
+                        <p:column style="width:80px" headerText="Options">
+                            <h:commandLink action="#{employeesController.onLinkProfile}" value="Link Profile">
+                                <f:setPropertyActionListener value="#{profile}" target="#{employeesController.dataModel.selected.object.profile}"/>
+                            </h:commandLink>
+                        </p:column>
+                    </p:dataTable>
+                </p:fieldset>
+                <h:panelGrid id="display_buttons" columns="3" cellpadding="4">
+                    <p:commandButton
+                            id="b20"
+                            icon="ui-icon-close"
+                            value="#{msgs['btn.ok']}"
+                            ajax="false"
+                            immediate="true"
+                            />
+                </h:panelGrid>
+            </p:dialog>
+        </h:form>
+    </ui:define>
+</ui:composition>

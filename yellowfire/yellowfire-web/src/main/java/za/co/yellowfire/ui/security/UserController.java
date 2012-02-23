@@ -86,7 +86,7 @@ public class UserController extends AbstractController {
        
     	RequestContext context = RequestContext.getCurrentInstance();
         
-    	if (!getUserNameAvailable(user.getName())) {
+    	if (!getUserNameAvailable(user.getUserName())) {
     		context.addCallbackParam("error", "The username is not available");
     		addErrorMessage("Error", "The password confirmation should match the password");
     	}
@@ -145,7 +145,7 @@ public class UserController extends AbstractController {
      */
     public void login() {
     	try {
-	    	Profile u = manager.login(getUser().getName(), getUser().getPassword());
+	    	Profile u = manager.login(getUser().getUserName(), getUser().getPassword());
 	    	if (u != null) {
 	    		this.loggedIn = true;
 	    		this.user = u;

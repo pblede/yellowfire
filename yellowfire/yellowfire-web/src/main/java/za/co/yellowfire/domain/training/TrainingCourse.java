@@ -2,8 +2,8 @@ package za.co.yellowfire.domain.training;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import za.co.yellowfire.common.domain.Contact;
 import za.co.yellowfire.domain.Archiveable;
-import za.co.yellowfire.domain.Contact;
 import za.co.yellowfire.domain.DomainEntity;
 import za.co.yellowfire.common.log.LogType;
 

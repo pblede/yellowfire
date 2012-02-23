@@ -1,0 +1,22 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:cc="http://java.sun.com/jsf/composite/cc"
+                template="/resources/layout/common-layout.xhtml">
+   
+    <ui:define name="head">
+	</ui:define>
+    <ui:define name="toolbar">
+        <cc:toolbar bean="#{employeeIndexController}" />
+    </ui:define>
+	<ui:define name="content">
+        <h:form id="h1" prependId="false">
+            <p:panel header="#{msgs['dlg.employee.index']}" style="width:100%">
+                <h:panelGrid>
+
+                </h:panelGrid>
+            </p:panel>
+        </h:form>
+	</ui:define>
+</ui:composition>

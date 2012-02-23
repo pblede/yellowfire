@@ -7,7 +7,7 @@
       <!--Note: Use the following for global scoped data sources -->
       <jta-data-source>yellowfire/app/ds</jta-data-source>
 
-      <class>za.co.yellowfire.domain.Contact</class>
+      <class>za.co.yellowfire.common.domain.Contact</class>
       <class>za.co.yellowfire.domain.Venue</class>
 
       <class>za.co.yellowfire.domain.profile.UserProperty</class>

@@ -1,0 +1,62 @@
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:composite="http://java.sun.com/jsf/composite"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:cc="http://java.sun.com/jsf/composite/cc"
+        xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<!-- INTERFACE -->
+<composite:interface>
+    <composite:attribute name="bean" required="true" type="za.co.yellowfire.domain.profile.Profile" shortDescription="The controller that profile should use"/>
+    <composite:attribute name="titles" required="true" shortDescription="The property that the titles should be read" />
+</composite:interface>
+
+<!-- IMPLEMENATION -->
+<composite:implementation>
+    <h:panelGrid columns="2">
+        <p:fieldset legend="#{msgs['pnl.profile']}">
+            <h:panelGrid columns="3" rendered="">
+                <h:outputLabel id="l00" value="#{msgs['fld.username']}:" for="a00" rendered="#{cc.attrs.bean.id eq null}"/>
+                <p:inputText id="a00" value="#{cc.attrs.bean.name}" disabled="false"
+                             rendered="#{cc.attrs.bean.id eq null}" size="100"/>
+                <h:message for="a00" rendered="#{cc.attrs.bean.id eq null}"/>
+
+                <h:outputLabel id="l01" value="#{msgs['fld.username']}:" for="a01" rendered="#{cc.attrs.bean.id ne null}"/>
+                <p:inputText id="a01" value="#{cc.attrs.bean.name}" disabled="true"
+                             rendered="#{cc.attrs.bean.id ne null}" />
+                <h:message for="a01" rendered="#{cc.attrs.bean.id ne null}"/>
+
+                <h:outputLabel id="l11" value="#{msgs['fld.firstname']}:" for="a11"/>
+                <p:inputText id="a11" value="#{cc.attrs.bean.firstName}" />
+                <h:message for="a11"/>
+
+                <h:outputLabel id="l12" value="#{msgs['fld.lastname']}:" for="a12"/>
+                <p:inputText id="a12" value="#{cc.attrs.bean.lastName}"/>
+                <h:message for="a12"/>
+
+                <h:outputLabel id="l02" value="#{msgs['fld.email']}:" for="a02"/>
+                <p:inputText id="a02" value="#{cc.attrs.bean.email}"/>
+                <h:message for="a02"/>
+
+                <h:outputLabel id="l03" value="#{msgs['fld.password']}:" for="a03"/>
+                <p:password id="a03" value="#{cc.attrs.bean.password}" minLength="6" feedback="true" redisplay="true" />
+                <h:message for="a03"/>
+
+        <h:outputLabel id="l04" value="#{msgs['fld.confirm.password']}:" for="a04"/>
+        <p:password id="a04" value="#{cc.attrs.bean.passwordConfirmation}" minLength="6" feedback="true" redisplay="true" />
+        <h:message for="a04"/>
+
+
+        <ui:remove>
+        <!--<h:outputLabel id="l06" value="#{msgs['fld.club']}:" for="a06"/>-->
+        <!--<h:selectOneMenu id="a06" value="#{cc.attrs.bean.club}">-->
+            <!--<f:selectItems itemDescription="#{club.name}" itemLabel="#{club.name}" value="#{cc.attrs.bean.clubs}"-->
+                           <!--var="club"/>-->
+            <!--<f:converter converterId="ClubConverter"/>-->
+        <!--</h:selectOneMenu>-->
+        <!--<h:message for="a06"/>-->
+        </ui:remove>
+    </h:panelGrid>
+</composite:implementation>
+</html>

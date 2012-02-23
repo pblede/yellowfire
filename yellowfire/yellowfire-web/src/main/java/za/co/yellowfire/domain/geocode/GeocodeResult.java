@@ -1,5 +1,6 @@
 package za.co.yellowfire.domain.geocode;
 
+import za.co.yellowfire.domain.DomainEntity;
 import za.co.yellowfire.domain.DomainObject;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -13,7 +14,7 @@ import java.util.Collection;
  * @version 0.0.1
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-public class GeocodeResult implements DomainObject {
+public class GeocodeResult extends DomainEntity {
 
     @XmlElement(name = "address_component")
     private Collection<GeocodeAddressComponent> addressComponents;

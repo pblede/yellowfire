@@ -5,6 +5,8 @@ import org.primefaces.model.SelectableDataModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import za.co.yellowfire.common.log.LogType;
+import za.co.yellowfire.domain.ChangeTrackingException;
+import za.co.yellowfire.domain.DomainObject;
 import za.co.yellowfire.ui.FacesUtil;
 import za.co.yellowfire.ui.PrimeFacesUtil;
 
@@ -32,9 +34,11 @@ public class DataTableModel<T> implements SelectableDataModel, Serializable {
     private transient DataTable table;
     private DataTableSearchListener<T> searchListener;
     private DataTableListener<T> listener;
+    private List<ColumnModel> columns;
 
     private transient ActionListener saveActionListener;
     private transient ActionListener deleteActionListener;
+    private transient ActionListener trackActionListener;
 
     /**
      * Constructs the data table model
@@ -42,8 +46,19 @@ public class DataTableModel<T> implements SelectableDataModel, Serializable {
      * @param searchListener The listener for search events
      */
     public DataTableModel(DataTableListener<T> listener, DataTableSearchListener<T> searchListener) {
+        this(listener, searchListener, new ArrayList<ColumnModel>());
+    }
+    
+    /**
+     * Constructs the data table model
+     * @param listener The listener for events initiated by the user
+     * @param searchListener The listener for search events
+     * @param columns The columns of the data model
+     */
+    public DataTableModel(DataTableListener<T> listener, DataTableSearchListener<T> searchListener, List<ColumnModel> columns) {
         this.searchListener = searchListener;
         this.listener = listener;
+        this.columns = columns;
 
         if (this.listener != null) {
             this.selected = new DataTableRow<T>(-1, this.listener.createEmpty());
@@ -51,8 +66,13 @@ public class DataTableModel<T> implements SelectableDataModel, Serializable {
             this.selected = new DataTableRow<T>(-1, null);
         }
 
+        if (this.columns == null) {
+            this.columns = new ArrayList<ColumnModel>();
+        }
+
         this.saveActionListener = new SaveActionListener(this);
         this.deleteActionListener = new DeleteActionListener(this);
+        this.trackActionListener = new TrackActionListener(this);
     }
 
     /**
@@ -85,6 +105,18 @@ public class DataTableModel<T> implements SelectableDataModel, Serializable {
      */
     public void setTable(DataTable table) {
         this.table = table;
+    }
+
+    public void addColumn(String header, String property) {
+        this.columns.add(new ColumnModel(header, property));
+    }
+
+    /**
+     * Provides the column specification for a data table
+     * @return List of column models
+     */
+    public List<ColumnModel> getColumns() {
+        return columns;
     }
 
     @Override
@@ -166,6 +198,10 @@ public class DataTableModel<T> implements SelectableDataModel, Serializable {
 
     public ActionListener getDeleteActionListener() {
         return deleteActionListener;
+    }
+
+    public ActionListener getTrackActionListener() {
+        return trackActionListener;
     }
 
     /**
@@ -304,6 +340,20 @@ public class DataTableModel<T> implements SelectableDataModel, Serializable {
         PrimeFacesUtil.addCallbackParam(result);
     }
 
+    public void onTrackChanges(ActionEvent event) {
+        if (getSelected() == null || getSelected().getObject() == null) {
+            return;
+        }
+
+        try {
+            if (getSelected().getObject() instanceof DomainObject) {
+                ((DomainObject) getSelected().getObject()).track();
+            }
+        } catch (ChangeTrackingException e) {
+            LOGGER.warn("Unable to start change tracking", e);
+        }
+    }
+
     /**
      * Triggered by the system when the data table is loaded for the first time or when the user triggers a reload
      * @param event The JSF action event
@@ -371,6 +421,24 @@ public class DataTableModel<T> implements SelectableDataModel, Serializable {
         public DeleteActionListener(DataTableModel model) {this.model = model;}
         @Override public void processAction(ActionEvent event) throws AbortProcessingException {
             model.onDelete(event);
+        }
+    }
+
+    private static class TrackActionListener implements ActionListener {
+        private DataTableModel model;
+        public TrackActionListener(DataTableModel model) {this.model = model;}
+        @Override public void processAction(ActionEvent event) throws AbortProcessingException {
+            if (model.getSelected() == null || model.getSelected().getObject() == null) {
+                return;
+            }
+
+            try {
+                if (model.getSelected().getObject() instanceof DomainObject) {
+                    ((DomainObject) model.getSelected().getObject()).track();
+                }
+            } catch (ChangeTrackingException e) {
+                LOGGER.warn("Unable to start change tracking", e);
+            }
         }
     }
 }

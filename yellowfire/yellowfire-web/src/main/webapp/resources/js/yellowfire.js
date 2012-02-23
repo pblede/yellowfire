@@ -1,14 +1,14 @@
 function onError() {
-    jQuery.gritter.add({title:'Internal error',text:'The was a problem fulfilling your request, could you please reload the page and try again.',image:'/bluefire/resources/images/growl/error.png', sticky:true});
+    jQuery.gritter.add({title:'Internal error',text:'The was a problem fulfilling your request, could you please reload the page and try again.',image:'/yellowfire/resources/images/growl/error.png', sticky:true});
 }
 
 function handleComplete(xhr, status, args) {
     if (status == 'error') {
         if (xhr.status == 500) {
-            jQuery.gritter.add({title:'Internal error:500',text:'The was a problem fulfilling your request, could you please reload the page and try again.',image:'/bluefire/resources/images/growl/error.png', sticky:true});
+            jQuery.gritter.add({title:'Internal error:500',text:'The was a problem fulfilling your request, could you please reload the page and try again.',image:'/yellowfire/resources/images/growl/error.png', sticky:true});
         }
         if (xhr.status == 503) {
-            jQuery.gritter.add({title:'Internal error:503',text:'The was a problem fulfilling your request, could you please reload the page and try again.',image:'/bluefire/resources/images/growl/error.png', sticky:true});
+            jQuery.gritter.add({title:'Internal error:503',text:'The was a problem fulfilling your request, could you please reload the page and try again.',image:'/yellowfire/resources/images/growl/error.png', sticky:true});
         }
         return false;
     }

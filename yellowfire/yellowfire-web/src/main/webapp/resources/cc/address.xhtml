@@ -1,0 +1,33 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:comp="http://java.sun.com/jsf/composite"
+                xmlns:cc="http://java.sun.com/jsf/composite/cc">
+
+   <comp:interface>
+       <comp:attribute name="bean" required="true" type="za.co.yellowfire.common.domain.Address" shortDescription="The address bean for the form" />
+       <comp:attribute name="readonly" required="false" default="true" shortDescription="The field is read-only"/>
+   </comp:interface>
+
+    <comp:implementation>
+        <h:panelGroup style="width:100%">
+            <h:panelGrid columns="2" style="width:100%" cellpadding="4" columnClasses="align-top,align-top" rendered="#{cc.attrs.readonly ne true}">
+                <h:outputText value="#{msgs['fld.line01']}:"/>
+                <cc:inputText label="#{msgs['fld.line01']}" value="#{cc.attrs.bean.line01}" readonly="#{cc.attrs.readonly}" required="false" />
+
+                <h:outputText value="#{msgs['fld.line02']}:"/>
+                <cc:inputText label="#{msgs['fld.line02']}" value="#{cc.attrs.bean.line02}" readonly="#{cc.attrs.readonly}" required="false" />
+
+                <h:panelGroup style="width:100%">
+                    <h:outputText value="#{msgs['fld.line03']}:"/>
+                    <cc:inputText label="#{msgs['fld.line03']}" value="#{cc.attrs.bean.line03}" readonly="#{cc.attrs.readonly}" required="false" />
+
+                    <h:outputText value="#{msgs['fld.postal.code']}:"/>
+                    <cc:inputText label="#{msgs['fld.postal.code']}" value="#{cc.attrs.bean.postalCode}" readonly="#{cc.attrs.readonly}" required="false" />
+                </h:panelGroup>
+            </h:panelGrid>
+        </h:panelGroup>
+    </comp:implementation>
+</ui:composition>
