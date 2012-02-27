@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+    <changeSet author="yellowfire" id="2" runOnChange="true" failOnError="true">
+        <sql endDelimiter=";" splitStatements="false" stripComments="true">
+            if not exists(select outcome_id from cde.outcome where outcome_description = 'Competent')
+            begin
+            set identity_insert cde.outcome on
+            insert into cde.outcome (outcome_id, outcome_description, version) values (1, 'Competent', 1);
+            set identity_insert cde.outcome off
+            end
+
+            if not exists(select outcome_id from cde.outcome where outcome_description = 'Not competent')
+            begin
+            set identity_insert cde.outcome on
+            insert into cde.outcome (outcome_id, outcome_description, version) values (2, 'Not competent', 1);
+            set identity_insert cde.outcome off
+            end
+
+            if not exists(select skill_area_id from cde.skill_area where skill_area_description = 'Test skill')
+            begin
+            set identity_insert cde.skill_area on
+            insert into cde.skill_area (skill_area_id, skill_area_description, version) values (1, 'Test skill', 1);
+            set identity_insert cde.skill_area off
+            end
+
+            if not exists(select skill_area_id from cde.skill_area where skill_area_description = 'Development skill')
+            begin
+            set identity_insert cde.skill_area on
+            insert into cde.skill_area (skill_area_id, skill_area_description, version) values (2, 'Development skill', 1);
+            set identity_insert cde.skill_area off
+            end
+
+            if not exists(select training_provider_id from cde.training_provider where training_provider_description= 'Mark')
+            begin
+            set identity_insert cde.training_provider on
+            insert into cde.training_provider (training_provider_id, training_provider_description, version) values (1, 'Mark', 1);
+            set identity_insert cde.training_provider off
+            end
+
+            if not exists(select duration_type_id from cde.duration_type where duration_type_description= 'Hours')
+            begin
+            set identity_insert cde.duration_type on
+            insert into cde.duration_type (duration_type_id, duration_type_description, version) values (0, 'Hours', 1);
+            set identity_insert cde.duration_type off
+            end
+            if not exists(select duration_type_id from cde.duration_type where duration_type_description= 'Days')
+            begin
+            set identity_insert cde.duration_type on
+            insert into cde.duration_type (duration_type_id, duration_type_description, version) values (1, 'Days', 1);
+            set identity_insert cde.duration_type off
+            end
+        </sql>
+    </changeSet>
+</databaseChangeLog>

@@ -48,6 +48,12 @@
             <artifactId>hibernate-validator</artifactId>
             <version>${hibernate.validator.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.jboss.weld</groupId>
+            <artifactId>weld-core</artifactId>
+            <version>1.1.1.Final</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
     <dependencyManagement>
         <dependencies>
@@ -108,6 +114,11 @@
                 <version>${commons.beanutils.version}</version>
             </dependency>
             <dependency>
+                <groupId>commons-logging</groupId>
+                <artifactId>commons-logging</artifactId>
+                <version>${commons.logging.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>org.apache.httpcomponents</groupId>
                 <artifactId>httpclient</artifactId>
                 <version>${httpcomponents.httpclient.version}</version>
@@ -163,9 +174,14 @@
                 <scope>test</scope>
             </dependency>
             <dependency>
+                <groupId>org.jboss.logging</groupId>
+                <artifactId>jboss-logging</artifactId>
+                <version>3.1.0.GA</version>
+            </dependency>
+            <dependency>
                 <groupId>org.jboss.arquillian</groupId>
                 <artifactId>arquillian-bom</artifactId>
-                <version>${arquillian.version}</version>
+                <version>${arquillian.bom.version}</version>
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
@@ -204,10 +220,6 @@
                     <scope>provided</scope>
                 </dependency>
                 <dependency>
-                    <groupId>org.jboss.logging</groupId>
-                    <artifactId>jboss-logging</artifactId>
-                </dependency>
-                <dependency>
                     <groupId>org.slf4j</groupId>
                     <artifactId>slf4j-jdk14</artifactId>
                 </dependency>
@@ -238,11 +250,6 @@
                                 <artifactId>seam-persistence-api</artifactId>
                             </exclusion>
                         </exclusions>
-                    </dependency>
-                    <dependency>
-                        <groupId>org.jboss.logging</groupId>
-                        <artifactId>jboss-logging</artifactId>
-                        <version>3.0.1.GA</version>
                     </dependency>
                     <dependency>
                         <groupId>org.jboss.arquillian.container</groupId>
@@ -287,44 +294,60 @@
             </activation>
             <dependencies>
                 <dependency>
+                    <groupId>org.jboss.spec</groupId>
+                    <artifactId>jboss-javaee-6.0</artifactId>
+                    <type>pom</type>
+                    <scope>provided</scope>
+                </dependency>
+                <dependency>
                     <groupId>org.glassfish.extras</groupId>
                     <artifactId>glassfish-embedded-all</artifactId>
                 </dependency>
                 <dependency>
-                    <groupId>org.jboss.logging</groupId>
-                    <artifactId>jboss-logging</artifactId>
+                    <groupId>javax.servlet</groupId>
+                    <artifactId>javax.servlet-api</artifactId>
+                    <scope>provided</scope>
                 </dependency>
                 <dependency>
                     <groupId>org.slf4j</groupId>
                     <artifactId>slf4j-jdk14</artifactId>
                 </dependency>
-                <!--<dependency>-->
-                    <!--<groupId>org.jboss.as</groupId>-->
-                    <!--<artifactId>jboss-as-arquillian-container-managed</artifactId>-->
-                    <!--<version>7.1.0.CR1b</version>-->
-                    <!--<scope>test</scope>-->
-                <!--</dependency>-->
+                <dependency>
+                    <groupId>org.jboss.as</groupId>
+                    <artifactId>jboss-as-arquillian-container-managed</artifactId>
+                    <version>7.1.0.Final</version>
+                    <scope>test</scope>
+                </dependency>
                 <dependency>
                     <groupId>org.jboss.weld.arquillian.container</groupId>
                     <artifactId>arquillian-weld-ee-embedded-1.1</artifactId>
                     <version>1.1.2.AS7</version>
                     <scope>test</scope>
                 </dependency>
-                <dependency>
-                    <groupId>org.jboss.arquillian.protocol</groupId>
-                    <artifactId>arquillian-protocol-servlet</artifactId>
-                    <version>${arquillian.version}</version>
-                    <scope>test</scope>
-                </dependency>
+                <!--<dependency>-->
+                    <!--<groupId>org.jboss.arquillian.protocol</groupId>-->
+                    <!--<artifactId>arquillian-protocol-servlet</artifactId>-->
+                    <!--<scope>test</scope>-->
+                <!--</dependency>-->
                 <dependency>
                     <groupId>org.jboss.arquillian.junit</groupId>
                     <artifactId>arquillian-junit-container</artifactId>
-                    <version>${arquillian.version}</version>
                     <scope>test</scope>
                 </dependency>
             </dependencies>
             <dependencyManagement>
                 <dependencies>
+                    <dependency>
+                        <groupId>org.jboss.spec</groupId>
+                        <artifactId>jboss-javaee-6.0</artifactId>
+                        <version>1.0.0.Final</version>
+                        <type>pom</type>
+                    </dependency>
+                    <dependency>
+                        <groupId>javax.servlet</groupId>
+                        <artifactId>javax.servlet-api</artifactId>
+                        <version>3.0.1</version>
+                    </dependency>
                     <dependency>
                         <groupId>org.jboss.seam.security</groupId>
                         <artifactId>seam-security</artifactId>
@@ -339,11 +362,6 @@
                                 <!--<artifactId>seam-persistence-api</artifactId>-->
                             <!--</exclusion>-->
                         <!--</exclusions>-->
-                    </dependency>
-                    <dependency>
-                        <groupId>org.jboss.logging</groupId>
-                        <artifactId>jboss-logging</artifactId>
-                        <version>3.1.0.CR2</version>
                     </dependency>
                 </dependencies>
             </dependencyManagement>
@@ -366,6 +384,52 @@
                             <warName>yellowfire</warName>
                          </configuration>
                     </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-dependency-plugin</artifactId>
+                        <version>2.1</version>
+                        <executions>
+                            <execution>
+                                <id>copy-test-libs</id>
+                                <phase>process-test-resources</phase>
+                                <configuration>
+                                    <includeScope>test</includeScope>
+                                    <silent>true</silent>
+                                    <outputDirectory>
+                                        ${project.build.directory}/test-libs
+                                    </outputDirectory>
+                                    <stripVersion>true</stripVersion>
+                                </configuration>
+                                <goals>
+                                    <goal>copy-dependencies</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <!--plugin>
+                        <artifactId>maven-dependency-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>unpack</id>
+                                <phase>process-test-classes</phase>
+                                <goals>
+                                    <goal>unpack</goal>
+                                </goals>
+                                <configuration>
+                                    <artifactItems>
+                                        <artifactItem>
+                                            <groupId>org.jboss.as</groupId>
+                                            <artifactId>jboss-as-dist</artifactId>
+                                            <version>7.1.0.Final</version>
+                                            <type>zip</type>
+                                            <overWrite>false</overWrite>
+                                            <outputDirectory>target</outputDirectory>
+                                        </artifactItem>
+                                    </artifactItems>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin-->
                     <!--<plugin>-->
                         <!--<groupId>org.apache.maven.plugins</groupId>-->
                         <!--<artifactId>maven-jar-plugin</artifactId>-->
@@ -684,10 +748,12 @@
         <commons.codec.version>1.5</commons.codec.version>
         <commons.collections.version>3.2.1</commons.collections.version>
         <commons.beanutils.version>1.8.3</commons.beanutils.version>
+        <commons.logging.version>1.1.1</commons.logging.version>
         <httpcomponents.httpclient.version>4.1.1</httpcomponents.httpclient.version>
         <httpcomponents.httpcore.version>4.1</httpcomponents.httpcore.version>
 
-        <arquillian.version>1.0.0.Final-SNAPSHOT</arquillian.version>
+        <arquillian.bom.version>1.0.0.CR7</arquillian.bom.version>
+        <arquillian.version>1.0.0.CR7</arquillian.version>
 
         <glassfish.version>3.1.1</glassfish.version>
 

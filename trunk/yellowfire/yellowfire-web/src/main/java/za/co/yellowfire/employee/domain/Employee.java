@@ -28,6 +28,10 @@ import java.util.Date;
                 query="select e from Employee e"
         ),
         @NamedQuery(
+                name="qry.employees.by.code",
+                query="select e from Employee e where e.code = :code"
+        ),
+        @NamedQuery(
                 name="qry.unlinked.profiles",
                 query="select p from User p where p.id not in (select e.profile.id from Employee e)"
         )
@@ -36,8 +40,20 @@ public class Employee extends DomainEntity {
     private static final long serialVersionUID = 1L;
 
     public static final String QRY_EMPLOYEES = "qry.employees";
+    public static final String QRY_EMPLOYEES_BY_CODE = "qry.employees.by.code";
+
     public static final String QRY_UNLINKED_PROFILES = "qry.unlinked.profiles";
 
+    public static final String FIELD_CODE = "code";
+    public static final String FIELD_JOINED = "joined";
+    public static final String FIELD_TERMINATED = "terminated";
+    public static final String FIELD_TERMINATION_REASON = "terminationReason";
+    public static final String FIELD_PROFILE = "profile";
+
+    public static final String[] TRACKED = new String[] {
+            FIELD_PROFILE,
+    };
+    
     @Id
     @Column(name = "employee_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -73,6 +89,12 @@ public class Employee extends DomainEntity {
     private int version;
 
     public Employee() {}
+
+    public Employee(String code, Profile profile, Date joined) {
+        this.code = code;
+        this.profile = profile;
+        this.joined = joined;
+    }
 
     public Long getId() {
         return id;
@@ -128,6 +150,11 @@ public class Employee extends DomainEntity {
 
     public void setTerminationReason(TerminationReason terminationReason) {
         this.terminationReason = terminationReason;
+    }
+
+    @Override
+    public String[] getTrackedProperties() {
+        return TRACKED;
     }
 
     @Override

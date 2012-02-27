@@ -140,10 +140,14 @@ public class Manifest implements Serializable {
                             }
                             
                             String location = url.toExternalForm();
+                            LOGGER.info("Using the application path {} to calculate the location of the META-INF\\MANIFEST.MF", location);
                             int index = location.indexOf("WEB-INF/classes");
+                            if (index < 0) index = location.indexOf("WEB-INF\\classes");
+
                             if (index > -1) {
                                 location = location.substring(0, index + "WEB-INF/classes".length());
                                 location = location + "/META-INF/MANIFEST.MF";
+                                LOGGER.info("Trying to load MANIFEST.MF from {}", location);
                                 InputStream is = null;
                                 try {
                                     is = new URL(location).openStream();
@@ -151,7 +155,7 @@ public class Manifest implements Serializable {
                                     manifest.read(is);
                                     return manifest;
                                 } catch (Exception e) {
-                                    LOGGER.error(MessageFormat.format("Error reading WEB-INF/classes/META-INF/MANIFEST.MF file: {0}", e.getMessage()), e);
+                                    LOGGER.warn("Unable to read WEB-INF/classes/META-INF/MANIFEST.MF file, will try META-INF\\MANIFEST in root of archive");
                                 } finally {
                                     try {
                                         if (is != null)
@@ -161,6 +165,31 @@ public class Manifest implements Serializable {
                                     }
                                 }
                                 
+                            }
+
+                            index = location.indexOf("WEB-INF/classes");
+                            if (index < 0) index = location.indexOf("WEB-INF\\classes");
+                            if (index > -1) {
+                                location = location.substring(0, index);
+                                location = location + "/META-INF/MANIFEST.MF";
+                                LOGGER.info("Trying to load MANIFEST.MF from {}", location);
+                                InputStream is = null;
+                                try {
+                                    is = new URL(location).openStream();
+                                    manifest = new java.util.jar.Manifest();
+                                    manifest.read(is);
+                                    return manifest;
+                                } catch (Exception e) {
+                                    LOGGER.warn("Unable to read META-INF/MANIFEST.MF file, manifest properties will be not be initialised");
+                                } finally {
+                                    try {
+                                        if (is != null)
+                                            is.close();
+                                    } catch (Exception e) {
+                                        LOGGER.error(MessageFormat.format("Error closing stream: {0}", e.getMessage()), e);
+                                    }
+                                }
+
                             }
                         }
                     } catch (IOException e) {

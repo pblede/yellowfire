@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0"
+             xmlns="http://java.sun.com/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+    <persistence-unit name="yellowfire" transaction-type="JTA">
+
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+        <jta-data-source>java:/yellowfire/test/ds</jta-data-source>
+
+        <class>za.co.yellowfire.common.domain.Address</class>
+        <class>za.co.yellowfire.common.domain.Contact</class>
+        <class>za.co.yellowfire.common.domain.PersonName</class>
+        <class>za.co.yellowfire.domain.Venue</class>
+        <class>za.co.yellowfire.domain.VenueCost</class>
+        <class>za.co.yellowfire.domain.goal.Goal</class>
+        <class>za.co.yellowfire.domain.notification.Notification</class>
+        <class>za.co.yellowfire.domain.profile.Profile</class>
+        <class>za.co.yellowfire.domain.profile.SystemProperty</class>
+        <class>za.co.yellowfire.domain.profile.UserProperty</class>
+        <class>za.co.yellowfire.domain.racing.CategoryFee</class>
+        <class>za.co.yellowfire.domain.racing.CategoryPrize</class>
+        <class>za.co.yellowfire.domain.racing.Club</class>
+        <class>za.co.yellowfire.domain.racing.Course</class>
+        <class>za.co.yellowfire.domain.racing.CourseCategory</class>
+        <class>za.co.yellowfire.domain.racing.District</class>
+        <class>za.co.yellowfire.domain.racing.GraphicLink</class>
+        <class>za.co.yellowfire.domain.racing.Note</class>
+        <class>za.co.yellowfire.domain.racing.Race</class>
+        <class>za.co.yellowfire.domain.racing.RaceRegistration</class>
+        <class>za.co.yellowfire.domain.racing.RaceSponsor</class>
+        <class>za.co.yellowfire.domain.result.Result</class>
+        <class>za.co.yellowfire.domain.training.Category</class>
+        <class>za.co.yellowfire.domain.training.ContentType</class>
+        <class>za.co.yellowfire.domain.training.Outcome</class>
+        <class>za.co.yellowfire.domain.training.SkillArea</class>
+        <class>za.co.yellowfire.domain.training.TrainingCourse</class>
+        <class>za.co.yellowfire.domain.training.TrainingCourseDate</class>
+        <class>za.co.yellowfire.domain.training.TrainingProvider</class>
+        <class>za.co.yellowfire.employee.domain.Employee</class>
+        <class>za.co.yellowfire.employee.domain.TerminationReason</class>
+        <class>za.co.yellowfire.performance.domain.Focus</class>
+
+        <properties>
+            <!--property name="eclipselink.session-name" value="yellowfire"/-->
+            <property name="eclipselink.target-server" value="JBoss"/>
+            <property name="eclipselink.target-database" value="SQLServer"/>
+
+            <property name="eclipselink.jdbc.native-sql" value="true"/>
+
+            <property name="eclipselink.logging.level" value="INFO"/>
+            <property name="eclipselink.logging.timestamp" value="true"/>
+            <property name="eclipselink.logging.session" value="true"/>
+            <property name="eclipselink.logging.thread" value="true"/>
+            <property name="eclipselink.logging.exceptions" value="true"/>
+
+            <property name="eclipselink.jdbc.bind-parameters" value="false"/>
+
+            <property name="eclipselink.jdbc.batch-writing" value="JDBC"/>
+
+            <property name="eclipselink.jdbc.brokerCache-statements" value="true"/>
+
+            <property name="eclipselink.jdbc.brokerCache-statements.size" value="50"/>
+
+            <property name="eclipselink.jdbc.exclusive-connection.is-lazy" value="true"/>
+
+            <property name="eclipselink.jdbc.exclusive-connection.mode" value="Transactional"/>
+
+            <property name="eclipselink.profiler" value="NoProfiler"/>
+            <property name="eclipselink.orm.validate.schema" value="true"/>
+            <property name="eclipselink.exclude-eclipselink-orm" value="true"/>
+        </properties>
+    </persistence-unit>
+</persistence>

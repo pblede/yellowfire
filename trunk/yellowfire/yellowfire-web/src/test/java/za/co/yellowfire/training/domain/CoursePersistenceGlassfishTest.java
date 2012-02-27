@@ -22,14 +22,14 @@ import java.util.List;
  * @author Mark P Ashworth
  * @version 0.0.1
  */
-@RunWith(Arquillian.class)
+//@RunWith(Arquillian.class)
 public class CoursePersistenceGlassfishTest {
     private static final Logger LOGGER = LoggerFactory.getLogger(LogType.TEST.getCategory());
 
-    @PersistenceContext(unitName = "yellowfire")
+    //@PersistenceContext(unitName = "yellowfire")
     private EntityManager em;
 
-    @Deployment(name = "weld-se-embedded-1.1")
+    //@Deployment(name = "weld-se-embedded-1.1")
     public static JavaArchive createTestArchive() {
         return ShrinkWrap.create(JavaArchive.class, "test.war")
                 .addPackage(LogType.class.getPackage())
@@ -77,7 +77,7 @@ public class CoursePersistenceGlassfishTest {
 //        return war;
     }
 
-    @Test
+    //@Test
     public void testInsertUpdate() {
         List results = em.createQuery("SELECT c from TrainingCourse c").getResultList();
         for (Object result : results) {

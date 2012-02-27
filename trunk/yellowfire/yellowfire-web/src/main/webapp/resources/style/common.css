@@ -7,7 +7,7 @@
 
 /*Override the logo for training*/
 h1.logo,
-h1.logo a { width: 242px; height: 55px; }
+h1.logo a { width: 242px; height: 51px; }
 h1.logo a { background: url('../images/logo.png') no-repeat 10%; }
 
 /*Override the banner height to 80px*/

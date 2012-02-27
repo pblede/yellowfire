@@ -81,25 +81,19 @@
         <createView schemaName="cde" viewName="vw_system_property">select&#13;
             property_name,&#13;
             property_value,&#13;
-            property_type,&#13;
-            create_ts,&#13;
-            update_ts,&#13;
-            [version]&#13;
+            property_type&#13;
             from cde.property&#13;
             where property_name like 'system.%'&#13;
         </createView>
         <createView schemaName="cde" viewName="vw_user_property">select&#13;
             property_name,&#13;
             property_value,&#13;
-            property_type,&#13;
-            create_ts,&#13;
-            update_ts,&#13;
-            [version]&#13;
+            property_type&#13;
             from cde.property&#13;
             where property_name like 'user.%'&#13;
         </createView>
     </changeSet>
-    <changeSet author="yellowfire" id="0.0.0b">
+    <changeSet author="yellowfire" id="0.0.0b" dbms="MSSQL">
         <sql endDelimiter=";" splitStatements="false" stripComments="true">
             declare @version varchar(25) = '0.0.0';
             if exists(select db_version from cde.version)
