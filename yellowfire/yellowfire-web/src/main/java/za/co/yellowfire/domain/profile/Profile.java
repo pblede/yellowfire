@@ -19,6 +19,9 @@ import java.io.Serializable;
 import java.util.*;
 
 /**
+ * TODO Do not implemented the User interface but rather return a property that contains this information. This causing
+ * issues with DomainObject and DomainEntity throughout the system.
+ *
  * @author Mark P Ashworth
  * @version 0.1.0
  */
@@ -63,6 +66,7 @@ public class Profile extends DomainEntity implements User {
             FIELD_FIRST_NAME,
             FIELD_LAST_NAME
     };
+
 
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

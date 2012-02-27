@@ -1,16 +1,16 @@
 package za.co.yellowfire.manager;
 
-import org.glassfish.embeddable.Deployer;
-import org.glassfish.embeddable.GlassFish;
-import org.glassfish.embeddable.GlassFishProperties;
-import org.glassfish.embeddable.GlassFishRuntime;
+//import org.glassfish.embeddable.Deployer;
+//import org.glassfish.embeddable.GlassFish;
+//import org.glassfish.embeddable.GlassFishProperties;
+//import org.glassfish.embeddable.GlassFishRuntime;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import za.co.yellowfire.domain.notification.Notification;
-import za.co.yellowfire.solarflare.SearchManager;
-import za.co.yellowfire.solarflare.SearchManagerBean;
-import za.co.yellowfire.solarflare.SearchQuery;
+//import za.co.yellowfire.solarflare.SearchManager;
+//import za.co.yellowfire.solarflare.SearchManagerBean;
+//import za.co.yellowfire.solarflare.SearchQuery;
 
 import javax.annotation.sql.DataSourceDefinition;
 import javax.naming.InitialContext;
@@ -32,44 +32,44 @@ import java.net.URI;
  properties = {"createDatabaseIfNotExist=true"}*/ 
 )
 public class DomainManagerTest {
-    private static GlassFishRuntime runtime;
-    private static GlassFish glassfish;
-
-    @BeforeClass
-    public static void setUpBeforeClass() throws Exception {
-        GlassFishProperties props = new GlassFishProperties();
-        props.setConfigFileURI(new File("C:\\Shared\\Projects.Java\\yellowfire\\yellowfire-ear\\domain.xml").toURI().toString());
-
-        // Define GlassFish and add target/classes as deploy folder
-        runtime = GlassFishRuntime.bootstrap();
-        glassfish = runtime.newGlassFish(props);
-        glassfish.start();
-        Deployer deployer = glassfish.getDeployer();
-
-        /*Deploy Solr*/
-        deployer.deploy(new File("C:\\Shared\\Projects.Java\\yellowfire\\deployments\\apache-solr-3.2.0.war").toURI());
-                
-        /*Deploy Yellowfire*/
-        URI uri = new File("target/classes").toURI();
-        deployer.deploy(uri);
-    }
-
-    @AfterClass
-    public static void tearDownAfterClass() throws Exception {
-        // Stop GlassFish
-        glassfish.stop();
-        glassfish.dispose();
-    }
+//    private static GlassFishRuntime runtime;
+//    private static GlassFish glassfish;
+//
+//    @BeforeClass
+//    public static void setUpBeforeClass() throws Exception {
+//        GlassFishProperties props = new GlassFishProperties();
+//        props.setConfigFileURI(new File("C:\\Shared\\Projects.Java\\yellowfire\\yellowfire-ear\\domain.xml").toURI().toString());
+//
+//        // Define GlassFish and add target/classes as deploy folder
+//        runtime = GlassFishRuntime.bootstrap();
+//        glassfish = runtime.newGlassFish(props);
+//        glassfish.start();
+//        Deployer deployer = glassfish.getDeployer();
+//
+//        /*Deploy Solr*/
+//        deployer.deploy(new File("C:\\Shared\\Projects.Java\\yellowfire\\deployments\\apache-solr-3.2.0.war").toURI());
+//
+//        /*Deploy Yellowfire*/
+//        URI uri = new File("target/classes").toURI();
+//        deployer.deploy(uri);
+//    }
+//
+//    @AfterClass
+//    public static void tearDownAfterClass() throws Exception {
+//        // Stop GlassFish
+//        glassfish.stop();
+//        glassfish.dispose();
+//    }
 
     public static DomainManager resolveDomainManager() throws NamingException {
         InitialContext ic = new InitialContext();
         return (DomainManager) ic.lookup("java:global/classes/DomainManager!za.co.yellowfire.manager.DomainManager");
     }
 
-    public static SearchManager resolveSearchManager() throws NamingException {
-        InitialContext ic = new InitialContext();
-        return (SearchManager) ic.lookup("java:global/classes/SearchManager!za.co.yellowfire.manager.SearchManager");
-    }
+//    public static SearchManager resolveSearchManager() throws NamingException {
+//        InitialContext ic = new InitialContext();
+//        return (SearchManager) ic.lookup("java:global/classes/SearchManager!za.co.yellowfire.manager.SearchManager");
+//    }
 
 //    @Test
 //    public void testQueryVenues() {
@@ -111,7 +111,7 @@ public class DomainManagerTest {
 //        domain.persist(venue);
 //        System.out.println("venue = " + venue);
 //
-        SearchManager manager = new SearchManagerBean("http://localhost:9081/solr");
+//        SearchManager manager = new SearchManagerBean("http://localhost:9081/solr");
 //        CompassDetachedHits hits = (CompassDetachedHits) manager.search("Mark's Test");
 //        for (CompassHit hit : hits) {
 //            System.out.println("***************************");
@@ -124,8 +124,8 @@ public class DomainManagerTest {
 //        domain.remove(venue);
 
         //manager = resolveSearchManager();
-        Object object = manager.search(new SearchQuery(Notification.class, "to:mark"));
-        System.out.println("object = " + object);
+//        Object object = manager.search(new SearchQuery(Notification.class, "to:mark"));
+//        System.out.println("object = " + object);
 
 //        for (CompassHit hit : hits) {
 //            System.out.println("***************************");

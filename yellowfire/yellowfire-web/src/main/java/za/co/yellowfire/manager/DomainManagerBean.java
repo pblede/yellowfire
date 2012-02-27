@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import za.co.yellowfire.domain.ChangeItem;
 import za.co.yellowfire.domain.DomainObject;
 import za.co.yellowfire.common.log.LogType;
+import za.co.yellowfire.domain.profile.Profile;
 
 import javax.ejb.*;
 import javax.persistence.EntityManager;
@@ -78,7 +79,13 @@ public class DomainManagerBean implements DomainManager, DomainManagerRemote {
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
     @Override public void remove(DomainObject object) {
         if (object != null) {
-            Object o = em.find(object.getClass(), object.getId());
+            Object o;
+            /* Profile objects are handled differently because of the picketlink User interface that is implemented.  */
+            if (object instanceof Profile) {
+                o = em.find(object.getClass(), ((Profile) object).getUserId());
+            } else {
+                o = em.find(object.getClass(), object.getId());
+            }
             if (o != null) {
                 em.remove(o);
                 //searchableRemovedEvent.fire((DomainObject) object);

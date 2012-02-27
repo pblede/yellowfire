@@ -123,8 +123,13 @@ public class SetupManager {
 
             //Microsoft SQL Server
             System.out.println("Database = " + connection.getDatabaseProductName());
-    
-            resource = "za/co/yellowfire/setup/db_0_0_0/yellowfire-cde-0.0.0-mssql.xml";
+
+            if (connection.getDatabaseProductName() != null && connection.getDatabaseProductName().equals("MSSQL")) {
+                resource = "za/co/yellowfire/setup/db_0_0_0/yellowfire-cde-0.0.0-mssql.xml";
+            } else if (connection.getDatabaseProductName() != null && connection.getDatabaseProductName().equals("H2")) {
+                resource = "za/co/yellowfire/setup/db_0_0_0/yellowfire-cde-0.0.0-h2.xml";
+            }
+
             liquibase = new Liquibase(resource, resourceAccessor, connection);
             liquibase.update(null);
         } finally {
