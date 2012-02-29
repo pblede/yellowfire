@@ -40,6 +40,10 @@ import java.util.*;
             query="select u from User u where u.userName = :userName"
         ),
         @NamedQuery(
+                name="qry.user.names",
+                query="select u from User u where u.userName in :userNames"
+        ),
+        @NamedQuery(
             name="qry.user.verification.key",
             query="select u from User u where u.verificationKey = :verificationKey"
         )
@@ -51,20 +55,45 @@ public class Profile extends DomainEntity implements User {
 
     public static final String QRY_USER_LOGIN = "qry.user.login";
     public static final String QRY_USER_NAME = "qry.user.name";
+    public static final String QRY_USER_NAMES = "qry.user.names";
     public static final String QRY_USER_VERIFICATION_KEY = "qry.user.verification.key";
 
     public static final String FIELD_ID = "id";
     public static final String FIELD_USER_NAME = "userName";
+    public static final String FIELD_USER_NAMES = "userNames";
     public static final String FIELD_PASSWORD = "password";
     public static final String FIELD_FIRST_NAME = "name.name";
     public static final String FIELD_LAST_NAME = "name.surname";
+    public static final String FIELD_ID_NUMBER = "idNumber";
+    public static final String FIELD_EMAIL = "email";
+    public static final String FIELD_PHYSICAL_ADDRESS = "physicalAddress";
+    public static final String FIELD_PHYSICAL_ADDRESS_LINE01 = "physicalAddress.line01";
+    public static final String FIELD_PHYSICAL_ADDRESS_LINE02 = "physicalAddress.line02";
+    public static final String FIELD_PHYSICAL_ADDRESS_LINE03 = "physicalAddress.line03";
+    public static final String FIELD_PHYSICAL_ADDRESS_POSTAL_CODE = "physicalAddress.postalCode";
+    public static final String FIELD_POSTAL_ADDRESS = "postalAddress";
+    public static final String FIELD_POSTAL_ADDRESS_LINE01 = "postalAddress.line01";
+    public static final String FIELD_POSTAL_ADDRESS_LINE02 = "postalAddress.line02";
+    public static final String FIELD_POSTAL_ADDRESS_LINE03 = "postalAddress.line03";
+    public static final String FIELD_POSTAL_ADDRESS_POSTAL_CODE = "postalAddress.postalCode";
     public static final String FIELD_VERIFICATION_KEY = "verificationKey";
+
 
     public static final String[] TRACKED = new String[] {
             FIELD_USER_NAME,
             FIELD_PASSWORD,
             FIELD_FIRST_NAME,
-            FIELD_LAST_NAME
+            FIELD_LAST_NAME,
+            FIELD_ID_NUMBER,
+            FIELD_EMAIL,
+            FIELD_PHYSICAL_ADDRESS_LINE01,
+            FIELD_PHYSICAL_ADDRESS_LINE02,
+            FIELD_PHYSICAL_ADDRESS_LINE03,
+            FIELD_PHYSICAL_ADDRESS_POSTAL_CODE,
+            FIELD_POSTAL_ADDRESS_LINE01,
+            FIELD_POSTAL_ADDRESS_LINE02,
+            FIELD_POSTAL_ADDRESS_LINE03,
+            FIELD_POSTAL_ADDRESS_POSTAL_CODE
     };
 
 
@@ -206,7 +235,7 @@ public class Profile extends DomainEntity implements User {
     }
 
     public void setUserName(String name) {
-        this.userName = userName;
+        this.userName = name;
     }
 
     public String getPassword() {

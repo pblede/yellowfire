@@ -39,6 +39,8 @@
                             <cc:quickLogout userBean="#{identity.user}" actionMethod="#{identity.logout}" id="ql2" update="lfp1 lfp2"/>
                             <cc:version id="lfv2" version="#{applicationManager.version}" />
                         </h:panelGrid>
+                        <h:outputLabel  value="Help" onclick="#{applicationManager.helpLink}" >
+                        </h:outputLabel>
                     </div>
                     <div id="toolbar">
                         <ui:insert name="toolbar">...</ui:insert>

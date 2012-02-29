@@ -32,6 +32,10 @@ public class ApplicationManager implements Serializable {
     private boolean setupRequired;
     private static final Object lock = new Object();
 
+    public String getHelpLink() {
+        return "assert('Hello');";
+    }
+
     @PostConstruct
     public void init() {
         try {
