@@ -1,6 +1,9 @@
 package za.co.yellowfire.domain;
 
 import org.apache.commons.beanutils.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import za.co.yellowfire.common.log.LogType;
 
 import javax.persistence.Column;
 import javax.persistence.PrePersist;
@@ -16,7 +19,8 @@ import java.util.*;
  */
 public abstract class DomainEntity implements DomainObject {
     private static final long serialVersionUID = 1L;
-    
+    private static final Logger LOGGER = LoggerFactory.getLogger(LogType.DOMAIN.getCategory());
+
     @Column(name = "create_ts")
     private Date created;
 
@@ -127,14 +131,16 @@ public abstract class DomainEntity implements DomainObject {
             String[] tracked = getTrackedProperties();
             if (tracked != null) {
                 for (String property : tracked) {
-                    original.put(property, util.getProperty(this, property));
+                    Object value = util.getProperty(this, property);
+                    LOGGER.info("Tracking property {} with original value {}", property, value != null ? value : "null");
+                    original.put(property, value);
                 }
             }
 
             List<DomainObject> objects = getDomainObjectsInTree();
             for (DomainObject object : objects) {
                 if (object != null) {
-                    System.out.println("Switching tracking on for object : " + object);
+                    LOGGER.info("Switching tracking on for object : " + object);
                     object.track();
                 }
             }
@@ -157,7 +163,9 @@ public abstract class DomainEntity implements DomainObject {
                     Object current = util.getProperty(this, property);
                     Object previous = this.original.containsKey(property) ? this.original.get(property) : null;
 
+                    LOGGER.info("Before compare of property {} current {} and previous {} ", new Object[] {property, current, previous});
                     if (((previous != null && !previous.equals(current)) || (current != null && !current.equals(previous)))) {
+                        LOGGER.info("Adding property {} to change item list", property);
                         changes.add(new ChangeItem(property, current));
                     }
                 }

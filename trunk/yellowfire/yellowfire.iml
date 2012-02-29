@@ -175,7 +175,7 @@
     <orderEntry type="library" scope="TEST" name="Maven: org.jboss.osgi.metadata:jbosgi-metadata:2.0.0.CR1" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.osgi:org.osgi.enterprise:4.2.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.jboss.arquillian.protocol:arquillian-protocol-jmx:1.0.0.CR7" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.jboss.weld.arquillian.container:arquillian-weld-ee-embedded-1.1:1.1.2.AS7" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.jboss.weld.arquillian.container:arquillian-weld-ee-embedded-1.1:1.1.2.Final" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.jboss.arquillian:arquillian-spi:1.0.0.Alpha4" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.jboss.arquillian:arquillian-api:1.0.0.Alpha4" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.jboss.arquillian.protocol:arquillian-protocol-local:1.0.0.Alpha4" level="project" />

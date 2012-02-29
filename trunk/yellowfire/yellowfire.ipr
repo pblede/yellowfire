@@ -2530,15 +2530,15 @@
         <root url="jar://$MAVEN_REPOSITORY$/org/jboss/threads/jboss-threads/2.0.0.GA/jboss-threads-2.0.0.GA-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Maven: org.jboss.weld.arquillian.container:arquillian-weld-ee-embedded-1.1:1.1.2.AS7">
+    <library name="Maven: org.jboss.weld.arquillian.container:arquillian-weld-ee-embedded-1.1:1.1.2.Final">
       <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/jboss/weld/arquillian/container/arquillian-weld-ee-embedded-1.1/1.1.2.AS7/arquillian-weld-ee-embedded-1.1-1.1.2.AS7.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/jboss/weld/arquillian/container/arquillian-weld-ee-embedded-1.1/1.1.2.Final/arquillian-weld-ee-embedded-1.1-1.1.2.Final.jar!/" />
       </CLASSES>
       <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/org/jboss/weld/arquillian/container/arquillian-weld-ee-embedded-1.1/1.1.2.AS7/arquillian-weld-ee-embedded-1.1-1.1.2.AS7-javadoc.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/jboss/weld/arquillian/container/arquillian-weld-ee-embedded-1.1/1.1.2.Final/arquillian-weld-ee-embedded-1.1-1.1.2.Final-javadoc.jar!/" />
       </JAVADOC>
       <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/jboss/weld/arquillian/container/arquillian-weld-ee-embedded-1.1/1.1.2.AS7/arquillian-weld-ee-embedded-1.1-1.1.2.AS7-sources.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/jboss/weld/arquillian/container/arquillian-weld-ee-embedded-1.1/1.1.2.Final/arquillian-weld-ee-embedded-1.1-1.1.2.Final-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Maven: org.jboss.weld:weld-api:1.1.Final">
